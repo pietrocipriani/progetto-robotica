@@ -37,8 +37,8 @@ struct RevoluteJoint {
   Scalar min_config, max_config;
 
   RevoluteJoint(
-    Scalar&& d, Scalar& theta, Scalar&& a, Scalar&& alpha,
-    Scalar&& min_config, Scalar&& max_config
+    Scalar d, Scalar& theta, Scalar a, Scalar alpha,
+    Scalar min_config, Scalar max_config
   ) noexcept;
 };
 
