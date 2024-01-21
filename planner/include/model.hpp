@@ -67,13 +67,12 @@ struct UR5 {
    */
   const std::array<RevoluteJoint, dof> joints;
 
-  const RevoluteJoint& world     = joints[0];
-  const RevoluteJoint& base      = joints[1];
-  const RevoluteJoint& shoulder  = joints[2];
-  const RevoluteJoint& elbow     = joints[3];
-  const RevoluteJoint& wrist1    = joints[4];
-  const RevoluteJoint& wrist2    = joints[5];
-  const RevoluteJoint& wrist3    = joints[6];
+  const RevoluteJoint& base      = joints[0];
+  const RevoluteJoint& shoulder  = joints[1];
+  const RevoluteJoint& elbow     = joints[2];
+  const RevoluteJoint& wrist1    = joints[3];
+  const RevoluteJoint& wrist2    = joints[4];
+  const RevoluteJoint& wrist3    = joints[5];
 
   /**
    * Constructs an UR5 in the default homing configuration.
