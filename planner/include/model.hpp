@@ -3,8 +3,6 @@
 
 #include <array>
 #include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
-#include <type_traits>
 
 namespace model {
 
@@ -12,7 +10,7 @@ namespace model {
  * The type representing a scalar.
  * @note The project should be dependent on this alias declaration for integrity.
  */
-using scalar = double;
+using Scalar = double;
 
 /**
  * The type representing a configuration for a generic robot.
@@ -20,34 +18,34 @@ using scalar = double;
  * @param dof The degrees of freedom.
  */
 template<size_t dof>
-using generic_config = Eigen::Vector<scalar, dof>;
+using generic_config = Eigen::Vector<Scalar, dof>;
 
 /**
  * Structure representing the DH parameters for a single revolute joint.
  */
-struct revolute_joint {
+struct RevoluteJoint {
 
   /**
    * The DH parameters as defined by the DH convention.
    * @p theta is a reference to the correponding robot config entry.
    */
-  scalar d, &theta, a, alpha;
+  Scalar d, &theta, a, alpha;
 
   /**
    * The physical limits of the joint.
    */
-  scalar min_config, max_config;
+  Scalar min_config, max_config;
 
-  revolute_joint(
-    scalar&& d, scalar& theta, scalar&& a, scalar&& alpha,
-    scalar&& min_config, scalar&& max_config
+  RevoluteJoint(
+    Scalar&& d, Scalar& theta, Scalar&& a, Scalar&& alpha,
+    Scalar&& min_config, Scalar&& max_config
   ) noexcept;
 };
 
 /**
- * The UR5 manipolator robot for the session.
+ * The UR5 manipolator model.
  */
-extern struct ur5 {
+struct UR5 {
   /**
    * The degrees of freedom of the UR5.
    */
@@ -56,45 +54,45 @@ extern struct ur5 {
   /**
    * The type representing a configuration for a @p dof manipulator.
    */
-  using configuration = generic_config<dof>;
+  using Configuration = generic_config<dof>;
 
   /**
    * The current configuration of the robot.
    */
-  configuration config;
+  Configuration config;
 
   /**
    * The parameters for the joints.
    * @note The configuration have to be modified via @p config.
    */
-  const std::array<revolute_joint, dof> joints;
+  const std::array<RevoluteJoint, dof> joints;
 
-  const revolute_joint& world     = joints[0];
-  const revolute_joint& base      = joints[1];
-  const revolute_joint& shoulder  = joints[2];
-  const revolute_joint& elbow     = joints[3];
-  const revolute_joint& wrist1    = joints[4];
-  const revolute_joint& wrist2    = joints[5];
-  const revolute_joint& wrist3    = joints[6];
+  const RevoluteJoint& world     = joints[0];
+  const RevoluteJoint& base      = joints[1];
+  const RevoluteJoint& shoulder  = joints[2];
+  const RevoluteJoint& elbow     = joints[3];
+  const RevoluteJoint& wrist1    = joints[4];
+  const RevoluteJoint& wrist2    = joints[5];
+  const RevoluteJoint& wrist3    = joints[6];
 
   /**
    * Constructs an UR5 in the default homing configuration.
    */
-  ur5() noexcept;
+  UR5() noexcept;
 
   /**
    * Constructs an UR5 with the given initial configuration.
    * @param homing_config The initial configuration.
    */
-  ur5(const configuration& homing_config) noexcept;
+  UR5(const Configuration& homing_config) noexcept;
 
   /**
    * Constructs an UR5 with the given initial configuration.
    * @param homing_config The initial configuration.
    */
-  ur5(configuration&& homing_config) noexcept;
+  UR5(Configuration&& homing_config) noexcept;
 
-} robot;
+};
 
 }
 
