@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include <exception>
+#include <sstream>
+#include <stdexcept>
 #include "tester.hpp"
 #include "../include/kinematics.hpp"
 #include "../include/model.hpp"
@@ -15,6 +17,9 @@ bool test_inverse_diff_kinematics();
 int main() {
 
   test("all", test_movement);
+
+  // Assuming the correct operation of `direct_kinematics`.
+  test("inverse kinematics", test_inverse_kinematics);
 
   // TODO: kinematics test
 
@@ -43,14 +48,33 @@ bool test_movement() {
 
     // TODO: calibrate tollerance, error is acceptable due to time quantization.
     if (error > 1e-10) {
-      std::cerr << "Failed at time " << time << " s with error = " << error << std::endl;
-      return false;
+      std::stringstream buf;
+      buf << "Failed at time " << time << " s with error = " << error;
+      throw std::runtime_error(buf.str());
     }
   }
 
   return true;
 }
 bool test_direct_kinematics() { return false; }
-bool test_inverse_kinematics() { return false; }
+bool test_inverse_kinematics() {
+  UR5 robot;
+
+  const auto initial_pos = direct_kinematics(robot);
+  robot.config = inverse_kinematics(robot, initial_pos);
+  const auto final_pos = direct_kinematics(robot);
+
+  Scalar error = (final_pos - initial_pos).norm();
+
+  if (error > 1e-10) {
+    std::stringstream buf;
+    buf << "Failed with error = " << error;
+    throw std::runtime_error(buf.str());
+  }
+
+  return true;
+
+  // TODO: test exceptions throw.
+}
 bool test_inverse_diff_kinematics() { return false; }
 

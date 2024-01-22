@@ -13,7 +13,7 @@ namespace planner {
  * Enum representing the types of blocks.
  */
 enum class Block {
-  NO_BLOCK, BLOCK_1
+  NO_BLOCK, BLOCK_1, BLOCK_2, BLOCK_3
 };
 
 /**

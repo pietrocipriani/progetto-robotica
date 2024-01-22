@@ -3,6 +3,7 @@
 
 #include <concepts>
 #include <iostream>
+#include <ostream>
 #include <string>
 
 
@@ -12,7 +13,11 @@
  * @param tester The test to be performed.
  * @note If `tester` throws, the test is "FAILED".
  */
+#if __cplusplus >= 202002L
 template<std::predicate Tester>
+#else
+template<class Tester>
+#endif
 void test(const std::string& name, const Tester& tester) noexcept {
   // ANSI escape codes for colored + bold output.
   constexpr char RED_ANSI[] = "\x1b[1;31m";
@@ -21,12 +26,14 @@ void test(const std::string& name, const Tester& tester) noexcept {
 
   std::cout << "test " << name << ": ";
 
-  bool success;
+  // defaults to failed test in case of exceptions.
+  bool success = false;
   try {
     success = tester();
+  } catch (std::exception& e) {
+    std::cerr << e.what() << std::endl;
   } catch (...) {
-    // catches every possible error: failed test.
-    success = false;
+    std::cerr << "Unknown error." << std::endl;
   }
 
   if (success) {

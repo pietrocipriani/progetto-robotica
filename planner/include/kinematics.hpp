@@ -2,7 +2,6 @@
 #define KINEMATICS_HPP_INCLUDED
 
 #include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
 #include "model.hpp"
 
 namespace kinematics {
@@ -16,12 +15,6 @@ inline constexpr size_t os_size = 3 + 3;
  * Type representing the pose of the end effector.
  */
 using Pose = Eigen::Vector<model::Scalar, os_size>;
-
-/**
- * Type representing the geometric or analytical jacobian.
- * @note Specific for UR5.
- */
-using Jacobian = Eigen::Matrix<model::Scalar, os_size, model::UR5::dof>;
 
 /**
  * Evaluates the direct kinematics of @p robot.
