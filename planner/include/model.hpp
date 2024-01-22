@@ -3,6 +3,9 @@
 
 #include <array>
 #include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/src/Core/Matrix.h>
+#include <eigen3/Eigen/src/Geometry/Quaternion.h>
+#include <limits>
 
 namespace model {
 
@@ -13,12 +16,21 @@ namespace model {
 using Scalar = double;
 
 /**
- * The type representing a configuration for a generic robot.
- * `Eigen` implementation in order to obtain efficient manipulation.
- * @param dof The degrees of freedom.
+ * Generic matrix in `Scalar` field.
  */
-template<size_t dof>
-using generic_config = Eigen::Vector<Scalar, dof>;
+template<size_t rows, size_t cols = rows>
+using Matrix = Eigen::Matrix<Scalar, rows, cols>;
+
+/**
+ * Generic vector in `Scalar` field.
+ */
+template<size_t n>
+using Vector = Eigen::Vector<Scalar, n>;
+
+/**
+ * Quaternion in `Scalar` field.
+ */
+using Quaternion = Eigen::Quaternion<Scalar>;
 
 /**
  * Structure representing the DH parameters for a single revolute joint.
@@ -36,9 +48,10 @@ struct RevoluteJoint {
    */
   Scalar min_config, max_config;
 
-  RevoluteJoint(
+  constexpr RevoluteJoint(
     Scalar d, Scalar& theta, Scalar a, Scalar alpha,
-    Scalar min_config, Scalar max_config
+    Scalar min_config = -std::numeric_limits<Scalar>::infinity(),
+    Scalar max_config = std::numeric_limits<Scalar>::infinity()
   ) noexcept;
 };
 
@@ -54,7 +67,7 @@ struct UR5 {
   /**
    * The type representing a configuration for a @p dof manipulator.
    */
-  using Configuration = generic_config<dof>;
+  using Configuration = Vector<dof>;
 
   /**
    * The current configuration of the robot.
@@ -83,13 +96,13 @@ struct UR5 {
    * Constructs an UR5 with the given initial configuration.
    * @param homing_config The initial configuration.
    */
-  UR5(const Configuration& homing_config) noexcept;
+  explicit UR5(const Configuration& homing_config) noexcept;
 
   /**
    * Constructs an UR5 with the given initial configuration.
    * @param homing_config The initial configuration.
    */
-  UR5(Configuration&& homing_config) noexcept;
+  explicit UR5(Configuration&& homing_config) noexcept;
 
 };
 

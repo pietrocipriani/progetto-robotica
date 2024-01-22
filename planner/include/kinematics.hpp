@@ -2,19 +2,38 @@
 #define KINEMATICS_HPP_INCLUDED
 
 #include <eigen3/Eigen/Dense>
+#include <eigen3/Eigen/src/Core/Matrix.h>
+#include <eigen3/Eigen/src/Geometry/Quaternion.h>
 #include "model.hpp"
 
 namespace kinematics {
 
-/**
- * The size of the operational space (position + orientation).
- */
-inline constexpr size_t os_size = 3 + 3;
 
 /**
  * Type representing the pose of the end effector.
  */
-using Pose = Eigen::Vector<model::Scalar, os_size>;
+struct Pose {
+  /**
+   * The size of the operational space.
+   */
+  static constexpr size_t os_size = 3;
+
+  /**
+   * The size of the orientation space.
+   */
+  static constexpr size_t orientation_size = os_size * (os_size - 1) / 2;
+
+  using Position = model::Vector<os_size>;
+
+  // Quaternion to avoid representation singularities.
+  using Orientation = model::Quaternion;
+
+  Position position;
+  Orientation orientation;
+
+  Pose(Position&& position, Orientation&& orientation);
+  Pose(const Position& position, const Orientation& orientation);
+};
 
 /**
  * Evaluates the direct kinematics of @p robot.
