@@ -2,6 +2,7 @@ import json
 import glob
 import os
 import random
+import sys
 
 # the letter mapping is:
 # H: all top squares have a circle, the base is high
@@ -22,6 +23,9 @@ VERTICES_TO_CATEGORIES = {
     4711: (10, "4x1_L"), # assign1/scene30/view=0
 }
 
+MODES = ["with_categories", "without_categories"]
+
+
 def get_views(root):
     assigns = []
     for i in range(1,4):
@@ -39,10 +43,14 @@ def get_views(root):
 def flatten_2(arr):
     return [c for a in arr for b in a for c in b]
 
-def get_coco_json(root, paths):
+def get_coco_json(root, paths, collapse_to_1_category):
+    """
+    Set `collapse_to_1_category` to True if you want a single
+    category without distinction between blocks classes
+    """
+
     images = []
     annotations = []
-    # vertices_to_categories = {}
 
     for path in paths:
         image_id = len(images)
@@ -56,9 +64,12 @@ def get_coco_json(root, paths):
 
         data = json.load(open(os.path.join(root, path + ".json")))
         for obj in data.values():
-            # use the number of vertices to understand the corresponding block type
-            vh = len(obj["vertices"])
-            category_id = VERTICES_TO_CATEGORIES[vh][0]
+            if collapse_to_1_category:
+                category_id = 0
+            else:
+                # use the number of vertices to understand the corresponding block type
+                vh = len(obj["vertices"])
+                category_id = VERTICES_TO_CATEGORIES[vh][0]
 
             x1,y1,x2,y2 = 1024,1024,0,0
             for (x,y) in obj["vertices"]:
@@ -67,6 +78,7 @@ def get_coco_json(root, paths):
                 x2 = max(x2, x)
                 y2 = max(y2, y)
 
+            # uncomment to visualize vertices on an image
             # bbox3d = obj["vertices"]
             # from PIL import Image, ImageDraw
             # from matplotlib import pyplot as plt
@@ -82,19 +94,21 @@ def get_coco_json(root, paths):
                 "id": len(annotations),
                 "image_id": image_id,
                 "category_id": category_id,
-                # "category_id": 0, # treat everything as a single category
                 "bbox": [x1, y1, x2-x1, y2-y1],
                 "area": (x2-x1)*(y2-y1),
             })
 
-    categories = []
-    for (vh, (category_id, name)) in VERTICES_TO_CATEGORIES.items():
-        if category_id not in [c["id"] for c in categories]:
-            categories.append({
-                "id": category_id,
-                "name": name,
-            })
-    #categories = [{"id": 0, "name": "C"}] # treat everything as a single category
+    if collapse_to_1_category:
+        # Treat everything as a single category
+        categories = [{"id": 0, "name": ""}]
+    else:
+        categories = []
+        for (vh, (category_id, name)) in VERTICES_TO_CATEGORIES.items():
+            if category_id not in [c["id"] for c in categories]:
+                categories.append({
+                    "id": category_id,
+                    "name": name,
+                })
 
     print()
     return {
@@ -110,13 +124,19 @@ def split_train_test(paths, train_over_total_ratio, seed):
     return paths[:mid], paths[mid:]
 
 def main():
+    if len(sys.argv) == 1 or len(sys.argv) > 2 or sys.argv[1] not in MODES:
+        print(f"Usage: {sys.argv[0]} [{'|'.join(MODES)}]")
+        exit(1)
+    collapse_to_1_category = sys.argv[1] == MODES[1]
+
     root = "assigns"
     views = get_views(root)
     paths = flatten_2(views)
     train, test = split_train_test(paths, 0.75, 2378)
     print(f"train size: {len(train)}; test size: {len(test)}")
+
     for prefix, paths in [("train", train), ("test", test)]:
-        res = get_coco_json(root, paths)
+        res = get_coco_json(root, paths, collapse_to_1_category)
         json.dump(res, open(os.path.join(root, prefix + "_annotations.coco.json"), "w"), indent=4)
 
 if __name__ == "__main__":
