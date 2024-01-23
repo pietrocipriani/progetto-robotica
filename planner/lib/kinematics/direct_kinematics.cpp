@@ -15,15 +15,16 @@ using namespace model;
  * @return The corresponding transformation.
  */
 JointTransformation translation_rotation(const Axis& axis, Scalar translation, Scalar rotation) {
-  using Translation = Eigen::Translation<Scalar, Pose::os_size>;
-  using Rotation = Eigen::AngleAxis<Scalar>;
-  
   return Translation(axis * translation) * Rotation(rotation, axis);
 } 
 
 JointTransformation joint_transformation_matrix(const RevoluteJoint& joint) {
+  return joint_transformation_matrix(joint, joint.theta);
+}
+
+JointTransformation joint_transformation_matrix(const model::RevoluteJoint& joint, model::Scalar theta) {
   // d and theta transformation.
-  const auto first_transform = translation_rotation(Axis::UnitZ(), joint.d, joint.theta);
+  const auto first_transform = translation_rotation(Axis::UnitZ(), joint.d, theta);
   // a and alpha transformation.
   const auto second_transform = translation_rotation(Axis::UnitX(), joint.a, joint.alpha);
 
