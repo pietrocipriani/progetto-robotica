@@ -5,6 +5,12 @@ from cv_bridge import CvBridge
 import cv2
 import sys
 
+# these are the topics you can subscribe to, to obtain the various images
+# /ur5/zed_node/left/image_rect_color
+# /ur5/zed_node/right_raw/image_raw_color
+# /ur5/zed_node/left_raw/image_raw_color
+# /ur5/zed_node/right/image_rect_color
+# /ur5/zed_node/depth/depth_registered
 topic = sys.argv[1]
 
 
