@@ -62,7 +62,7 @@ class YoloS(pytorch_lightning.LightningModule):
     def validation_step(self, batch, batch_idx):
         loss, loss_dict = self.common_step(batch, batch_idx)
         self.log("val_loss", loss, prog_bar=True, batch_size=self.batch_size)
-        if batch_idx == 41:
+        if batch_idx == 0:
             print()
         return loss
 
