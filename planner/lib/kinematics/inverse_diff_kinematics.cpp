@@ -44,13 +44,13 @@ Jacobian generate_jacobian(const UR5& robot) {
 
   for (auto& joint : robot.joints) {
     // The Z axis of the joint frame in base frame coords.
-    const auto axis = transformation.rotation() * Axis::UnitZ();
+    const Axis axis = transformation.rotation() * Axis::UnitZ();
 
     // The origin of the joint frame in the base frame coords.
-    const auto origin = transformation.translation();
+    const Pose::Position origin = transformation.translation();
 
     // The rotational radius around `axis`.
-    const auto radius = end_effector_position - origin;
+    const Pose::Position radius = end_effector_position - origin;
 
     // The partial derivative of the direct kinematics for this joint (column of the jacobian).
     Movement derivative;
@@ -76,15 +76,11 @@ Jacobian generate_jacobian(const UR5& robot) {
  */
 template<size_t n>
 Matrix<n, n> invert(const Matrix<n, n>& matrix) {
-  bool invertible;
-  Matrix<n, n> inverse;
-  
-  // NOTE: Max for 4x4 matrices.
-  matrix.computeInverseWithCheck(inverse, invertible);
+  if (std::abs(matrix.determinant()) < 1e-8) {
+    throw std::domain_error("Singular configuration.");
+  }
 
-  if (!invertible) throw std::domain_error("Singular configuration.");
-
-  return inverse;
+  return matrix.inverse();
 }
 
 /**
@@ -119,7 +115,7 @@ InvJacobian invert(const Jacobian& matrix) {
  */
 Movement movement_as_vector(const Pose& movement) {
   // The axis of rotation * sin(dtheta/2).
-  auto axis = movement.orientation.vec();
+  Axis axis = movement.orientation.vec();
   
   // The norm  of the axis should be sin(theta/2).
   Scalar norm = axis.norm();
@@ -146,9 +142,9 @@ Movement movement_as_vector(const Pose& movement) {
 model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& movement) {
   Jacobian geometric_jacobian = generate_jacobian(robot);
 
-  const auto inverse = invert(geometric_jacobian);
+  const InvJacobian inverse = invert(geometric_jacobian);
 
-  const auto movement_vector = movement_as_vector(movement);
+  const Movement movement_vector = movement_as_vector(movement);
 
   return inverse * movement_vector;
 }

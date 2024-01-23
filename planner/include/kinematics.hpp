@@ -33,6 +33,18 @@ struct Pose {
 
   Pose(Position&& position, Orientation&& orientation);
   Pose(const Position& position, const Orientation& orientation);
+
+  [[deprecated("Non commutative operator, not clear.")]]
+  Pose& operator +=(const Pose& other);
+
+  [[deprecated]]
+  Pose& operator -=(const Pose& other);
+
+  [[deprecated("Non-commutative operator, not clear.")]]
+  Pose operator +(const Pose& other) const;
+
+  [[deprecated]]
+  Pose operator -(const Pose& other) const;
 };
 
 /**

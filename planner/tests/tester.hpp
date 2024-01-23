@@ -32,8 +32,10 @@ void test(const std::string& name, const Tester& tester) noexcept {
     success = tester();
   } catch (std::exception& e) {
     std::cerr << e.what() << std::endl;
+    std::cout << "test " << name << ": ";
   } catch (...) {
     std::cerr << "Unknown error." << std::endl;
+    std::cout << "test " << name << ": ";
   }
 
   if (success) {
