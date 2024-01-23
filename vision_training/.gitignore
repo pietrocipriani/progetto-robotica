@@ -2,3 +2,4 @@ checkpoints*/
 assigns/
 lightning_logs/
 __pycache__/
+*.safetensors
