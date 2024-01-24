@@ -38,18 +38,20 @@ Configurations expand(const ArgList& variable_argument, Function& function, Args
 
   // Generate solutions for every possible value of the variable argument.
   for (const auto& arg : variable_argument) {
-    // Invokes the function.
-    auto configs = std::invoke(function, args..., arg);
+    try {
+      // Invokes the function.
+      auto configs = std::invoke(function, args..., arg);
 
-    if constexpr (std::is_same_v<UR5::Configuration, std::remove_cv_t<decltype(configs)>>) {
-      // If function returns a Configuration...
-      configs[index - 1] = arg;
-      result.push_back(configs);
-    } else {
-      // If function returns a Configurations...
-      for (auto& config : configs) config[index - 1] = arg;
-      result.insert(result.end(), configs.begin(), configs.end());
-    }
+      if constexpr (std::is_same_v<UR5::Configuration, std::remove_cv_t<decltype(configs)>>) {
+        // If function returns a Configuration...
+        configs[index - 1] = arg;
+        result.push_back(configs);
+      } else {
+        // If function returns a Configurations...
+        for (auto& config : configs) config[index - 1] = arg;
+        result.insert(result.end(), configs.begin(), configs.end());
+      }
+    } catch (std::domain_error& e) {}
   }
 
   return result;
@@ -168,28 +170,33 @@ UR5::Configuration configs_given_theta_3(
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-std::vector<UR5::Configuration> configs_given_theta_5(
+Configurations configs_given_theta_5(
   const UR5& robot, JointTransformation direct_kin, Scalar theta_5
 ) {
   // The transformation matrix from frame 1 to frame 6.
+  // TODO: more efficient to only invert the rotation.
   const JointTransformation inverse_kin = direct_kin.inverse();
 
   // Axis z1 in the end effector frame.
   const Axis z1_frame_6 = rotate(inverse_kin, Axis::UnitZ());
 
-  // The coefficient of alignment between z1 and z6.
-  const Scalar affinity_z1_z6 = (z1_frame_6 - Axis::UnitZ()).norm();
+  // The coefficient of alignment between z1 and z6. Lower: the smaller the difference.
+  const Scalar alignment_z1_z6 = z1_frame_6.head<2>().norm();
 
   Scalar theta_6;
 
   // TODO: define tollerance
-  if (affinity_z1_z6 > 1e-7) {
+  // NOTE: it can be proven that this condition is equivalent to sin(theta_5) < eps.
+  // NOTE: it can be proven that it is sufficient to take eps' = eps / sqrt(2)
+  //         in order to have this condition implied by x < eps' && y < eps'.
+  //       This is an acceptable crop.
+  if (alignment_z1_z6 < 1e-7) {
     // If z1 and z6 are aligned, there exist infinite solutions.
     // Cannot represent continuous solutions. Arbitrary value for theta_6.
-    // NOTE: IEC 60559 compliant systems have std::atan2(0, 0) == 0.
+    // NOTE: IEEE 754 compliant systems have std::atan2(0, 0) == 0.
     theta_6 = 0;
   } else {
-    theta_6 = vector_angle_xy(z1_frame_6);
+    theta_6 = -vector_angle_xy(z1_frame_6 / std::sin(theta_5));
   }
 
   // Inversion of the wrist3 transformation
@@ -233,7 +240,7 @@ std::vector<UR5::Configuration> configs_given_theta_5(
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-std::vector<UR5::Configuration> configs_given_theta_1(
+Configurations configs_given_theta_1(
   const UR5& robot, JointTransformation direct_kin, Scalar theta_1
 ) {
   // Inversion of the base joint transformation.
@@ -248,10 +255,8 @@ std::vector<UR5::Configuration> configs_given_theta_1(
   const Pose::Position origin_6 = direct_kin.translation();
 
   // The value of theta_5 (+-)
-  // TODO: check correctness. y = - d4 - d6 * cos5
-  const auto theta_5 = acos(- (origin_6.y() + robot.wrist1.d) / robot.wrist3.d);
-
-  // NOTE: it is not possible to obtain NaN. No check needed.
+  // TODO: check correctness. z = d4 + d6 * cos5
+  const auto theta_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
 
   return expand<5>(theta_5, configs_given_theta_5, robot, direct_kin);
 }
@@ -264,7 +269,7 @@ std::vector<UR5::Configuration> configs_given_theta_1(
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-std::vector<UR5::Configuration> configurations(const UR5& robot, const Pose& pose) {
+Configurations configurations(const UR5& robot, const Pose& pose) {
   // Construct the direct kinematics matrix from the final pose.
   JointTransformation direct_kin = Translation(pose.position) * pose.orientation;
 
@@ -297,6 +302,10 @@ std::vector<UR5::Configuration> configurations(const UR5& robot, const Pose& pos
 UR5::Configuration inverse_kinematics(const UR5& robot, const Pose& pose) {
   // Possible configurations
   const auto configs = configurations(robot, pose);
+
+  if (configs.empty()) {
+    throw std::domain_error("Unreachable position.");
+  }
 
   // TODO: choose the solution.
   return configs.front();
