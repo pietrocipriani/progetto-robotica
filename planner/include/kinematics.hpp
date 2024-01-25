@@ -34,17 +34,38 @@ struct Pose {
   Pose(Position&& position, Orientation&& orientation);
   Pose(const Position& position, const Orientation& orientation);
 
-  [[deprecated("Non commutative operator, not clear.")]]
-  Pose& operator +=(const Pose& other);
+  /**
+   * Moves `this` Pose by the given @p movement.
+   * @param movement The movement.
+   * @return `this` modified pose.
+   */
+  Pose& move(const Pose& movement);
 
-  [[deprecated]]
-  Pose& operator -=(const Pose& other);
+  /**
+   * Returns a pose given by `this` pose moved by @p movement.
+   * @param movement The movement.
+   * @return The modified pose.
+   */
+  Pose moved(const Pose& movement) const;
 
-  [[deprecated("Non-commutative operator, not clear.")]]
-  Pose operator +(const Pose& other) const;
+  /**
+   * Returns the movement necessary to move from `this` position to the @p desired pose.
+   * @param desired The desired pose.
+   * @return The movement.
+   */
+  Pose error(const Pose& desired) const;
 
-  [[deprecated]]
-  Pose operator -(const Pose& other) const;
+  /**
+   * Inverts `this` movement.
+   */
+  Pose inverse() const;
+
+  /**
+   * Computes the norm of the pose.
+   * Useful to compute the norm of `error`.
+   */
+  model::Scalar norm() const;
+
 };
 
 /**
@@ -53,6 +74,14 @@ struct Pose {
  * @return The pose of the end effector.
  */
 Pose direct_kinematics(const model::UR5& robot) noexcept;
+
+/**
+ * Evaluates the direct kinematics of @p robot.
+ * @param robot The robot configuration.
+ * @param config The target robot configuration.
+ * @return The pose of the end effector.
+ */
+Pose direct_kinematics(const model::UR5& robot, const model::UR5::Configuration& config) noexcept;
 
 /**
  * Performs the inverse kinematics for @p robot.
@@ -73,6 +102,21 @@ model::UR5::Configuration inverse_kinematics(const model::UR5& robot, const Pose
  * @note No damped least-squares. A correct planning is assumed. This choice could be subject to change.
  */
 model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& velocity);
+
+/**
+ * Desired-pose-aware inverse differential kinematics implementation.
+ * @param robot The robot configuration.
+ * @param velocity The desired velocity in the operational space.
+ * @param desired_pose The desired current pose.
+ * @return The configuration variation.
+ * @throws @p std::domain_error when in singularity.
+ * @see kinematics::inverse_diff_kinematics
+ */
+model::UR5::Configuration dpa_inverse_diff_kinematics(
+  const model::UR5& robot,
+  const Pose& velocity,
+  const Pose& desired_pose
+);
 
 }
 

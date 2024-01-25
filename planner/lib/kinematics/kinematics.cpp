@@ -2,27 +2,37 @@
 
 namespace kinematics {
 
-Pose::Pose(Position&& position, Orientation&& orientation) : position(std::move(position)), orientation(std::move(orientation)) {}
-Pose::Pose(const Position& position, const Orientation& orientation) : position(position), orientation(orientation) {}
+Pose::Pose(Position&& position, Orientation&& orientation)
+  : position(std::move(position)), orientation(std::move(orientation)) {}
 
-Pose& Pose::operator +=(const Pose& other) {
-  position += other.position;
-  orientation = other.orientation * orientation;
+Pose::Pose(const Position& position, const Orientation& orientation)
+  : position(position), orientation(orientation) {}
+
+Pose& Pose::move(const Pose& movement) {
+  // Linear composition.
+  position += movement.position;
+
+  // Quaternion composition.
+  orientation = movement.orientation * orientation;
+
   return *this;
 }
 
-Pose& Pose::operator -=(const Pose& other) {
-  position -= other.position;
-  orientation = other.orientation.conjugate() * orientation;
-  return *this;
+Pose Pose::moved(const Pose& movement) const {
+  return Pose(*this).move(movement);
 }
 
-Pose Pose::operator +(const Pose& other) const {
-  return Pose(position + other.position, other.orientation * orientation);
+Pose Pose::error(const Pose& desired) const {
+  return inverse().move(desired);
 }
 
-Pose Pose::operator -(const Pose& other) const {
-  return Pose(position - other.position, other.orientation.conjugate() * orientation);
+Pose Pose::inverse() const {
+  return Pose(-position, orientation.conjugate());
 }
+
+model::Scalar Pose::norm() const {
+  return std::sqrt(position.squaredNorm() + orientation.vec().squaredNorm());
+}
+
 
 }
