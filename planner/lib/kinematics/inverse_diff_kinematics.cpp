@@ -76,7 +76,8 @@ Jacobian generate_jacobian(const UR5& robot) {
  */
 template<size_t n>
 Matrix<n, n> invert(const Matrix<n, n>& matrix) {
-  if (std::abs(matrix.determinant()) < 1e-8) {
+  // TODO: calibrate threshold
+  if (std::abs(matrix.determinant()) < 1e-5) {
     throw std::domain_error("Singular configuration.");
   }
 
@@ -140,13 +141,42 @@ Movement movement_as_vector(const Pose& movement) {
 }
 
 model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& movement) {
+  // Geometric jacobian as we are working with quaternions.
   Jacobian geometric_jacobian = generate_jacobian(robot);
 
+  // TODO: only feasible when not in singularities.
   const InvJacobian inverse = invert(geometric_jacobian);
 
+  // Conversion from quaternion to ω·Δt.
+  // TODO: check a movement is passed and not a velocity for the comment.
   const Movement movement_vector = movement_as_vector(movement);
 
   return inverse * movement_vector;
+}
+
+
+model::UR5::Configuration dpa_inverse_diff_kinematics(
+  const model::UR5& robot,
+  const Pose& movement,
+  const Pose& desired_pose
+) {
+  // Direct kinematics for the effective position (error computation).
+  const Pose effective_position = direct_kinematics(robot);
+
+  // Compute the error, movement is required.
+  // TODO: introduce a weight coefficient.
+  // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
+  Pose error = effective_position.error(desired_pose);
+
+  // TODO: only for testing purposes: delta t.
+  error.position *= 1;
+
+  // Compose the error with the desired movement.
+  // TODO: prove the error converges to 0.
+  // TODO: quaternion arithmetric is used in sequential composition, not for rotations at the same time.
+  error.move(movement);
+
+  return inverse_diff_kinematics(robot, error);
 }
 
 

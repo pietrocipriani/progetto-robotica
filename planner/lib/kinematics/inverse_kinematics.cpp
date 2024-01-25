@@ -175,6 +175,7 @@ Configurations configs_given_theta_5(
 ) {
   // The transformation matrix from frame 1 to frame 6.
   // TODO: more efficient to only invert the rotation.
+  //       Complete inversion for readibility only.
   const JointTransformation inverse_kin = direct_kin.inverse();
 
   // Axis z1 in the end effector frame.
@@ -228,7 +229,12 @@ Configurations configs_given_theta_5(
 
   const auto theta_3 = acos(cos_theta_3);
 
-  return expand<3>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
+  Configurations&& configs = expand<3>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
+  
+  // Update theta_6.
+  for (auto& config : configs) config[5] = theta_6;
+
+  return configs;
 }
 
 /**

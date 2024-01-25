@@ -1,6 +1,7 @@
 #include "kinematics.hpp"
 #include "direct_kinematics.hpp"
 #include "model.hpp"
+#include "utils.hpp"
 
 namespace kinematics {
 
@@ -33,11 +34,17 @@ JointTransformation joint_transformation_matrix(const model::RevoluteJoint& join
 }
 
 Pose direct_kinematics(const UR5& robot) noexcept {
+  return direct_kinematics(robot, robot.config);
+}
+
+Pose direct_kinematics(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
   JointTransformation transformation = JointTransformation::Identity();
 
-  for (const auto& joint : robot.joints) {
+  for (const auto& joint_theta : zip(robot.joints, config)) {
+    const auto& [joint, theta] = joint_theta;
+
     // Apply transformation to the relative frame (post-multiplication).
-    transformation = transformation * joint_transformation_matrix(joint);
+    transformation = transformation * joint_transformation_matrix(joint, theta);
   }
 
   // Quaternion from rotation matrix.
