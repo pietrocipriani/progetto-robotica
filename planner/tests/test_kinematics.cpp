@@ -27,13 +27,6 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-Scalar error(const Pose& p1, const Pose& p2) {
-  Scalar sq_translation_error = (p1.position - p2.position).squaredNorm();
-  Scalar rotation_error = (p1.orientation.angularDistance(p2.orientation));
-  Scalar sq_rotation_error = std::pow(rotation_error, 2);
-  return std::sqrt(sq_translation_error + sq_rotation_error);
-}
-
 bool test_movement() {
   // 100 ms as dt.
   constexpr Scalar dt = 0.01;
@@ -43,25 +36,29 @@ bool test_movement() {
 
   Pose position = direct_kinematics(robot);
 
-  // 1 min simulation.
-  for (Scalar time = 0.0; time < 60.0; time += dt) {
+  // 4 min simulation.
+  for (Scalar time = 0.0; time < 60.0 * 2.6; time += dt) {
     Pose velocity(
       Pose::Position::Random().normalized() * 0.01 * dt,
       Pose::Orientation(Eigen::AngleAxis<Scalar>(0.1 * dt, Pose::Orientation::Vector3::Random().normalized()))
     );
 
-    const UR5::Configuration config_variation = inverse_diff_kinematics(robot, velocity);
+    const UR5::Configuration config_variation = dpa_inverse_diff_kinematics(robot, velocity, position);
 
-    position += velocity;
+    position.move(velocity);
     robot.config += config_variation;
 
     auto effective_pos = direct_kinematics(robot);
-    Scalar error = ::error(position, effective_pos);
+    Scalar error = effective_pos.error(position).norm();
+
+    std::clog << error << std::endl;
 
     // TODO: calibrate tollerance, error is acceptable due to time quantization.
-    if (error >= 4e-3) {
+    if (error >= 1e-0) {
       std::stringstream buf;
-      buf << "Failed at time " << time << " s with error = " << error;
+      buf << "Failed at time " << time << " s with error = " << error
+          << " linear part error = " << effective_pos.error(position).position.norm()
+          << " rot part error = " << effective_pos.error(position).orientation.vec().norm();
       throw std::runtime_error(buf.str());
     }
   }
@@ -85,7 +82,11 @@ bool test_inverse_kinematics() {
     }
 
     const auto final_pos = direct_kinematics(robot);
-    Scalar error = ::error(final_pos, initial_pos);
+    Scalar error = final_pos.error(initial_pos).norm();
+
+    if (std::isnan(error)) {
+      throw std::runtime_error("Unexpected NaN.");
+    }
 
     if (error > 1e-10) {
       std::stringstream buf;
