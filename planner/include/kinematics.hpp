@@ -31,8 +31,9 @@ struct Pose {
   Position position;
   Orientation orientation;
 
-  Pose(Position&& position, Orientation&& orientation);
-  Pose(const Position& position, const Orientation& orientation);
+  Pose() noexcept;
+  Pose(Position&& position, Orientation&& orientation) noexcept;
+  Pose(const Position& position, const Orientation& orientation) noexcept;
 
   /**
    * Moves `this` Pose by the given @p movement.
@@ -65,6 +66,27 @@ struct Pose {
    * Useful to compute the norm of `error`.
    */
   model::Scalar norm() const;
+
+
+  /**
+   * Multiplies this movement by the given coefficient.
+   */
+  Pose operator *(model::Scalar coefficient) const;
+
+  /**
+   * Multiplies this movement by the given coefficient.
+   */
+  Pose& operator *=(model::Scalar coefficient);
+
+  /**
+   * Linear interpolation between two positions.
+   * @param other The target pose.
+   * @param t The time [0; 1].
+   * @return the linear interpolation between these two poses.
+   * @note Uses SLERP for orientation.
+   */
+  Pose interpolate(const Pose& other, model::Scalar t) const;
+  
 
 };
 
