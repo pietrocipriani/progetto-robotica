@@ -34,6 +34,7 @@ std::array<RevoluteJoint, UR5::dof> generate_ur5_parameters(
 ) {
   // TODO: Only C++20 offers non-C style math constants?
   static constexpr Scalar pi2 = M_PI_2;
+  static constexpr Scalar pi = M_PI;
 
   // TODO: make config reference joints.
   /*using Parameters = std::array<Scalar, UR5::dof>;
@@ -45,12 +46,12 @@ std::array<RevoluteJoint, UR5::dof> generate_ur5_parameters(
 
   // TODO: add constraints.
   std::array<RevoluteJoint, UR5::dof> joints {{
-    {0.1625 , config[0] ,  0      ,  pi2 },
-    {0      , config[1] , -0.425  ,  0   },
-    {0      , config[2] , -0.3922 ,  0   },
-    {0.1333 , config[3] ,  0      ,  pi2 },
-    {0.0997 , config[4] ,  0      , -pi2 },
-    {0.0996 , config[5] ,  0      ,  0   }
+    {0.1625 , config[0] ,  0      ,  pi2 , -2 * pi , 2 * pi},
+    {0      , config[1] , -0.425  ,  0   , -pi     ,      0},
+    {0      , config[2] , -0.3922 ,  0   , -pi     ,     pi}, 
+    {0.1333 , config[3] ,  0      ,  pi2 , -2 * pi , 2 * pi},
+    {0.0997 , config[4] ,  0      , -pi2 , -2 * pi , 2 * pi},
+    {0.0996 , config[5] ,  0      ,  0   , -2 * pi , 2 * pi}
   }};
 
   // Scales every linear parameter.
