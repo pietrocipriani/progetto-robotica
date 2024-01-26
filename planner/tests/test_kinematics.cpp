@@ -1,6 +1,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <exception>
+#include <iomanip>
 #include <sstream>
 #include <stdexcept>
 #include "tester.hpp"
@@ -18,6 +19,7 @@ bool test_inverse_diff_kinematics();
 
 int main() {
 
+  test("direct", test_direct_kinematics);
   test("all", test_movement);
 
   // Assuming the correct operation of `direct_kinematics`.
@@ -69,7 +71,18 @@ bool test_movement() {
 
   return true;
 }
-bool test_direct_kinematics() { return false; }
+bool test_direct_kinematics() {
+  UR5 robot;
+
+  const auto pos = direct_kinematics(robot);
+
+  const Pose correct(
+    Pose::Position(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
+    Pose::Orientation(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007)
+  );
+
+  return pos.error(correct).norm() < 1e-50;
+}
 bool test_inverse_kinematics() {
   UR5 robot;
 

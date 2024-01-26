@@ -32,8 +32,8 @@ using Configurations = std::vector<UR5::Configuration>;
  * @return The list of configurations.
  * @throw Whatever is thrown by @p function.
  */
-template<size_t index, typename Function, typename ArgList, class... Args>
-Configurations expand(const ArgList& variable_argument, Function& function, Args&... args) {
+template<size_t index, bool fail_silently, typename Function, typename ArgList, class... Args>
+Configurations expand(const ArgList& variable_argument, Function&& function, Args&&... args) {
   Configurations result;
 
   // Generate solutions for every possible value of the variable argument.
@@ -51,7 +51,11 @@ Configurations expand(const ArgList& variable_argument, Function& function, Args
         for (auto& config : configs) config[index - 1] = arg;
         result.insert(result.end(), configs.begin(), configs.end());
       }
-    } catch (std::domain_error& e) {}
+    } catch (const std::domain_error& e) {
+      if constexpr (!fail_silently) {
+        throw;
+      }
+    }
   }
 
   return result;
@@ -229,7 +233,7 @@ Configurations configs_given_theta_5(
 
   const auto theta_3 = acos(cos_theta_3);
 
-  Configurations&& configs = expand<3>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
+  Configurations&& configs = expand<3, false>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
   
   // Update theta_6.
   for (auto& config : configs) config[5] = theta_6;
@@ -261,10 +265,9 @@ Configurations configs_given_theta_1(
   const Pose::Position origin_6 = direct_kin.translation();
 
   // The value of theta_5 (+-)
-  // TODO: check correctness. z = d4 + d6 * cos5
   const auto theta_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
 
-  return expand<5>(theta_5, configs_given_theta_5, robot, direct_kin);
+  return expand<5, true>(theta_5, configs_given_theta_5, robot, direct_kin);
 }
 
 /**
@@ -302,7 +305,8 @@ Configurations configurations(const UR5& robot, const Pose& pose) {
   // Adding the global rotation.
   for (auto& val : theta_1) val += angle_5_0_xy;
   
-  return expand<1>(theta_1, configs_given_theta_1, robot, direct_kin);
+  // The two solutions are symmetrical, if the first fails also the other will.
+  return expand<1, false>(theta_1, configs_given_theta_1, robot, direct_kin);
 }
 
 UR5::Configuration inverse_kinematics(const UR5& robot, const Pose& pose) {

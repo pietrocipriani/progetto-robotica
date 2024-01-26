@@ -40,12 +40,13 @@ struct RevoluteJoint {
    * The DH parameters as defined by the DH convention.
    * @p theta is a reference to the correponding robot config entry.
    */
-  Scalar d, &theta, a, alpha;
+  Scalar d = 0, &theta, a = 0, alpha = 0;
 
   /**
    * The physical limits of the joint.
    */
-  Scalar min_config, max_config;
+  Scalar min_config = -std::numeric_limits<Scalar>::infinity();
+  Scalar max_config = std::numeric_limits<Scalar>::infinity();
 
   constexpr RevoluteJoint(
     Scalar d, Scalar& theta, Scalar a, Scalar alpha,
@@ -68,6 +69,8 @@ struct UR5 {
    */
   using Configuration = Vector<dof>;
 
+  using Parameters = std::array<RevoluteJoint, dof>;
+
   /**
    * The current configuration of the robot.
    */
@@ -77,7 +80,7 @@ struct UR5 {
    * The parameters for the joints.
    * @note The configuration have to be modified via @p config.
    */
-  const std::array<RevoluteJoint, dof> joints;
+  const Parameters joints;
 
   const RevoluteJoint& base      = joints[0];
   const RevoluteJoint& shoulder  = joints[1];

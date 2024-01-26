@@ -285,5 +285,58 @@ Scalar sigmoid(Scalar&& x) {
 }
 
 
+template<class Integer>
+struct Range {
+private:
+  Integer _begin, _end;
+public:
+  using value_type = Integer;
+  using reference = Integer;
+  using const_reference = Integer;
+  using difference_type = Integer;
+  using size_type = Integer;
+  class iterator {
+    Integer num;
+  public:
+    using iterator_category = std::input_iterator_tag;
+    using value_type = Range::value_type;
+    using reference = Range::reference;
+    using pointer = void;
+    using const_reference = Range::const_reference;
+    using difference_type = Range::difference_type;
+    using size_type = Range::size_type;
+
+    iterator(Integer num = 0) : num(num) {}
+
+    iterator& operator++() {
+      ++num;
+      return *this;
+    }
+    iterator operator++(int) {
+      iterator prev = *this;
+      ++num;
+      return prev;
+    }
+    bool operator==(const iterator& other) const {
+      return num == other.num;
+    }
+    bool operator!=(const iterator& other) const {
+      return !operator==(other);
+    }
+    reference operator*() const {
+      return num;
+    }
+  };
+  using const_iterator = iterator;
+
+  Range(Integer end) : _begin(0), _end(end) {}
+  Range(Integer begin, Integer end) : _begin(begin), _end(end) {}
+
+  iterator begin() const { return _begin; }
+  iterator cbegin() const { return _begin; }
+  iterator end() const { return _end; }
+  iterator cend() const { return _end; }
+};
+
 
 #endif /* UTILS_HPP_INCLUDED */
