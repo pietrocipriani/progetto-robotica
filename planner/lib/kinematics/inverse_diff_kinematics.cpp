@@ -1,6 +1,9 @@
 #include "kinematics.hpp"
 #include "direct_kinematics.hpp"
+#include "model.hpp"
+#include "utils.hpp"
 #include <cmath>
+#include <sstream>
 #include <stdexcept>
 
 namespace kinematics {
@@ -75,10 +78,12 @@ Jacobian generate_jacobian(const UR5& robot) {
  * @throw std::domain_error if the @p matrix is not invertible.
  */
 template<size_t n>
-Matrix<n, n> invert(const Matrix<n, n>& matrix) {
+Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
   // TODO: calibrate threshold
   if (std::abs(matrix.determinant()) < 1e-5) {
-    throw std::domain_error("Singular configuration.");
+    std::stringstream err; 
+    err << "Singular configuration. Det = " << matrix.determinant();
+    throw std::domain_error(err.str());
   }
 
   return matrix.inverse();
@@ -91,20 +96,39 @@ Matrix<n, n> invert(const Matrix<n, n>& matrix) {
  * @throw std::domain_error If the system is overdetermined or if in singular configuration.
  * @note This function performs the traditional inverse in case of square jacobian.
  */
+template<bool damped = true>
 InvJacobian invert(const Jacobian& matrix) {
   constexpr size_t rows = Jacobian::RowsAtCompileTime;
   constexpr size_t cols = Jacobian::ColsAtCompileTime;
 
-  if constexpr (rows == cols) {
+  if constexpr (damped) {
+    // DLS inverse.
+
+    const auto matrix_matrixt = matrix * matrix.transpose();
+
+    // TODO: choose coefficient
+    // constexpr Scalar damping_factor = 1e-2;
+
+    // Error too high in certain cases.
+    const Scalar damping_factor = sigmoid(1e-5 / matrix_matrixt.determinant()) * 0.1;
+
+    // The damping matrix
+    auto damping = std::pow(damping_factor, 2) * Matrix<rows, rows>::Identity();
+
+
+
+    auto matrix_to_invert = matrix_matrixt + damping;
+    return matrix.transpose() * sq_invert<rows>(matrix_to_invert);
+  } else if constexpr (rows == cols) {
     // Square matrix, normal inversion.
-    return invert<rows>(matrix);
+    return sq_invert<rows>(matrix);
   } else if constexpr (rows > cols) {
     // Overdetermined system
     // Solutions could exist, however it is not in the scope of this implementation.
     throw std::domain_error("Not enough degrees of freedom.");
   } else {
     // Right pseudo-inverse.
-    return matrix.transpose() * invert<rows>(matrix * matrix.transpose());
+    return matrix.transpose() * sq_invert<rows>(matrix * matrix.transpose());
   }
 }
 
@@ -140,18 +164,22 @@ Movement movement_as_vector(const Pose& movement) {
   return velocity;
 }
 
-model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& movement) {
+model::UR5::Configuration inverse_diff_kinematics(const model::UR5 &robot, const Movement& movement) {
   // Geometric jacobian as we are working with quaternions.
   Jacobian geometric_jacobian = generate_jacobian(robot);
 
   // TODO: only feasible when not in singularities.
   const InvJacobian inverse = invert(geometric_jacobian);
 
+  return inverse * movement;
+}
+
+model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& movement) {
   // Conversion from quaternion to ω·Δt.
   // TODO: check a movement is passed and not a velocity for the comment.
   const Movement movement_vector = movement_as_vector(movement);
 
-  return inverse * movement_vector;
+  return inverse_diff_kinematics(robot, movement_vector);
 }
 
 
@@ -167,9 +195,18 @@ model::UR5::Configuration dpa_inverse_diff_kinematics(
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
   Pose error = effective_position.error(desired_pose);
+  
+  // TODO: error weight.
+  error *= 1;
 
-  // TODO: only for testing purposes: delta t.
-  error.position *= 1;
+  /*Movement desired_movement = movement_as_vector(movement);
+
+  Movement error_movement = movement_as_vector(error);
+
+  Movement movement_vector = desired_movement + error_movement;
+
+  return inverse_diff_kinematics(robot, movement_vector);*/
+
 
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.

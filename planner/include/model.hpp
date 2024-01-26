@@ -3,8 +3,7 @@
 
 #include <array>
 #include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
-#include <eigen3/Eigen/src/Geometry/Quaternion.h>
+#include <eigen3/Eigen/Geometry>
 #include <limits>
 
 namespace model {
