@@ -1,9 +1,12 @@
 #include <cmath>
 #include <cstdlib>
+#include <cstring>
+#include <fstream>
 #include <exception>
 #include <iomanip>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 #include "tester.hpp"
 #include "kinematics.hpp"
 #include "model.hpp"
@@ -31,6 +34,14 @@ int main() {
   // TODO: kinematics test
 
   return EXIT_SUCCESS;
+}
+
+std::ostream& operator<<(std::ostream& out, const Pose& pose) {
+  out << pose.position.x() << ", " << pose.position.y() << ", " << pose.position.z() << ", ";
+  auto axis = pose.orientation * (Pose::Orientation::Vector3::UnitZ() * 0.02);
+  out << axis.x() << ", " << axis.y() << ", " << axis.z();
+
+  return out;
 }
 
 bool test_movement() {
@@ -150,12 +161,28 @@ bool test_path() {
   for (auto& final_pose : final) {
     std::clog << "-------------------------- NEW BATCH -------------------------" << std::endl;
 
+    char filename[] = "/tmp/test_path_XXXXXX\0csv";
+    char * temp = mktemp(filename);
+
+    size_t len = strlen(temp);
+
+    std::ofstream file;
+
+    if (len == 0) {
+      std::cerr << "Cannot create the csv file." << std::endl;
+    } else {
+      temp[len] = '.';
+      std::cerr << "Plot available at " << temp << "." << std::endl;
+      file = std::ofstream(temp);
+    }
+
     robot.config = initial_config;
 
     Pose current = initial;
 
     constexpr Scalar max_time = 10;
     for (Scalar time = 0; time < max_time; time += dt) {
+
       Pose next_pos = interpolate(initial, final_pose, time / max_time);
 
       Pose movement = current.error(next_pos);
@@ -163,6 +190,9 @@ bool test_path() {
       robot.config += dpa_inverse_diff_kinematics(robot, movement, current);
 
       current = std::move(next_pos);
+
+      auto p = direct_kinematics(robot);
+      file << p << ", " << current << "\n";
     }
     Pose movement = current.error(final_pose);
     robot.config += dpa_inverse_diff_kinematics(robot, movement, current);

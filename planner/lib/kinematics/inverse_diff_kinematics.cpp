@@ -110,7 +110,7 @@ InvJacobian invert(const Jacobian& matrix) {
     // constexpr Scalar damping_factor = 1e-2;
 
     // Error too high in certain cases.
-    const Scalar damping_factor = sigmoid(1e-5 / matrix_matrixt.determinant()) * 0.1;
+    const Scalar damping_factor = sigmoid(1 / matrix_matrixt.determinant()) * 1;
 
     // The damping matrix
     auto damping = std::pow(damping_factor, 2) * Matrix<rows, rows>::Identity();
