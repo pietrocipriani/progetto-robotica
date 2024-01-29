@@ -3,11 +3,24 @@
 
 #include "model.hpp"
 #include "utils.hpp"
+#include "kinematics.hpp"
 #include <queue>
 #include <stdexcept>
 #include <vector>
 
 namespace planner {
+
+namespace os {
+using Pose = kinematics::Pose;
+using Position = kinematics::Pose::Position;
+using Velocity = Position;
+using Acceleration = Velocity;
+}
+namespace js {
+using Position = model::UR5::Configuration;
+using Velocity = Position;
+using Acceleration = Velocity;
+}
 
 /**
  * Enum representing the types of blocks.
@@ -33,7 +46,12 @@ public:
   /**
    * The 2D position of the block.
    */
-  Scalar x, y, angle;
+  Eigen::Vector<Scalar, 2> position;
+  
+  /**
+   * The 2D orientation of the block.
+   */
+  Scalar orientation;
 
   /**
    * The bounding box in order to perform safe movements.
@@ -41,12 +59,19 @@ public:
    */
   Scalar hit_box_radius;
 
-
-  constexpr BlockPose(
+  BlockPose(
     Scalar x, Scalar y, Scalar angle,
     Scalar hit_box_radius,
     Block block = Block::NO_BLOCK
   ) noexcept;
+
+  /**
+   * Checks if @p this block collides with @p other.
+   * Collision is computed according to position and @p hit_box_radius.
+   * @param other The other `BlockPose` to check the collision with.
+   * @return `true` if the two hitbox collides, `false` otherwise.
+   */
+  bool collides(const BlockPose& other) const;
 };
 
 /**
@@ -63,8 +88,8 @@ struct BlockMovement {
    */
   BlockPose target;
 
-  constexpr BlockMovement(const BlockPose& start, const BlockPose& end) noexcept;
-  constexpr BlockMovement(BlockPose&& start, BlockPose&& end) noexcept;
+  BlockMovement(const BlockPose& start, const BlockPose& target) noexcept;
+  BlockMovement(BlockPose&& start, BlockPose&& target) noexcept;
 };
 
 /**
@@ -100,6 +125,16 @@ public:
 };
 
 /**
+ * Sequence of configurations to perform the movement of a certain block.
+ * @note Two phases are returned to allow the controller to perform the picking.
+ */
+struct MovementSequence {
+  using ConfigSequence = std::queue<model::UR5::Configuration>;
+
+  ConfigSequence picking, dropping;
+};
+
+/**
  * Generates dependencies between the positioning of the blocks.
  * Some blocks could be into the target position of another block.
  * @param blocks The initial positions of the recognized blocks. 
@@ -122,12 +157,12 @@ std::queue<BlockMovement> generate_block_positioning_order(
  * @param robot The current robot configuration.
  * @param movement The requested block movement.
  * @param dt The time granularity.
- * @return A sequence of configuration variations in order to perform the given movement.
+ * @return A sequence of configurations in order to perform the given movement.
  * @throw std::domain_error If one of the positions is not in the operational space.
- * @note Evaluate if its worth to run this into a thread in order to perform the next calculations
- *  during the physical driving of the robot for the previous movement.
  */
-std::queue<model::UR5::Configuration> joint_space_planning(
+// TODO: Is it worth to run this into a thread in order to perform the next calculations
+//  during the physical driving of the robot for the previous movement?
+MovementSequence plan_movement(
   model::UR5& robot,
   const BlockMovement& movement,
   const model::Scalar dt

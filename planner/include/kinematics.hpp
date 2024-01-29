@@ -57,6 +57,15 @@ struct Pose {
   Pose error(const Pose& desired) const;
 
   /**
+   * Returns the distance between @p other and @p this.
+   * This method is substantially a wrapper for Pose::error.
+   * It is provided only for clarity in certain contexts.
+   * @param other The starting pose.
+   * @return The distance as movement.
+   */
+  Pose operator -(const Pose& other) const;
+
+  /**
    * Inverts `this` movement.
    */
   Pose inverse() const;
@@ -95,7 +104,7 @@ struct Pose {
  * @param robot The robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct_kinematics(const model::UR5& robot) noexcept;
+Pose direct(const model::UR5& robot) noexcept;
 
 /**
  * Evaluates the direct kinematics of @p robot.
@@ -103,7 +112,7 @@ Pose direct_kinematics(const model::UR5& robot) noexcept;
  * @param config The target robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct_kinematics(const model::UR5& robot, const model::UR5::Configuration& config) noexcept;
+Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept;
 
 /**
  * Performs the inverse kinematics for @p robot.
@@ -113,7 +122,7 @@ Pose direct_kinematics(const model::UR5& robot, const model::UR5::Configuration&
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-model::UR5::Configuration inverse_kinematics(const model::UR5& robot, const Pose& pose);
+model::UR5::Configuration inverse(const model::UR5& robot, const Pose& pose);
 
 /**
  * Finds the configuration variation in order to obtain the desired velocity in the operational space.
@@ -123,7 +132,7 @@ model::UR5::Configuration inverse_kinematics(const model::UR5& robot, const Pose
  * @throws @p std::domain_error when in singularity.
  * @note No damped least-squares. A correct planning is assumed. This choice could be subject to change.
  */
-model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& velocity);
+model::UR5::Configuration inverse_diff(const model::UR5& robot, const Pose& velocity);
 
 /**
  * Desired-pose-aware inverse differential kinematics implementation.
@@ -134,7 +143,7 @@ model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const
  * @throws @p std::domain_error when in singularity.
  * @see kinematics::inverse_diff_kinematics
  */
-model::UR5::Configuration dpa_inverse_diff_kinematics(
+model::UR5::Configuration dpa_inverse_diff(
   const model::UR5& robot,
   const Pose& velocity,
   const Pose& desired_pose

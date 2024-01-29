@@ -160,10 +160,13 @@ struct Identity {
 /**
  * A simple implementation for the java 'Stream' concept.
  * @param Iterator The underlying iterator.
- * @param Function The transformation function type. Defaults to the identity function.
+ * @param Output The type of the values produced by this stream.
  */
-template<class Iterator, class Function = Identity<typename std::iterator_traits<Iterator>::value_type>>
+template<class Iterator, class Output = typename std::iterator_traits<Iterator>::value_type>
 class Stream {
+public:
+  using Input = typename std::iterator_traits<Iterator>::value_type;
+  using Function = std::function<Output(const Input&)>;
 private:
   Iterator _begin, _end;
   Function transformation;
@@ -179,13 +182,13 @@ public:
     Iterator current;
   public:
     using iterator_category = std::input_iterator_tag;
-    using value_type = const std::invoke_result_t<Function, typename std::iterator_traits<Iterator>::value_type>;
+    using value_type = typename Function::result_t;
     using difference_type = typename std::iterator_traits<Iterator>::difference_type;
-    using pointer = const value_type *;
-    using reference = const value_type;
+    using pointer = void;
+    using reference = value_type;
     using const_reference = const value_type;
 
-    const_iterator(Function& transformation, Iterator current)
+    const_iterator(const Function& transformation, Iterator current)
       : transformation(transformation), current(current) {}
 
     bool operator!=(const const_iterator& other) const {
@@ -193,14 +196,14 @@ public:
     }
 
     bool operator==(const const_iterator& other) const {
-      return &transformation == &other.transformation && current == other.current;
+      return current == other.current;
     }
 
-    reference operator*() {
-      return std::invoke(transformation, *current);
+    const_reference operator*() {
+      return transformation(*current);
     }
-    const value_type operator*() const {
-      return std::invoke(transformation, *current);
+    const_reference operator*() const {
+      return transformation(*current);
     }
 
     const_iterator operator++() {
@@ -253,7 +256,7 @@ public:
    * @param function The transformation.
    */
   template<class Function2>
-  Stream<Iterator, FunctionComposition<Function, Function2>> operator|(Function2&& function) {
+  Stream<Iterator, std::invoke_result_t<Function2, Output>> operator|(Function2&& function) {
     return Stream(_begin, _end, FunctionComposition(transformation, std::forward(function)));
   }
 

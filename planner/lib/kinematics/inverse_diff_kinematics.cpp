@@ -36,7 +36,7 @@ Jacobian generate_jacobian(const UR5& robot) {
   Jacobian result;
   
   // End effector position in order to compute the radius.
-  const auto end_effector_position = direct_kinematics(robot).position;
+  const auto end_effector_position = direct(robot).position;
 
   // The origin of the frame associate to the frame of the iteration. Initially the base frame.
   // Origin recovered as `origin.translation()`.
@@ -164,7 +164,7 @@ Movement movement_as_vector(const Pose& movement) {
   return velocity;
 }
 
-model::UR5::Configuration inverse_diff_kinematics(const model::UR5 &robot, const Movement& movement) {
+model::UR5::Configuration inverse_diff(const model::UR5 &robot, const Movement& movement) {
   // Geometric jacobian as we are working with quaternions.
   Jacobian geometric_jacobian = generate_jacobian(robot);
 
@@ -174,22 +174,22 @@ model::UR5::Configuration inverse_diff_kinematics(const model::UR5 &robot, const
   return inverse * movement;
 }
 
-model::UR5::Configuration inverse_diff_kinematics(const model::UR5& robot, const Pose& movement) {
+model::UR5::Configuration inverse_diff(const model::UR5& robot, const Pose& movement) {
   // Conversion from quaternion to ω·Δt.
   // TODO: check a movement is passed and not a velocity for the comment.
   const Movement movement_vector = movement_as_vector(movement);
 
-  return inverse_diff_kinematics(robot, movement_vector);
+  return inverse_diff(robot, movement_vector);
 }
 
 
-model::UR5::Configuration dpa_inverse_diff_kinematics(
+model::UR5::Configuration dpa_inverse_diff(
   const model::UR5& robot,
   const Pose& movement,
   const Pose& desired_pose
 ) {
   // Direct kinematics for the effective position (error computation).
-  const Pose effective_position = direct_kinematics(robot);
+  const Pose effective_position = direct(robot);
 
   // Compute the error, movement is required.
   // TODO: introduce a weight coefficient.
@@ -213,7 +213,7 @@ model::UR5::Configuration dpa_inverse_diff_kinematics(
   // TODO: quaternion arithmetric is used in sequential composition, not for rotations at the same time.
   error.move(movement);
 
-  return inverse_diff_kinematics(robot, error);
+  return inverse_diff(robot, error);
 }
 
 

@@ -33,11 +33,11 @@ JointTransformation joint_transformation_matrix(const model::RevoluteJoint& join
   return first_transform * second_transform;
 }
 
-Pose direct_kinematics(const UR5& robot) noexcept {
-  return direct_kinematics(robot, robot.config);
+Pose direct(const UR5& robot) noexcept {
+  return direct(robot, robot.config);
 }
 
-Pose direct_kinematics(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
+Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
   JointTransformation transformation = JointTransformation::Identity();
 
   for (const auto& joint_theta : zip(robot.joints, config)) {

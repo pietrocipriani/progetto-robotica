@@ -309,7 +309,7 @@ Configurations configurations(const UR5& robot, const Pose& pose) {
   return expand<1, false>(theta_1, configs_given_theta_1, robot, direct_kin);
 }
 
-UR5::Configuration inverse_kinematics(const UR5& robot, const Pose& pose) {
+UR5::Configuration inverse(const UR5& robot, const Pose& pose) {
   // Possible configurations
   const auto configs = configurations(robot, pose);
 

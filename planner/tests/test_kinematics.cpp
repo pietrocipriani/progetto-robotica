@@ -51,7 +51,7 @@ bool test_movement() {
   // default constructed robot.
   UR5 robot;
 
-  Pose position = direct_kinematics(robot);
+  Pose position = direct(robot);
 
   // 4 min simulation.
   for (Scalar time = 0.0; time < 60.0 * 2.6; time += dt) {
@@ -62,12 +62,12 @@ bool test_movement() {
     );
     // TODO: cannot choose a random path.
 
-    const UR5::Configuration config_variation = dpa_inverse_diff_kinematics(robot, velocity, position);
+    const UR5::Configuration config_variation = dpa_inverse_diff(robot, velocity, position);
 
     position.move(velocity);
     robot.config += config_variation;
 
-    auto effective_pos = direct_kinematics(robot);
+    auto effective_pos = direct(robot);
     Scalar error = effective_pos.error(position).norm();
 
     // TODO: calibrate tollerance
@@ -85,7 +85,7 @@ bool test_movement() {
 bool test_direct_kinematics() {
   UR5 robot;
 
-  const auto pos = direct_kinematics(robot);
+  const auto pos = direct(robot);
 
   const Pose correct(
     Pose::Position(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
@@ -99,17 +99,17 @@ bool test_inverse_kinematics() {
 
   for (int i = 0; i < 10000; ++i) {
     robot.config = UR5::Configuration::Random() * M_PI * 2;
-    const auto initial_pos = direct_kinematics(robot);
+    const auto initial_pos = direct(robot);
 
     try {
-      robot.config = inverse_kinematics(robot, initial_pos);
+      robot.config = inverse(robot, initial_pos);
     } catch (std::domain_error& e) {
       std::stringstream buf;
       buf << "Failed with error = " << e.what() << " at iteration " << i << ". Solution: " << robot.config;
       throw std::domain_error(buf.str());
     }
 
-    const auto final_pos = direct_kinematics(robot);
+    const auto final_pos = direct(robot);
     Scalar error = final_pos.error(initial_pos).norm();
 
     if (std::isnan(error)) {
@@ -154,7 +154,7 @@ bool test_path() {
   
   UR5 robot;
 
-  const UR5::Configuration initial_config = inverse_kinematics(robot, initial);
+  const UR5::Configuration initial_config = inverse(robot, initial);
 
   // TODO: kp, kq
 
@@ -187,18 +187,18 @@ bool test_path() {
 
       Pose movement = current.error(next_pos);
 
-      robot.config += dpa_inverse_diff_kinematics(robot, movement, current);
+      robot.config += dpa_inverse_diff(robot, movement, current);
 
       current = std::move(next_pos);
 
-      auto p = direct_kinematics(robot);
+      auto p = direct(robot);
       file << p << ", " << current << "\n";
     }
     Pose movement = current.error(final_pose);
-    robot.config += dpa_inverse_diff_kinematics(robot, movement, current);
+    robot.config += dpa_inverse_diff(robot, movement, current);
     current = final_pose;
     
-    auto effective_pos = direct_kinematics(robot);
+    auto effective_pos = direct(robot);
 
     std::clog << "Final error: " << effective_pos.error(final_pose).norm() << std::endl;
     std::clog << "Orientation error: " << effective_pos.error(final_pose).orientation.vec().norm() << std::endl;
