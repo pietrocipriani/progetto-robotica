@@ -33,11 +33,11 @@ JointTransformation joint_transformation_matrix(const model::RevoluteJoint& join
   return first_transform * second_transform;
 }
 
-Pose direct(const UR5& robot) noexcept {
+Pose_2 direct(const UR5& robot) noexcept {
   return direct(robot, robot.config);
 }
 
-Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
+Pose_2 direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
   JointTransformation transformation = JointTransformation::Identity();
 
   for (const auto& joint_theta : zip(robot.joints, config)) {
@@ -47,11 +47,11 @@ Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) no
     transformation = transformation * joint_transformation_matrix(joint, theta);
   }
 
-  // Quaternion from rotation matrix.
-  Pose::Orientation rotation(transformation.linear());
+  // XYZ Euler angles from rotation matrix.
+  Pose_2::Orientation rotation = transformation.linear().eulerAngles(0, 1, 2);
 
   // Construct the pose as position + orientation.
-  return Pose(transformation.translation(), std::move(rotation));
+  return Pose_2(transformation.translation(), std::move(rotation));
 }
 
 }

@@ -11,9 +11,8 @@
 namespace planner {
 
 namespace os {
-using Pose = kinematics::Pose;
-using Position = kinematics::Pose::Position;
-using Velocity = Position;
+using Position = kinematics::Pose_2;
+using Velocity = kinematics::Movement;
 using Acceleration = Velocity;
 }
 namespace js {

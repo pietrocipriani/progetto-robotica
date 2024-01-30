@@ -36,9 +36,9 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-std::ostream& operator<<(std::ostream& out, const Pose& pose) {
+std::ostream& operator<<(std::ostream& out, const Pose_2& pose) {
   out << pose.position.x() << ", " << pose.position.y() << ", " << pose.position.z() << ", ";
-  auto axis = pose.orientation * (Pose::Orientation::Vector3::UnitZ() * 0.02);
+  auto axis = pose.orientation * (Pose_2::Orientation::Vector3::UnitZ() * 0.02);
   out << axis.x() << ", " << axis.y() << ", " << axis.z();
 
   return out;
@@ -51,31 +51,31 @@ bool test_movement() {
   // default constructed robot.
   UR5 robot;
 
-  Pose position = direct(robot);
+  Pose_2 position = direct(robot);
 
   // 4 min simulation.
   for (Scalar time = 0.0; time < 60.0 * 2.6; time += dt) {
-    Pose velocity(
-      Pose::Position::Random().normalized() * 0.01 * dt,
+    Movement velocity(
+      Movement::Traslation::Random().normalized() * 0.01 * dt,
       // Can only rotate around the z axis.
-      Pose::Orientation(Eigen::AngleAxis<Scalar>(0.1 * dt, Pose::Orientation::Vector3::UnitZ()))
+      Movement::Rotation::UnitZ() * 0.1 * dt
     );
     // TODO: cannot choose a random path.
 
     const UR5::Configuration config_variation = dpa_inverse_diff(robot, velocity, position);
 
-    position.move(velocity);
+    position += velocity;
     robot.config += config_variation;
 
     auto effective_pos = direct(robot);
-    Scalar error = effective_pos.error(position).norm();
+    Scalar error = (position - effective_pos).norm();
 
     // TODO: calibrate tollerance
     if (error > 1e-2) {
       std::stringstream buf;
       buf << "Failed at time " << time << " s with error = " << error
-          << " linear part error = " << effective_pos.error(position).position.norm()
-          << " rot part error = " << effective_pos.error(position).orientation.vec().norm();
+          << " linear part error = " << (position - effective_pos).traslation.norm()
+          << " rot part error = " << (effective_pos - position).rotation.norm();
       throw std::runtime_error(buf.str());
     }
   }
@@ -87,12 +87,13 @@ bool test_direct_kinematics() {
 
   const auto pos = direct(robot);
 
-  const Pose correct(
-    Pose::Position(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
-    Pose::Orientation(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007)
+  const Pose_2 correct(
+    Pose_2::Position(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
+    // TODO: convert to euler angles.
+    model::Quaternion(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007).toRotationMatrix().eulerAngles(0, 1, 2)
   );
 
-  return pos.error(correct).norm() < 1e-50;
+  return (correct - pos).norm() < 1e-50;
 }
 bool test_inverse_kinematics() {
   UR5 robot;
@@ -110,7 +111,7 @@ bool test_inverse_kinematics() {
     }
 
     const auto final_pos = direct(robot);
-    Scalar error = final_pos.error(initial_pos).norm();
+    Scalar error = (final_pos - initial_pos).norm();
 
     if (std::isnan(error)) {
       throw std::runtime_error("Unexpected NaN.");

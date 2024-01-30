@@ -3,7 +3,11 @@
 
 namespace kinematics {
 
-Pose::Pose() noexcept : position(Position::Zero()), orientation(Orientation::Identity()) {}
+
+Pose_2::Pose_2(Container&& pose) noexcept : from_origin(std::move(pose)) {}
+
+Pose_2::Pose_2(const Container& pose) noexcept : from_origin(pose) {}
+
 
 Pose::Pose(Position&& position, Orientation&& orientation) noexcept
   : position(std::move(position)), orientation(std::move(orientation)) {}
@@ -48,10 +52,6 @@ Pose& Pose::operator *=(model::Scalar coefficient) {
   position *= coefficient;
   orientation = pow(orientation, coefficient);
   return *this;
-}
-
-Pose Pose::interpolate(const Pose& other, model::Scalar t) const {
-  return (other * t).move(*this * (1 - t));
 }
 
 }
