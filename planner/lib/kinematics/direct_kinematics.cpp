@@ -24,7 +24,7 @@ JointTransformation joint_transformation_matrix(const RevoluteJoint& joint) {
   return joint_transformation_matrix(joint, joint.theta);
 }
 
-JointTransformation joint_transformation_matrix(const model::RevoluteJoint& joint, model::Scalar theta) {
+JointTransformation joint_transformation_matrix(const model::RevoluteJoint& joint, Scalar theta) {
   // d and theta transformation.
   const auto first_transform = translation_rotation(Axis::UnitZ(), joint.d, theta);
   // a and alpha transformation.
@@ -34,28 +34,36 @@ JointTransformation joint_transformation_matrix(const model::RevoluteJoint& join
   return first_transform * second_transform;
 }
 
-Pose direct(const UR5& robot) noexcept {
+template<class Robot>
+Pose direct(const Robot& robot) noexcept {
   return direct(robot, robot.config);
 }
 
-Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept {
+template<class Robot>
+Pose direct(const Robot& robot, const typename Robot::Configuration& config) noexcept {
   JointTransformation transformation = JointTransformation::Identity();
 
-  for (const auto& joint_theta : zip(robot.joints, config)) {
+  for (const auto& joint_theta : zip(robot.joints, config.vector())) {
     const auto& [joint, theta] = joint_theta;
 
     // Apply transformation to the relative frame (post-multiplication).
     transformation = transformation * joint_transformation_matrix(joint, theta);
   }
 
-
   Pose::Linear translation = transformation.translation();
 
   // ZYX Euler angles from rotation matrix.
-  Pose::Angular rotation = euler::from(transformation.linear());
+  #ifndef USE_EULER_ANGLES
+    Pose::Angular rotation(transformation.linear());
+  #else
+    Pose::Angular rotation = euler::from<dimension<JointTransformation::LinearPart>>(transformation.linear());
+  #endif
 
   // Construct the pose as position + orientation.
   return Pose(std::move(translation), std::move(rotation));
 }
+
+template Pose direct<model::UR5>(const model::UR5&) noexcept;
+template Pose direct<model::UR5>(const model::UR5&, const model::UR5::Configuration&) noexcept;
 
 }

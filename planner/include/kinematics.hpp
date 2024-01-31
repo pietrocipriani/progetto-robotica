@@ -6,6 +6,7 @@
 #include "utils.hpp"
 #include "constants.hpp"
 #include <type_traits>
+#include "operational_space.hpp"
 
 namespace kinematics {
   
@@ -26,12 +27,10 @@ namespace kinematics {
  *  - The project require rotations only around the Z axis (this is not a good point, loss of generality).
  *  - The planner has full control on the orientation interpolation
  */
-using Pose = LengthOrientation<0>;
-using Velocity = LengthOrientation<1>;
-using Acceleration = LengthOrientation<2>;
+using Pose = OperationalSpace<os_size>;
+using Velocity = Pose::Derivative;
+using Acceleration = Velocity::Derivative;
 
-template<size_t time_derivative>
-LengthOrientation<time_derivative> operator*(model::Scalar coeff, const LengthOrientation<time_derivative>& mov);
 
 
 /**
@@ -39,7 +38,8 @@ LengthOrientation<time_derivative> operator*(model::Scalar coeff, const LengthOr
  * @param robot The robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct(const model::UR5& robot) noexcept;
+template<class Robot>
+Pose direct(const Robot& robot) noexcept;
 
 /**
  * Evaluates the direct kinematics of @p robot.
@@ -47,7 +47,8 @@ Pose direct(const model::UR5& robot) noexcept;
  * @param config The target robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept;
+template<class Robot>
+Pose direct(const Robot& robot, const typename Robot::Configuration& config) noexcept;
 
 /**
  * Performs the inverse kinematics for @p robot.
@@ -67,7 +68,8 @@ model::UR5::Configuration inverse(const model::UR5& robot, const Pose& pose);
  * @throws @p std::domain_error when in singularity.
  * @note Damped least-squares. This choice could be subject to change.
  */
-model::UR5::Configuration inverse_diff(const model::UR5& robot, const Velocity& movement);
+template<class Robot>
+typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement);
 
 /**
  * Desired-pose-aware inverse differential kinematics implementation.
@@ -78,11 +80,12 @@ model::UR5::Configuration inverse_diff(const model::UR5& robot, const Velocity& 
  * @throws @p std::domain_error when in singularity.
  * @see kinematics::inverse_diff
  */
-model::UR5::Configuration dpa_inverse_diff(
-  const model::UR5& robot,
+template<class Robot>
+typename Robot::Velocity dpa_inverse_diff(
+  const Robot& robot,
   const Velocity& movement,
   const Pose& desired_pose,
-  model::Scalar dt
+  const Time& dt
 );
 
 }

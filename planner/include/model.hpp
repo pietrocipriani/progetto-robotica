@@ -5,31 +5,10 @@
 #include <eigen3/Eigen/Dense>
 #include <eigen3/Eigen/Geometry>
 #include <limits>
+#include "types.hpp"
+#include "joint_space.hpp"
 
 namespace model {
-
-/**
- * The type representing a scalar.
- * @note The project should be dependent on this alias declaration for integrity.
- */
-using Scalar = double;
-
-/**
- * Generic matrix in `Scalar` field.
- */
-template<size_t rows, size_t cols = rows>
-using Matrix = Eigen::Matrix<Scalar, rows, cols>;
-
-/**
- * Generic vector in `Scalar` field.
- */
-template<size_t n>
-using Vector = Eigen::Vector<Scalar, n>;
-
-/**
- * Quaternion in `Scalar` field.
- */
-using Quaternion = Eigen::Quaternion<Scalar>;
 
 /**
  * Structure representing the DH parameters for a single revolute joint.
@@ -40,7 +19,8 @@ struct RevoluteJoint {
    * The DH parameters as defined by the DH convention.
    * @p theta is a reference to the correponding robot config entry.
    */
-  Scalar d = 0, &theta, a = 0, alpha = 0;
+  Scalar d = 0, a = 0, alpha = 0;
+  const Scalar& theta;
 
   /**
    * The physical limits of the joint.
@@ -49,7 +29,7 @@ struct RevoluteJoint {
   Scalar max_config = std::numeric_limits<Scalar>::infinity();
 
   constexpr RevoluteJoint(
-    Scalar d, Scalar& theta, Scalar a, Scalar alpha,
+    Scalar d, const Scalar& theta, Scalar a, Scalar alpha,
     Scalar min_config = -std::numeric_limits<Scalar>::infinity(),
     Scalar max_config = std::numeric_limits<Scalar>::infinity()
   ) noexcept;
@@ -65,9 +45,25 @@ struct UR5 {
   static constexpr size_t dof = 6;
 
   /**
+   * The maximum rotational speed a joint can have. [rad/s]
+   */
+  static constexpr Scalar max_joint_speed = M_PI;
+
+  /**
+   * Very rough estimation of the max acceleration for the base joint with
+   * a fully extended arm. [rad/s²]
+   * Only half of the available torque is used.
+   */
+  static constexpr Scalar max_joint_accel = 40 * 0.5;
+
+  /**
    * The type representing a configuration for a @p dof manipulator.
    */
-  using Configuration = Vector<dof>;
+  using Configuration = JointSpace<dof>;
+
+  using Velocity = Configuration::Derivative;
+
+  using Acceleration = Velocity::Derivative;
 
   using Parameters = std::array<RevoluteJoint, dof>;
 

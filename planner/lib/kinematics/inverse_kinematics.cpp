@@ -2,6 +2,7 @@
 #include "direct_kinematics.hpp"
 #include "model.hpp"
 #include "euler.hpp"
+#include "types.hpp"
 #include <cerrno>
 #include <cmath>
 #include <limits>
@@ -18,6 +19,17 @@ using namespace model;
  */
 using Configurations = std::vector<UR5::Configuration>;
 
+enum Theta : size_t {
+  t1 = 0, t2 = 1, t3 = 2, t4 = 3, t5 = 4, t6 = 5
+};
+
+#define theta_1 config[t1]
+#define theta_2 config[t2]
+#define theta_3 config[t3]
+#define theta_4 config[t4]
+#define theta_5 config[t5]
+#define theta_6 config[t6]
+
 /**
  * Calls @p function @p n times with the various parameters in @p variable_argument
  * and condensate the configs into a single Configurations.
@@ -32,23 +44,24 @@ using Configurations = std::vector<UR5::Configuration>;
  * @return The list of configurations.
  * @throw Whatever is thrown by @p function.
  */
-template<size_t index, bool fail_silently, typename Function, typename ArgList, class... Args>
-Configurations expand(const ArgList& variable_argument, Function&& function, Args&&... args) {
+template<Theta theta, bool fail_silently, typename Function, typename ArgList, class... Args>
+Configurations expand(
+  const ArgList& variable_argument, Function&& function, UR5::Configuration::Base& config, Args&&... args
+) {
   Configurations result;
 
   // Generate solutions for every possible value of the variable argument.
   for (const auto& arg : variable_argument) {
+    config[theta] = arg;
     try {
       // Invokes the function.
-      auto configs = std::invoke(function, args..., arg);
+      auto configs = std::invoke(function, config, args...);
 
       if constexpr (std::is_same_v<UR5::Configuration, std::remove_cv_t<decltype(configs)>>) {
         // If function returns a Configuration...
-        configs[index - 1] = arg;
         result.push_back(configs);
       } else {
         // If function returns a Configurations...
-        for (auto& config : configs) config[index - 1] = arg;
         result.insert(result.end(), configs.begin(), configs.end());
       }
     } catch (const std::domain_error& e) {
@@ -141,13 +154,11 @@ std::array<Scalar, 2> asin(Scalar sin) {
  * @return The configuration to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
  */
 UR5::Configuration configs_given_theta_3(
-  const UR5& robot, JointTransformation direct_kin, const Pose::Linear& origin_3, Scalar theta_3
+  UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin, const Pose::Linear& origin_3
 ) {
-  static constexpr Scalar nan = std::numeric_limits<Scalar>::quiet_NaN();
-
   // Radius angle + angle inside the triangle.
-  const Scalar theta_2 = vector_angle_xy(-origin_3)
-                       + std::asin(robot.elbow.a * sin(theta_3) / origin_3.norm());
+  theta_2 = vector_angle_xy(-origin_3)
+          + std::asin(robot.elbow.a * sin(theta_3) / origin_3.norm());
 
   // Inversion of the elbow transformation
   const auto cancel_theta_3 = inverse_trans(robot.elbow, theta_3);
@@ -161,9 +172,9 @@ UR5::Configuration configs_given_theta_3(
   // x4 axis in frame 3 coords.
   const Axis x4_frame_3 = rotate(direct_kin, Axis::UnitX());
 
-  const Scalar theta_4 = vector_angle_xy(x4_frame_3);
+  theta_4 = vector_angle_xy(x4_frame_3);
 
-  return UR5::Configuration(nan, theta_2, theta_3, theta_4, nan, nan);
+  return UR5::Configuration(config);
 }
 
 /**
@@ -176,7 +187,7 @@ UR5::Configuration configs_given_theta_3(
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
 Configurations configs_given_theta_5(
-  const UR5& robot, JointTransformation direct_kin, Scalar theta_5
+  UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin
 ) {
   // The transformation matrix from frame 1 to frame 6.
   // TODO: more efficient to only invert the rotation.
@@ -188,8 +199,6 @@ Configurations configs_given_theta_5(
 
   // The coefficient of alignment between z1 and z6. Lower: the smaller the difference.
   const Scalar alignment_z1_z6 = z1_frame_6.head<2>().norm();
-
-  Scalar theta_6;
 
   // TODO: define tollerance
   // NOTE: it can be proven that this condition is equivalent to sin(theta_5) < eps.
@@ -232,13 +241,10 @@ Configurations configs_given_theta_5(
     throw std::domain_error("Unreachable, too distant.");
   }
 
-  const auto theta_3 = acos(cos_theta_3);
+  const auto thetas_3 = acos(cos_theta_3);
 
-  Configurations configs = expand<3, false>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
+  Configurations configs = expand<t3, false>(thetas_3, configs_given_theta_3, config, robot, direct_kin, origin_3);
   
-  // Update theta_6.
-  for (auto& config : configs) config[5] = theta_6;
-
   return configs;
 }
 
@@ -252,7 +258,7 @@ Configurations configs_given_theta_5(
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
 Configurations configs_given_theta_1(
-  const UR5& robot, JointTransformation direct_kin, Scalar theta_1
+  UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin
 ) {
   // Inversion of the base joint transformation.
   // NOTE: The inverse should be computed efficiently by Eigen due to the isometry property of the transformation.
@@ -266,9 +272,9 @@ Configurations configs_given_theta_1(
   const Pose::Linear origin_6 = direct_kin.translation();
 
   // The value of theta_5 (+-)
-  const auto theta_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
+  const auto thetas_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
 
-  return expand<5, true>(theta_5, configs_given_theta_5, robot, direct_kin);
+  return expand<t5, true>(thetas_5, configs_given_theta_5, config, robot, direct_kin);
 }
 
 /**
@@ -280,8 +286,14 @@ Configurations configs_given_theta_1(
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
 Configurations configurations(const UR5& robot, const Pose& pose) {
+  UR5::Configuration::Base config;
+
   // Construct the direct kinematics matrix from the final pose.
-  JointTransformation direct_kin = Translation(pose.linear) * euler::to_rotation(pose.angular);
+  #ifndef USE_EULER_ANGLES
+    JointTransformation direct_kin = Translation(pose.linear()) * pose.angular();
+  #else
+    JointTransformation direct_kin = Translation(pose.linear()) * euler::to_rotation<os_size>(pose.angular());
+  #endif
 
   // The origin of frame 5.
   // Obtained going backwards along z6 of d6.
@@ -301,13 +313,13 @@ Configurations configurations(const UR5& robot, const Pose& pose) {
   const Scalar angle_5_0_xy = vector_angle_xy(origin_5);
 
   // The shift angle respect to the planar arm.
-  auto theta_1 = asin(robot.wrist1.d / distance_5_0_xy);
+  auto thetas_1 = asin(robot.wrist1.d / distance_5_0_xy);
 
   // Adding the global rotation.
-  for (auto& val : theta_1) val += angle_5_0_xy;
+  for (auto& val : thetas_1) val += angle_5_0_xy;
   
   // The two solutions are symmetrical, if the first fails also the other will.
-  return expand<1, false>(theta_1, configs_given_theta_1, robot, direct_kin);
+  return expand<t1, false>(thetas_1, configs_given_theta_1, config, robot, direct_kin);
 }
 
 UR5::Configuration inverse(const UR5& robot, const Pose& pose) {
