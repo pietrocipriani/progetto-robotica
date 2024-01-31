@@ -342,4 +342,8 @@ public:
 };
 
 
+template<class T, class Target>
+constexpr bool is_quasi = std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, Target>;
+
+
 #endif /* UTILS_HPP_INCLUDED */

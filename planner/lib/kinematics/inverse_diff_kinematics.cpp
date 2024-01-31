@@ -1,7 +1,9 @@
 #include "kinematics.hpp"
+#include "constants.hpp"
 #include "direct_kinematics.hpp"
 #include "model.hpp"
 #include "utils.hpp"
+#include "euler.hpp"
 #include <cmath>
 #include <sstream>
 #include <stdexcept>
@@ -83,22 +85,17 @@ InvJacobian invert(const Jacobian& matrix) {
   }
 }
 
-// TODO: implement
-model::Matrix<orientation_size, orientation_size> euler_angles_jacobian(const Pose_2::OrientationReference& orientation);
-
 /**
  * Generate the inverse analytical jacobian for the current configuration of @p robot.
  * @param robot The robot instance.
+ * @param current_pose The precalculated current_pose
  * @return The analytical jacobian.
  */
-InvJacobian generate_inverse_jacobian(const UR5& robot) {
+InvJacobian generate_inverse_jacobian(const UR5& robot, const Pose& current_pose) {
   Jacobian geometric;
   
-  // TODO FIXME: recalculation with dpa.
-  const auto current_pose = direct(robot);
-
   // End effector position in order to compute the radius.
-  const auto end_effector_position = current_pose.position;
+  const auto end_effector_position = current_pose.linear;
 
   // The origin of the frame associate to the frame of the iteration. Initially the base frame.
   // Origin recovered as `origin.translation()`.
@@ -112,19 +109,17 @@ InvJacobian generate_inverse_jacobian(const UR5& robot) {
     const Axis axis = transformation.rotation() * Axis::UnitZ();
 
     // The origin of the joint frame in the base frame coords.
-    const Pose_2::Position origin = transformation.translation();
+    const auto origin = transformation.translation();
 
     // The rotational radius around `axis`.
-    const Pose_2::Position radius = end_effector_position - origin;
+    const auto radius = end_effector_position - origin;
 
     // The partial derivative of the direct kinematics for this joint (column of the jacobian).
-    Movement::Container derivative;
-    derivative << axis.cross(radius),
-                  axis;
+    Velocity derivative(axis.cross(radius), axis);
 
     // Updates the column with the derivative.
     // Passes to the next column for the next iteration.
-    *jac_column++ = derivative;
+    *jac_column++ = static_cast<const Velocity::Base&>(derivative);
 
     // pass to the next frame.
     transformation = transformation * joint_transformation_matrix(joint);
@@ -132,54 +127,44 @@ InvJacobian generate_inverse_jacobian(const UR5& robot) {
 
   auto geom_inverse = invert(geometric);
 
-  auto euler_to_omega = euler_angles_jacobian(current_pose.orientation);
+  Matrix<os_size + orientation_size> euler_to_omega;
+  euler_to_omega.topLeftCorner<os_size, os_size>() = Matrix<os_size>::Identity();
+  euler_to_omega.bottomRightCorner<orientation_size, orientation_size>() = euler::jacobian(current_pose.angular);
 
   return geom_inverse * euler_to_omega;
 }
 
-
-model::UR5::Configuration inverse_diff(const model::UR5 &robot, const Movement::Container& movement) {
+model::UR5::Configuration inverse_diff(const model::UR5 &robot, const Velocity& movement, const Pose& current_pose) {
   // Geometric jacobian as we are working with quaternions.
-  const auto inverse = generate_inverse_jacobian(robot);
+  const auto inverse = generate_inverse_jacobian(robot, current_pose);
 
-  return inverse * movement;
+  return inverse * static_cast<const Velocity::Base&>(movement);
 }
 
-model::UR5::Configuration inverse_diff(const model::UR5& robot, const Movement& movement) {
-  return inverse_diff(robot, movement.vector);
+model::UR5::Configuration inverse_diff(const model::UR5 &robot, const Velocity& movement) {
+  return inverse_diff(robot, movement, direct(robot));
 }
 
 
 model::UR5::Configuration dpa_inverse_diff(
   const model::UR5& robot,
-  const Movement& movement,
-  const Pose_2& desired_pose
+  const Velocity& movement,
+  const Pose& desired_pose,
+  Scalar dt
 ) {
   // Direct kinematics for the effective position (error computation).
-  const Pose_2 effective_position = direct(robot);
+  const Pose effective_position = direct(robot);
 
   // Compute the error, movement is required.
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
-  Movement error = desired_pose - effective_position;
+  Velocity error = (desired_pose - effective_position) / dt;
   
-  // TODO: error weight.
-  error *= 1;
-
-  /*Movement desired_movement = movement_as_vector(movement);
-
-  Movement error_movement = movement_as_vector(error);
-
-  Movement movement_vector = desired_movement + error_movement;
-
-  return inverse_diff_kinematics(robot, movement_vector);*/
-
-
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.
   error += movement;
 
-  return inverse_diff(robot, error);
+  return inverse_diff(robot, error, effective_position);
 }
 
 

@@ -11,9 +11,9 @@
 namespace planner {
 
 namespace os {
-using Position = kinematics::Pose_2;
-using Velocity = kinematics::Movement;
-using Acceleration = Velocity;
+using Position = kinematics::Pose;
+using Velocity = kinematics::Velocity;
+using Acceleration = kinematics::Acceleration;
 }
 namespace js {
 using Position = model::UR5::Configuration;

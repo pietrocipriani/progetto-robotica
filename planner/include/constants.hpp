@@ -45,10 +45,21 @@ constexpr model::Scalar back_obstacle_distance = 0.35;
 
 
 
+namespace kinematics {
+
+/**
+ * The size of the operational space.
+ */
+static constexpr size_t os_size = 3;
+
+/**
+ * The size of the orientation space.
+ * @note Binomial(os_size, 2).
+ */
+static constexpr size_t orientation_size = os_size * (os_size - 1) / 2;
 
 
-
-
+}
 
 
 

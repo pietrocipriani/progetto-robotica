@@ -1,7 +1,7 @@
 #include "kinematics.hpp"
 #include "direct_kinematics.hpp"
 #include "model.hpp"
-#include <asm-generic/errno-base.h>
+#include "euler.hpp"
 #include <cerrno>
 #include <cmath>
 #include <limits>
@@ -68,7 +68,7 @@ Configurations expand(const ArgList& variable_argument, Function&& function, Arg
  */
 Scalar vector_angle_xy(const Axis& vector) {
   return std::atan2(vector.y(), vector.x());
-} 
+}
 
 /**
  * Calculates the inverse transformation matrix for @p joint with the given @p theta.
@@ -90,6 +90,7 @@ JointTransformation inverse_trans(const RevoluteJoint& joint, Scalar theta) {
 Axis rotate(const JointTransformation& trans, const Axis& axis) {
   return trans.linear() * axis;
 }
+
 
 /**
  * Computes the two solutions of cos(theta) = @p cos.
@@ -140,7 +141,7 @@ std::array<Scalar, 2> asin(Scalar sin) {
  * @return The configuration to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
  */
 UR5::Configuration configs_given_theta_3(
-  const UR5& robot, JointTransformation direct_kin, const Pose_2::Position& origin_3, Scalar theta_3
+  const UR5& robot, JointTransformation direct_kin, const Pose::Linear& origin_3, Scalar theta_3
 ) {
   static constexpr Scalar nan = std::numeric_limits<Scalar>::quiet_NaN();
 
@@ -215,7 +216,7 @@ Configurations configs_given_theta_5(
 
   // The origin of frame 3 respect to frame 1.
   // Obtained going backwards along y4 of d4.
-  const Pose_2::Position origin_3 = direct_kin * (- Axis::UnitY() * robot.wrist1.d);
+  const Pose::Linear origin_3 = direct_kin * (- Axis::UnitY() * robot.wrist1.d);
 
   // The magnitude of the radius squared between origin_3 and origin_1.
   const Scalar radius_sq = origin_3.squaredNorm();
@@ -233,7 +234,7 @@ Configurations configs_given_theta_5(
 
   const auto theta_3 = acos(cos_theta_3);
 
-  Configurations&& configs = expand<3, false>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
+  Configurations configs = expand<3, false>(theta_3, configs_given_theta_3, robot, direct_kin, origin_3);
   
   // Update theta_6.
   for (auto& config : configs) config[5] = theta_6;
@@ -262,7 +263,7 @@ Configurations configs_given_theta_1(
   direct_kin = cancel_theta_1 * direct_kin;
 
   // The origin of frame 6.
-  const Pose_2::Position origin_6 = direct_kin.translation();
+  const Pose::Linear origin_6 = direct_kin.translation();
 
   // The value of theta_5 (+-)
   const auto theta_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
@@ -278,14 +279,14 @@ Configurations configs_given_theta_1(
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-Configurations configurations(const UR5& robot, const Pose_2& pose) {
+Configurations configurations(const UR5& robot, const Pose& pose) {
   // Construct the direct kinematics matrix from the final pose.
-  JointTransformation direct_kin = Translation(pose.position) * euler_to_rot_matrix(pose.orientation);
+  JointTransformation direct_kin = Translation(pose.linear) * euler::to_rotation(pose.angular);
 
   // The origin of frame 5.
   // Obtained going backwards along z6 of d6.
   // NOTE: the axis inversion has to be performed before the homogeneous transformation.
-  const Pose_2::Position origin_5 = direct_kin * (- Axis::UnitZ() * robot.wrist3.d);
+  const Pose::Linear origin_5 = direct_kin * (- Axis::UnitZ() * robot.wrist3.d);
 
   // The distance in the xy plane between origin_5 and origin_0.
   const Scalar distance_5_0_xy = origin_5.head<2>().norm();
@@ -309,7 +310,7 @@ Configurations configurations(const UR5& robot, const Pose_2& pose) {
   return expand<1, false>(theta_1, configs_given_theta_1, robot, direct_kin);
 }
 
-UR5::Configuration inverse(const UR5& robot, const Pose_2& pose) {
+UR5::Configuration inverse(const UR5& robot, const Pose& pose) {
   // Possible configurations
   const auto configs = configurations(robot, pose);
 

@@ -1,57 +1,95 @@
 #include "kinematics.hpp"
+#include "euler.hpp"
+#include "model.hpp"
 #include "utils.hpp"
 
 namespace kinematics {
+  
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(Base&& vector)
+  : container(std::move(vector)) {}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(const Base& vector)
+  : container(vector) {}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(const Linear& linear, const Angular& angular)
+  : container((Base() << linear, angular).finished()) {}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(const Linear& linear, Angular&& angular)
+  : container((Base() << linear, std::move(angular)).finished()) {}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(Linear&& linear, const Angular& angular)
+  : container((Base() << std::move(linear), angular).finished()) {}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::LengthOrientation(Linear&& linear, Angular&& angular)
+  : container((Base() << std::move(linear), std::move(angular)).finished()) {}
 
 
-Pose_2::Pose_2(Container&& pose) noexcept : from_origin(std::move(pose)) {}
-
-Pose_2::Pose_2(const Container& pose) noexcept : from_origin(pose) {}
 
 
-Pose::Pose(Position&& position, Orientation&& orientation) noexcept
-  : position(std::move(position)), orientation(std::move(orientation)) {}
+template<size_t time_derivative>
+LengthOrientation<time_derivative> LengthOrientation<time_derivative>::operator-(const LengthOrientation& other) const {
+  return LengthOrientation(container) -= other;
+}
 
-Pose::Pose(const Position& position, const Orientation& orientation) noexcept
-  : position(position), orientation(orientation) {}
-
-Pose& Pose::move(const Pose& movement) {
-  // Linear composition.
-  position += movement.position;
-
-  // Quaternion composition.
-  orientation = movement.orientation * orientation;
-
-  // NOTE: Norm has been multiplied. Small errors are exponentially propagated: mitigation.
-  orientation.normalize();
-
+template<size_t time_derivative>
+LengthOrientation<time_derivative>& LengthOrientation<time_derivative>::operator-=(const LengthOrientation& other) {
+  container -= other.container;
+  angular = euler::from(model::Quaternion(euler::to_rotation(angular)));
   return *this;
 }
 
-Pose Pose::moved(const Pose& movement) const {
-  return Pose(*this).move(movement);
+template<size_t time_derivative>
+LengthOrientation<time_derivative> LengthOrientation<time_derivative>::operator+(const LengthOrientation& variation) const {
+  return LengthOrientation(container) += variation.container;
 }
 
-Pose Pose::error(const Pose& desired) const {
-  return inverse().move(desired);
-}
-
-Pose Pose::inverse() const {
-  return Pose(-position, orientation.conjugate());
-}
-
-model::Scalar Pose::norm() const {
-  return std::sqrt(position.squaredNorm() + orientation.vec().squaredNorm());
-}
-
-Pose Pose::operator *(model::Scalar coefficient) const {
-  return Pose(position * coefficient, pow(orientation, coefficient));
-}
-
-Pose& Pose::operator *=(model::Scalar coefficient) {
-  position *= coefficient;
-  orientation = pow(orientation, coefficient);
+template<size_t time_derivative>
+LengthOrientation<time_derivative>& LengthOrientation<time_derivative>::operator+=(const LengthOrientation& variation) {
+  container += variation.container;
+  angular = euler::from(model::Quaternion(euler::to_rotation(angular)));
   return *this;
 }
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative - 1> LengthOrientation<time_derivative>::operator*(model::Scalar time) const {
+  return LengthOrientation<time_derivative - 1>(container * time);
+}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative + 1> LengthOrientation<time_derivative>::operator/(model::Scalar time) const {
+  return LengthOrientation<time_derivative + 1>(container / time);
+}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative> LengthOrientation<time_derivative>::normalized() const {
+  return LengthOrientation(container.normalized());
+}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>& LengthOrientation<time_derivative>::normalize() {
+  container.normalize();
+  return *this;
+}
+
+template<size_t time_derivative>
+model::Scalar LengthOrientation<time_derivative>::norm() const {
+  return container.norm();
+}
+
+template<size_t time_derivative>
+LengthOrientation<time_derivative>::operator const Base& () const {
+  return container;
+}
+
+
+template class LengthOrientation<0>;
+template class LengthOrientation<1>;
+template class LengthOrientation<2>;
 
 }
