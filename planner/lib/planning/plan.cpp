@@ -4,7 +4,6 @@
 #include "plan.hpp"
 #include <algorithm>
 #include <cmath>
-#include <eigen3/Eigen/Geometry>
 #include <functional>
 #include <limits>
 
@@ -18,7 +17,7 @@ using namespace model;
  * @param pose The pose of the end effector.
  * @note Only lifting movements are considered safe when in the low-zone.
  */
-os::Pose safe_pose(const os::Pose& pose) {
+os::Position safe_pose(const os::Position& pose) {
   static constexpr Scalar safe_z = table_distance - margin - std::numeric_limits<Scalar>::epsilon();
 
   auto safe_pose = pose;
@@ -29,11 +28,11 @@ os::Pose safe_pose(const os::Pose& pose) {
   return safe_pose;
 }
 
-os::Pose block_pose_to_pose(const BlockPose& pose) {
+os::Position block_pose_to_pose(const BlockPose& pose) {
   // TODO: dummy implementation
-  return os::Pose(
-    os::Position(pose.position.x(), pose.position.y(), table_distance),
-    os::Pose::Orientation(Eigen::AngleAxis<Scalar>(pose.orientation, os::Pose::Orientation::Vector3::UnitZ()))
+  return os::Position(
+    os::Position::Position(pose.position.x(), pose.position.y(), table_distance),
+    os::Position::Orientation::UnitZ() * pose.orientation
   );
 }
 
@@ -50,14 +49,14 @@ os::Pose block_pose_to_pose(const BlockPose& pose) {
  *  during the physical driving of the robot for the previous movement.
  */
 MovementSequence plan_movement(UR5& robot, const BlockMovement& movement, const Scalar dt) {
-  const os::Pose start_pose = block_pose_to_pose(movement.start);
-  const os::Pose target_pose = block_pose_to_pose(movement.target);
+  const os::Position start_pose = block_pose_to_pose(movement.start);
+  const os::Position target_pose = block_pose_to_pose(movement.target);
 
   // Pose outside of the low-zone just above the `start_pose`.
-  const os::Pose start_safe_pose = safe_pose(start_pose);
+  const os::Position start_safe_pose = safe_pose(start_pose);
   
   // Pose outside of the low-zone just above the `target_pose`.
-  const os::Pose target_safe_pose = safe_pose(target_pose);
+  const os::Position target_safe_pose = safe_pose(target_pose);
 
   // NOTE: only to throw exceptions prematurely in case of unreachability.
   kinematics::inverse(robot, start_safe_pose);

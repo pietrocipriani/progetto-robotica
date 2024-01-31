@@ -11,15 +11,14 @@
 namespace planner {
 
 namespace os {
-using Pose = kinematics::Pose;
-using Position = kinematics::Pose::Position;
-using Velocity = Position;
-using Acceleration = Velocity;
+using Position = kinematics::Pose;
+using Velocity = kinematics::Velocity;
+using Acceleration = kinematics::Acceleration;
 }
 namespace js {
 using Position = model::UR5::Configuration;
-using Velocity = Position;
-using Acceleration = Velocity;
+using Velocity = model::UR5::Velocity;
+using Acceleration = model::UR5::Acceleration;
 }
 
 /**
@@ -33,9 +32,6 @@ enum class Block {
  * The class representing the pose of a block on the table.
  */
 struct BlockPose {
-private:
-  using Scalar = model::Scalar;
-
 public:
 
   /**
@@ -43,15 +39,7 @@ public:
    */
   Block block;
 
-  /**
-   * The 2D position of the block.
-   */
-  Eigen::Vector<Scalar, 2> position;
-  
-  /**
-   * The 2D orientation of the block.
-   */
-  Scalar orientation;
+  OperationalSpace<2> pose;
 
   /**
    * The bounding box in order to perform safe movements.
@@ -165,7 +153,7 @@ std::queue<BlockMovement> generate_block_positioning_order(
 MovementSequence plan_movement(
   model::UR5& robot,
   const BlockMovement& movement,
-  const model::Scalar dt
+  const Time& dt
 );
 
 }

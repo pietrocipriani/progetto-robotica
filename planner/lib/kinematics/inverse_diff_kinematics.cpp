@@ -1,7 +1,9 @@
 #include "kinematics.hpp"
+#include "constants.hpp"
 #include "direct_kinematics.hpp"
 #include "model.hpp"
 #include "utils.hpp"
+#include "euler.hpp"
 #include <cmath>
 #include <sstream>
 #include <stdexcept>
@@ -14,65 +16,18 @@ using namespace model;
  * Type representing the geometric or analytical jacobian.
  * @note Specific for UR5.
  */
-using Jacobian = Matrix<Pose::os_size + Pose::orientation_size, UR5::dof>;
+template<class Robot>
+using Jacobian = Matrix<os_size + so<os_size>, Robot::dof>;
 
 /**
  * Type representing the inverse of the geometric or analytical jacobian.
  */
-using InvJacobian = Matrix<Jacobian::ColsAtCompileTime, Jacobian::RowsAtCompileTime>;
+template<class Robot>
+using InvJacobian = Matrix<Jacobian<Robot>::ColsAtCompileTime, Jacobian<Robot>::RowsAtCompileTime>;
+
 
 /**
- * Type representing a movement like kinematics::Pose as a single vector for small variations.
- * Linear movement + angular movement.
- */
-using Movement = Vector<Jacobian::RowsAtCompileTime>;
-
-/**
- * Generate the geometric jacobian for the current configuration of @p robot.
- * @param robot The robot instance.
- * @return The geometric jacobian.
- */
-Jacobian generate_jacobian(const UR5& robot) {
-  Jacobian result;
-  
-  // End effector position in order to compute the radius.
-  const auto end_effector_position = direct(robot).position;
-
-  // The origin of the frame associate to the frame of the iteration. Initially the base frame.
-  // Origin recovered as `origin.translation()`.
-  auto transformation = JointTransformation::Identity();
-
-  // Column iterator.
-  auto jac_column = result.colwise().begin();
-
-  for (auto& joint : robot.joints) {
-    // The Z axis of the joint frame in base frame coords.
-    const Axis axis = transformation.rotation() * Axis::UnitZ();
-
-    // The origin of the joint frame in the base frame coords.
-    const Pose::Position origin = transformation.translation();
-
-    // The rotational radius around `axis`.
-    const Pose::Position radius = end_effector_position - origin;
-
-    // The partial derivative of the direct kinematics for this joint (column of the jacobian).
-    Movement derivative;
-    derivative << axis.cross(radius),
-                  axis;
-
-    // Updates the column with the derivative.
-    // Passes to the next column for the next iteration.
-    *jac_column++ = derivative;
-
-    // pass to the next frame.
-    transformation = transformation * joint_transformation_matrix(joint);
-  }
-
-  return result;
-}
-
-/**
- * Function performing the inverse of a square matrix.
+ * Function performing the inverse of a square matrix with determinant check.
  * @param matrix The matric to invert.
  * @return The inverse.
  * @throw std::domain_error if the @p matrix is not invertible.
@@ -80,7 +35,7 @@ Jacobian generate_jacobian(const UR5& robot) {
 template<size_t n>
 Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
   // TODO: calibrate threshold
-  if (std::abs(matrix.determinant()) < 1e-5) {
+  if (std::abs(matrix.determinant()) < dummy_precision) {
     std::stringstream err; 
     err << "Singular configuration. Det = " << matrix.determinant();
     throw std::domain_error(err.str());
@@ -96,26 +51,22 @@ Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
  * @throw std::domain_error If the system is overdetermined or if in singular configuration.
  * @note This function performs the traditional inverse in case of square jacobian.
  */
-template<bool damped = true>
-InvJacobian invert(const Jacobian& matrix) {
-  constexpr size_t rows = Jacobian::RowsAtCompileTime;
-  constexpr size_t cols = Jacobian::ColsAtCompileTime;
+template<class Robot, bool damped = true>
+InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
+  constexpr size_t rows = Jacobian<Robot>::RowsAtCompileTime;
+  constexpr size_t cols = Jacobian<Robot>::ColsAtCompileTime;
 
   if constexpr (damped) {
     // DLS inverse.
 
     const auto matrix_matrixt = matrix * matrix.transpose();
 
-    // TODO: choose coefficient
-    // constexpr Scalar damping_factor = 1e-2;
-
     // Error too high in certain cases.
-    const Scalar damping_factor = sigmoid(1 / matrix_matrixt.determinant()) * 1;
+    // TODO: calibrate damping factor.
+    const Scalar damping_factor = sigmoid(1e-5 / matrix_matrixt.determinant()) * 1;
 
     // The damping matrix
-    auto damping = std::pow(damping_factor, 2) * Matrix<rows, rows>::Identity();
-
-
+    auto damping = std::pow(damping_factor, 2) * Matrix<rows>::Identity();
 
     auto matrix_to_invert = matrix_matrixt + damping;
     return matrix.transpose() * sq_invert<rows>(matrix_to_invert);
@@ -133,60 +84,85 @@ InvJacobian invert(const Jacobian& matrix) {
 }
 
 /**
- * Converts a kinematics::Pose into a compact vector.
- * @param movement The movement to convert.
- * @return A PoseVector representing the same velocity as @p pose as linear velocity and angular velocity,
- * @note Due to representation issues, @p pose should represent a "small" variation.
+ * Generate the inverse analytical jacobian for the current configuration of @p robot.
+ * @param robot The robot instance.
+ * @param current_pose The precalculated current_pose
+ * @return The analytical jacobian.
  */
-Movement movement_as_vector(const Pose& movement) {
-  // The axis of rotation * sin(dtheta/2).
-  Axis axis = movement.orientation.vec();
+template<class Robot>
+InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Pose& current_pose) {
+  Jacobian<Robot> geometric;
   
-  // The norm  of the axis should be sin(theta/2).
-  Scalar norm = axis.norm();
+  // End effector position in order to compute the radius.
+  const auto end_effector_position = current_pose.linear();
 
-  if (norm < 1e-8) {
-    // Linear approximation in order to avoid normalization errors due to small vectors.
-    // sin(theta/2) approximable to theta/2.
-    // TODO: better to work with already time-cropped movements or velocities?
-    axis *= 2;
-  } else {
-    // Correct inversion when enough precision is available.
-    // NOTE: computationally heavier. Worth it?
-    axis = 2 * std::asin(norm) * axis.normalized();
+  // The origin of the frame associate to the frame of the iteration. Initially the base frame.
+  // Origin recovered as `origin.translation()`.
+  auto transformation = JointTransformation::Identity();
+
+  // Column iterator.
+  auto jac_column = geometric.colwise().begin();
+
+  for (auto& joint : robot.joints) {
+    // The Z axis of the joint frame in base frame coords.
+    const Axis axis = transformation.rotation() * Axis::UnitZ();
+
+    // The origin of the joint frame in the base frame coords.
+    const auto origin = transformation.translation();
+
+    // The rotational radius around `axis`.
+    const auto radius = end_effector_position - origin;
+
+    // The partial derivative of the direct kinematics for this joint (column of the jacobian).
+    Velocity::Base column;
+    column << axis.cross(radius) , axis;
+
+    // Updates the column with the derivative.
+    // Passes to the next column for the next iteration.
+    *jac_column++ = std::move(column);
+
+    // pass to the next frame.
+    transformation = transformation * joint_transformation_matrix(joint);
   }
 
-  Movement velocity;
-  // Concatenation of the position and the vector part of the quaternion (orientation).
-  velocity << movement.position,
-              axis;
-
-  return velocity;
+  return invert<Robot>(geometric);
 }
 
-model::UR5::Configuration inverse_diff(const model::UR5 &robot, const Movement& movement) {
-  // Geometric jacobian as we are working with quaternions.
-  Jacobian geometric_jacobian = generate_jacobian(robot);
+#ifdef USE_EULER_ANGLES
+template<class Robot>
+InvJacobian<Robot> inverse_analytical_jacobian(const Robot& robot, const Pose& current_pose) {
+  auto geom = inverse_geometrical_jacobian(robot, current_pose);
 
-  // TODO: only feasible when not in singularities.
-  const InvJacobian inverse = invert(geometric_jacobian);
+  Matrix<decltype(geom)::ColsAtCompileTime> euler_to_omega;
+  euler_to_omega.template topLeftCorner<os_size, os_size>() = Matrix<os_size>::Identity();
+  euler_to_omega.template bottomRightCorner<so<os_size>, so<os_size>>() = euler::jacobian<os_size>(current_pose.angular());
 
-  return inverse * movement;
+  return geom * euler_to_omega;
+}
+#endif
+
+template<class Robot>
+typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement, const Pose& current_pose) {
+  #ifndef USE_EULER_ANGLES
+    const auto inverse = inverse_geometrical_jacobian(robot, current_pose);
+  #else
+    const auto inverse = inverse_analytical_jacobian(robot, current_pose);
+  #endif
+
+  return typename Robot::Velocity(inverse * movement.vector());
 }
 
-model::UR5::Configuration inverse_diff(const model::UR5& robot, const Pose& movement) {
-  // Conversion from quaternion to ω·Δt.
-  // TODO: check a movement is passed and not a velocity for the comment.
-  const Movement movement_vector = movement_as_vector(movement);
-
-  return inverse_diff(robot, movement_vector);
+template<class Robot>
+typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement) {
+  return inverse_diff(robot, movement, direct(robot));
 }
 
-
-model::UR5::Configuration dpa_inverse_diff(
-  const model::UR5& robot,
-  const Pose& movement,
-  const Pose& desired_pose
+template<class Robot>
+typename Robot::Velocity dpa_inverse_diff(
+  const Robot& robot,
+  const Velocity& movement,
+  const Pose& desired_pose,
+  const Time& dt
 ) {
   // Direct kinematics for the effective position (error computation).
   const Pose effective_position = direct(robot);
@@ -194,27 +170,17 @@ model::UR5::Configuration dpa_inverse_diff(
   // Compute the error, movement is required.
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
-  Pose error = effective_position.error(desired_pose);
+  Velocity error = (desired_pose - effective_position) / dt;
   
-  // TODO: error weight.
-  error *= 1;
-
-  /*Movement desired_movement = movement_as_vector(movement);
-
-  Movement error_movement = movement_as_vector(error);
-
-  Movement movement_vector = desired_movement + error_movement;
-
-  return inverse_diff_kinematics(robot, movement_vector);*/
-
-
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.
-  // TODO: quaternion arithmetric is used in sequential composition, not for rotations at the same time.
-  error.move(movement);
+  error += movement;
 
-  return inverse_diff(robot, error);
+  return inverse_diff(robot, error, effective_position);
 }
 
+
+template decltype(dpa_inverse_diff<model::UR5>) dpa_inverse_diff<model::UR5>;
+template model::UR5::Velocity inverse_diff<model::UR5>(const model::UR5&, const Velocity&);
 
 }

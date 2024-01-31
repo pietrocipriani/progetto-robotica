@@ -12,7 +12,7 @@
 #include <vector>
 #include <cassert>
 #include <cmath>
-#include "model.hpp"
+#include "types.hpp"
 
 
 // TODO: Split into multiple files. Bigger than i thought.
@@ -275,9 +275,9 @@ public:
 // TODO: compute negative exponentiations with the conjugate.
 // TODO: template to keep it in the header without warnings. :)
 template<class Scalar>
-model::Quaternion pow(const model::Quaternion& base, Scalar&& exp) {
+Quaternion pow(const Quaternion& base, Scalar&& exp) {
   // Computes `slerp(exp, 1, base) = 1^(1 - exp) + base^exp = base^exp`.
-  return model::Quaternion::Identity().slerp(exp, base);
+  return Quaternion::Identity().slerp(exp, base);
 }
 
 template<class Scalar>
@@ -340,6 +340,22 @@ public:
   iterator end() const { return _end; }
   iterator cend() const { return _end; }
 };
+
+
+template<class T, class Target>
+constexpr bool is_quasi = std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, Target>;
+
+template<size_t size>
+constexpr size_t so = size * (size - 1) / 2;
+
+template<class T>
+constexpr size_t dimension = T::RowsAtCompileTime;
+
+template<>
+inline constexpr size_t dimension<Quaternion> = Quaternion::Dim;
+
+template<>
+inline constexpr size_t dimension<Complex> = Complex::Dim;
 
 
 #endif /* UTILS_HPP_INCLUDED */

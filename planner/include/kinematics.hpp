@@ -1,110 +1,45 @@
 #ifndef KINEMATICS_HPP_INCLUDED
 #define KINEMATICS_HPP_INCLUDED
 
-#include <eigen3/Eigen/Dense>
-#include <eigen3/Eigen/src/Core/Matrix.h>
-#include <eigen3/Eigen/src/Geometry/Quaternion.h>
+#include "euler.hpp"
 #include "model.hpp"
+#include "utils.hpp"
+#include "constants.hpp"
+#include <type_traits>
+#include "operational_space.hpp"
 
 namespace kinematics {
-
-
-/**
- * Type representing the pose of the end effector.
- */
-struct Pose {
-  /**
-   * The size of the operational space.
-   */
-  static constexpr size_t os_size = 3;
-
-  /**
-   * The size of the orientation space.
-   */
-  static constexpr size_t orientation_size = os_size * (os_size - 1) / 2;
-
-  using Position = model::Vector<os_size>;
-
-  // Quaternion to avoid representation singularities.
-  using Orientation = model::Quaternion;
-
-  Position position;
-  Orientation orientation;
-
-  Pose() noexcept;
-  Pose(Position&& position, Orientation&& orientation) noexcept;
-  Pose(const Position& position, const Orientation& orientation) noexcept;
-
-  /**
-   * Moves `this` Pose by the given @p movement.
-   * @param movement The movement.
-   * @return `this` modified pose.
-   */
-  Pose& move(const Pose& movement);
-
-  /**
-   * Returns a pose given by `this` pose moved by @p movement.
-   * @param movement The movement.
-   * @return The modified pose.
-   */
-  Pose moved(const Pose& movement) const;
-
-  /**
-   * Returns the movement necessary to move from `this` position to the @p desired pose.
-   * @param desired The desired pose.
-   * @return The movement.
-   */
-  Pose error(const Pose& desired) const;
-
-  /**
-   * Returns the distance between @p other and @p this.
-   * This method is substantially a wrapper for Pose::error.
-   * It is provided only for clarity in certain contexts.
-   * @param other The starting pose.
-   * @return The distance as movement.
-   */
-  Pose operator -(const Pose& other) const;
-
-  /**
-   * Inverts `this` movement.
-   */
-  Pose inverse() const;
-
-  /**
-   * Computes the norm of the pose.
-   * Useful to compute the norm of `error`.
-   */
-  model::Scalar norm() const;
-
-
-  /**
-   * Multiplies this movement by the given coefficient.
-   */
-  Pose operator *(model::Scalar coefficient) const;
-
-  /**
-   * Multiplies this movement by the given coefficient.
-   */
-  Pose& operator *=(model::Scalar coefficient);
-
-  /**
-   * Linear interpolation between two positions.
-   * @param other The target pose.
-   * @param t The time [0; 1].
-   * @return the linear interpolation between these two poses.
-   * @note Uses SLERP for orientation.
-   */
-  Pose interpolate(const Pose& other, model::Scalar t) const;
   
 
-};
+/**
+ * The pose of the end effector (position + orientation).
+ * Position in cartesian coordinates.
+ * Orientation as quaternions.
+ * @note About the usage of quaternions:
+ *  - Euler angles have representational singularities and need the analytical jacobian.
+ *  - Angular velocities are much more intuitive that euler angles variations.
+ *    - Interpolation of euler angles can lead to "unexpected" movements.
+ *  - Quaternions consent numeric integration of the result (a problem of angular velocities).
+ *  However:
+ *  - Quaternions cannot be analytically integrated unless the rotation axis remains constant. // TODO: verify statement.
+ *    - Actually the project require rotations only around the Z axis. (loss of generality).
+ *    - Also in case of multiple rotations it is possible to segment the movement: cannot grant continuity in orientation variation.
+ *  - The project require rotations only around the Z axis (this is not a good point, loss of generality).
+ *  - The planner has full control on the orientation interpolation
+ */
+using Pose = OperationalSpace<os_size>;
+using Velocity = Pose::Derivative;
+using Acceleration = Velocity::Derivative;
+
+
 
 /**
  * Evaluates the direct kinematics of @p robot.
  * @param robot The robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct(const model::UR5& robot) noexcept;
+template<class Robot>
+Pose direct(const Robot& robot) noexcept;
 
 /**
  * Evaluates the direct kinematics of @p robot.
@@ -112,7 +47,8 @@ Pose direct(const model::UR5& robot) noexcept;
  * @param config The target robot configuration.
  * @return The pose of the end effector.
  */
-Pose direct(const model::UR5& robot, const model::UR5::Configuration& config) noexcept;
+template<class Robot>
+Pose direct(const Robot& robot, const typename Robot::Configuration& config) noexcept;
 
 /**
  * Performs the inverse kinematics for @p robot.
@@ -130,9 +66,10 @@ model::UR5::Configuration inverse(const model::UR5& robot, const Pose& pose);
  * @param velocity The desired velocity in the operational space.
  * @return The configuration variation.
  * @throws @p std::domain_error when in singularity.
- * @note No damped least-squares. A correct planning is assumed. This choice could be subject to change.
+ * @note Damped least-squares. This choice could be subject to change.
  */
-model::UR5::Configuration inverse_diff(const model::UR5& robot, const Pose& velocity);
+template<class Robot>
+typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement);
 
 /**
  * Desired-pose-aware inverse differential kinematics implementation.
@@ -141,12 +78,14 @@ model::UR5::Configuration inverse_diff(const model::UR5& robot, const Pose& velo
  * @param desired_pose The desired current pose.
  * @return The configuration variation.
  * @throws @p std::domain_error when in singularity.
- * @see kinematics::inverse_diff_kinematics
+ * @see kinematics::inverse_diff
  */
-model::UR5::Configuration dpa_inverse_diff(
-  const model::UR5& robot,
-  const Pose& velocity,
-  const Pose& desired_pose
+template<class Robot>
+typename Robot::Velocity dpa_inverse_diff(
+  const Robot& robot,
+  const Velocity& movement,
+  const Pose& desired_pose,
+  const Time& dt
 );
 
 }

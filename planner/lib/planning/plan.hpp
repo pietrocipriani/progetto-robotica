@@ -30,7 +30,7 @@ void descend_movement(
   model::UR5& robot,
   MovementSequence::ConfigSequence& seq,
   model::Scalar dt,
-  const js::Velocity& initial_velocity
+  const os::Velocity& initial_velocity
 );
 
 /*

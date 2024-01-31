@@ -1,6 +1,7 @@
 #include "../plan.hpp"
 #include "../interpolation.hpp"
 #include "constants.hpp"
+#include "planner.hpp"
 
 namespace planner {
 
@@ -12,7 +13,7 @@ using namespace model;
  * @param current_pose The pose to check.
  * @return `true` if the robot is too low, `false` otherwise.
  */
-bool is_low_zone(const os::Pose& pose) {
+bool is_low_zone(const os::Position& pose) {
   // only the z coord is checked. Relative to the robot base frame.
   auto& position = pose.position.z();
 
@@ -30,8 +31,8 @@ bool is_low_zone(const os::Pose& pose) {
  */
 Scalar get_max_speed(const UR5& robot) {
   // A unit lift velocity in the operational space.
-  os::Pose os_velocity;
-  os_velocity.position = os::Position::UnitZ();
+  os::Velocity os_velocity;
+  os_velocity.traslation = os::Velocity::Traslation::UnitZ();
 
   // The joint space velocity.
   // NOTE: a DLS approach is used, this is not optimal as the path could be distorted.
@@ -51,11 +52,11 @@ os::Velocity lift_movement(UR5& robot, MovementSequence::ConfigSequence& seq, Sc
 
   // The current velocity in the joint space.
   // Initial velocity is assumed to be null.
-  js::Velocity current_js_velocity = js::Velocity::Zero();
+  os::Velocity current_velocity;
 
   // If the robot is not in the low-zone, no action is required.
   if (!is_low_zone(initial_pose)) { 
-    return current_js_velocity;
+    return current_velocity;
   }
 
   // TODO: precomputed or better proof of feasibility needed.
@@ -87,12 +88,15 @@ os::Velocity lift_movement(UR5& robot, MovementSequence::ConfigSequence& seq, Sc
   max_speed = std::min(max_speed, planner::max_speed * dt);
 
   // We are trying to lift the end effector: decreasing z of the UR5 base frame.
-  const auto max_speed_vector = - os::Velocity::UnitZ() * max_speed;
+  const auto max_speed_vector = os::Velocity(
+    - os::Velocity::Traslation::UnitZ() * max_speed,
+    os::Velocity::Rotation()
+  );
 
   // Interpolation function.
   auto interpolation = os_uam_interpolation(
-    initial_pose.position,
-    os::Velocity::Zero(),
+    initial_pose,
+    current_velocity,
     max_speed_vector,
     max_acc
   );
@@ -104,10 +108,10 @@ os::Velocity lift_movement(UR5& robot, MovementSequence::ConfigSequence& seq, Sc
   for (Scalar time = 1.0; is_low_zone(desired_pose); ++time) {
     // Orientation unchanged in the low-orbit to avoid collisions in case of rectangular blocks.
     // Also we could have just positioned a block.
-    os::Pose next_pose(interpolation(time), initial_pose.orientation);
+    os::Position next_pose(interpolation(time), initial_pose.orientation);
 
     // The desired movement from the previous desired pose to the next desired pose.
-    const os::Pose movement = next_pose - desired_pose;
+    const os::Velocity movement = next_pose - desired_pose;
 
     current_js_velocity = kinematics::dpa_inverse_diff(robot, movement, desired_pose);
 
@@ -117,20 +121,11 @@ os::Velocity lift_movement(UR5& robot, MovementSequence::ConfigSequence& seq, Sc
     // Registeration of the configuration into the sequence.
     seq.push(robot.config);
 
-    desired_pose = std::move(next_pose);   
+    desired_pose = std::move(next_pose);
   }
   
   return current_js_velocity;
 }
-
-
-
-
-
-
-
-
-
 
 
 
