@@ -8,7 +8,6 @@ project(vision_ros)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  cv_bridge
   rospy
 )
 
@@ -104,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES vision_ros
-#  CATKIN_DEPENDS cv_bridge rospy
+#  CATKIN_DEPENDS rospy std_msgs
 #  DEPENDS system_lib
 )
 
