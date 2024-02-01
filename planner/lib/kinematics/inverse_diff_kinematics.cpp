@@ -4,6 +4,7 @@
 #include "model.hpp"
 #include "utils.hpp"
 #include "euler.hpp"
+#include <cassert>
 #include <cmath>
 #include <sstream>
 #include <stdexcept>
@@ -11,6 +12,12 @@
 namespace kinematics {
 
 using namespace model;
+
+/**
+ * Determinant of J·J^T to be considered near to a singularity.
+ */
+// TODO: calibrate threshold.
+constexpr Scalar min_safe_determinant = 1e-3;
 
 /**
  * Type representing the geometric or analytical jacobian.
@@ -27,15 +34,18 @@ using InvJacobian = Matrix<Jacobian<Robot>::ColsAtCompileTime, Jacobian<Robot>::
 
 
 /**
- * Function performing the inverse of a square matrix with determinant check.
+ * Function performing the inverse of a square matrix with (optional: default) determinant check.
+ * @param safe If a check on the determinant has to be performed.
  * @param matrix The matric to invert.
  * @return The inverse.
  * @throw std::domain_error if the @p matrix is not invertible.
  */
-template<size_t n>
+template<size_t n, bool safe = false>
 Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
-  // TODO: calibrate threshold
-  if (std::abs(matrix.determinant()) < dummy_precision) {
+  if constexpr (safe) {
+    // NOTE: NDEBUG dependent check.
+    assert(std::abs(matrix.determinant()) >= min_safe_determinant);
+  } else if (std::abs(matrix.determinant()) < min_safe_determinant) {
     std::stringstream err; 
     err << "Singular configuration. Det = " << matrix.determinant();
     throw std::domain_error(err.str());
@@ -59,17 +69,36 @@ InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
   if constexpr (damped) {
     // DLS inverse.
 
-    const auto matrix_matrixt = matrix * matrix.transpose();
+    // matrix * matrix^T
+    const auto mmt = matrix * matrix.transpose();
 
-    // Error too high in certain cases.
     // TODO: calibrate damping factor.
-    const Scalar damping_factor = sigmoid(1e-5 / matrix_matrixt.determinant()) * 1;
+    // With positive semidefinite matrixes this relation stands:
+    // det(A + B) >= det(A) + det(B)
+    // With real coefficients it is easily proovable that matrix_matrixt is a positive semidefinite matrix.
+    // The identity matrix is positive definite.
+    //
+    // We want to allow the minimum damping factor to avoid the singularity threshold.
+    // The above relation translates into:
+    // det(matrix_matrixt + k²·I) >= det(mmt) + k^(2·rows) >= min_safe_determinant.
+    // This means that
+    // k^(2·rows) >= min_safe_determinant - det(mmt).
+    // k >= pow( max(0, min_safe_determinant - det(mmt)) , 1 / 2·rows ).
+    
+    // As above, the min determinant of the damping matrix.
+    // dummy precision to avoid subthreshold triggering just for approximations.
+    Scalar min_damping_det = min_safe_determinant - mmt.determinant() + dummy_precision;
+    // If the determinant can be negative, no damping factor is needed.
+    min_damping_det = std::max(0.0, min_damping_det);
+
+    // The det is k^(2·rows), extracting k².
+    const Scalar damping_factor = std::pow(min_damping_det, 1.0 / rows);
 
     // The damping matrix
-    auto damping = std::pow(damping_factor, 2) * Matrix<rows>::Identity();
+    auto damping = damping_factor * Matrix<rows>::Identity();
 
-    auto matrix_to_invert = matrix_matrixt + damping;
-    return matrix.transpose() * sq_invert<rows>(matrix_to_invert);
+    auto matrix_to_invert = mmt + damping;
+    return matrix.transpose() * sq_invert<rows, true>(matrix_to_invert);
   } else if constexpr (rows == cols) {
     // Square matrix, normal inversion.
     return sq_invert<rows>(matrix);
