@@ -6,6 +6,9 @@
 - `vision_ros/` contains a catkin package that extracts blocks positions from the camera
 - `vision_training/` contains the code that was used to train the YoLoS model that recognizes blocks
 
+### Catkin workspace
+
+The root folder of this repository is a [catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) created using `catkin_make`. In order for the workspace to be active, you need to run `catkin_make` in the root of this repository, and then `source devel/setup.bash`. The latter command can be put in `.bashrc` so that it's executed before starting any terminal session.
 
 ## Project n. 1
 A number of objects (e.g., mega-blocks) are stored without any specific order on a stand
