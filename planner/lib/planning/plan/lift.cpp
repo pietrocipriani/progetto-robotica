@@ -7,18 +7,6 @@ namespace planner {
 
 using namespace model;
 
-/**
- * Checks the position of the end effector.
- * If it is too low (near the table) movement should be carefully planned.
- * @param current_pose The pose to check.
- * @return `true` if the robot is too low, `false` otherwise.
- */
-bool is_low_zone(const os::Position& pose) {
-  // only the z coord is checked. Relative to the robot base frame.
-  auto& position = pose.position.z();
-
-  return position > table_distance - margin;
-}
 
 /**
  * Finds the estimated maximum speed in the operational space according to a speed
@@ -29,7 +17,8 @@ bool is_low_zone(const os::Position& pose) {
  *  a small neighbour of the current pose.
  *  This is not always the case.
  */
-Scalar get_max_speed(const UR5& robot) {
+template<class Robot>
+Scalar get_max_speed(const Robot& robot) {
   // A unit lift velocity in the operational space.
   os::Velocity os_velocity;
   os_velocity.traslation = os::Velocity::Traslation::UnitZ();
@@ -39,9 +28,9 @@ Scalar get_max_speed(const UR5& robot) {
   const auto js_velocity = kinematics::inverse_diff(robot, os_velocity);
 
   // Cropping of the `js_velocity` in order to have the max top speed smaller than the max possible speed.
-  Scalar max_velocity = *std::max_element(js_velocity.begin(), js_velocity.end());
+  Scalar max_velocity = *std::max_element(js_velocity.vector().begin(), js_velocity.vector().end());
 
-  Scalar crop = max_joint_speed / std::abs(max_velocity);
+  Scalar crop = UR5::max_joint_speed / std::abs(max_velocity);
 
   return crop;
 }

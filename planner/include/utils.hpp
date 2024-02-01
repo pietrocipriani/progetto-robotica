@@ -355,7 +355,7 @@ template<>
 inline constexpr size_t dimension<Quaternion> = Quaternion::Dim;
 
 template<>
-inline constexpr size_t dimension<Complex> = Complex::Dim;
+inline constexpr size_t dimension<Complex> = 1;
 
 
 #endif /* UTILS_HPP_INCLUDED */

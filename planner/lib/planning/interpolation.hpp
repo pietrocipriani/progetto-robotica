@@ -7,7 +7,7 @@
 namespace planner {
 
 template<class T>
-using TimeFunction = std::function<T(model::Scalar)>;
+using TimeFunction = std::function<T(const Time&)>;
 
 /**
  * Operational space uniformly accelerated motion with speed saturation.
@@ -29,7 +29,7 @@ TimeFunction<os::Position> os_uam_interpolation(
   const os::Position& initial_position,
   const os::Velocity& initial_velocity,
   const os::Velocity& final_velocity,
-  model::Scalar acceleration
+  Scalar acceleration
 );
 
 TimeFunction<js::Position> js_parbolic_interpolation(
@@ -37,7 +37,7 @@ TimeFunction<js::Position> js_parbolic_interpolation(
   const js::Position& final_config,
   const js::Velocity& initial_velocity,
   const js::Velocity& final_velocity,
-  model::Scalar acceleration
+  Scalar acceleration
 );
 
 

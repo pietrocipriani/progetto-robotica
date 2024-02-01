@@ -149,10 +149,18 @@ public:
     return vector().norm();
   }
 
+  auto& linear() {
+    return _linear;
+  }
+  
   const auto& linear() const {
     return _linear;
   }
 
+  auto& angular() {
+    return _angular;
+  }
+  
   const auto& angular() const {
     return _angular;
   }

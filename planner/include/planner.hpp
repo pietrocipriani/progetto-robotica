@@ -2,6 +2,7 @@
 #define PLANNER_HPP_INCLUDED
 
 #include "model.hpp"
+#include "operational_space.hpp"
 #include "utils.hpp"
 #include "kinematics.hpp"
 #include <queue>
@@ -34,12 +35,14 @@ enum class Block {
 struct BlockPose {
 public:
 
+  using Pose = OperationalSpace<2>;
+
   /**
    * The type of the block.
    */
   Block block;
 
-  OperationalSpace<2> pose;
+  Pose pose;
 
   /**
    * The bounding box in order to perform safe movements.
