@@ -124,6 +124,7 @@ class ImageProcessor:
 
         rospy.loginfo(f"block_detector boxes {boxes}")
         detected_blocks_msg = DetectedBlocks(
+            image=msg,
             source_image_topic=IMAGE_TOPIC,
             boxes=[
                 BlockDetectorBox(x1=x1.item(), y1=y2, x2=x2.item(), y2=y2.item())
