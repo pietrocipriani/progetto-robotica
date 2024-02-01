@@ -208,6 +208,10 @@ include_directories(
 
 
 # ADDED BY ME
+install(DIRECTORY block_detector_model/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/block_detector_model
+)
+
 catkin_install_python(PROGRAMS scripts/block_detector.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
