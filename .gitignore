@@ -1,3 +1,6 @@
 bin/
 **.o
 **.out
+devel/
+build/
+/src/CMakeLists.txt
