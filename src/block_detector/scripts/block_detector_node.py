@@ -70,7 +70,7 @@ def non_max_suppression(boxes, connected_data, overlapThresh):
     return boxes[tuple(pick),], list(map(connected_data.__getitem__, pick))
 
 
-class ImageProcessor:
+class BlockDetector:
     def __init__(self):
         self.bridge = CvBridge()
 
@@ -94,7 +94,7 @@ class ImageProcessor:
         self.image_sub = rospy.Subscriber(IMAGE_TOPIC, Image, self.callback, queue_size=1)
 
 
-    def callback(self, msg):
+    def callback(self, msg: Image):
         try:
             image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
         except CvBridgeError as e:
@@ -127,8 +127,8 @@ class ImageProcessor:
             image=msg,
             source_image_topic=IMAGE_TOPIC,
             boxes=[
-                BlockDetectorBox(x1=x1.item(), y1=y2, x2=x2.item(), y2=y2.item())
-                for (x1, y2, x2, y2) in boxes
+                BlockDetectorBox(x1=x1.item(), y1=y1.item(), x2=x2.item(), y2=y2.item())
+                for (x1, y1, x2, y2) in boxes
             ]
         )
         self.blocks_pub.publish(detected_blocks_msg)
@@ -138,7 +138,7 @@ class ImageProcessor:
 def main():
     rospy.init_node("block_detector")
     rospy.loginfo("block_detector init")
-    proc = ImageProcessor()
+    proc = BlockDetector()
     try:
         rospy.spin()
     except KeyboardInterrupt:

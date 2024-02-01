@@ -215,6 +215,7 @@ install(DIRECTORY block_detector_model/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/block_detector_model
 )
 
-catkin_install_python(PROGRAMS scripts/block_detector_node.py
+catkin_install_python(
+  PROGRAMS scripts/block_detector_node.py scripts/inspect_detected_blocks.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
