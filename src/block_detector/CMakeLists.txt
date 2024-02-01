@@ -10,6 +10,7 @@ project(block_detector)
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   rospy
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -46,11 +47,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  BlockDetectorBox.msg
+  DetectedBlocks.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -67,10 +68,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs  # Or other packages containing msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -106,6 +107,7 @@ catkin_package(
 #  LIBRARIES block_detector
 #  CATKIN_DEPENDS rospy
 #  DEPENDS system_lib
+  CATKIN_DEPENDS message_runtime
 )
 
 ###########
@@ -212,6 +214,6 @@ install(DIRECTORY block_detector_model/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/block_detector_model
 )
 
-catkin_install_python(PROGRAMS scripts/block_detector.py
+catkin_install_python(PROGRAMS scripts/block_detector_node.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
