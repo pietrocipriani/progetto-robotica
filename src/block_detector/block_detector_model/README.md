@@ -1,0 +1,1 @@
+This folder should contain `config.json` and `model.safetensors`. Download the latter from [here](TODO_INSERT_LINK).
