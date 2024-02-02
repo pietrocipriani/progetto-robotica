@@ -18,7 +18,7 @@ using namespace model;
  */
 JointTransformation translation_rotation(const Axis& axis, Scalar translation, Scalar rotation) {
   return Translation(axis * translation) * Rotation(rotation, axis);
-} 
+}
 
 JointTransformation joint_transformation_matrix(const RevoluteJoint& joint) {
   return joint_transformation_matrix(joint, joint.theta);
