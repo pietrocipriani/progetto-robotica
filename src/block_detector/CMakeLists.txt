@@ -50,15 +50,13 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   BlockDetectorBox.msg
-  DetectedBlocks.msg
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  DetectBlocks.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -216,6 +214,6 @@ install(DIRECTORY block_detector_model/
 )
 
 catkin_install_python(
-  PROGRAMS scripts/block_detector_node.py scripts/inspect_detected_blocks.py
+  PROGRAMS scripts/block_detector_server.py scripts/inspect_detected_blocks.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
