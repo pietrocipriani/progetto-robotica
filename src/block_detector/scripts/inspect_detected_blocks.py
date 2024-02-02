@@ -30,14 +30,13 @@ class BlockInspector:
 
     def callback(self, encoded_image: Image):
         try:
-            decoded_image = self.bridge.imgmsg_to_cv2(encoded_image, desired_encoding="passthrough")
+            decoded_image = self.bridge.imgmsg_to_cv2(encoded_image, desired_encoding="bgr8")
         except CvBridgeError as e:
             print(e)
             return
 
         resp = self.detect_blocks_srv(encoded_image)
         boxes = resp.boxes
-        print("RESPONSE", boxes)
 
         with torch.no_grad():
             boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in boxes])[1:]
