@@ -93,7 +93,7 @@ class BlockDetector:
 
     def callback(self, request: Image):
         try:
-            decoded_image = self.bridge.imgmsg_to_cv2(request.image, desired_encoding="passthrough")
+            decoded_image = self.bridge.imgmsg_to_cv2(request.image, desired_encoding="bgr8")
         except CvBridgeError as e:
             print(e)
             return
