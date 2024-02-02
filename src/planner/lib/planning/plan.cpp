@@ -90,10 +90,14 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
   }
 
   // Picking sequence.
-  current_pose = via_point_sequencer(robot, seq.picking, current_pose, dt, std::move(picking_viapt));
+  current_pose = via_point_sequencer(
+    robot, seq.picking, std::move(current_pose), dt, std::move(picking_viapt)
+  );
 
   // Dropping sequence.
-  via_point_sequencer(robot, seq.dropping, current_pose, dt, std::move(dropping_viapt));
+  via_point_sequencer(
+    robot, seq.dropping, std::move(current_pose), dt, std::move(dropping_viapt)
+  );
   
   return seq;
 }

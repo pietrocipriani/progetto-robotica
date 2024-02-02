@@ -25,11 +25,53 @@ using TimeFunction = std::function<T(const Time&)>;
  *        Alternatively the same axis of rotation must be imposed.
  *        Otherwise numeric integration can be performed.
  */
+[[deprecated("Migrate to quadratic + linear interpolation.")]]
 TimeFunction<os::Position> os_uam_interpolation(
   const os::Position& initial_position,
   const os::Velocity& initial_velocity,
   const os::Velocity& final_velocity,
   Scalar acceleration
+);
+
+template<class Point>
+TimeFunction<Point> linear_interpolation(
+  const Point& initial_position, const Point& final_position,
+  const Time& start_time,
+  const Time& duration
+);
+
+template<class Point, class Velocity, bool i_know_exactly_what_i_am_doing_and_i_take_full_responsability = false>
+TimeFunction<Point> quadratic_interpolation(
+  const Point& initial_position,
+  const Velocity& initial_velocity,
+  const Velocity& final_velocity,
+  const Time& start_time,
+  const Time& duration
+);
+
+template<class Point, class Velocity>
+TimeFunction<Point> quadratic_acceleration(
+  const Point& initial_position,
+  const Velocity& final_velocity,
+  const Time& start_time,
+  const Time& duration
+);
+
+template<class Point, class Velocity>
+TimeFunction<Point> quadratic_deceleration(
+  const Point& final_position,
+  const Velocity& initial_velocity,
+  const Time& start_time,
+  const Time& duration
+);
+
+template<bool i_know_exactly_what_i_am_doing_and_i_take_full_responsability = false>
+TimeFunction<Quaternion> quaternion_interpolation(
+  const Quaternion& initial_position,
+  const Quaternion& initial_velocity,
+  const Quaternion& final_velocity,
+  const Time& final_time,
+  const Time& duration
 );
 
 TimeFunction<js::Position> js_parbolic_interpolation(

@@ -7,7 +7,7 @@ namespace planner {
 
 
 /**
- * Converts a @p cartesian coordinate into cylindrical coordinates.
+ * Converts in place a @p cartesian coordinate into cylindrical coordinates.
  * @param cartesian The point in cartesian coordinates.
  * @note Cylindrical coordinates: [rho; theta; h].
  */
@@ -37,17 +37,19 @@ void cylindrical_to_cartesian(os::Position::Linear& cylindrical) {
   cylindrical = {x, y, z};
 }
 
+
 os::Position via_point_sequencer(
   model::UR5& robot,
   MovementSequence::ConfigSequence& seq,
-  const os::Position& current_pose,
+  os::Position current_pose,
   const Time& dt,
   ViaPoints viapoints
 ) {
   // Conversion of each waypoint to to cylindrical coords.
   for (auto& pose : viapoints) cartesian_to_cylindrical(pose.linear());
-
+  cartesian_to_cylindrical(current_pose.linear());
   
+
 
 }
 

@@ -22,7 +22,7 @@ using ViaPoints = std::list<os::Position>;
 os::Position via_point_sequencer(
   model::UR5& robot,
   MovementSequence::ConfigSequence& seq,
-  const os::Position& current_pose,
+  os::Position current_pose,
   const Time& dt,
   ViaPoints viapoints
 );

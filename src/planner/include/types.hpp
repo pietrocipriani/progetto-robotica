@@ -38,7 +38,18 @@ using RotationMatrix = Rotation::RotationMatrixType;
  */
 using Quaternion = Eigen::Quaternion<Scalar>;
 
-using Complex = std::complex<Scalar>;
+/**
+ * Complex class to provide uniformity with Quaternion.
+ */
+class Complex : public std::complex<Scalar> {
+  static constexpr size_t Dim = 1;
+
+  using std::complex<Scalar>::complex;
+
+  static constexpr Complex Identity() {
+    return Complex(1);
+  }
+};
 
 using Axis = Rotation::VectorType;
 

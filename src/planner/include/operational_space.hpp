@@ -37,6 +37,8 @@ private:
 public:
 
 #ifndef USE_EULER_ANGLES
+
+  OperationalSpace() : OperationalSpace(Linear::Zero(), Angular::Identity()) {}
   
   OperationalSpace(const Linear& linear, const Angular& angular)
     : _linear(linear), _angular(angular) {}
@@ -51,6 +53,8 @@ public:
     : _linear(std::move(linear)), _angular(std::move(angular)) {}
   
 #else
+  
+  OperationalSpace() : OperationalSpace(Linear::Zero(), Angular::Zero()) {}
 
   explicit OperationalSpace(const Base& base)
     : _vector(base) {}
