@@ -1,4 +1,4 @@
-#include "../plan.hpp"
+/*#include "../plan.hpp"
 #include "../interpolation.hpp"
 #include "constants.hpp"
 #include "planner.hpp"
@@ -8,15 +8,14 @@ namespace planner {
 using namespace model;
 
 
-/**
- * Finds the estimated maximum speed in the operational space according to a speed
- * limit in the joint space. For lifts only.
- * @param robot The robot.
- * @return The magnitude of the max speed in the operational space.
- * @note The estimation is based on the current position jacobian and is reliable only in
- *  a small neighbour of the current pose.
- *  This is not always the case.
- */
+
+/// Finds the estimated maximum speed in the operational space according to a speed
+/// limit in the joint space. For lifts only.
+/// @param robot The robot.
+/// @return The magnitude of the max speed in the operational space.
+/// @note The estimation is based on the current position jacobian and is reliable only in
+/// a small neighbour of the current pose.
+/// This is not always the case.
 template<class Robot>
 Scalar get_max_speed(const Robot& robot) {
   // A unit lift velocity in the operational space.
@@ -118,4 +117,4 @@ os::Velocity lift_movement(UR5& robot, MovementSequence::ConfigSequence& seq, Sc
 
 
 
-}
+}*/

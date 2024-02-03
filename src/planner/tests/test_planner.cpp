@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <vector>
+#include "kinematics.hpp"
 #include "model.hpp"
 #include "tester.hpp"
 #include "../include/planner.hpp"
@@ -13,7 +14,7 @@ using namespace planner;
 
 bool test_conflict_management();
 bool test_movement_planning();
-bool test_via_points();
+bool test_planner();
 bool test_linear_interpolator();
 
 int main() {
@@ -21,7 +22,7 @@ int main() {
   //test("conflict management", test_conflict_management);
   //test("conflict management", test_movement_planning);
   test("linear", test_linear_interpolator);
-  test("via points", test_via_points);
+  test("planner", test_planner);
 
   // TODO: planning test
 
@@ -58,6 +59,7 @@ int main() {
 
 #include "../lib/planning/interpolation.hpp"
 #include "../lib/planning/sequencer.hpp"
+#include "planner.hpp"
 
 os::Position safe_pose(const os::Position& pose) {
   static constexpr Scalar safe_z = table_distance - margin - std::numeric_limits<Scalar>::epsilon();
@@ -98,7 +100,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose& pose) {
   return out;
 }
 
-bool test_via_points() {
+bool test_planner() {
   model::UR5 robot;
 
   const BlockMovement movement(
@@ -108,33 +110,10 @@ bool test_via_points() {
 
   constexpr Time dt = 0.001;
 
-  const os::Position start_pose = block_pose_to_pose(movement.start.pose);
-  const os::Position target_pose = block_pose_to_pose(movement.target.pose);
+  auto configs = planner::plan_movement(robot, movement, dt);
 
-
-  // Pose outside of the low-zone just above the `start_pose`.
-  const os::Position start_safe_pose = safe_pose(start_pose);
-  
-  // Pose outside of the low-zone just above the `target_pose`.
-  const os::Position target_safe_pose = safe_pose(target_pose);
-
-  planner::ViaPoints picking_viapt{start_safe_pose};
-  planner::ViaPoints dropping_viapt{start_safe_pose, target_safe_pose};
-  
-  os::Position current_pose = kinematics::direct(robot);
-  
-  std::clog << "start: " << start_pose << '\n' << "target: " << target_pose << std::endl;
-
-  if (unsafe(current_pose)) {
-    picking_viapt.push_front(safe_pose(current_pose));
-  }
-
-  Time finish;
-
-  auto f1 = via_point_sequencer(current_pose, picking_viapt, start_pose, finish);
-    
   char filename[] = "/tmp/test_via_points_XXXXXX\0csv";
-  char * temp = mktemp(filename);
+  char *temp = mktemp(filename);
 
   size_t len = strlen(temp);
 
@@ -148,17 +127,14 @@ bool test_via_points() {
     file = std::ofstream(temp);
   }
   
-  for (Time t = 0.0; t <= finish; t += dt) {
-    file << f1(t) << '\n';
+  while (!configs.picking.empty()) {
+    file << kinematics::direct(robot, configs.picking.front()) << '\n';
+    configs.picking.pop();
   }
-
-
-  auto f2 = via_point_sequencer(start_pose, dropping_viapt, target_pose, finish);
-
-  for (Time t = 0.0; t <= finish; t += dt) {
-    file << f2(t) << '\n';
+  while (!configs.dropping.empty()) {
+    file << kinematics::direct(robot, configs.dropping.front()) << '\n';
+    configs.dropping.pop();
   }
-  
 
   return true;
 }

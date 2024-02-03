@@ -87,12 +87,10 @@ public:
     #endif
   }
 
-  [[deprecated("Unintuitive.")]]
   OperationalSpace operator-(const OperationalSpace& other) const {
     return OperationalSpace(*this) -= other;
   }
 
-  [[deprecated("Unintuitive.")]]
   OperationalSpace& operator-=(const OperationalSpace& variation) {
     // TODO: un-intuitive
     #ifndef USE_EULER_ANGLES
@@ -105,12 +103,10 @@ public:
     return *this;
   }
 
-  [[deprecated("Non commutative.")]]
   OperationalSpace operator+(const OperationalSpace& variation) const {
     return OperationalSpace(*this) += variation;
   }
 
-  [[deprecated("Non commutative.")]]
   OperationalSpace& operator+=(const OperationalSpace& variation) {
     #ifndef USE_EULER_ANGLES
       using quaternion_rotation_algebra::operator+=;
