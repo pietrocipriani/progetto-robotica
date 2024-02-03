@@ -17,6 +17,7 @@
 #include "utils/math.hpp"
 #include "utils/sequenced_function.hpp"
 #include "utils/coordinates.hpp"
+#include "utils/unlazy.hpp"
 
 
 // TODO: Split into multiple files. Bigger than i thought.

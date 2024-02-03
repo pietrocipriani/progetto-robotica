@@ -2,6 +2,7 @@
 #define PARABOLIC_HPP_INCLUDED
 
 
+#include "constants.hpp"
 #include "linear.hpp"
 #include "quadratic.hpp"
 #include "planner.hpp"
@@ -66,23 +67,35 @@ void interpolation3(
   auto t23 = QuadraticTimestamps::build<Mode::ViaPoint, end_mode>(via, end);
   
   // Velocities.
-  auto v12 = (via.point - start.point) / t12.delta;
-  auto v23 = (end.point - via.point) / t23.delta;
+  auto v12 = unlazy((via.point - start.point) / t12.delta);
+  auto v23 = unlazy((end.point - via.point) / t23.delta);
 
   if constexpr (start_mode == Mode::Point) {
     auto l = quadratic_acceleration(start.point, v12, t12.start, start.accel_delta);
     auto q = linear_interpolation(start.point, via.point, t12.start + start.accel_delta / 2, t12.delta);
+
+    assert((start.point - l(t12.start)).norm() < dummy_precision);
+    assert((l(t12.start_linear) - q(t12.start_linear)).norm() < dummy_precision);
+
     chain.emplace_back(std::move(l), t12.start);
     chain.emplace_back(std::move(q), t12.start_linear);
   }
 
   auto q = quadratic_interpolation(chain.back()(t12.end_linear), v12, v23, t12.end_linear, via.accel_delta);
   auto l = linear_interpolation(via.point, end.point, t23.start, t23.delta);
+
+  assert((q(t12.end_linear) - chain.back()(t12.end_linear)).norm() < dummy_precision);
+  assert((q(t23.start_linear) - l(t23.start_linear)).norm() < dummy_precision);
+
   chain.emplace_back(std::move(q), t12.end_linear);
   chain.emplace_back(std::move(l), t23.start_linear);
 
   if constexpr (end_mode == Mode::Point) {
     auto q = quadratic_deceleration(end.point, v23, t23.end, end.accel_delta);
+  
+    assert((q(t23.end_linear) - l(t23.end_linear)).norm() < dummy_precision);
+    assert((q(t23.end) - end.point).norm() < dummy_precision);
+
     chain.emplace_back(q, t23.end_linear);
   }
 }

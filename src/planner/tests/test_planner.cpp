@@ -7,17 +7,20 @@
 #include "tester.hpp"
 #include "../include/planner.hpp"
 #include "types.hpp"
+#include "utils/coordinates.hpp"
 
 using namespace planner;
 
 bool test_conflict_management();
 bool test_movement_planning();
 bool test_via_points();
+bool test_linear_interpolator();
 
 int main() {
 
   //test("conflict management", test_conflict_management);
   //test("conflict management", test_movement_planning);
+  test("linear", test_linear_interpolator);
   test("via points", test_via_points);
 
   // TODO: planning test
@@ -75,7 +78,6 @@ bool unsafe(const os::Position& pose) {
 }
 
 os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
-  // TODO: dummy implementation. Could require a transformation between the two frames.
   return os::Position(
     os::Position::Linear(pose.linear().x(), pose.linear().y(), table_distance),
     os::Position::Angular(Rotation(std::arg(pose.angular()), Axis::UnitZ()))
@@ -87,7 +89,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose& pose) {
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
   #ifndef USE_EULER_ANGLES
-    Axis axis = pose.angular() * (Axis::UnitX() * 0.02);
+    Axis axis = pose.angular() * (Axis::UnitZ() * 0.02);
   #else
     auto axis = euler::rotate_axis<os_size>(pose.angular(), Axis::UnitZ() * 0.02);
   #endif
@@ -100,14 +102,15 @@ bool test_via_points() {
   model::UR5 robot;
 
   const BlockMovement movement(
-    {0.3, 0.3, 0, 0},
-    {-0.3, -0.3, 0, 0}
+    BlockPose(0.3, 0.3, 0, 0),
+    BlockPose(-0.1, -0.1, 0, 0)
   );
 
   constexpr Time dt = 0.001;
 
   const os::Position start_pose = block_pose_to_pose(movement.start.pose);
   const os::Position target_pose = block_pose_to_pose(movement.target.pose);
+
 
   // Pose outside of the low-zone just above the `start_pose`.
   const os::Position start_safe_pose = safe_pose(start_pose);
@@ -119,6 +122,8 @@ bool test_via_points() {
   planner::ViaPoints dropping_viapt{start_safe_pose, target_safe_pose};
   
   os::Position current_pose = kinematics::direct(robot);
+  
+  std::clog << "start: " << start_pose << '\n' << "target: " << target_pose << std::endl;
 
   if (unsafe(current_pose)) {
     picking_viapt.push_front(safe_pose(current_pose));
@@ -156,6 +161,18 @@ bool test_via_points() {
   
 
   return true;
+}
+
+
+bool test_linear_interpolator() {
+  os::Position::Linear start(0,0,0);
+  os::Position::Linear end(1,1,1);
+  Time start_t = 0;
+  Time end_t = 10;
+
+  auto l = linear_interpolation(start, end, start_t, end_t);
+
+  return l(start_t).isApprox(start) && l(end_t).isApprox(end);
 }
 
 

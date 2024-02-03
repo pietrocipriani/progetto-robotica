@@ -32,7 +32,7 @@ TimeFunction<Point> quadratic_acceleration(
 ) {
   using namespace quaternion_rotation_algebra;
 
-  auto acc2 = final_velocity / (2 * duration);
+  auto acc2 = unlazy(final_velocity / (2 * duration));
 
   return [=, acc = std::move(acc2)](const Time& time) {
     auto t = time - start_time;
@@ -49,7 +49,7 @@ TimeFunction<Point> quadratic_deceleration(
 ) {
   using namespace quaternion_rotation_algebra;
 
-  auto acc2 = -initial_velocity / (2 * duration);
+  auto acc2 = unlazy(-initial_velocity / (2 * duration));
 
   return [=, acc = std::move(acc2)](const Time& time) {
     auto t = final_time - time;
@@ -74,7 +74,7 @@ TimeFunction<Point> quadratic_interpolation(
   using namespace quaternion_rotation_algebra;
 
   // 1/2 a. Due to strict policies in the manipulability of js/os::Position.
-  auto acceleration2 = (final_velocity - initial_velocity) / (2 * duration);
+  auto acceleration2 = unlazy((final_velocity - initial_velocity) / (2 * duration));
 
   return [=, acc = std::move(acceleration2)](const Time& time) {
     auto t = time - start_time;

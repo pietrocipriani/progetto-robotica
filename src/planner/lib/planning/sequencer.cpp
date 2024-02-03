@@ -32,11 +32,11 @@ TimeFunction<os::Position> via_point_sequencer(
 ) {
   using namespace coordinates;
 
-  LinearParams start_lp = make_lp(current_pose.linear(), 0, 1);
-  AngularParams start_ap = make_ap(current_pose.angular(), 0, 1);
+  LinearParams start_lp = make_lp(current_pose.linear(), 0, 4);
+  AngularParams start_ap = make_ap(current_pose.angular(), 0, 4);
 
-  LinearParams end_lp = make_lp(target_pose.linear(), 10.0 * (viapoints.size() + 1), 1);
-  AngularParams end_ap = make_ap(target_pose.angular(), 10.0 * (viapoints.size() + 1), 1);
+  LinearParams end_lp = make_lp(target_pose.linear(), 10.0 * (viapoints.size() + 1), 4);
+  AngularParams end_ap = make_ap(target_pose.angular(), 10.0 * (viapoints.size() + 1), 4);
 
   std::vector<LinearParams> vlp;
   std::vector<AngularParams> vap;
@@ -44,18 +44,18 @@ TimeFunction<os::Position> via_point_sequencer(
   vap.reserve(viapoints.size() + 1);
 
   for (auto& pose : viapoints) {
-    vlp.push_back(make_lp(pose.linear(), 10.0 * (vlp.size() + 1), 1));
-    vap.push_back(make_ap(pose.angular(), 10.0 * (vap.size() + 1), 1));
+    vlp.push_back(make_lp(pose.linear(), 10.0 * (vlp.size() + 1), 4));
+    vap.push_back(make_ap(pose.angular(), 10.0 * (vap.size() + 1), 4));
   }
   vap.push_back(end_ap);
 
-  finish_time = vlp.back().time;
+  finish_time = end_lp.time;
 
   auto linear_fun = parabolic_interpolation(start_lp, vlp, end_lp);
   auto angular_fun = stop_and_play_interpolation(start_ap, vap);
   
   return [lf = std::move(linear_fun), af = std::move(angular_fun)](const Time& t) {
-    return os::Position(lf(t), af(t));
+    return os::Position(convert<Cylindrical, Cartesian>(lf(t)), af(t));
   };
 }
 

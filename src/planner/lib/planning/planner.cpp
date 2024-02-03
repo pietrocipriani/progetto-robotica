@@ -8,7 +8,7 @@ BlockPose::BlockPose(
   Scalar x, Scalar y, Scalar angle,
   Scalar hit_box_radius,
   Block block
-) noexcept : block(block), pose({x, y}, Complex(std::polar(1.0, angle))), hit_box_radius(hit_box_radius) {}
+) noexcept : block(block), pose({x, y}, Complex(angle)), hit_box_radius(hit_box_radius) {}
 
 bool BlockPose::collides(const BlockPose& other) const {
   auto distance = pose.linear() - other.pose.linear();

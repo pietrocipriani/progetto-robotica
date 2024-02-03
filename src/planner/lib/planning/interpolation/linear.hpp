@@ -20,7 +20,7 @@ auto linear_interpolation(
 ) {
   using namespace quaternion_rotation_algebra;
 
-  auto velocity = (final_position - initial_position) / duration;
+  auto velocity = unlazy((final_position - initial_position) / duration);
 
   return [=, velocity = std::move(velocity)](const Time& time) {
     return initial_position + velocity * (time - start_time);

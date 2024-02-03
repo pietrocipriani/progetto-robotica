@@ -14,7 +14,7 @@ constexpr Scalar table_distance = 0.7;
 /**
  * The low zone. Risk of bouncing into obstacles.
  */
-constexpr Scalar margin = 0.2;
+constexpr Scalar margin = 0.1;
 
 /**
  * The maximum velocity in the operational space of the end effector. [m/s]

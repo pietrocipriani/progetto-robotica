@@ -47,7 +47,7 @@ void interpolation2(
   Timestamps t(start, end);
   
   // Velocity.
-  auto v = (end.point - start.point) / t.delta;
+  auto v = unlazy((end.point - start.point) / t.delta);
 
   auto q1 = quadratic_acceleration(start.point, v, t.start, start.accel_delta);
   auto l = linear_interpolation(start.point, end.point, t.start + start.accel_delta / 2, t.delta);

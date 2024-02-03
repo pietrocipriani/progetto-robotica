@@ -68,6 +68,13 @@ public:
   const Base& vector() const {
     return _vector;
   }
+
+  // For uniformity with Eigen only.
+  JointSpace& eval() { return *this; }
+
+  // For uniformity with Eigen only.
+  const JointSpace& eval() const { return *this; }
+
 };
 
 

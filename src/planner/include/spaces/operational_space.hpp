@@ -181,6 +181,10 @@ public:
     return _vector;
   }
   #endif
+
+  OperationalSpace& eval() { return *this; }
+  const OperationalSpace& eval() const { return *this; }
+  
 };
 
 template<size_t size, ssize_t order>
