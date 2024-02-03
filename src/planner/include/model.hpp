@@ -6,7 +6,7 @@
 #include <eigen3/Eigen/Geometry>
 #include <limits>
 #include "types.hpp"
-#include "joint_space.hpp"
+#include "spaces.hpp"
 
 namespace model {
 

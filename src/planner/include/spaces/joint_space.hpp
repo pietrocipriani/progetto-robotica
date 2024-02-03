@@ -1,7 +1,7 @@
 #ifndef JOINT_SPACE_HPP_INCLUDED
 #define JOINT_SPACE_HPP_INCLUDED
 
-#include "types.hpp"
+#include "../types.hpp"
 
 
 

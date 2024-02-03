@@ -2,7 +2,7 @@
 #define PLANNER_HPP_INCLUDED
 
 #include "model.hpp"
-#include "operational_space.hpp"
+#include "spaces.hpp"
 #include "utils.hpp"
 #include "kinematics.hpp"
 #include <queue>

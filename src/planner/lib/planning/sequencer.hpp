@@ -3,6 +3,7 @@
 
 #include "planner.hpp"
 #include "model.hpp"
+#include "types.hpp"
 #include <list>
 
 namespace planner {
@@ -19,12 +20,11 @@ using ViaPoints = std::list<os::Position>;
  * @param points The set of via points.
  * @return The effective position at the end of the movement.
  */
-os::Position via_point_sequencer(
-  model::UR5& robot,
-  MovementSequence::ConfigSequence& seq,
-  os::Position current_pose,
-  const Time& dt,
-  ViaPoints viapoints
+TimeFunction<os::Position> via_point_sequencer(
+  const os::Position& current_pose,
+  const ViaPoints& viapoints,
+  const os::Position& target_pose,
+  Time& finish_time
 );
 
 

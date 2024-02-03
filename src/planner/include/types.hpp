@@ -55,5 +55,8 @@ using Axis = Rotation::VectorType;
 
 using Time = Scalar;
 
+template<class T>
+using TimeFunction = std::function<T(const Time&)>;
+
 
 #endif /* TYPES_HPP_INCLUDED */

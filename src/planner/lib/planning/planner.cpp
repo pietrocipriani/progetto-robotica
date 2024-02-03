@@ -1,4 +1,5 @@
 #include "planner.hpp"
+#include <complex>
 
 namespace planner {
 
@@ -7,10 +8,10 @@ BlockPose::BlockPose(
   Scalar x, Scalar y, Scalar angle,
   Scalar hit_box_radius,
   Block block
-) noexcept : block(block), position(x, y), orientation(angle), hit_box_radius(hit_box_radius) {}
+) noexcept : block(block), pose({x, y}, Complex(std::polar(1.0, angle))), hit_box_radius(hit_box_radius) {}
 
 bool BlockPose::collides(const BlockPose& other) const {
-  auto distance = position - other.position;
+  auto distance = pose.linear() - other.pose.linear();
   Scalar min_distance = hit_box_radius + other.hit_box_radius;
 
   return distance.norm() < min_distance;

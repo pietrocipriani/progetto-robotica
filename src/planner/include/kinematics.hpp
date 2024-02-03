@@ -6,7 +6,7 @@
 #include "utils.hpp"
 #include "constants.hpp"
 #include <type_traits>
-#include "operational_space.hpp"
+#include "spaces.hpp"
 
 namespace kinematics {
   
