@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(controller)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++20)
+add_compile_options(-std=c++17)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -10,6 +10,7 @@ project(controller)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  planner
 )
 
 ## System dependencies are found with CMake's conventions

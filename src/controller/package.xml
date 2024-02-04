@@ -52,6 +52,7 @@
   <depend>roscpp</depend>
   <depend>std_msgs</depend>
   <depend>gazebo_msgs</depend>
+  <depend>planner</depend>
   <exec_depend>gazebo_ros</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->

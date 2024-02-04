@@ -6,6 +6,7 @@
 #include <string>
 #include <stdexcept>
 #include <random>
+#include "planner.hpp"
 
 template<typename ... Args>
 std::string string_format( const std::string& format, Args ... args )
@@ -62,6 +63,9 @@ constexpr const char* MODEL_SDF = R"(
 )";
 
 int main(int argc, char **argv) {
+	planner::BlockPose bp(1,2,3,4);
+	bp.collides(bp);
+
     ros::init(argc, argv, "controller");
     if (argc != 1) {
         ROS_INFO("usage: controller");
