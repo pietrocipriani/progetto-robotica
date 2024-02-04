@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(planner)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++17)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -115,14 +115,15 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/planner.cpp
-# )
+file(GLOB_RECURSE LIB_SRCS lib/*.cpp)
+add_library(${PROJECT_NAME}
+  ${LIB_SRCS}
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries

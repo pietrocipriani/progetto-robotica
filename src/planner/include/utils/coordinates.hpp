@@ -20,7 +20,7 @@ void convert(Vector<3>& p) {
 }
 
 template<CoordinateSystem from, CoordinateSystem to>
-[[nodiscard("Use void convert(Point& p) for in-place conversion.")]]
+[[nodiscard]] // Use void convert(Point& p) for in-place conversion.
 Vector<3> convert(const Vector<3>& p) {
   static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
   return p;
@@ -31,7 +31,7 @@ Vector<3> convert(const Vector<3>& p) {
 /// @return The point in cylindrical coordinates.
 /// @note Cylindrical coordinates: [rho; theta; h].
 template<>
-[[nodiscard("Use void convert(Point& p) for in-place conversion.")]]
+[[nodiscard]] // Use void convert(Point& p) for in-place conversion.
 inline Vector<3> convert<Cartesian, Cylindrical>(const Vector<3>& cartesian) {
   const auto rho = cartesian.head<2>().norm();
   const auto theta = std::atan2(cartesian.y(), cartesian.x());

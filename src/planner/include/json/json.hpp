@@ -66,7 +66,7 @@ private:
 
   template<class T>
   using enable_e = typename std::enable_if_t<is_json_type<T> || is_same_enough<T, Json>, T>;
-  
+
   template<class T>
   static constexpr const bool& assignable = std::is_assignable_v<Variant, T>;
   template<class T>
@@ -83,7 +83,7 @@ public:
 
   template<class T, std::enable_if_t<constructible<T>, bool> = true>
   Json(T&& data) noexcept(nt_constructible<T>) : data(std::forward<T&&>(data)) {}
-  
+
   template<class T>
   typename std::enable_if_t<assignable<T>, Json>& operator =(T&& value) noexcept(nt_assignable<T>) {
     data = value;
@@ -134,7 +134,7 @@ public:
   const Json& operator[] (const List::size_type& index) const {
     return get(index);
   }
-  
+
   /// Assumes the json is a list.
   /// Extracts the value at the given @p index.
   Json& operator[] (const List::size_type& index) {
@@ -147,7 +147,7 @@ public:
   const enable_e<T>& get(const List::size_type& index) const {
     return as<List>().at(index).as<T>();
   }
-  
+
   /// Assumes the json is a list.
   /// Extracts the value at the given @p index.
   template<class T = Json>
@@ -191,8 +191,8 @@ public:
                       Type& get##Type(const Object::key_type& key) { return get<Type>(key); }\
                       const Type& get##Type(const List::size_type& index) const { return get<Type>(index); }\
                       Type& get##Type(const List::size_type& index) { return get<Type>(index); }
-                      
-  
+
+
   SPEC(Null)
   SPEC(String)
   SPEC(Int)
@@ -202,7 +202,7 @@ public:
   SPEC(Bool)
 
   #undef SPEC
-  
+
 };
 
 }
