@@ -103,7 +103,6 @@ bool test_planner() {
 
   auto configs = planner::plan_movement(robot, movement, dt);
 
-  
   while (!configs.picking.empty()) {
     file << kinematics::direct(robot, configs.picking.front()) << '\n';
     configs.picking.pop();
