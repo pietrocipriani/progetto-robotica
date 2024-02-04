@@ -15,7 +15,7 @@ template<size_t rows, size_t cols = rows>
 using Matrix = Eigen::Matrix<Scalar, rows, cols>;
 
 template<size_t N>
-using Vector = Eigen::Vector<Scalar, N>;
+using Vector = Eigen::Matrix<Scalar, N, 1>;
 
 template<size_t size>
 using EulerAngles = Vector<size>;
