@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <std_msgs/Float64MultiArray.h>
 #include <gazebo_msgs/SpawnModel.h>
 #include <geometry_msgs/Pose.h>
 #include <iostream>
@@ -7,6 +8,7 @@
 #include <stdexcept>
 #include <random>
 #include "planner.hpp"
+#include "model.hpp"
 
 template<typename ... Args>
 std::string string_format( const std::string& format, Args ... args )
@@ -62,20 +64,59 @@ constexpr const char* MODEL_SDF = R"(
 </sdf>
 )";
 
-int main(int argc, char **argv) {
-	planner::BlockPose bp(1,2,3,4);
-	bp.collides(bp);
+std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& config, double gripper_pos) {
+	std_msgs::Float64MultiArray data;
+	const auto& v = config.vector().data();
+	ROS_INFO("kinematics %.3lf %.3lf %.3lf - %.3lf %.3lf %.3lf", v[0], v[1], v[2], v[3], v[4], v[5]);
+	data.data = std::vector<double>(8, 0.0);
+	for (int i=0; i<6; ++i) {
+		data.data[i] = v[i];
+	}
+	data.data[6] = data.data[7] = gripper_pos;
+	return data;
+}
 
+void publish_configs(
+	ros::Publisher& publisher,
+	const model::UR5& robot,
+	Time dt,
+	planner::MovementSequence::ConfigSequence& q,
+	double gripper_pos
+) {
+	ros::Rate rate(1 / dt);
+	while (!q.empty()) {
+		publisher.publish(config_to_ros(q.front(), gripper_pos));
+		q.pop();
+		rate.sleep();
+	}
+}
+
+int main(int argc, char **argv) {
     ros::init(argc, argv, "controller");
     if (argc != 1) {
         ROS_INFO("usage: controller");
         return 1;
     }
+	ROS_INFO("initialized controller");
+
+    ros::NodeHandle n;
+	ros::Publisher publisher = n.advertise<std_msgs::Float64MultiArray>(
+		"/ur5/joint_group_pos_controller/command", 1);
+	ROS_INFO("created publisher");
+
+	model::UR5 robot;
+	const planner::BlockMovement movement(
+		planner::BlockPose(0.5, 0.5, 0, 0),
+		planner::BlockPose(0.8, 0.6, 0, 0)
+	);
+	constexpr Time dt = 0.01;
+	constexpr double scale = 3;
+	auto configs = planner::plan_movement(robot, movement, dt);
+	ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
 
 	std::random_device dev;
     std::mt19937 rng(dev());
 
-    ros::NodeHandle n;
     ros::ServiceClient client = n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
     gazebo_msgs::SpawnModel srv;
 	srv.request.model_name = string_format("nome_bellissimo %d", rng());
@@ -85,9 +126,9 @@ int main(int argc, char **argv) {
 	geometry_msgs::Pose pose;
 	geometry_msgs::Point point;
 	geometry_msgs::Quaternion quaternion;
-	point.x = 0.3;
-	point.y = 0.3;
-	point.z = 1.0;
+	point.x = 0.5;
+	point.y = 0.5;
+	point.z = 0.88;
 	quaternion.x = 0.0;
 	quaternion.y = 0.0;
 	quaternion.z = 0.0;
@@ -99,11 +140,13 @@ int main(int argc, char **argv) {
 
 
     if (client.call(srv)) {
-        ROS_INFO("Success: %d status: %s", (int)srv.response.success, srv.response.status_message.c_str());
+        ROS_INFO("Spawned block, success: %d status: %s", (int)srv.response.success, srv.response.status_message.c_str());
     } else {
         ROS_ERROR("Failed to call service");
         return 1;
     }
 
-    return 0;
+	publish_configs(publisher, robot, dt/scale, configs.picking, 1.0);
+	publish_configs(publisher, robot, dt/scale, configs.dropping, -0.1);
+	ROS_INFO("finished");
 }
