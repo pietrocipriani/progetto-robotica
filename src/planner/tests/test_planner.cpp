@@ -126,7 +126,7 @@ bool test_planner() {
     std::cerr << "Plot available at " << temp << "." << std::endl;
     file = std::ofstream(temp);
   }
-  
+
   while (!configs.picking.empty()) {
     file << kinematics::direct(robot, configs.picking.front()) << '\n';
     configs.picking.pop();
