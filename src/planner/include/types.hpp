@@ -38,11 +38,26 @@ using RotationMatrix = Rotation::RotationMatrixType;
  */
 using Quaternion = Eigen::Quaternion<Scalar>;
 
-using Complex = std::complex<Scalar>;
+/// Complex class to provide uniformity with Quaternion.
+/// Unit length complex for 2D rotation.
+class Complex : public std::complex<Scalar> {
+public:
+  static constexpr size_t Dim = 1;
+
+  constexpr Complex() : std::complex<Scalar>(1, 0) {}
+  Complex(const Scalar& angle) : std::complex<Scalar>(std::polar<Scalar>(1, angle)) {}
+
+  static constexpr Complex Identity() {
+    return Complex();
+  }
+};
 
 using Axis = Rotation::VectorType;
 
 using Time = Scalar;
+
+template<class T>
+using TimeFunction = std::function<T(const Time&)>;
 
 
 #endif /* TYPES_HPP_INCLUDED */

@@ -334,4 +334,12 @@ UR5::Configuration inverse(const UR5& robot, const Pose& pose) {
   return configs.front();
 }
 
+#undef theta_1
+#undef theta_2
+#undef theta_3
+#undef theta_4
+#undef theta_5
+#undef theta_6
+
+
 }

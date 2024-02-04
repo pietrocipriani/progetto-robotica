@@ -14,8 +14,7 @@
 #include "kinematics.hpp"
 #include "model.hpp"
 #include "types.hpp"
-#include "operational_space.hpp"
-#include "joint_space.hpp"
+#include "spaces.hpp"
 
 using namespace kinematics;
 using namespace model;
@@ -79,7 +78,7 @@ std::ostream& operator<<(std::ostream& out, const Pose& pose) {
 
 bool test_movement() {
   // 100 ms as dt.
-  constexpr Scalar dt = 0.01;
+  constexpr Scalar dt = 0.001;
 
   // default constructed robot.
   UR5 robot;
@@ -198,7 +197,7 @@ bool test_path() {
     };
   #endif
 
-  constexpr Scalar dt = 0.01;
+  constexpr Scalar dt = 0.001;
   
   UR5 robot;
 

@@ -1,54 +1,62 @@
 #include "sequencer.hpp"
+#include "interpolation/parabolic.hpp"
+#include "interpolation/stop_and_play.hpp"
 #include "planner.hpp"
+#include "utils/coordinates.hpp"
+#include "interpolation.hpp"
 #include <algorithm>
 
 
 namespace planner {
 
+using LinearParams = Params<os::Position::Linear>;
+using AngularParams = Params<os::Position::Angular>;
 
-/**
- * Converts a @p cartesian coordinate into cylindrical coordinates.
- * @param cartesian The point in cartesian coordinates.
- * @note Cylindrical coordinates: [rho; theta; h].
- */
-void cartesian_to_cylindrical(os::Position::Linear& cartesian) {
-  const auto rho = cartesian.head<2>().norm();
-  const auto theta = std::atan2(cartesian.y(), cartesian.x());
-  const auto h = cartesian.z();
+LinearParams make_lp(const os::Position::Linear& p, const Time& t, const Time& acc) {
+  using namespace coordinates;
 
-  cartesian = {rho, theta, h};
+  return {convert<Cartesian, Cylindrical>(p), t, acc};
+}
+AngularParams make_ap(const os::Position::Angular& p, const Time& t, const Time& acc) {
+  using namespace coordinates;
+
+  return {p, t, acc};
 }
 
-/**
- * Converts a @p cylindrical coordinate into cartesian coordinates.
- * @param cylindrical The point in cartesian coordinates.
- * @return The point @p cylindrical in cartesian coordinates.
- * @note Cylindrical coordinates: [rho; theta; h].
- */
-void cylindrical_to_cartesian(os::Position::Linear& cylindrical) {
-  const auto& rho = cylindrical.x();
-  const auto& theta = cylindrical.y();
-  const auto& h = cylindrical.z();
 
-  const auto x = std::cos(theta) * rho;
-  const auto y = std::sin(theta) * rho;
-  const auto z = h;
-
-  cylindrical = {x, y, z};
-}
-
-os::Position via_point_sequencer(
-  model::UR5& robot,
-  MovementSequence::ConfigSequence& seq,
+TimeFunction<os::Position> via_point_sequencer(
   const os::Position& current_pose,
-  const Time& dt,
-  ViaPoints viapoints
+  const ViaPoints& viapoints,
+  const os::Position& target_pose,
+  Time& finish_time
 ) {
-  // Conversion of each waypoint to to cylindrical coords.
-  for (auto& pose : viapoints) cartesian_to_cylindrical(pose.linear());
+  using namespace coordinates;
 
+  LinearParams start_lp = make_lp(current_pose.linear(), 0, 4);
+  AngularParams start_ap = make_ap(current_pose.angular(), 0, 4);
+
+  LinearParams end_lp = make_lp(target_pose.linear(), 10.0 * (viapoints.size() + 1), 4);
+  AngularParams end_ap = make_ap(target_pose.angular(), 10.0 * (viapoints.size() + 1), 4);
+
+  std::vector<LinearParams> vlp;
+  std::vector<AngularParams> vap;
+  vlp.reserve(viapoints.size());
+  vap.reserve(viapoints.size() + 1);
+
+  for (auto& pose : viapoints) {
+    vlp.push_back(make_lp(pose.linear(), 10.0 * (vlp.size() + 1), 4));
+    vap.push_back(make_ap(pose.angular(), 10.0 * (vap.size() + 1), 4));
+  }
+  vap.push_back(end_ap);
+
+  finish_time = end_lp.time;
+
+  auto linear_fun = parabolic_interpolation(start_lp, vlp, end_lp);
+  auto angular_fun = stop_and_play_interpolation(start_ap, vap);
   
-
+  return [lf = std::move(linear_fun), af = std::move(angular_fun)](const Time& t) {
+    return os::Position(convert<Cylindrical, Cartesian>(lf(t)), af(t));
+  };
 }
 
 

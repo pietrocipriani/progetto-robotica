@@ -1,7 +1,7 @@
 #ifndef JOINT_SPACE_HPP_INCLUDED
 #define JOINT_SPACE_HPP_INCLUDED
 
-#include "types.hpp"
+#include "../types.hpp"
 
 
 
@@ -68,6 +68,13 @@ public:
   const Base& vector() const {
     return _vector;
   }
+
+  // For uniformity with Eigen only.
+  JointSpace& eval() { return *this; }
+
+  // For uniformity with Eigen only.
+  const JointSpace& eval() const { return *this; }
+
 };
 
 

@@ -1,9 +1,9 @@
 #ifndef OPERATIONAL_SPACE_HPP_INCLUDED
 #define OPERATIONAL_SPACE_HPP_INCLUDED
 
-#include "types.hpp"
-#include "constants.hpp"
-#include "utils.hpp"
+#include "../types.hpp"
+#include "../constants.hpp"
+#include "../utils.hpp"
 
 template<size_t size = 3, ssize_t order = 0>
 class OperationalSpace {
@@ -37,6 +37,8 @@ private:
 public:
 
 #ifndef USE_EULER_ANGLES
+
+  OperationalSpace() : OperationalSpace(Linear::Zero(), Angular::Identity()) {}
   
   OperationalSpace(const Linear& linear, const Angular& angular)
     : _linear(linear), _angular(angular) {}
@@ -51,6 +53,8 @@ public:
     : _linear(std::move(linear)), _angular(std::move(angular)) {}
   
 #else
+  
+  OperationalSpace() : OperationalSpace(Linear::Zero(), Angular::Zero()) {}
 
   explicit OperationalSpace(const Base& base)
     : _vector(base) {}
@@ -71,53 +75,43 @@ public:
     : OperationalSpace((Base() << std::move(linear), std::move(angular)).finished()) {}
 
 #endif
+
   
 
   OperationalSpace operator-() const {
     #ifndef USE_EULER_ANGLES
-      return OperationalSpace(-_linear, _angular.conjugate());
+      using quaternion_rotation_algebra::operator-;
+      return OperationalSpace(-_linear, -_angular);
     #else
       return OperationalSpace(-_vector);
     #endif
   }
 
-  /**
-   * @p this - @p other = @p result | @p other + @p result = @p this.
-   * desired - effective = error | effective + error = result.
-   *
-   * Returns the distance between @p other and @p this.
-   * This method is substantially a wrapper for Pose::error.
-   * It is provided only for clarity in certain contexts.
-   * @param other The starting pose.
-   * @return The distance as movement.
-   */
-  [[deprecated("Unintuitive.")]]
   OperationalSpace operator-(const OperationalSpace& other) const {
     return OperationalSpace(*this) -= other;
   }
 
-  [[deprecated("Unintuitive.")]]
   OperationalSpace& operator-=(const OperationalSpace& variation) {
     // TODO: un-intuitive
     #ifndef USE_EULER_ANGLES
+      using quaternion_rotation_algebra::operator-=;
       _linear -= variation._linear;
-      _angular = _angular * variation._angular.conjugate();
+      _angular -= variation._angular;
     #else
       _vector += variation._vector;
     #endif
     return *this;
   }
 
-  [[deprecated("Non commutative.")]]
   OperationalSpace operator+(const OperationalSpace& variation) const {
     return OperationalSpace(*this) += variation;
   }
 
-  [[deprecated("Non commutative.")]]
   OperationalSpace& operator+=(const OperationalSpace& variation) {
     #ifndef USE_EULER_ANGLES
+      using quaternion_rotation_algebra::operator+=;
       _linear += variation._linear;
-      _angular = (variation._angular * _angular).normalized();
+      _angular += variation._angular;
     #else
       _vector += variation._vector;
     #endif
@@ -126,7 +120,8 @@ public:
 
   Primitive operator*(const Time& dt) const {
     #ifndef USE_EULER_ANGLES
-      return Primitive(_linear * dt, pow(_angular, dt));
+      using quaternion_rotation_algebra::operator*;
+      return Primitive(_linear * dt, _angular * dt);
     #else
       return Primitive(_vector * dt);
     #endif
@@ -134,16 +129,12 @@ public:
 
   Derivative operator/(const Time& dt) const {
     #ifndef USE_EULER_ANGLES
-      return Derivative(_linear / dt, pow(_angular, 1.0 / dt));
+      using quaternion_rotation_algebra::operator/;
+      return Derivative(_linear / dt, _angular / dt);
     #else
       return Derivative(_vector / dt);
     #endif
   }
-
-  /*OperationalSpace normalized() const;
-  OperationalSpace& normalize() {
-
-  }*/
 
   Scalar norm() const {
     return vector().norm();
@@ -186,6 +177,10 @@ public:
     return _vector;
   }
   #endif
+
+  OperationalSpace& eval() { return *this; }
+  const OperationalSpace& eval() const { return *this; }
+  
 };
 
 template<size_t size, ssize_t order>
