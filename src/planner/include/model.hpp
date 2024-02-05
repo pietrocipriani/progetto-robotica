@@ -54,7 +54,7 @@ struct UR5 {
    * a fully extended arm. [rad/s²]
    * Only half of the available torque is used.
    */
-  static constexpr Scalar max_joint_accel = 40 * 0.5;
+  static constexpr Scalar max_joint_accel = 40 * 0.5 * 0.01;
 
   /**
    * The type representing a configuration for a @p dof manipulator.

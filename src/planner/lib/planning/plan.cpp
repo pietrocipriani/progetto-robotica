@@ -5,6 +5,7 @@
 #include "interpolation.hpp"
 #include "sequencer.hpp"
 #include "types.hpp"
+#include "utils/coordinates.hpp"
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -86,10 +87,10 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
 
   Time finish_time;
 
-  auto picking = via_point_sequencer(current_pose, picking_viapt, start_pose, finish_time);
+  auto picking = via_point_sequencer<coordinates::Cylindrical>(current_pose, picking_viapt, start_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.picking, picking, finish_time, dt);
 
-  auto dropping = via_point_sequencer(start_pose, dropping_viapt, target_pose, finish_time);
+  auto dropping = via_point_sequencer<coordinates::Cylindrical>(start_pose, dropping_viapt, target_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.dropping, dropping, finish_time, dt);
 
   return seq;

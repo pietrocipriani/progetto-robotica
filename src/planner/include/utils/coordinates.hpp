@@ -2,6 +2,8 @@
 #define UTILS_COORDINATES_HPP_INCLUDED
 
 #include "../types.hpp"
+#include "../constants.hpp"
+#include <cmath>
 #include <type_traits>
 
 namespace coordinates {
@@ -12,11 +14,17 @@ enum CoordinateSystem {
 
 
 template<CoordinateSystem from, CoordinateSystem to>
-void convert(Vector<3>& p);
+void convert(Vector<3>& p) {
+  static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
+  return;
+}
 
 template<CoordinateSystem from, CoordinateSystem to>
 [[nodiscard("Use void convert(Point& p) for in-place conversion.")]]
-Vector<3> convert(const Vector<3>& p);
+Vector<3> convert(const Vector<3>& p) {
+  static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
+  return p;
+}
 
 /// Converts a @p cartesian coordinate into cylindrical coordinates.
 /// @param cartesian The point in cartesian coordinates.
@@ -69,7 +77,27 @@ inline void convert<Cylindrical, Cartesian>(Vector<3>& cylindrical) {
   cylindrical = convert<Cylindrical, Cartesian>(point);
 }
 
+
+template<CoordinateSystem from, CoordinateSystem to = Cartesian>
+Scalar measure(const Vector<3>& start, const Vector<3>& end) {
+  static_assert(from == to, "Default implementation do not admit conversion.");
+  return (end - start).norm();
 }
 
+template<>
+inline Scalar measure<Cylindrical>(const Vector<3>& start, const Vector<3>& end) {
+  Vector<3> delta = end - start;
+  delta[1] *= end[0];
+
+
+  Scalar pseudo_norm_sq = std::pow(delta[0], 2) + std::pow(delta[2], 2);
+
+  if (std::abs(delta[1]) < dummy_precision) return delta.norm();
+  if (pseudo_norm_sq < dummy_precision) return delta[1];
+
+  return delta.norm() / 2 + std::asinh(delta[1] / std::sqrt(pseudo_norm_sq)) * pseudo_norm_sq / delta[1];
+}
+
+}
 
 #endif /* UTILS_COORDINATES_HPP_INCLUDED */
