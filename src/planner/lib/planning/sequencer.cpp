@@ -43,7 +43,7 @@ Scalar get_desired_speed(
   const Scalar b = next_speed * acc_1 + prev_speed * acc_2;
   const Scalar c = -2 * distance * acc_1 * acc_2;
   
-  return -b + std::sqrt(std::pow(b, 2) - 4 * a * c) / 2 / a;
+  return (-b + std::sqrt(std::pow(b, 2) - 4 * a * c)) / 2 / a;
 }
 
 // TODO: consider orientation.
@@ -59,16 +59,22 @@ std::tuple<LinearParams, AngularParams> generate_parameters(
 ) {
   using namespace coordinates;
 
+  assert(prev_speed >= 0 && max_speed >= 0 && next_speed >= 0);
+
   const Scalar distance = measure<interpolation>(
     convert<current, interpolation>(point.linear()),
     convert<current, interpolation>(next_point.linear())
   );
+
+  assert(distance >= 0);
 
   // Approximation:
   // The max acceleration limit is on the single joint and is determined by the inertia of the robot.
   // We are imposing the max acceleration on the end effector movement.
   const Scalar max_acceleration = get_max_acceleration(point);
   const Scalar max_acceleration_next = get_max_acceleration(next_point);
+
+  assert(max_acceleration >= 0 && max_acceleration_next >= 0);
 
   // Worst case approximation.
   // We are assuming that the two velocities have opposite verse in order to accomodate
@@ -81,6 +87,7 @@ std::tuple<LinearParams, AngularParams> generate_parameters(
   );
   max_speed = std::min(desired_speed, max_speed);
 
+  assert(max_speed >= 0);
 
   const Time current_time = time;
   time += distance / max_speed;
@@ -155,6 +162,8 @@ TimeFunction<os::Position> via_point_sequencer(
   auto [start_lp, start_ap] = generate_parameters<Cartesian, system>(
     *current, *next, prev_speed, max_speed, next_speed, prev_time
   );
+
+  prev_time += start_lp.accel_delta / 2;
 
   std::vector<LinearParams> vlp;
   std::vector<AngularParams> vap;
