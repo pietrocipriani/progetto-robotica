@@ -3,3 +3,5 @@ assigns/
 lightning_logs/
 __pycache__/
 *.safetensors
+runs
+*.pt
