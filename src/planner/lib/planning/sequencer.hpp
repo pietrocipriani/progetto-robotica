@@ -18,6 +18,7 @@ using ViaPoints = std::list<os::Position>;
 /// @param dt The simulation time quantization.
 /// @param points The set of via points.
 /// @return The effective position at the end of the movement.
+template<coordinates::CoordinateSystem system>
 TimeFunction<os::Position> via_point_sequencer(
   const os::Position& current_pose,
   const ViaPoints& viapoints,

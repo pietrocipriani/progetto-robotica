@@ -59,32 +59,8 @@ int main() {
 
 #include "../lib/planning/interpolation.hpp"
 #include "../lib/planning/sequencer.hpp"
+#include "../lib/planning/internal.hpp"
 #include "planner.hpp"
-
-os::Position safe_pose(const os::Position& pose) {
-  static constexpr Scalar safe_z = table_distance - margin - std::numeric_limits<Scalar>::epsilon();
-
-  auto safe_pose = pose;
-
-  // The robot could already be in a safe position.
-  safe_pose.linear().z() = std::min(safe_pose.linear().z(), safe_z);
-
-  return safe_pose;
-}
-
-bool unsafe(const os::Position& pose) {
-  // only the z coord is checked. Relative to the robot base frame.
-  auto& position = pose.linear().z();
-
-  return position > table_distance - margin;
-}
-
-os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
-  return os::Position(
-    os::Position::Linear(pose.linear().x(), pose.linear().y(), table_distance),
-    os::Position::Angular(Rotation(std::arg(pose.angular()), Axis::UnitZ()))
-  );
-}
 
 std::ostream& operator<<(std::ostream& out, const kinematics::Pose& pose) {
   Eigen::IOFormat format(Eigen::FullPrecision, Eigen::DontAlignCols, ", ");
@@ -110,8 +86,6 @@ bool test_planner() {
 
   constexpr Time dt = 0.001;
 
-  auto configs = planner::plan_movement(robot, movement, dt);
-
   char filename[] = "/tmp/test_via_points_XXXXXX\0csv";
   char *temp = mktemp(filename);
 
@@ -126,6 +100,9 @@ bool test_planner() {
     std::cerr << "Plot available at " << temp << "." << std::endl;
     file = std::ofstream(temp);
   }
+
+  auto configs = planner::plan_movement(robot, movement, dt);
+
   
   while (!configs.picking.empty()) {
     file << kinematics::direct(robot, configs.picking.front()) << '\n';

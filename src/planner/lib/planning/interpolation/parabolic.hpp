@@ -16,11 +16,12 @@
 
 namespace planner {
 
+/// Possible modes of points:
+/// - Point: an extremal point.
+/// - ViaPoint: an (unreached) via point.
+enum class Mode { Point, ViaPoint };
 
 namespace internal {
-
-
-enum class Mode { Point, ViaPoint };
 
 struct QuadraticTimestamps {
   Time start, end, start_linear, end_linear, delta;
@@ -71,14 +72,14 @@ void interpolation3(
   auto v23 = unlazy((end.point - via.point) / t23.delta);
 
   if constexpr (start_mode == Mode::Point) {
-    auto l = quadratic_acceleration(start.point, v12, t12.start, start.accel_delta);
-    auto q = linear_interpolation(start.point, via.point, t12.start + start.accel_delta / 2, t12.delta);
+    auto q = quadratic_acceleration(start.point, v12, t12.start, start.accel_delta);
+    auto l = linear_interpolation(start.point, via.point, t12.start + start.accel_delta / 2, t12.delta);
 
-    assert((start.point - l(t12.start)).norm() < dummy_precision);
+    assert((start.point - q(t12.start)).norm() < dummy_precision);
     assert((l(t12.start_linear) - q(t12.start_linear)).norm() < dummy_precision);
 
-    chain.emplace_back(std::move(l), t12.start);
-    chain.emplace_back(std::move(q), t12.start_linear);
+    chain.emplace_back(std::move(q), t12.start);
+    chain.emplace_back(std::move(l), t12.start_linear);
   }
 
   auto q = quadratic_interpolation(chain.back()(t12.end_linear), v12, v23, t12.end_linear, via.accel_delta);
