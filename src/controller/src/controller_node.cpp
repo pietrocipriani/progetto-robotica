@@ -64,6 +64,35 @@ constexpr const char* MODEL_SDF = R"(
 </sdf>
 )";
 
+void spawn_block(ros::ServiceClient& client, double x, double y) {
+    static std::mt19937 rng = std::mt19937(std::random_device()());
+
+    gazebo_msgs::SpawnModel srv;
+	srv.request.model_name = string_format("nome_bellissimo %d", rng());
+	srv.request.model_xml = string_format(MODEL_SDF, 1.0, 1.0, 0.0, 1.0);
+	srv.request.robot_namespace = "/gazebo/";
+
+	geometry_msgs::Pose pose;
+	geometry_msgs::Point point;
+	geometry_msgs::Quaternion quaternion;
+	point.x = x;
+	point.y = y;
+	point.z = 0.88;
+	quaternion.x = 0.0;
+	quaternion.y = 0.0;
+	quaternion.z = 0.0;
+	quaternion.w = 1.0;
+	pose.position = point;
+	pose.orientation = quaternion;
+	srv.request.initial_pose = pose;
+
+    if (client.call(srv)) {
+        ROS_INFO("Spawned block, success: %d status: %s", (int)srv.response.success, srv.response.status_message.c_str());
+    } else {
+        ROS_ERROR("Failed to call spawn block service");
+    }
+}
+
 std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& config, double gripper_pos) {
 	std_msgs::Float64MultiArray data;
 	const auto& v = config.vector().data();
@@ -72,6 +101,7 @@ std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& confi
 	for (int i=0; i<6; ++i) {
 		data.data[i] = v[i];
 	}
+	data.data[5] -= M_PI * 2;
 	data.data[6] = data.data[7] = gripper_pos;
 	return data;
 }
@@ -102,51 +132,37 @@ int main(int argc, char **argv) {
     ros::NodeHandle n;
 	ros::Publisher publisher = n.advertise<std_msgs::Float64MultiArray>(
 		"/ur5/joint_group_pos_controller/command", 1);
-	ROS_INFO("created publisher");
+	ros::ServiceClient client = n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
+	ROS_INFO("created publisher and client");
 
-	model::UR5 robot;
-	const planner::BlockMovement movement(
-		planner::BlockPose(0.5, 0.5, 0, 0),
-		planner::BlockPose(0.8, 0.6, 0, 0)
-	);
 	constexpr Time dt = 0.01;
-	constexpr double scale = 3;
-	auto configs = planner::plan_movement(robot, movement, dt);
-	ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
+	constexpr double scale = 0.5;
+	model::UR5 robot;
 
-	std::random_device dev;
-    std::mt19937 rng(dev());
+	std::vector<planner::BlockPose> poses{
+		planner::BlockPose(0.5, 0.5, 0, 0),
+		planner::BlockPose(0.8, 0.6, 0, 0),
+		planner::BlockPose(0.6, 0.7, 0, 0),
+		planner::BlockPose(0.2, 0.6, 0, 0),
+		planner::BlockPose(0.1, 0.4, 0, 0),
+		planner::BlockPose(0.8, 0.4, 0, 0),
+	};
 
-    ros::ServiceClient client = n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
-    gazebo_msgs::SpawnModel srv;
-	srv.request.model_name = string_format("nome_bellissimo %d", rng());
-	srv.request.model_xml = string_format(MODEL_SDF, 1.0, 1.0, 0.0, 1.0);
-	srv.request.robot_namespace = "/gazebo/";
+	for (int i=0; i<poses.size()-1; i += 2) {
+		if (i%2 == 0) {
+			spawn_block(client, poses[i].pose.linear().x(), poses[i].pose.linear().y());
+		}
 
-	geometry_msgs::Pose pose;
-	geometry_msgs::Point point;
-	geometry_msgs::Quaternion quaternion;
-	point.x = 0.5;
-	point.y = 0.5;
-	point.z = 0.88;
-	quaternion.x = 0.0;
-	quaternion.y = 0.0;
-	quaternion.z = 0.0;
-	quaternion.w = 1.0;
-	pose.position = point;
-	pose.orientation = quaternion;
-	srv.request.initial_pose = pose;
+		const planner::BlockMovement movement{
+			poses[i],
+			poses[i+1]
+		};
 
+		auto configs = planner::plan_movement(robot, movement, dt);
+		ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
 
-
-    if (client.call(srv)) {
-        ROS_INFO("Spawned block, success: %d status: %s", (int)srv.response.success, srv.response.status_message.c_str());
-    } else {
-        ROS_ERROR("Failed to call service");
-        return 1;
-    }
-
-	publish_configs(publisher, robot, dt/scale, configs.picking, 1.0);
-	publish_configs(publisher, robot, dt/scale, configs.dropping, -0.1);
-	ROS_INFO("finished");
+		publish_configs(publisher, robot, dt/scale, configs.picking, 1.0);
+		publish_configs(publisher, robot, dt/scale, configs.dropping, -0.2);
+		ROS_INFO("finished");
+	}
 }
