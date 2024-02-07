@@ -14,10 +14,11 @@ namespace kinematics {
 
 using namespace model;
 
-/**
- * List of possible configurations.
- */
+/// List of possible configurations.
+///
 using Configurations = std::vector<UR5::Configuration>;
+
+using DefaultPose = Pose<coord::Lie, coord::Cartesian>;
 
 enum Theta : size_t {
   t1 = 0, t2 = 1, t3 = 2, t4 = 3, t5 = 4, t6 = 5
@@ -30,20 +31,18 @@ enum Theta : size_t {
 #define theta_5 config[t5]
 #define theta_6 config[t6]
 
-/**
- * Calls @p function @p n times with the various parameters in @p variable_argument
- * and condensate the configs into a single Configurations.
- * @param index The index of the theta parameter in order to update the configs. 1-based.
- * @param Function The Function type. Must accept as last argument an Arg.
- *  Must be a function returning a Configurations or a UR5::Configuration.
- * @param ArgList The type of a list containing the values for the variable argument.
- * @param Args the other parameters for @p Function.
- * @param variable_argument The list of variable arguments.
- * @param function The function to generate configurations.
- * @param args The arguments for function.
- * @return The list of configurations.
- * @throw Whatever is thrown by @p function.
- */
+/// Calls @p function @p n times with the various parameters in @p variable_argument
+/// and condensate the configs into a single Configurations.
+/// @param index The index of the theta parameter in order to update the configs. 1-based.
+/// @param Function The Function type. Must accept as last argument an Arg.
+///        Must be a function returning a Configurations or a UR5::Configuration.
+/// @param ArgList The type of a list containing the values for the variable argument.
+/// @param Args the other parameters for @p Function.
+/// @param variable_argument The list of variable arguments.
+/// @param function The function to generate configurations.
+/// @param args The arguments for function.
+/// @return The list of configurations.
+/// @throw Whatever is thrown by @p function.
 template<Theta theta, bool fail_silently, typename Function, typename ArgList, class... Args>
 Configurations expand(
   const ArgList& variable_argument, Function&& function, UR5::Configuration::Base& config, Args&&... args
@@ -74,44 +73,37 @@ Configurations expand(
   return result;
 }
 
-/**
- * Calculates the angle in the xy plane of the vector @p vector.
- * @param vector The vector.
- * @return The angle.
- */
+
+/// Calculates the angle in the xy plane of the vector @p vector.
+/// @param vector The vector.
+/// @return The angle.
 Scalar vector_angle_xy(const Axis& vector) {
   return std::atan2(vector.y(), vector.x());
 }
 
-/**
- * Calculates the inverse transformation matrix for @p joint with the given @p theta.
- * @param joint The transforming joint.
- * @param theta The configuration theta.
- * @return The transformation matrix for the inverse transformation.
- */
+/// Calculates the inverse transformation matrix for @p joint with the given @p theta.
+/// @param joint The transforming joint.
+/// @param theta The configuration theta.
+/// @return The transformation matrix for the inverse transformation.
 JointTransformation inverse_trans(const RevoluteJoint& joint, Scalar theta) {
   return joint_transformation_matrix(joint, theta).inverse();
 }
 
-/**
- * Calculates the rotated @p axis after the transformation @trans.
- * @param trans The transformation.
- * @param axis The axis.
- * @return The resulting axis.
- * @note Only the rotation is applied.
- */
+/// Calculates the rotated @p axis after the transformation @trans.
+/// @param trans The transformation.
+/// @param axis The axis.
+/// @return The resulting axis.
+/// @note Only the rotation is applied.
 Axis rotate(const JointTransformation& trans, const Axis& axis) {
   return trans.linear() * axis;
 }
 
 
-/**
- * Computes the two solutions of cos(theta) = @p cos.
- * @param cos The cosine value.
- * @return An array containing the two solutions.
- * @throw std::domain_error In case of domain errors.
- * @note Can return two coincident solutions.
- */
+/// Computes the two solutions of cos(theta) = @p cos.
+/// @param cos The cosine value.
+/// @return An array containing the two solutions.
+/// @throw std::domain_error In case of domain errors.
+/// @note Can return two coincident solutions.
 std::array<Scalar, 2> acos(Scalar cos) {
   errno = 0;
   Scalar res = std::acos(cos);
@@ -125,13 +117,11 @@ std::array<Scalar, 2> acos(Scalar cos) {
   return {{-res, res}};
 }
 
-/**
- * Computes the two solutions of sin(theta) = @p sin.
- * @param sin The sine value.
- * @return An array containing the two solutions.
- * @throw std::domain_error In case of domain errors.
- * @note Can return two coincident solutions.
- */
+/// Computes the two solutions of sin(theta) = @p sin.
+/// @param sin The sine value.
+/// @return An array containing the two solutions.
+/// @throw std::domain_error In case of domain errors.
+/// @note Can return two coincident solutions.
 std::array<Scalar, 2> asin(Scalar sin) {
   errno = 0;
   Scalar res = std::asin(sin);
@@ -145,16 +135,17 @@ std::array<Scalar, 2> asin(Scalar sin) {
   return {{res, M_PI - res}};
 }
 
-/**
- * Performs the inverse kinematics for @p robot given theta_3.
- * @param robot The robot parameters.
- * @param direct_kin The precalculated direct kinematics from frame 6 to frame 1.
- * @param theta_3 The value of theta_5.
- * @param origin_3 The origin_3 respect to origin_1. For efficency only.
- * @return The configuration to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
- */
+/// Performs the inverse kinematics for @p robot given theta_3.
+/// @param robot The robot parameters.
+/// @param direct_kin The precalculated direct kinematics from frame 6 to frame 1.
+/// @param theta_3 The value of theta_5.
+/// @param origin_3 The origin_3 respect to origin_1. For efficency only.
+/// @return The configuration to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
 UR5::Configuration configs_given_theta_3(
-  UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin, const Pose::Linear& origin_3
+  UR5::Configuration::Base& config,
+  const UR5& robot,
+  JointTransformation direct_kin,
+  const DefaultPose::Linear& origin_3
 ) {
   // Radius angle + angle inside the triangle.
   theta_2 = vector_angle_xy(-origin_3)
@@ -177,15 +168,13 @@ UR5::Configuration configs_given_theta_3(
   return UR5::Configuration(config);
 }
 
-/**
- * Performs the inverse kinematics for @p robot given theta_5.
- * @param robot The robot parameters.
- * @param direct_kin The precalculated direct kinematics from frame 6 to frame 1.
- * @param theta_5 The value of theta_5.
- * @return The possible configurations to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
- * @throws @p std::domain_error if the desired @p pose in not in the operational space.
- * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
- */
+/// Performs the inverse kinematics for @p robot given theta_5.
+/// @param robot The robot parameters.
+/// @param direct_kin The precalculated direct kinematics from frame 6 to frame 1.
+/// @param theta_5 The value of theta_5.
+/// @return The possible configurations to obtain the given @p pose (theta_2, theta_3, theta_4, theta_5, theta_6).
+/// @throws @p std::domain_error if the desired @p pose in not in the operational space.
+/// @note UR5 is not redundant, however multiple (finite) solutions are allowed.
 Configurations configs_given_theta_5(
   UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin
 ) {
@@ -225,7 +214,7 @@ Configurations configs_given_theta_5(
 
   // The origin of frame 3 respect to frame 1.
   // Obtained going backwards along y4 of d4.
-  const Pose::Linear origin_3 = direct_kin * (- Axis::UnitY() * robot.wrist1.d);
+  const DefaultPose::Linear origin_3 = direct_kin * (- Axis::UnitY() * robot.wrist1.d);
 
   // The magnitude of the radius squared between origin_3 and origin_1.
   const Scalar radius_sq = origin_3.squaredNorm();
@@ -248,15 +237,13 @@ Configurations configs_given_theta_5(
   return configs;
 }
 
-/**
- * Performs the inverse kinematics for @p robot given theta_1.
- * @param robot The robot parameters.
- * @param direct_kin The precalculated direct kinematics for efficiency.
- * @param theta_1 The value of theta_1.
- * @return The possible configurations to obtain the given @p pose.
- * @throws @p std::domain_error if the desired @p pose in not in the operational space.
- * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
- */
+/// Performs the inverse kinematics for @p robot given theta_1.
+/// @param robot The robot parameters.
+/// @param direct_kin The precalculated direct kinematics for efficiency.
+/// @param theta_1 The value of theta_1.
+/// @return The possible configurations to obtain the given @p pose.
+/// @throws @p std::domain_error if the desired @p pose in not in the operational space.
+/// @note UR5 is not redundant, however multiple (finite) solutions are allowed.
 Configurations configs_given_theta_1(
   UR5::Configuration::Base& config, const UR5& robot, JointTransformation direct_kin
 ) {
@@ -269,7 +256,7 @@ Configurations configs_given_theta_1(
   direct_kin = cancel_theta_1 * direct_kin;
 
   // The origin of frame 6.
-  const Pose::Linear origin_6 = direct_kin.translation();
+  const DefaultPose::Linear origin_6 = direct_kin.translation();
 
   // The value of theta_5 (+-)
   const auto thetas_5 = acos((origin_6.z() - robot.wrist1.d) / robot.wrist3.d);
@@ -285,20 +272,15 @@ Configurations configs_given_theta_1(
  * @throws @p std::domain_error if the desired @p pose in not in the operational space.
  * @note UR5 is not redundant, however multiple (finite) solutions are allowed.
  */
-Configurations configurations(const UR5& robot, const Pose& pose) {
+Configurations configurations(const UR5& robot, const DefaultPose& pose) {
   UR5::Configuration::Base config;
 
-  // Construct the direct kinematics matrix from the final pose.
-  #ifndef USE_EULER_ANGLES
-    JointTransformation direct_kin = Translation(pose.linear()) * pose.angular();
-  #else
-    JointTransformation direct_kin = Translation(pose.linear()) * euler::to_rotation<os_size>(pose.angular());
-  #endif
+  JointTransformation direct_kin = Translation(pose.linear()) * pose.angular();
 
   // The origin of frame 5.
   // Obtained going backwards along z6 of d6.
   // NOTE: the axis inversion has to be performed before the homogeneous transformation.
-  const Pose::Linear origin_5 = direct_kin * (- Axis::UnitZ() * robot.wrist3.d);
+  const DefaultPose::Linear origin_5 = direct_kin * (- Axis::UnitZ() * robot.wrist3.d);
 
   // The distance in the xy plane between origin_5 and origin_0.
   const Scalar distance_5_0_xy = origin_5.head<2>().norm();
@@ -322,7 +304,7 @@ Configurations configurations(const UR5& robot, const Pose& pose) {
   return expand<t1, false>(thetas_1, configs_given_theta_1, config, robot, direct_kin);
 }
 
-UR5::Configuration inverse(const UR5& robot, const Pose& pose) {
+UR5::Configuration inverse(const UR5& robot, const Pose<>& pose) {
   // Possible configurations
   const auto configs = configurations(robot, pose);
 

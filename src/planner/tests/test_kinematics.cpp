@@ -62,7 +62,7 @@ bool test_euler() {
   return true;
 }
 
-std::ostream& operator<<(std::ostream& out, const Pose& pose) {
+std::ostream& operator<<(std::ostream& out, const Pose<>& pose) {
   Eigen::IOFormat format(Eigen::FullPrecision, Eigen::DontAlignCols, ", ");
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
@@ -83,15 +83,15 @@ bool test_movement() {
   // default constructed robot.
   UR5 robot;
 
-  Pose position = direct(robot);
+  Pose<> position = direct(robot);
 
   // 4 min simulation.
   for (Scalar time = 0.0; time < 60.0 * 2.6; time += dt) {
-    Velocity velocity(
-      Velocity::Linear::Random().normalized() * 0.01,
+    Velocity<> velocity(
+      Velocity<>::Linear::Random().normalized() * 0.01,
       // Can only rotate around the z axis.
       #ifndef USE_EULER_ANGLES
-        Velocity::Angular(Rotation(0.1, Axis::UnitZ()))
+        Velocity<>::Angular(Rotation(0.1, Axis::UnitZ()))
       #else
         euler::from<os_size>(Eigen::AngleAxis<Scalar>(0.1, Axis::UnitZ()))
       #endif
@@ -123,10 +123,10 @@ bool test_direct_kinematics() {
 
   const auto pos = direct(robot);
 
-  const Pose correct(
-    Pose::Linear(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
+  const Pose<> correct(
+    Pose<>::Linear(0.1518323030153386210550081614201189950109, -0.1908279822262344826988567092485027387738,  0.4550005526318916526662405885872431099415),
     #ifndef USE_EULER_ANGLES
-      Pose::Angular(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007)
+      Pose<>::Angular(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007)
     #else
       euler::from<os_size>(Quaternion(0.7111026719196652523535817636002320796251, -0.05565392930722438957769071521397563628852, 0.1157674536882463689480005086807068437338, -0.6912550374557274723841260311019141227007))
     #endif
@@ -174,18 +174,18 @@ bool test_inverse_kinematics() {
 }
 bool test_inverse_diff_kinematics() { return false; }
 
-Pose interpolate(const Pose& from, const Pose& to, Scalar time) {
+Pose<> interpolate(const Pose<>& from, const Pose<>& to, Scalar time) {
   return from + (to - from) / 1 * time;
 }
 
 bool test_path() {
   #ifndef USE_EULER_ANGLES
-    const Pose initial(Pose::Linear(0.3, 0.3, 0.1), Pose::Angular::Identity());
-    const Pose::Linear final_position(0.5, 0.5, 0.5);
-    const Pose final[] {
-      {final_position, Pose::Angular(euler::to_rotation<os_size>({M_PI / 3, M_PI_2 - 0.1, M_PI / 3}))},
-      {final_position, Pose::Angular(euler::to_rotation<os_size>({M_PI_4, M_PI_4, M_PI_4}))},
-      {final_position, Pose::Angular(euler::to_rotation<os_size>({-M_PI_2 + 0.1, M_PI / 3, 2 * M_PI / 3}))}
+    const Pose<> initial(Pose<>::Linear(0.3, 0.3, 0.1), Pose<>::Angular::Identity());
+    const Pose<>::Linear final_position(0.5, 0.5, 0.5);
+    const Pose<> final[] {
+      {final_position, Pose<>::Angular(euler::to_rotation<os_size>({M_PI / 3, M_PI_2 - 0.1, M_PI / 3}))},
+      {final_position, Pose<>::Angular(euler::to_rotation<os_size>({M_PI_4, M_PI_4, M_PI_4}))},
+      {final_position, Pose<>::Angular(euler::to_rotation<os_size>({-M_PI_2 + 0.1, M_PI / 3, 2 * M_PI / 3}))}
     };
   #else
     const Pose initial(Pose::Linear(0.3, 0.3, 0.1), Pose::Angular::Zero());
@@ -225,11 +225,11 @@ bool test_path() {
 
     robot.config = initial_config;
 
-    Pose current = initial;
+    Pose<> current = initial;
 
     constexpr Scalar max_time = 10;
     for (Scalar time = 0; time < max_time; time += dt) {
-      Pose next_pos = interpolate(initial, final_pose, time / max_time);
+      Pose<> next_pos = interpolate(initial, final_pose, time / max_time);
 
       auto movement = (next_pos - current) / dt;
 

@@ -41,7 +41,7 @@ void interpolation2(
   typename SequencedFunction<TimeFunction<Point>, Time>::Container& chain
 ) {
   using namespace internal;
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   // Timestamp.
   Timestamps t(start, end);

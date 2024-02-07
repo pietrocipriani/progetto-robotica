@@ -12,9 +12,9 @@
 namespace planner {
 
 namespace os {
-using Position = kinematics::Pose;
-using Velocity = kinematics::Velocity;
-using Acceleration = kinematics::Acceleration;
+using Position = kinematics::Pose<>;
+using Velocity = kinematics::Velocity<>;
+using Acceleration = kinematics::Acceleration<>;
 }
 namespace js {
 using Position = model::UR5::Configuration;
@@ -22,32 +22,28 @@ using Velocity = model::UR5::Velocity;
 using Acceleration = model::UR5::Acceleration;
 }
 
-/**
- * Enum representing the types of blocks.
- */
+/// Enum representing the types of blocks.
+///
 enum class Block {
   NO_BLOCK, BLOCK_1, BLOCK_2, BLOCK_3
 };
 
-/**
- * The class representing the pose of a block on the table.
- */
+/// The class representing the pose of a block on the table.
+///
 struct BlockPose {
 public:
 
-  using Pose = OperationalSpace<2>;
+  using Pose = OperationalSpace<coord::Cartesian, coord::Euler, 2>;
 
-  /**
-   * The type of the block.
-   */
+  /// The type of the block.
+  ///
   Block block;
 
   Pose pose;
 
-  /**
-   * The bounding box in order to perform safe movements.
-   * Circular in order to simplify the checking.
-   */
+  /// The bounding box in order to perform safe movements.
+  /// Circular in order to simplify the checking.
+  ///
   Scalar hit_box_radius;
 
   BlockPose(

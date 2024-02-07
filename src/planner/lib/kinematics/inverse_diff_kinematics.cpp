@@ -4,6 +4,7 @@
 #include "model.hpp"
 #include "utils.hpp"
 #include "euler.hpp"
+#include "utils/coordinates.hpp"
 #include <cassert>
 #include <cmath>
 #include <sstream>
@@ -13,33 +14,29 @@ namespace kinematics {
 
 using namespace model;
 
-/**
- * Determinant of J·J^T to be considered near to a singularity.
- */
+using DefaultPose = Pose<coord::Lie, coord::Cartesian>;
+
+/// Determinant of J·J^T to be considered near to a singularity.
+///
 // TODO: calibrate threshold.
 constexpr Scalar min_safe_determinant = 1e-3;
 
-/**
- * Type representing the geometric or analytical jacobian.
- * @note Specific for UR5.
- */
+/// Type representing the geometric or analytical jacobian.
+/// @note Specific for UR5.
 template<class Robot>
 using Jacobian = Matrix<os_size + so<os_size>, Robot::dof>;
 
-/**
- * Type representing the inverse of the geometric or analytical jacobian.
- */
+/// Type representing the inverse of the geometric or analytical jacobian.
+///
 template<class Robot>
 using InvJacobian = Matrix<Jacobian<Robot>::ColsAtCompileTime, Jacobian<Robot>::RowsAtCompileTime>;
 
 
-/**
- * Function performing the inverse of a square matrix with (optional: default) determinant check.
- * @param safe If a check on the determinant has to be performed.
- * @param matrix The matric to invert.
- * @return The inverse.
- * @throw std::domain_error if the @p matrix is not invertible.
- */
+/// Function performing the inverse of a square matrix with (optional: default) determinant check.
+/// @param safe If a check on the determinant has to be performed.
+/// @param matrix The matric to invert.
+/// @return The inverse.
+/// @throw std::domain_error if the @p matrix is not invertible.
 template<size_t n, bool safe = false>
 Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
   if constexpr (safe) {
@@ -54,13 +51,11 @@ Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
   return matrix.inverse();
 }
 
-/**
- * Function performing the right pseudo-inverse of the jacobian.
- * @param jacobian The jacobian to "invert".
- * @return The right pseudo-inverse.
- * @throw std::domain_error If the system is overdetermined or if in singular configuration.
- * @note This function performs the traditional inverse in case of square jacobian.
- */
+/// Function performing the right pseudo-inverse of the jacobian.
+/// @param jacobian The jacobian to "invert".
+/// @return The right pseudo-inverse.
+/// @throw std::domain_error If the system is overdetermined or if in singular configuration.
+/// @note This function performs the traditional inverse in case of square jacobian.
 template<class Robot, bool damped = true>
 InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
   constexpr size_t rows = Jacobian<Robot>::RowsAtCompileTime;
@@ -112,14 +107,12 @@ InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
   }
 }
 
-/**
- * Generate the inverse analytical jacobian for the current configuration of @p robot.
- * @param robot The robot instance.
- * @param current_pose The precalculated current_pose
- * @return The analytical jacobian.
- */
+/// Generate the inverse analytical jacobian for the current configuration of @p robot.
+/// @param robot The robot instance.
+/// @param current_pose The precalculated current_pose
+/// @return The analytical jacobian.
 template<class Robot>
-InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Pose& current_pose) {
+InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const DefaultPose& current_pose) {
   Jacobian<Robot> geometric;
   
   // End effector position in order to compute the radius.
@@ -143,7 +136,7 @@ InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Pose& 
     const auto radius = end_effector_position - origin;
 
     // The partial derivative of the direct kinematics for this joint (column of the jacobian).
-    Velocity::Base column;
+    DefaultPose::Derivative::Base column;
     column << axis.cross(radius) , axis;
 
     // Updates the column with the derivative.
@@ -157,49 +150,36 @@ InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Pose& 
   return invert<Robot>(geometric);
 }
 
-#ifdef USE_EULER_ANGLES
 template<class Robot>
-InvJacobian<Robot> inverse_analytical_jacobian(const Robot& robot, const Pose& current_pose) {
-  auto geom = inverse_geometrical_jacobian(robot, current_pose);
-
-  Matrix<decltype(geom)::ColsAtCompileTime> euler_to_omega;
-  euler_to_omega.template topLeftCorner<os_size, os_size>() = Matrix<os_size>::Identity();
-  euler_to_omega.template bottomRightCorner<so<os_size>, so<os_size>>() = euler::jacobian<os_size>(current_pose.angular());
-
-  return geom * euler_to_omega;
-}
-#endif
-
-template<class Robot>
-typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement, const Pose& current_pose) {
-  #ifndef USE_EULER_ANGLES
-    const auto inverse = inverse_geometrical_jacobian(robot, current_pose);
-  #else
-    const auto inverse = inverse_analytical_jacobian(robot, current_pose);
-  #endif
+typename Robot::Velocity inverse_diff(
+  const Robot& robot,
+  const DefaultPose::Derivative& movement,
+  const DefaultPose& current_pose
+) {
+  const auto inverse = inverse_geometrical_jacobian(robot, current_pose);
 
   return typename Robot::Velocity(inverse * movement.vector());
 }
 
 template<class Robot>
-typename Robot::Velocity inverse_diff(const Robot& robot, const Velocity& movement) {
+typename Robot::Velocity inverse_diff(const Robot& robot, const DefaultPose::Derivative& movement) {
   return inverse_diff(robot, movement, direct(robot));
 }
 
 template<class Robot>
 typename Robot::Velocity dpa_inverse_diff(
   const Robot& robot,
-  const Velocity& movement,
-  const Pose& desired_pose,
+  const DefaultPose::Derivative& movement,
+  const DefaultPose& desired_pose,
   const Time& dt
 ) {
   // Direct kinematics for the effective position (error computation).
-  const Pose effective_position = direct(robot);
+  const auto effective_position = direct<Robot, coord::Lie, coord::Cartesian>(robot);
 
   // Compute the error, movement is required.
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
-  Velocity error = (desired_pose - effective_position) / dt;
+  auto error = (desired_pose - effective_position) / dt;
   
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.
@@ -210,6 +190,6 @@ typename Robot::Velocity dpa_inverse_diff(
 
 
 template decltype(dpa_inverse_diff<model::UR5>) dpa_inverse_diff<model::UR5>;
-template model::UR5::Velocity inverse_diff<model::UR5>(const model::UR5&, const Velocity&);
+template model::UR5::Velocity inverse_diff<model::UR5>(const model::UR5&, const DefaultPose::Derivative&);
 
 }

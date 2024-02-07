@@ -3,8 +3,10 @@
 
 
 #include "planner.hpp"
+#include "spaces/operational_space.hpp"
 #include "types.hpp"
 #include "utils.hpp"
+#include "utils/coordinates.hpp"
 
 namespace planner {
 
@@ -18,8 +20,9 @@ constexpr bool uses_quaternions = false;
 template<>
 inline constexpr bool uses_quaternions<Quaternion> = true;
 
-template<>
-inline constexpr bool uses_quaternions<os::Position> = is_quasi<os::Position::Angular, Quaternion>;
+template<coord::LinearSystem ls, coord::AngularSystem as, size_t s, ssize_t o>
+constexpr bool uses_quaternions<OperationalSpace<ls, as, s, o>>
+                                = is_quasi<coord::angular_type<as, s>, Quaternion>;
 
 }
 
@@ -30,7 +33,7 @@ TimeFunction<Point> quadratic_acceleration(
   const Time& start_time,
   const Time& duration
 ) {
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   auto acc2 = unlazy(final_velocity / (2 * duration));
 
@@ -47,7 +50,7 @@ TimeFunction<Point> quadratic_deceleration(
   const Time& final_time,
   const Time& duration
 ) {
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   auto acc2 = unlazy(-initial_velocity / (2 * duration));
 
@@ -71,7 +74,7 @@ TimeFunction<Point> quadratic_interpolation(
     "Cannot quadratically interpolate quaternions."
   );
 
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   // 1/2 a. Due to strict policies in the manipulability of js/os::Position.
   auto acceleration2 = unlazy((final_velocity - initial_velocity) / (2 * duration));

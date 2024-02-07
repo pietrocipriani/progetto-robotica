@@ -2,9 +2,8 @@
 #define EULER_HPP_INCLUDED
 
 
-#include "model.hpp"
 #include "constants.hpp"
-#include "utils.hpp"
+#include "utils/helpers.hpp"
 #include "types.hpp"
 #include <array>
 #include <eigen3/Eigen/Geometry>
