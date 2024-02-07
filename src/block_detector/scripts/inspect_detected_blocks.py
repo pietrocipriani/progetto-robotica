@@ -17,7 +17,7 @@ IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
 def draw_bbox(image, bbox, txt_labels=None):
     x = (torchvision.transforms.functional.to_tensor(image) * 255.).to(torch.uint8)
     bbox = bbox.to(torch.int)
-    res = torchvision.utils.draw_bounding_boxes(x, bbox, txt_labels, width=2)
+    res = torchvision.utils.draw_bounding_boxes(x, bbox, txt_labels, width=1)
     return res.permute(1,2,0).cpu().numpy()
 
 
@@ -31,17 +31,18 @@ class BlockInspector:
     def callback(self, encoded_image: Image):
         try:
             decoded_image = self.bridge.imgmsg_to_cv2(encoded_image, desired_encoding="bgr8")
+            decoded_image = decoded_image[396:912, 676:1544, :]
         except CvBridgeError as e:
             print(e)
             return
 
-        resp = self.detect_blocks_srv(encoded_image)
-        boxes = resp.boxes
+        resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
+        data = resp.boxes
 
         with torch.no_grad():
-            boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in boxes])[1:]
+            boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in data])[1:]
             rospy.loginfo(f"received boxes {boxes}")
-            self.annotated_image = draw_bbox(decoded_image, boxes)
+            self.annotated_image = draw_bbox(decoded_image, boxes, [b.label for b in data])
 
 
 def main():
@@ -55,10 +56,11 @@ def main():
             if proc.annotated_image is not None:
                 cv2.imshow(WINDOW_TITLE, proc.annotated_image)
                 k = cv2.waitKey(1) & 0xFF
-                if k == 27 or cv2.getWindowProperty(WINDOW_TITLE, 0) < 0:
-                    break
-    except cv2.error:
-        print("cv2.error, shutting down")
+                try:
+                    if k == 27 or cv2.getWindowProperty(WINDOW_TITLE, 0) < 0:
+                        break
+                except cv2.error:
+                    print("cv2.error, shutting down")
     except KeyboardInterrupt:
         print("Shutting down")
 

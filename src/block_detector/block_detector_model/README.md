@@ -1,1 +1,1 @@
-This folder should contain `config.json` and `model.safetensors`. Download the latter from [here](TODO_INSERT_LINK).
+This folder should contain `model.pt`. Download it from [here](TODO_INSERT_LINK).
