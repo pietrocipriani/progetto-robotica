@@ -58,7 +58,7 @@ void interpolation3(
   const Params<Point>& end,
   typename SequencedFunction<TimeFunction<Point>, Time>::Container& chain
 ) {
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   // The chain must start with a Mode::Point.
   assert(start_mode == Mode::Point || !chain.empty());

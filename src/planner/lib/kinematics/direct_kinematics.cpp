@@ -3,6 +3,7 @@
 #include "model.hpp"
 #include "utils.hpp"
 #include "euler.hpp"
+#include "utils/coordinates.hpp"
 
 namespace kinematics {
 
@@ -34,36 +35,49 @@ JointTransformation joint_transformation_matrix(const model::RevoluteJoint& join
   return first_transform * second_transform;
 }
 
-template<class Robot>
-Pose direct(const Robot& robot) noexcept {
-  return direct(robot, robot.config);
+template<
+  class Robot, coord::AngularSystem angular_system,
+  coord::LinearSystem linear_system
+> Pose<angular_system, linear_system> direct(const Robot& robot) noexcept {
+  return direct<Robot, angular_system, linear_system>(robot, robot.config);
 }
 
-template<class Robot>
-Pose direct(const Robot& robot, const typename Robot::Configuration& config) noexcept {
+template<
+  class Robot, coord::AngularSystem angular_system,
+  coord::LinearSystem linear_system
+> Pose<angular_system, linear_system> direct(
+  const Robot& robot,
+  const typename Robot::Configuration& config
+) noexcept {
+  using DefaultPose = Pose<coord::Lie, coord::Cartesian>;
+
   JointTransformation transformation = JointTransformation::Identity();
 
-  for (const auto& joint_theta : zip(robot.joints, config.vector())) {
-    const auto& [joint, theta] = joint_theta;
+  for (int i=0; i<robot.joints.size(); ++i) {
+    const auto& joint = robot.joints[i];
+    const auto& theta = config.vector()[i];
 
     // Apply transformation to the relative frame (post-multiplication).
     transformation = transformation * joint_transformation_matrix(joint, theta);
   }
 
-  Pose::Linear translation = transformation.translation();
+  DefaultPose::Linear translation = transformation.translation();
+  DefaultPose::Angular rotation(transformation.linear());
 
-  // ZYX Euler angles from rotation matrix.
-  #ifndef USE_EULER_ANGLES
-    Pose::Angular rotation(transformation.linear());
-  #else
-    Pose::Angular rotation = euler::from<dimension<JointTransformation::LinearPart>>(transformation.linear());
-  #endif
+  const DefaultPose pose(std::move(translation), std::move(rotation));
 
-  // Construct the pose as position + orientation.
-  return Pose(std::move(translation), std::move(rotation));
+  return pose;
 }
 
-template Pose direct<model::UR5>(const model::UR5&) noexcept;
-template Pose direct<model::UR5>(const model::UR5&, const model::UR5::Configuration&) noexcept;
+#define SPECIALIZE(m, a, l) template Pose<a, l> direct<m, a, l>(const m&) noexcept;\
+                            template Pose<a, l> direct<m, a, l>(const m&, const m::Configuration&) noexcept;
+
+
+SPECIALIZE(model::UR5, coord::Lie, coord::Cartesian)
+SPECIALIZE(model::UR5, coord::Lie, coord::Cylindrical)
+SPECIALIZE(model::UR5, coord::Euler, coord::Cartesian)
+SPECIALIZE(model::UR5, coord::Euler, coord::Cylindrical)
+
+#undef SPECIALIZE
 
 }

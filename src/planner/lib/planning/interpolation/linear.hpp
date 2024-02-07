@@ -18,7 +18,7 @@ auto linear_interpolation(
   const Point& initial_position, const Point& final_position,
   const Time& start_time, const Time& duration
 ) {
-  using namespace quaternion_rotation_algebra;
+  using namespace uniformed_rotation_algebra;
 
   auto velocity = unlazy((final_position - initial_position) / duration);
 

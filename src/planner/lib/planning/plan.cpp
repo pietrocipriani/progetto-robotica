@@ -34,6 +34,10 @@ void to_js_trajectory(
   // TODO: can skip some steps, however it is not a problem, isn't it?
   //        Also the finish time could be != duration.
   for (Time t = 0; t <= duration; t += dt) {
+    #ifdef JOINT_SPACE_PLANNING
+    robot.config = f(t);
+    result.push(robot.config);
+    #else
     os::Position next_pose = f(t);
 
     const os::Velocity ov = (next_pose - current_pose) / dt;
@@ -45,6 +49,7 @@ void to_js_trajectory(
     result.push(robot.config);
 
     current_pose = std::move(next_pose);
+    #endif
   }
 }
 
@@ -87,10 +92,10 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
 
   Time finish_time;
 
-  auto picking = via_point_sequencer<coordinates::Cylindrical>(current_pose, picking_viapt, start_pose, finish_time);
+  auto picking = via_point_sequencer<coord::Cylindrical, coord::Euler>(current_pose, picking_viapt, start_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.picking, picking, finish_time, dt);
 
-  auto dropping = via_point_sequencer<coordinates::Cylindrical>(start_pose, dropping_viapt, target_pose, finish_time);
+  auto dropping = via_point_sequencer<coord::Cylindrical, coord::Euler>(start_pose, dropping_viapt, target_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.dropping, dropping, finish_time, dt);
 
   return seq;

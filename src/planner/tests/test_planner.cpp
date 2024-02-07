@@ -62,7 +62,7 @@ int main() {
 #include "../lib/planning/internal.hpp"
 #include "planner.hpp"
 
-std::ostream& operator<<(std::ostream& out, const kinematics::Pose& pose) {
+std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
   Eigen::IOFormat format(Eigen::FullPrecision, Eigen::DontAlignCols, ", ");
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
@@ -103,7 +103,6 @@ bool test_planner() {
 
   auto configs = planner::plan_movement(robot, movement, dt);
 
-  
   while (!configs.picking.empty()) {
     file << kinematics::direct(robot, configs.picking.front()) << '\n';
     configs.picking.pop();

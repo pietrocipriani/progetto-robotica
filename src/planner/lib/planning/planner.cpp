@@ -9,7 +9,7 @@ BlockPose::BlockPose(
   Scalar x, Scalar y, Scalar angle,
   Scalar hit_box_radius,
   Block block
-) noexcept : block(block), pose({x, y}, Complex(angle)), hit_box_radius(hit_box_radius) {}
+) noexcept : block(block), pose({x, y}, BlockPose::Pose::Angular(angle)), hit_box_radius(hit_box_radius) {}
 
 bool BlockPose::collides(const BlockPose& other) const {
   auto distance = pose.linear() - other.pose.linear();
@@ -36,7 +36,7 @@ std::queue<BlockMovement> generate_block_positioning_order(
   for (auto& b : blocks) {
     order.emplace(b, targets.at(b.block));
   }
-  
+
   return order;
 }
 
@@ -63,10 +63,13 @@ bool unsafe(const os::Position& pose) {
 
 
 os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
-  // TODO: dummy implementation. Could require a transformation between the two frames.
   return os::Position(
-    os::Position::Linear(pose.linear().x(), pose.linear().y(), table_distance),
-    os::Position::Angular(Rotation(std::arg(pose.angular()), Axis::UnitZ()))
+    os::Position::Linear(
+      pose.linear().x() - gazebo_to_os_x,
+      -(pose.linear().y() - gazebo_to_os_y),
+      table_distance
+    ),
+    os::Position::Angular(Rotation(pose.angular()[0], Axis::UnitZ()))
   );
 }
 
