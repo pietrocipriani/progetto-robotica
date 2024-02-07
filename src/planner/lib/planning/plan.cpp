@@ -1,5 +1,6 @@
 #include "internal.hpp"
 #include "kinematics.hpp"
+#include "model.hpp"
 #include "planner.hpp"
 #include "constants.hpp"
 #include "interpolation.hpp"
@@ -33,22 +34,27 @@ void to_js_trajectory(
 ) {
   // TODO: can skip some steps, however it is not a problem, isn't it?
   //        Also the finish time could be != duration.
-  for (Time t = 0; t <= duration; t += dt) {
+  for (Time t = 0; t <= duration;) {
     #ifdef JOINT_SPACE_PLANNING
     robot.config = f(t);
     result.push(robot.config);
     #else
-    os::Position next_pose = f(t);
+    os::Position next_pose = f(t + dt);
 
     const os::Velocity ov = (next_pose - current_pose) / dt;
 
     const js::Velocity jv = kinematics::dpa_inverse_diff(robot, ov, current_pose, dt);
 
-    robot.config += jv * dt;
+    // Enforcing max joint speed with time dilation.
+    const Scalar time_factor = std::min(1.0, model::UR5::max_joint_speed / jv.norm());
+
+    robot.config += jv * (dt * time_factor);
+
+    t += dt * time_factor;
 
     result.push(robot.config);
 
-    current_pose = std::move(next_pose);
+    current_pose = f(t);
     #endif
   }
 }
@@ -92,10 +98,10 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
 
   Time finish_time;
 
-  auto picking = via_point_sequencer<coord::Cylindrical, coord::Euler>(current_pose, picking_viapt, start_pose, finish_time);
+  auto picking = via_point_sequencer<coord::Cylindrical, coord::Lie>(current_pose, picking_viapt, start_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.picking, picking, finish_time, dt);
 
-  auto dropping = via_point_sequencer<coord::Cylindrical, coord::Euler>(start_pose, dropping_viapt, target_pose, finish_time);
+  auto dropping = via_point_sequencer<coord::Cylindrical, coord::Lie>(start_pose, dropping_viapt, target_pose, finish_time);
   to_js_trajectory(robot, current_pose, seq.dropping, dropping, finish_time, dt);
 
   return seq;

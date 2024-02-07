@@ -156,8 +156,6 @@ via_point_sequencer(
   const os::Position& target_pose,
   Time& finish_time
 ) {
-  using Parameters = Params<kinematics::Pose<angular_system, linear_system>>;
-
   // TODO: too many special cases.
 
   auto vp_it = viapoints.begin();

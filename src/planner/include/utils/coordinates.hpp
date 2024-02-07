@@ -59,7 +59,10 @@ inline typename linear_type<Cylindrical, 3>::type convert<Cartesian, Cylindrical
   const typename linear_type<Cartesian, 3>::type& cartesian
 ) {
   const auto rho = cartesian.head<2>().norm();
-  const auto theta = std::atan2(cartesian.y(), cartesian.x());
+  // TODO: dummy implementation to avoid control panel.
+  auto theta = std::atan2(cartesian.y(), cartesian.x());
+  if (theta >= M_PI_2) theta -= 2 * M_PI;
+
   const auto h = cartesian.z();
 
   return {rho, theta, h};

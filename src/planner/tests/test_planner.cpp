@@ -80,8 +80,8 @@ bool test_planner() {
   model::UR5 robot;
 
   const BlockMovement movement(
-    BlockPose(0.3, 0.3, 0, 0),
-    BlockPose(-0.1, -0.1, 0, 0)
+    BlockPose(0.8, 0.2, 0, 0),
+    BlockPose(0.4, 0.2, 0, 0)
   );
 
   constexpr Time dt = 0.001;
