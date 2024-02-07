@@ -3,7 +3,8 @@ import rospy
 import rospkg
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
-from block_detector.msg import BlockDetectorBox, DetectedBlocks
+from block_detector.msg import BlockDetectorBox
+from block_detector.srv import DetectBlocks, DetectBlocksResponse
 
 import numpy as np
 import torch
@@ -13,7 +14,6 @@ import os
 FEATURE_EXTRACTOR_HUGGINGFACE_PATH = "hustvl/yolos-small"
 FEATURE_EXTRACTOR_SIZE = {"width": 1024, "height": 768}
 NUM_LABELS = 1
-IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
 PUBLISH_TOPIC = "detected_blocks"
 CONFIDENCE_THRESHOLD = 0.8
 OVERLAP_THRESHOLD = 0.5 # set to None to skip non-max-suppression
@@ -90,22 +90,19 @@ class BlockDetector:
 
         rospy.loginfo("block_detector done loading model")
 
-        self.blocks_pub = rospy.Publisher(PUBLISH_TOPIC, DetectedBlocks, queue_size=1)
-        self.image_sub = rospy.Subscriber(IMAGE_TOPIC, Image, self.callback, queue_size=1)
 
-
-    def callback(self, msg: Image):
+    def callback(self, request: Image):
         try:
-            image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="passthrough")
+            decoded_image = self.bridge.imgmsg_to_cv2(request.image, desired_encoding="bgr8")
         except CvBridgeError as e:
             print(e)
             return
 
         with torch.no_grad():
-            inputs = self.feature_extractor(images=image, return_tensors="pt")
+            inputs = self.feature_extractor(images=decoded_image, return_tensors="pt")
             outputs = self.model(**inputs)
 
-            target_sizes = torch.tensor([image.shape[:2]])
+            target_sizes = torch.tensor([decoded_image.shape[:2]])
             results = self.feature_extractor.post_process_object_detection(
                 outputs,
                 threshold=CONFIDENCE_THRESHOLD,
@@ -123,15 +120,12 @@ class BlockDetector:
                 )
 
         rospy.loginfo(f"block_detector boxes {boxes}")
-        detected_blocks_msg = DetectedBlocks(
-            image=msg,
-            source_image_topic=IMAGE_TOPIC,
-            boxes=[
+        return DetectBlocksResponse(
+            boxes = [
                 BlockDetectorBox(x1=x1.item(), y1=y1.item(), x2=x2.item(), y2=y2.item())
                 for (x1, y1, x2, y2) in boxes
             ]
         )
-        self.blocks_pub.publish(detected_blocks_msg)
 
 
 
@@ -139,6 +133,7 @@ def main():
     rospy.init_node("block_detector")
     rospy.loginfo("block_detector init")
     proc = BlockDetector()
+    rospy.Service("detect_blocks", DetectBlocks, proc.callback)
     try:
         rospy.spin()
     except KeyboardInterrupt:

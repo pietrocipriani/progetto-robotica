@@ -53,8 +53,9 @@ template<
 
   JointTransformation transformation = JointTransformation::Identity();
 
-  for (const auto& joint_theta : zip(robot.joints, config.vector())) {
-    const auto& [joint, theta] = joint_theta;
+  for (int i=0; i<robot.joints.size(); ++i) {
+    const auto& joint = robot.joints[i];
+    const auto& theta = config.vector()[i];
 
     // Apply transformation to the relative frame (post-multiplication).
     transformation = transformation * joint_transformation_matrix(joint, theta);

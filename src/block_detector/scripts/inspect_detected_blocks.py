@@ -3,14 +3,15 @@ import rospy
 import rospkg
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
-from block_detector.msg import BlockDetectorBox, DetectedBlocks
+from block_detector.msg import BlockDetectorBox
+from block_detector.srv import DetectBlocks, DetectBlocksResponse
 import torchvision
 import torch
 import cv2
 
 
-PUBLISH_TOPIC = "detected_blocks"
 WINDOW_TITLE = "Detected blocks"
+IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
 
 
 def draw_bbox(image, bbox, txt_labels=None):
@@ -21,28 +22,33 @@ def draw_bbox(image, bbox, txt_labels=None):
 
 
 class BlockInspector:
-    def __init__(self):
+    def __init__(self, detect_blocks_srv):
         self.bridge = CvBridge()
-        self.sub = rospy.Subscriber(PUBLISH_TOPIC, DetectedBlocks, self.callback, queue_size=1)
+        self.detect_blocks_srv = detect_blocks_srv
+        self.image_sub = rospy.Subscriber(IMAGE_TOPIC, Image, self.callback, queue_size=1)
         self.annotated_image = None
 
-    def callback(self, msg: DetectedBlocks):
+    def callback(self, encoded_image: Image):
         try:
-            image = self.bridge.imgmsg_to_cv2(msg.image, desired_encoding="passthrough")
+            decoded_image = self.bridge.imgmsg_to_cv2(encoded_image, desired_encoding="bgr8")
         except CvBridgeError as e:
             print(e)
             return
 
+        resp = self.detect_blocks_srv(encoded_image)
+        boxes = resp.boxes
+
         with torch.no_grad():
-            boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in msg.boxes])[1:]
+            boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in boxes])[1:]
             rospy.loginfo(f"received boxes {boxes}")
-            self.annotated_image = draw_bbox(image, boxes)
+            self.annotated_image = draw_bbox(decoded_image, boxes)
 
 
 def main():
     rospy.init_node("inspect_detected_blocks", anonymous=True)
     rospy.loginfo("inspect_detected_blocks init")
-    proc = BlockInspector()
+    detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
+    proc = BlockInspector(detect_blocks_srv)
 
     try:
         while True:

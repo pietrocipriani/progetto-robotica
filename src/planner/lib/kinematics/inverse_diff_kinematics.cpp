@@ -43,7 +43,7 @@ Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
     // NOTE: NDEBUG dependent check.
     assert(std::abs(matrix.determinant()) >= min_safe_determinant);
   } else if (std::abs(matrix.determinant()) < min_safe_determinant) {
-    std::stringstream err; 
+    std::stringstream err;
     err << "Singular configuration. Det = " << matrix.determinant();
     throw std::domain_error(err.str());
   }
@@ -79,7 +79,7 @@ InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
     // This means that
     // k^(2·rows) >= min_safe_determinant - det(mmt).
     // k >= pow( max(0, min_safe_determinant - det(mmt)) , 1 / 2·rows ).
-    
+
     // As above, the min determinant of the damping matrix.
     // dummy precision to avoid subthreshold triggering just for approximations.
     Scalar min_damping_det = min_safe_determinant - mmt.determinant() + dummy_precision;
@@ -114,7 +114,7 @@ InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
 template<class Robot>
 InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const DefaultPose& current_pose) {
   Jacobian<Robot> geometric;
-  
+
   // End effector position in order to compute the radius.
   const auto end_effector_position = current_pose.linear();
 
@@ -122,10 +122,10 @@ InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Defaul
   // Origin recovered as `origin.translation()`.
   auto transformation = JointTransformation::Identity();
 
-  // Column iterator.
-  auto jac_column = geometric.colwise().begin();
+  // Used to iterate through columns.
+  int column_index = 0;
 
-  for (auto& joint : robot.joints) {
+  for (const auto& joint : robot.joints) {
     // The Z axis of the joint frame in base frame coords.
     const Axis axis = transformation.rotation() * Axis::UnitZ();
 
@@ -141,7 +141,7 @@ InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Defaul
 
     // Updates the column with the derivative.
     // Passes to the next column for the next iteration.
-    *jac_column++ = std::move(column);
+    geometric.col(column_index++) = std::move(column);
 
     // pass to the next frame.
     transformation = transformation * joint_transformation_matrix(joint);
@@ -180,7 +180,7 @@ typename Robot::Velocity dpa_inverse_diff(
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
   auto error = (desired_pose - effective_position) / dt;
-  
+
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.
   error += movement;
