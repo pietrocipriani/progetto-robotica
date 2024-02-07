@@ -25,8 +25,8 @@ VERTICES_TO_CATEGORIES = {
 
 MODES = ["with_categories", "without_categories"]
 FORMATS = ["coco", "ultralytics"]
-HEIGHT = 1080
-WIDTH = 1920
+HEIGHT = 1024
+WIDTH = 1024
 
 
 def get_views(root):
@@ -175,6 +175,12 @@ def save_ultralytics(root, train, test, collapse_to_1_category):
                         str((x2 - x1) / WIDTH),
                         str((y2 - y1) / HEIGHT),
                     ]) + "\n")
+
+            try:
+                # remove any cache file to be sure
+                os.remove(os.path.join(root, path + ".npy"))
+            except OSError:
+                pass
 
         print()
 
