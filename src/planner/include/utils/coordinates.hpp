@@ -3,25 +3,49 @@
 
 #include "../types.hpp"
 #include "../constants.hpp"
+#include "../euler.hpp"
+#include "unlazy.hpp"
+#include "helpers.hpp"
+#include "unlazy.hpp"
 #include <cmath>
 #include <type_traits>
 
-namespace coordinates {
+namespace coord {
 
-enum CoordinateSystem {
+enum LinearSystem {
   Cartesian, Cylindrical
+};
+enum AngularSystem {
+  Euler, Lie
 };
 
 
-template<CoordinateSystem from, CoordinateSystem to>
-void convert(Vector<3>& p) {
+template<LinearSystem linear_system, size_t size>
+struct linear_type {
+  using type = Vector<size>;
+};
+
+template<AngularSystem angular_system, size_t size>
+struct angular_type {
+  using type = EulerAngles<so<size>>;
+  static_assert(angular_system == Euler);
+};
+
+template<>
+struct angular_type<Lie, 3> {
+  using type = Quaternion;
+};
+
+
+
+template<LinearSystem from, LinearSystem to, size_t size>
+typename linear_type<to, size>::type convert(const typename linear_type<from, size>::type& p) {
   static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
-  return;
+  return p;
 }
 
-template<CoordinateSystem from, CoordinateSystem to>
-[[nodiscard]] // Use void convert(Point& p) for in-place conversion.
-Vector<3> convert(const Vector<3>& p) {
+template<AngularSystem from, AngularSystem to, size_t size>
+typename angular_type<to, size>::type convert(const typename angular_type<from, size>::type& p) {
   static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
   return p;
 }
@@ -31,8 +55,9 @@ Vector<3> convert(const Vector<3>& p) {
 /// @return The point in cylindrical coordinates.
 /// @note Cylindrical coordinates: [rho; theta; h].
 template<>
-[[nodiscard]] // Use void convert(Point& p) for in-place conversion.
-inline Vector<3> convert<Cartesian, Cylindrical>(const Vector<3>& cartesian) {
+inline typename linear_type<Cylindrical, 3>::type convert<Cartesian, Cylindrical, 3>(
+  const typename linear_type<Cartesian, 3>::type& cartesian
+) {
   const auto rho = cartesian.head<2>().norm();
   const auto theta = std::atan2(cartesian.y(), cartesian.x());
   const auto h = cartesian.z();
@@ -40,23 +65,14 @@ inline Vector<3> convert<Cartesian, Cylindrical>(const Vector<3>& cartesian) {
   return {rho, theta, h};
 }
 
-/// Converts in place a @p cartesian coordinate into cylindrical coordinates.
-/// @param cartesian The point in cartesian coordinates.
-/// @note Cylindrical coordinates: [rho; theta; h].
-template<>
-inline void convert<Cartesian, Cylindrical>(Vector<3>& cartesian) {
-  const auto& point = cartesian;
-  cartesian = convert<Cartesian, Cylindrical>(point);
-}
-
-
-
 /// Converts a @p cylindrical coordinate into cartesian coordinates.
 /// @param cylindrical The point in cartesian coordinates.
 /// @return The point @p cylindrical in cartesian coordinates.
 /// @note Cylindrical coordinates: [rho; theta; h].
 template<>
-inline Vector<3> convert<Cylindrical, Cartesian>(const Vector<3>& cylindrical) {
+inline typename linear_type<Cartesian, 3>::type convert<Cylindrical, Cartesian, 3>(
+  const typename linear_type<Cylindrical, 3>::type& cylindrical
+) {
   const auto& rho = cylindrical.x();
   const auto& theta = cylindrical.y();
   const auto& h = cylindrical.z();
@@ -68,34 +84,60 @@ inline Vector<3> convert<Cylindrical, Cartesian>(const Vector<3>& cylindrical) {
   return {x, y, z};
 }
 
-/// Converts in place a @p cylindrical coordinate into cartesian coordinates.
-/// @param cylindrical The point in cartesian coordinates.
-/// @note Cylindrical coordinates: [rho; theta; h].
+
+/// Converts a @p quaternion into an euler angle.
+/// @param cartesian The point in cartesian coordinates.
+/// @return The point in cylindrical coordinates.
+/// @note Euler representation can be subject to changes, only coherence is asserted.
 template<>
-inline void convert<Cylindrical, Cartesian>(Vector<3>& cylindrical) {
-  const auto& point = cylindrical;
-  cylindrical = convert<Cylindrical, Cartesian>(point);
+inline typename angular_type<Euler, 3>::type convert<Lie, Euler, 3>(
+  const typename angular_type<Lie, 3>::type& lie
+) {
+  // TODO: deprecate euler.
+  return euler::from<3>(lie);
 }
 
+/// Converts a @p quaternion into an euler angle.
+/// @param cartesian The point in cartesian coordinates.
+/// @return The point in cylindrical coordinates.
+/// @note Euler representation can be subject to changes, only coherence is asserted.
+template<>
+inline typename angular_type<Lie, 3>::type convert<Euler, Lie, 3>(
+  const typename angular_type<Euler, 3>::type& euler
+) {
+  using Ret = typename angular_type<Lie, 3>::type;
+  return Ret(euler::to_rotation<3>(euler));
+}
 
-template<CoordinateSystem from, CoordinateSystem to = Cartesian>
-Scalar measure(const Vector<3>& start, const Vector<3>& end) {
-  static_assert(from == to, "Default implementation do not admit conversion.");
+/// Measures the length of a linearly interpolated trajectory between
+///     @p start and @p end in the @from system with the @to metric.
+template<LinearSystem from, LinearSystem to = Cartesian, size_t size>
+Scalar measure(
+  const typename linear_type<from, size>::type& start,
+  const typename linear_type<from, size>::type& end
+) {
+  static_assert(from == to, "Default implementation do not allow conversion.");
   return (end - start).norm();
 }
 
 template<>
-inline Scalar measure<Cylindrical>(const Vector<3>& start, const Vector<3>& end) {
-  Vector<3> delta = end - start;
-  delta[1] *= end[0];
+inline Scalar measure<Cylindrical, Cartesian, 3>(
+  const typename linear_type<Cylindrical, 3>::type& start,
+  const typename linear_type<Cylindrical, 3>::type& end
+) {
+  const auto delta = unlazy(end - start);
+
+  const auto& delta_rho = delta.x();
+  const auto& delta_theta = delta.y() * end.x();
+  const auto& delta_h = delta.z();
 
 
-  Scalar pseudo_norm_sq = std::pow(delta[0], 2) + std::pow(delta[2], 2);
+  Scalar pseudo_norm_sq = std::pow(delta_rho, 2) + std::pow(delta_h, 2);
 
-  if (std::abs(delta[1]) < dummy_precision) return delta.norm();
-  if (pseudo_norm_sq < dummy_precision) return delta[1];
+  if (std::abs(delta_theta) < dummy_precision) return delta.norm();
+  if (pseudo_norm_sq < dummy_precision) return delta_theta;
 
-  return delta.norm() / 2 + std::asinh(delta[1] / std::sqrt(pseudo_norm_sq)) * pseudo_norm_sq / delta[1];
+  return delta.norm() / 2 + std::asinh(delta_theta / std::sqrt(pseudo_norm_sq)) * pseudo_norm_sq / delta_theta;
 }
 
 }

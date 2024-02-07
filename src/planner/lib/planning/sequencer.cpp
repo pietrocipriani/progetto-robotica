@@ -2,6 +2,7 @@
 #include "constants.hpp"
 #include "interpolation/parabolic.hpp"
 #include "interpolation/stop_and_play.hpp"
+#include "kinematics.hpp"
 #include "model.hpp"
 #include "planner.hpp"
 #include "utils/coordinates.hpp"
@@ -14,6 +15,8 @@
 
 namespace planner {
 
+using namespace coord;
+
 using LinearParams = Params<os::Position::Linear>;
 using AngularParams = Params<os::Position::Angular>;
 
@@ -22,8 +25,12 @@ Scalar get_max_speed(const os::Position& start, const os::Position& end) {
   return max_linear_speed;
 }
 
+// TODO: avoid conversions.
 Scalar get_max_acceleration(const os::Position& pose) {
   // TODO: radius awareness.
+  return model::UR5::max_joint_accel;
+}
+Scalar get_max_angular_acceleration(const os::Position& pose) {
   return model::UR5::max_joint_accel;
 }
 
@@ -48,92 +55,177 @@ Scalar get_desired_speed(
 
 // TODO: consider orientation.
 // TODO: problems with low accelerations.
-template<coordinates::CoordinateSystem current, coordinates::CoordinateSystem interpolation, bool first = false>
-std::tuple<LinearParams, AngularParams> generate_parameters(
-  const os::Position& point,
-  const os::Position& next_point,
+template<LinearSystem linear_system, AngularSystem angular_system>
+auto generate_parameters(
+  const kinematics::Pose<angular_system, linear_system>& point,
+  const kinematics::Pose<angular_system, linear_system>& next_point,
   const Scalar prev_speed,
   Scalar& max_speed,
   const Scalar next_speed,
   Time& time
 ) {
-  using namespace coordinates;
-
+  using TargetPoint = kinematics::Pose<angular_system, linear_system>;
   assert(prev_speed >= 0 && max_speed >= 0 && next_speed >= 0);
 
-  const Scalar distance = measure<interpolation>(
-    convert<current, interpolation>(point.linear()),
-    convert<current, interpolation>(next_point.linear())
+  const Scalar linear_distance = measure<linear_system, Cartesian, TargetPoint::space_size>(
+    point.linear(), next_point.linear()
   );
 
-  assert(distance >= 0);
+  /*const Scalar angular_distance = measure<angular_system, Lie>(
+    point.angular(), next_point.angular()
+  );*/
+
+  assert(linear_distance >= 0/* && angular_distance >= 0*/);
 
   // Approximation:
   // The max acceleration limit is on the single joint and is determined by the inertia of the robot.
   // We are imposing the max acceleration on the end effector movement.
-  const Scalar max_acceleration = get_max_acceleration(point);
-  const Scalar max_acceleration_next = get_max_acceleration(next_point);
+  const Scalar max_lin_acc_1 = get_max_acceleration(point);
+  const Scalar max_lin_acc_2 = get_max_acceleration(next_point);
 
-  assert(max_acceleration >= 0 && max_acceleration_next >= 0);
+  assert(max_lin_acc_1 >= 0 && max_lin_acc_2 >= 0);
 
   // Worst case approximation.
   // We are assuming that the two velocities have opposite verse in order to accomodate
   //  the acceleration rating in the worst case.
   // Local optimization. No awareness of the global frame.
-  const Scalar desired_speed = get_desired_speed(
-    distance,
+  const Scalar desired_linear_speed = get_desired_speed(
+    linear_distance,
     prev_speed, next_speed,
-    max_acceleration, max_acceleration_next
+    max_lin_acc_1, max_lin_acc_2
   );
-  max_speed = std::min(desired_speed, max_speed);
+  max_speed = std::min(desired_linear_speed, max_speed);
 
   assert(max_speed >= 0);
 
   const Time current_time = time;
-  time += distance / max_speed;
-  Scalar delta_t_1 = (prev_speed + max_speed) / max_acceleration / 2;
 
-  if constexpr (first) {
-    time += delta_t_1;
-  }
-
-  return std::make_tuple(
-    LinearParams(convert<current, interpolation>(point.linear()), current_time, 2 * delta_t_1),
-    // TODO: first should have full delta.
-    AngularParams(point.angular(), current_time, delta_t_1)
+  time += std::max(linear_distance / max_speed, 0.0/*angular_distance / max_speed*/);
+  Scalar delta_t = std::max(
+    (prev_speed + max_speed) / max_lin_acc_1,
+    0.0
   );
+  
+  #ifdef JOINT_SPACE_PLANNING
+  return Params<model::UR5::Configuration>(kinematics::inverse(model::UR5(), point), current_time, delta_t);
+  #else
+  return Params<TargetPoint>(point, current_time, delta_t);
+  #endif
 }
 
-// TODO: consider orientation.
-template<coordinates::CoordinateSystem current, coordinates::CoordinateSystem interpolation>
-std::tuple<LinearParams, AngularParams> generate_parameters(
-  const os::Position& point,
-  const Scalar prev_speed,
-  const Time& time
+template<LinearSystem linear_system, AngularSystem angular_system>
+auto generate_parameters(
+  const kinematics::Pose<angular_system, linear_system>& point,
+  const Scalar prev_linear_speed,
+  const Scalar prev_angular_speed,
+  Time& time
 ) {
-  using namespace coordinates;
+  using TargetPoint = kinematics::Pose<angular_system, linear_system>;
 
   // Approximation:
   // The max acceleration limit is on the single joint and is determined by the inertia of the robot.
   // We are imposing the max acceleration on the end effector movement.
-  const Scalar max_acceleration = get_max_acceleration(point);
+  const Scalar max_lin_acc = get_max_acceleration(point);
 
-  const Scalar delta_t_1 = prev_speed / max_acceleration;
+  const Scalar max_ang_acc = get_max_angular_acceleration(point);
 
-  return std::make_tuple(
-    LinearParams(convert<current, interpolation>(point.linear()), time + delta_t_1 / 2, delta_t_1),
-    AngularParams(point.angular(), time + delta_t_1 / 2, delta_t_1)
+  const Scalar delta_t = std::max(
+    prev_linear_speed / max_lin_acc,
+    prev_angular_speed / max_ang_acc
   );
+
+  time += delta_t / 2;
+
+  #ifdef JOINT_SPACE_PLANNING
+  return Params<model::UR5::Configuration>(kinematics::inverse(model::UR5(), point), time, delta_t);
+  #else
+  return Params<TargetPoint>(point, time, delta_t);
+  #endif
 }
 
-template<coordinates::CoordinateSystem system>
+
+template<LinearSystem linear_system, AngularSystem angular_system>
+#ifdef JOINT_SPACE_PLANNING
+TimeFunction<model::UR5::Configuration>
+#else
+TimeFunction<kinematics::Pose<angular_system, linear_system>>
+#endif
+via_point_sequencer(
+  const os::Position& current_pose,
+  const ViaPoints& viapoints,
+  const os::Position& target_pose,
+  Time& finish_time
+) {
+  using Parameters = Params<kinematics::Pose<angular_system, linear_system>>;
+
+  // TODO: too many special cases.
+
+  auto vp_it = viapoints.begin();
+
+  auto get_next = [&, finished = false]() mutable -> const os::Position* {
+    if (finished) {
+      return nullptr;
+    } else if (vp_it != viapoints.end()) {
+      return &*vp_it++;
+    } else {
+      finished = true;
+      return &target_pose;
+    }
+  };
+
+  const os::Position *current = &current_pose;
+  const os::Position *next = get_next();
+  const os::Position *next_next = get_next(); 
+
+  Scalar prev_speed = 0;
+  Scalar max_speed = get_max_speed(*current, *next);
+  Scalar next_speed = next_next == nullptr ? 0 : get_max_speed(*next, *next_next);
+
+  Scalar prev_time = 0;
+
+  auto start = generate_parameters<linear_system, angular_system>(
+    *current, *next, prev_speed, max_speed, next_speed, prev_time
+  );
+
+  prev_time += start.accel_delta / 2;
+
+  std::vector<decltype(start)> via_points;
+  via_points.reserve(viapoints.size());
+
+  for (size_t i = 0; i < viapoints.size(); ++i) {
+    current = next;
+    next = next_next;
+    next_next = get_next();
+
+    prev_speed = max_speed;
+    max_speed = next_speed;
+    next_speed = next_next == nullptr ? 0 : get_max_speed(*next, *next_next);
+
+    auto params = generate_parameters<linear_system, angular_system>(
+      *current, *next, prev_speed, max_speed, next_speed, prev_time
+    );
+
+    via_points.push_back(std::move(params));
+  }
+
+  
+  auto end = generate_parameters<linear_system, angular_system>(
+    target_pose, max_speed, max_speed, prev_time
+  );
+
+  finish_time = end.time;
+
+  return parabolic_interpolation(start, via_points, end);
+}
+
+
+/*template<LinearSystem system>
 TimeFunction<os::Position> via_point_sequencer(
   const os::Position& current_pose,
   const ViaPoints& viapoints,
   const os::Position& target_pose,
   Time& finish_time
 ) {
-  using namespace coordinates;
   // TODO: too many special cases.
 
   auto vp_it = viapoints.begin();
@@ -201,10 +293,17 @@ TimeFunction<os::Position> via_point_sequencer(
   return [lf = std::move(linear_fun), af = std::move(angular_fun)](const Time& t) {
     return os::Position(convert<system, Cartesian>(lf(t)), af(t));
   };
-}
+}*/
 
-template decltype(via_point_sequencer<coordinates::Cylindrical>) via_point_sequencer<coordinates::Cylindrical>;
-template decltype(via_point_sequencer<coordinates::Cartesian>) via_point_sequencer<coordinates::Cartesian>;
+
+#define SPECIALIZATION(ls, as)  template decltype(via_point_sequencer<ls, as>) via_point_sequencer<ls, as>;
+
+SPECIALIZATION(coord::Cylindrical, coord::Lie)
+SPECIALIZATION(coord::Cylindrical, coord::Euler)
+SPECIALIZATION(coord::Cartesian, coord::Lie)
+SPECIALIZATION(coord::Cartesian, coord::Euler)
+
+#undef SPECIALIZATION
 
 }
 

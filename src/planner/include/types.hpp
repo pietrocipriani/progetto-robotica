@@ -4,6 +4,7 @@
 #include <complex>
 #include <eigen3/Eigen/Dense>
 #include <eigen3/Eigen/Geometry>
+#include <type_traits>
 
 /**
  * The type representing a scalar.

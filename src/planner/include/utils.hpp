@@ -18,6 +18,8 @@
 #include "utils/sequenced_function.hpp"
 #include "utils/coordinates.hpp"
 #include "utils/unlazy.hpp"
+#include "utils/quaternion_algebra.hpp"
+#include "utils/helpers.hpp"
 
 
 // TODO: Split into multiple files. Bigger than i thought.
@@ -323,64 +325,5 @@ public:
 };
 
 
-template<class T, class Target>
-constexpr bool is_quasi = std::is_same_v<std::remove_cv_t<std::remove_reference_t<T>>, Target>;
-
-template<size_t size>
-constexpr size_t so = size * (size - 1) / 2;
-
-template<class T>
-constexpr size_t dimension = T::RowsAtCompileTime;
-
-template<>
-inline constexpr size_t dimension<Quaternion> = Quaternion::Dim;
-
-template<>
-inline constexpr size_t dimension<Complex> = 1;
-
-// Namespace to avoid the unwanted usage of these functions.
-namespace quaternion_rotation_algebra {
-
-// Quaternion algebra for rotations.
-inline Quaternion operator-(const Quaternion& q) {
-  return q.conjugate();
-}
-inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2) {
-  return (q2 * q1).normalized();
-}
-inline Quaternion& operator+=(Quaternion& q1, const Quaternion& q2) {
-  return q1 = q1 + q2;
-}
-inline Quaternion operator-(const Quaternion& q1, const Quaternion& q2) {
-  return -q2 + q1;
-}
-/**
- * @p this - @p other = @p result | @p other + @p result = @p this.
- * desired - effective = error | effective + error = result.
- *
- * Returns the distance between @p other and @p this.
- * @param other The starting pose.
- * @return The distance as movement.
- */
-inline Quaternion& operator-=(Quaternion& q1, const Quaternion& q2) {
-  return q1 = q1 - q2;
-}
-inline Quaternion operator*(const Quaternion& q1, const Scalar& c) {
-  return pow(q1, c).normalized();
-}
-inline Quaternion operator*(const Scalar& c, const Quaternion& q1) {
-  return q1 * c;
-}
-inline Quaternion& operator*=(Quaternion& q1, const Scalar& c) {
-  return q1 = q1 * c;
-}
-inline Quaternion operator/(const Quaternion& q1, const Scalar& c) {
-  return q1 * (1 / c);
-}
-inline Quaternion& operator/=(Quaternion& q1, const Scalar& c) {
-  return q1 *= (1 / c);
-}
-
-}
 
 #endif /* UTILS_HPP_INCLUDED */
