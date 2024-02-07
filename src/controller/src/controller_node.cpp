@@ -55,7 +55,7 @@ constexpr const char* MODEL_SDF = R"(
 		<material>
 			<ambient>%1f %2f %3f %4f</ambient>
 			<diffuse>1.0 1.0 1.0 1.0</diffuse>
-			<specular>0.1 0.1 0.1 1</specular>
+			<specular>0.0 0.0 0.0 1</specular>
 			<emissive>0 0 0 0</emissive>
 		</material>
 	</visual>
@@ -68,8 +68,8 @@ void spawn_block(ros::ServiceClient& client, double x, double y) {
     static std::mt19937 rng = std::mt19937(std::random_device()());
 
     gazebo_msgs::SpawnModel srv;
-	srv.request.model_name = string_format("nome_bellissimo %d", rng());
-	srv.request.model_xml = string_format(MODEL_SDF, 1.0, 1.0, 0.0, 1.0);
+	srv.request.model_name = string_format("nome_bellissimo_%d", abs(int(rng())));
+	srv.request.model_xml = string_format(MODEL_SDF, 0.45, 0.25, 0.36, 1.0);
 	srv.request.robot_namespace = "/gazebo/";
 
 	geometry_msgs::Pose pose;
@@ -77,11 +77,11 @@ void spawn_block(ros::ServiceClient& client, double x, double y) {
 	geometry_msgs::Quaternion quaternion;
 	point.x = x;
 	point.y = y;
-	point.z = 0.88;
-	quaternion.x = 0.0;
+	point.z = 0.88 + 0.05;
+	quaternion.x = 1.0;
 	quaternion.y = 0.0;
 	quaternion.z = 0.0;
-	quaternion.w = 1.0;
+	quaternion.w = 0.0;
 	pose.position = point;
 	pose.orientation = quaternion;
 	srv.request.initial_pose = pose;
@@ -147,6 +147,11 @@ int main(int argc, char **argv) {
 		planner::BlockPose(0.1, 0.4, 0, 0),
 		planner::BlockPose(0.8, 0.4, 0, 0),
 	};
+
+	// for (int i=0; i<poses.size()-1; i += 1) {
+	// 	spawn_block(client, poses[i].pose.linear().x(), poses[i].pose.linear().y());
+	// }
+	// return 0;
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		if (i%2 == 0) {
