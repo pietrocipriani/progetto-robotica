@@ -7,6 +7,7 @@
 #include "planner.hpp"
 #include "utils/coordinates.hpp"
 #include "interpolation.hpp"
+#include "utils/helpers.hpp"
 #include <algorithm>
 #include <functional>
 #include <iostream>
@@ -20,8 +21,8 @@ using namespace coord;
 using LinearParams = Params<os::Position::Linear>;
 using AngularParams = Params<os::Position::Angular>;
 
-Scalar get_max_speed(const os::Position& start, const os::Position& end) {
-  // TODO: consider joint space limits.
+Scalar get_max_speed() {
+  // NOTE: joint space limits enforced by time dilation.
   return max_linear_speed;
 }
 
@@ -45,7 +46,7 @@ Scalar get_desired_speed(
   Scalar acc_1, Scalar acc_2
 ) {
   // TODO: In some cases we can obtain a better result by just checking if we can...
-
+  
   const Scalar a = acc_1 + acc_2;
   const Scalar b = next_speed * acc_1 + prev_speed * acc_2;
   const Scalar c = -2 * distance * acc_1 * acc_2;
@@ -143,6 +144,49 @@ auto generate_parameters(
   #endif
 }
 
+template<class Point, template <class T> class Container>
+TimeFunction<Point> via_point_interpolation(
+  const Params<Point>& start,
+  Container<Params<Point>>&& via_points,
+  Params<Point>&& end
+) {
+  constexpr bool is_quat_pose = is_quasi<Point, kinematics::Pose<coord::Lie, coord::Cylindrical>> ||
+                                is_quasi<Point, kinematics::Pose<coord::Lie, coord::Cartesian>>;
+
+  if constexpr (is_quasi<Point, Quaternion>) {
+    for (auto& p : via_points) p.accel_delta /= 2;
+    via_points.push_back(std::move(end));
+    return stop_and_play_interpolation(start, via_points);
+  } else if constexpr (is_quat_pose) {
+    const Params<typename Point::Linear> start_lin(start.point.linear(), start.time, start.accel_delta);
+    const Params<typename Point::Angular> start_ang(start.point.angular(), start.time, start.accel_delta);
+    const Params<typename Point::Linear> end_lin(end.point.linear(), end.time, end.accel_delta);
+    Params<typename Point::Angular> end_ang(end.point.angular(), end.time, end.accel_delta);
+    Container<Params<typename Point::Linear>> vp_lin;
+    Container<Params<typename Point::Angular>> vp_ang;
+    vp_lin.reserve(via_points.size());
+    vp_ang.reserve(via_points.size() + 1);
+
+    for (auto vp : via_points) {
+      vp_lin.emplace_back(vp.point.linear(), vp.time, vp.accel_delta);
+      vp_ang.emplace_back(vp.point.angular(), vp.time, vp.accel_delta / 2);
+    }
+    vp_ang.push_back(std::move(end_ang));
+    
+    auto lin = parabolic_interpolation(start_lin, vp_lin, end_lin);
+    auto ang = stop_and_play_interpolation(start_ang, vp_ang);
+
+    return [l = std::move(lin), a = std::move(ang)](const Time& time) {
+      return Point(l(time), a(time));
+    };
+  } else {
+    return parabolic_interpolation(start, via_points, end);
+  }
+}
+
+
+
+
 
 template<LinearSystem linear_system, AngularSystem angular_system>
 #ifdef JOINT_SPACE_PLANNING
@@ -176,8 +220,8 @@ via_point_sequencer(
   const os::Position *next_next = get_next(); 
 
   Scalar prev_speed = 0;
-  Scalar max_speed = get_max_speed(*current, *next);
-  Scalar next_speed = next_next == nullptr ? 0 : get_max_speed(*next, *next_next);
+  Scalar max_speed = get_max_speed();
+  Scalar next_speed = next_next == nullptr ? 0 : get_max_speed();
 
   Scalar prev_time = 0;
 
@@ -197,7 +241,7 @@ via_point_sequencer(
 
     prev_speed = max_speed;
     max_speed = next_speed;
-    next_speed = next_next == nullptr ? 0 : get_max_speed(*next, *next_next);
+    next_speed = next_next == nullptr ? 0 : get_max_speed();
 
     auto params = generate_parameters<linear_system, angular_system>(
       *current, *next, prev_speed, max_speed, next_speed, prev_time
@@ -213,7 +257,7 @@ via_point_sequencer(
 
   finish_time = end.time;
 
-  return parabolic_interpolation(start, via_points, end);
+  return via_point_interpolation(start, std::move(via_points), std::move(end));
 }
 
 

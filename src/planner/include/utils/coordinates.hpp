@@ -123,6 +123,25 @@ Scalar measure(
   return (end - start).norm();
 }
 
+/// Measures the length of a linearly interpolated trajectory between
+///     @p start and @p end in the @from system with the @to metric.
+template<AngularSystem from, AngularSystem to = Lie, size_t size>
+Scalar measure(
+  const typename angular_type<from, size>::type& start,
+  const typename angular_type<from, size>::type& end
+) {
+  static_assert(from == to, "Default implementation do not allow conversion.");
+  return (end - start).norm();
+}
+
+/// Measures the length of a linearly interpolated trajectory between
+///     @p start and @p end in the @from system with the @to metric.
+template<>
+inline Scalar measure<Lie, Lie, 3>(const Quaternion& start, const Quaternion& end) {
+  return start.angularDistance(end);
+}
+
+
 template<>
 inline Scalar measure<Cylindrical, Cartesian, 3>(
   const typename linear_type<Cylindrical, 3>::type& start,

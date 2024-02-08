@@ -31,7 +31,7 @@ inline constexpr bool uses_quaternions<kinematics::Pose<coord::Lie, coord::Carte
     = is_quasi<kinematics::Pose<coord::Lie, coord::Cylindrical>::Angular, Quaternion>;
 
 template<class Point, class Velocity>
-TimeFunction<Point> quadratic_interpolation(
+TimeFunction<Point> _quadratic_interpolation(
   const Point& initial_position,
   const Velocity& initial_velocity,
   const Velocity& final_velocity,
@@ -95,7 +95,7 @@ TimeFunction<Point> quadratic_interpolation(
 ) {
   static_assert(!internal::uses_quaternions<Point>);
 
-  return internal::quadratic_interpolation(
+  return internal::_quadratic_interpolation(
     initial_position,
     initial_velocity, final_velocity,
     start_time, duration
@@ -114,9 +114,8 @@ inline TimeFunction<Quaternion> quadratic_interpolation<Quaternion, Quaternion>(
 
   const bool aligned = initial_velocity.vec().cross(final_velocity.vec()).isApprox(Axis::Zero());
 
-
   if (aligned) {
-    return internal::quadratic_interpolation(
+    return internal::_quadratic_interpolation(
       initial_position,
       initial_velocity, final_velocity,
       start_time, duration
@@ -125,8 +124,8 @@ inline TimeFunction<Quaternion> quadratic_interpolation<Quaternion, Quaternion>(
     auto mid = initial_position + initial_velocity * (duration / 2);
     auto mid_time = start_time + duration / 2;
 
-    auto dec = quadratic_deceleration(mid, initial_velocity, duration / 2, mid_time);
-    auto acc = quadratic_acceleration(mid, final_velocity, duration / 2, mid_time);
+    auto dec = quadratic_deceleration(mid, initial_velocity, mid_time, duration / 2);
+    auto acc = quadratic_acceleration(mid, final_velocity, mid_time, duration / 2);
 
     return [=, dec = std::move(dec), acc = std::move(acc)](const Time& time) {
       if (time < mid_time) {
@@ -166,6 +165,9 @@ TimeFunction<kinematics::Pose<coord::Lie, ls>> quadratic_interpolation(
     return kinematics::Pose<coord::Lie, ls>(l(time), a(time));
   };
 }
+
+
+
 }
 
 
