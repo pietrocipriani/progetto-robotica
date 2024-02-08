@@ -101,7 +101,7 @@ std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& confi
 	for (int i=0; i<6; ++i) {
 		data.data[i] = v[i];
 	}
-	data.data[5] -= M_PI * 2;
+	//data.data[5] -= M_PI * 2;
 	data.data[6] = data.data[7] = gripper_pos;
 	return data;
 }
