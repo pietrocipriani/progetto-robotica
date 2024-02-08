@@ -1,5 +1,6 @@
 #include "internal.hpp"
 #include "kinematics.hpp"
+#include "model.hpp"
 #include "planner.hpp"
 #include "constants.hpp"
 #include "interpolation.hpp"
@@ -33,26 +34,99 @@ void to_js_trajectory(
 ) {
   // TODO: can skip some steps, however it is not a problem, isn't it?
   //        Also the finish time could be != duration.
-  for (Time t = 0; t <= duration; t += dt) {
+  for (Time t = 0; t <= duration;) {
     #ifdef JOINT_SPACE_PLANNING
     robot.config = f(t);
     result.push(robot.config);
     #else
-    os::Position next_pose = f(t);
+    os::Position next_pose = f(t + dt);
 
     const os::Velocity ov = (next_pose - current_pose) / dt;
 
     const js::Velocity jv = kinematics::dpa_inverse_diff(robot, ov, current_pose, dt);
 
-    robot.config += jv * dt;
+    // Enforcing max joint speed with time dilation.
+    const Scalar time_factor = std::min(1.0, model::UR5::max_joint_speed / jv.norm());
+
+    robot.config += jv * (dt * time_factor);
+
+    t += dt * time_factor;
 
     result.push(robot.config);
 
-    current_pose = std::move(next_pose);
+    current_pose = f(t);
     #endif
   }
 }
 
+template<coord::LinearSystem ls, coord::AngularSystem as>
+auto generate_positions(
+  const model::UR5& robot,
+  const model::UR5::Configuration& current_config,
+  const kinematics::Pose<as, ls>& current_pose,
+  const BlockPose::Pose& target
+) {
+  using Position = kinematics::Pose<as, ls>;
+
+  Position pose = block_pose_to_pose(target);
+  
+  // Pose outside of the low-zone just above the `pose`.
+  Position safe_pose = planner::safe_pose(pose);
+
+  const Position safe_current_pose = planner::safe_pose(current_pose);
+
+  const auto js_pos = kinematics::inverse(robot, safe_pose);
+  
+  // Just to throw exceptions prematurely in case of unreachability.
+  kinematics::inverse(robot, pose);
+
+  ViaPoints via_points;
+
+  if (unsafe(current_pose)) via_points.push_back(safe_current_pose);
+  
+  if constexpr (as == coord::Lie) {
+    // The mid point in the joint space interpolation.
+    const auto js_pos_mid = current_config + (js_pos - current_config) / 2 * 1;
+  
+    // The mid point in the operational space interpolation.
+    const auto os_pos_mid = safe_current_pose + (safe_pose - safe_current_pose) / 2 * 1;
+    
+    // The operational space view of `js_pos_mid`.
+    const Position os_js_pos_mid = kinematics::direct(robot, js_pos_mid);
+
+    // The wanted mid-point.
+    // NOTE: all this is necessary to force the correct orientation of the end effector to avoid
+    //       violations of the joint limits with coord::Lie interpolation.
+    Position mid_pose(os_pos_mid.linear(), os_js_pos_mid.angular());
+
+    // The angular distance to the mid point is at more than pi/2 radiants.
+    // This means that the angular distance to the desired orientation is more than pi.
+    // The interpolation will naturally take the other way around.
+    // We force the passage through the mid point by adding it as a via point.
+    if (safe_current_pose.angular().angularDistance(mid_pose.angular()) > M_PI_2) {
+      via_points.push_back(std::move(mid_pose));
+    }
+  }
+
+  via_points.push_back(std::move(safe_pose));
+
+
+  return std::make_tuple(via_points, pose, js_pos);
+}
+
+template<coord::LinearSystem ls, coord::AngularSystem as>
+auto generate_positions(
+  const model::UR5& robot,
+  const model::UR5::Configuration& current_config,
+  const BlockPose::Pose& start,
+  const BlockPose::Pose& target
+) {
+  using Position = kinematics::Pose<as, ls>;
+
+  const Position current_pose = block_pose_to_pose(start);
+
+  return generate_positions<ls, as>(robot, current_config, current_pose, target);
+}
 
 /// Generates the sequence of movements from the initial @p robot configuration, throught the picking
 /// of one block from its starting position, to the relase of the block into its target position.
@@ -64,38 +138,27 @@ void to_js_trajectory(
 /// @note Evaluate if its worth to run this into a thread in order to perform the next calculations
 ///       during the physical driving of the robot for the previous movement.
 MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement, const Time& dt) {
-  const os::Position start_pose = block_pose_to_pose(movement.start.pose);
-  const os::Position target_pose = block_pose_to_pose(movement.target.pose);
+  constexpr coord::LinearSystem ls = coord::Cylindrical;
+  constexpr coord::AngularSystem as = coord::Lie;
 
-  // Pose outside of the low-zone just above the `start_pose`.
-  const os::Position start_safe_pose = safe_pose(start_pose);
-  
-  // Pose outside of the low-zone just above the `target_pose`.
-  const os::Position target_safe_pose = safe_pose(target_pose);
+  os::Position current_pose = kinematics::direct(robot);
 
-  // NOTE: only to throw exceptions prematurely in case of unreachability.
-  kinematics::inverse(robot, start_safe_pose);
-  kinematics::inverse(robot, target_safe_pose);
-  kinematics::inverse(robot, start_pose);
-  kinematics::inverse(robot, target_pose);
+  const auto [picking_viapt, picking_end, picking_end_config] = generate_positions<ls, as>(
+    robot, robot.config, current_pose, movement.start.pose
+  );
+
+  const auto [dropping_viapt, dropping_end, _] = generate_positions<ls, as>(
+    robot, picking_end_config, movement.start.pose, movement.target.pose
+  );
 
   MovementSequence seq;
 
-  ViaPoints picking_viapt{start_safe_pose};
-  ViaPoints dropping_viapt{start_safe_pose, target_safe_pose};
-  
-  os::Position current_pose = kinematics::direct(robot);
-
-  if (unsafe(current_pose)) {
-    picking_viapt.push_front(safe_pose(current_pose));
-  }
-
   Time finish_time;
 
-  auto picking = via_point_sequencer<coord::Cylindrical, coord::Euler>(current_pose, picking_viapt, start_pose, finish_time);
+  auto picking = via_point_sequencer<ls, as>(current_pose, picking_viapt, picking_end, finish_time);
   to_js_trajectory(robot, current_pose, seq.picking, picking, finish_time, dt);
 
-  auto dropping = via_point_sequencer<coord::Cylindrical, coord::Euler>(start_pose, dropping_viapt, target_pose, finish_time);
+  auto dropping = via_point_sequencer<ls, as>(picking_end, dropping_viapt, dropping_end, finish_time);
   to_js_trajectory(robot, current_pose, seq.dropping, dropping, finish_time, dt);
 
   return seq;

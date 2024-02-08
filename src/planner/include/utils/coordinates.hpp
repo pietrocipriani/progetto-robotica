@@ -59,7 +59,10 @@ inline typename linear_type<Cylindrical, 3>::type convert<Cartesian, Cylindrical
   const typename linear_type<Cartesian, 3>::type& cartesian
 ) {
   const auto rho = cartesian.head<2>().norm();
-  const auto theta = std::atan2(cartesian.y(), cartesian.x());
+  // TODO: dummy implementation to avoid control panel.
+  auto theta = std::atan2(cartesian.y(), cartesian.x());
+  if (theta >= M_PI_2) theta -= 2 * M_PI;
+
   const auto h = cartesian.z();
 
   return {rho, theta, h};
@@ -119,6 +122,25 @@ Scalar measure(
   static_assert(from == to, "Default implementation do not allow conversion.");
   return (end - start).norm();
 }
+
+/// Measures the length of a linearly interpolated trajectory between
+///     @p start and @p end in the @from system with the @to metric.
+template<AngularSystem from, AngularSystem to = Lie, size_t size>
+Scalar measure(
+  const typename angular_type<from, size>::type& start,
+  const typename angular_type<from, size>::type& end
+) {
+  static_assert(from == to, "Default implementation do not allow conversion.");
+  return (end - start).norm();
+}
+
+/// Measures the length of a linearly interpolated trajectory between
+///     @p start and @p end in the @from system with the @to metric.
+template<>
+inline Scalar measure<Lie, Lie, 3>(const Quaternion& start, const Quaternion& end) {
+  return start.angularDistance(end);
+}
+
 
 template<>
 inline Scalar measure<Cylindrical, Cartesian, 3>(

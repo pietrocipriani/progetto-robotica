@@ -67,7 +67,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
   #ifndef USE_EULER_ANGLES
-    Axis axis = pose.angular() * (Axis::UnitZ() * 0.02);
+    Axis axis = pose.angular() * (Axis::UnitX() * 0.02);
   #else
     auto axis = euler::rotate_axis<os_size>(pose.angular(), Axis::UnitZ() * 0.02);
   #endif
@@ -80,8 +80,8 @@ bool test_planner() {
   model::UR5 robot;
 
   const BlockMovement movement(
-    BlockPose(0.3, 0.3, 0, 0),
-    BlockPose(-0.1, -0.1, 0, 0)
+    BlockPose(0.8, 0.2, 0, 0),
+    BlockPose(0.4, 0.2, 0, 0)
   );
 
   constexpr Time dt = 0.001;
