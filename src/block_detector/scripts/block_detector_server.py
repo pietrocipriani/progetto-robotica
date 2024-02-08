@@ -5,7 +5,6 @@ from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 from block_detector.msg import BlockDetectorBox
 from block_detector.srv import DetectBlocks, DetectBlocksResponse
-import cv2
 
 import ultralytics
 import os
@@ -30,10 +29,7 @@ class BlockDetector:
 
 
     def callback(self, request: Image):
-        try:
-            decoded_image = self.bridge.imgmsg_to_cv2(request.image, desired_encoding="bgr8")
-        except CvBridgeError as e:
-            return
+        decoded_image = self.bridge.imgmsg_to_cv2(request.image, desired_encoding="bgr8")
 
         result = self.model(
             decoded_image,
