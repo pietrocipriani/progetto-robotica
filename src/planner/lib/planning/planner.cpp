@@ -73,4 +73,49 @@ os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
   );
 }
 
+MovementSequence::ConfigGenerator::ConfigGenerator(std::function<Ret()>&& next)
+    : next(std::move(next)) {}
+
+MovementSequence::ConfigGenerator::const_iterator::const_iterator(const ConfigGenerator& parent)
+      : next(parent.next), current(next()) {}
+
+MovementSequence::ConfigGenerator::const_iterator::const_iterator()
+      : next(), current(std::make_tuple(model::UR5::Configuration(), true)) {}
+
+bool MovementSequence::ConfigGenerator::const_iterator::operator!=(const const_iterator& other) const {
+  return std::get<bool>(current) != std::get<bool>(other.current);
+}
+
+bool MovementSequence::ConfigGenerator::const_iterator::operator==(const const_iterator& other) const {
+  return *this != other;
+}
+
+MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() {
+  return std::get<Point>(current);
+}
+  
+MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() const {
+  return std::get<Point>(current);
+}
+
+MovementSequence::ConfigGenerator::const_iterator MovementSequence::ConfigGenerator::const_iterator::operator++() {
+  current = next();
+  return *this;
+}
+
+MovementSequence::ConfigGenerator::const_iterator MovementSequence::ConfigGenerator::const_iterator::operator++(int) {
+  auto copy = *this;
+  current = next();
+  return copy;
+}
+
+MovementSequence::ConfigGenerator::const_iterator MovementSequence::ConfigGenerator::begin() const {
+  return const_iterator(*this);
+}
+
+MovementSequence::ConfigGenerator::const_iterator MovementSequence::ConfigGenerator::end() const {
+  return const_iterator();
+}
+
+
 }

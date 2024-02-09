@@ -90,7 +90,7 @@ private:
   /// @note The limit for the first function is ignored.
   typename It::reference current(const Domain& arg) const {
     if (can_use(it, arg)) return *it;
-    if (can_use(std::next(it), arg)) return *++it;
+    if (it != functions.cend() && can_use(std::next(it), arg)) return *++it;
 
     // Binary search of the first function that can accept @p arg.
     it = std::lower_bound(functions.cbegin(), functions.cend(), arg);

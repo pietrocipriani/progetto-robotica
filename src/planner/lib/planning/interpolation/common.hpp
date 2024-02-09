@@ -10,14 +10,17 @@ namespace planner {
 template<class Point>
 struct Params {
   Point point;
-  Time time;
-  Time accel_delta;
+
+  struct Times {
+    Time time;
+    Time accel_delta;
+  } times;
 
   Params(const Point& point, const Time& time, const Time& accel_delta)
-    : point(point), time(time), accel_delta(accel_delta) {}
+    : point(point), times{time, accel_delta} {}
 
   Params(Point&& point, const Time& time, const Time& accel_delta)
-    : point(std::move(point)), time(time), accel_delta(accel_delta) {}
+    : point(std::move(point)), times{time, accel_delta} {}
 };
 
 
