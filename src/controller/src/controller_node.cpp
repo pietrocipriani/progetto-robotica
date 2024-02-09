@@ -64,10 +64,10 @@ int main(int argc, char **argv) {
 		};
 
 		auto configs = planner::plan_movement(robot, movement, dt);
-		ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
+		ROS_INFO("Movement planned");
 
-		config_publisher.publish_config_sequence(configs.picking, 0, scale / dt);
-		config_publisher.publish_config_sequence(configs.dropping, 2.6, scale / dt);
-		ROS_INFO("finished");
+		config_publisher.publish_config_sequence(configs.lazy_picking, 0, scale / dt);
+		config_publisher.publish_config_sequence(configs.lazy_dropping, 2.6, scale / dt);
+		ROS_INFO("Finished");
 	}
 }

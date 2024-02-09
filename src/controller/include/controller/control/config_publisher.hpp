@@ -31,7 +31,7 @@ public:
      * @return the last configuration obtained from the config sequence
     */
     model::UR5::Configuration publish_config_sequence(
-        planner::MovementSequence::ConfigSequence& queue,
+        planner::MovementSequence::ConfigGenerator& configs,
         double gripper_pos,
         double frequency_hz
     );

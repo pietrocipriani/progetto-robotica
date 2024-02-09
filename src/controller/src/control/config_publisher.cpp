@@ -37,26 +37,25 @@ void ConfigPublisher::publish_config(
 
 
 model::UR5::Configuration ConfigPublisher::publish_config_sequence(
-    planner::MovementSequence::ConfigSequence& queue,
+    planner::MovementSequence::ConfigGenerator& configs,
     double gripper_pos,
-    double frequencyHz
+    double frequency_hz
 ) {
-	ros::Rate rate(frequencyHz);
-	while (!queue.empty()) {
-        const auto& config = queue.front();
+    if (configs.begin() == configs.end()) {
+        // should never be reached!
+        ROS_ERROR("Empty queue passed to publish_config_sequence");
+    }
+
+	ros::Rate rate(frequency_hz);
+    model::UR5::Configuration last(model::UR5::Configuration::Base{});
+
+	for (auto config : configs) {
 		publisher.publish(config_to_ros(config, gripper_pos));
-
-        if (queue.size() == 1) {
-            return config;
-        }
-
-		queue.pop();
+        std::swap(config, last);
 		rate.sleep();
 	}
 
-    // should never be reached!
-    ROS_ERROR("Empty queue passed to publish_config_sequence");
-    return model::UR5::Configuration(model::UR5::Configuration::Base{});
+    return last;
 }
 
 } // namespace controller::control
