@@ -40,12 +40,12 @@ int main(int argc, char **argv) {
 	model::UR5 robot;
 
 	std::vector<planner::BlockPose> poses{
-		planner::BlockPose(0.5, 0.5, 0.5, 0),
-		planner::BlockPose(0.8, 0.6, 1, 0),
-		planner::BlockPose(0.6, 0.7, 2, 0),
-		planner::BlockPose(0.2, 0.6, 3, 0),
-		planner::BlockPose(0.1, 0.4, 4, 0),
-		planner::BlockPose(0.8, 0.4, 5, 0),
+		planner::BlockPose(planner::Block::B_4x1_L, 0.5, 0.5, 0.5),
+		planner::BlockPose(planner::Block::B_4x1_L, 0.8, 0.6, 1),
+		planner::BlockPose(planner::Block::B_2x2_H, 0.6, 0.7, 2),
+		planner::BlockPose(planner::Block::B_2x2_H, 0.2, 0.6, 3),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.1, 0.4, 4),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.8, 0.4, 5),
 	};
 
 	// for (int i=0; i<poses.size()-1; i += 1) {
@@ -55,9 +55,9 @@ int main(int argc, char **argv) {
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		if (i%2 == 0) {
-			block_spawner.spawn_block(planner::Block::B_2x2_U,
+			block_spawner.spawn_block(poses[i].block,
 				poses[i].pose.linear().x(), poses[i].pose.linear().y(),
-				poses[i].pose.angular()[0], true,
+				poses[i].pose.angular()[0], false,
 				util::Color{255, 0, 0, 255});
 		}
 

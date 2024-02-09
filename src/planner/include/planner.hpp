@@ -37,22 +37,17 @@ public:
 
   Pose pose;
 
-  /// The bounding box in order to perform safe movements.
-  /// Circular in order to simplify the checking.
-  ///
   Scalar hit_box_radius;
 
-  BlockPose(
-    Scalar x, Scalar y, Scalar angle,
-    Scalar hit_box_radius,
-    Block block = Block::B_1x1_H
-  ) noexcept;
+  BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept;
 
   /// Checks if @p this block collides with @p other.
   /// Collision is computed according to position and @p hit_box_radius.
   /// @param other The other `BlockPose` to check the collision with.
   /// @return `true` if the two hitbox collides, `false` otherwise.
   bool collides(const BlockPose& other) const;
+
+  os::Position to_os_position() const;
 };
 
 /// Class representing a planned movement of a block from a starting pose to a target pose.

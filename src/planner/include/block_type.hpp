@@ -48,6 +48,53 @@ constexpr const char* get_name(const Block& block_type) {
     return ""; // unreachable
 }
 
+constexpr double get_gripping_height(const Block& block_type) {
+    switch (block_type) {
+        case Block::B_1x1_H:
+        case Block::B_2x1_T: case Block::B_2x1_H: case Block::B_2x1_U:
+        case Block::B_3x1_H: case Block::B_3x1_U:
+        case Block::B_4x1_H:
+            return 0.005; // keep a bit away from the table for high blocks
+        case Block::B_2x1_L: case Block::B_4x1_L:
+            return 0.0; // touch the table for low blocks
+        case Block::B_2x2_H: case Block::B_2x2_U:
+            return 0.025; // avoid 2x2 blocks from wedging in the gripper's upper part
+    }
+    return 0.0; // unreachable
+}
+
+/// The bounding box in order to perform safe movements.
+/// Circular in order to simplify the checking.
+///
+constexpr double get_hit_box_radius(const Block& block_type) {
+    // TODO fill values
+    switch (block_type) {
+        case Block::B_1x1_H:
+            return 0.0;
+        case Block::B_2x1_T:
+            return 0.0;
+        case Block::B_2x1_L:
+            return 0.0;
+        case Block::B_2x1_H:
+            return 0.0;
+        case Block::B_2x1_U:
+            return 0.0;
+        case Block::B_2x2_H:
+            return 0.0;
+        case Block::B_2x2_U:
+            return 0.0;
+        case Block::B_3x1_H:
+            return 0.0;
+        case Block::B_3x1_U:
+            return 0.0;
+        case Block::B_4x1_H:
+            return 0.0;
+        case Block::B_4x1_L:
+            return 0.0;
+    }
+    return 0.0; // unreachable
+}
+
 } // namespace controller::world
 
 #endif // _BLOCK_TYPE_HPP_
