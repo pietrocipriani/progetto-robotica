@@ -69,7 +69,7 @@ os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
       -(pose.linear().y() - gazebo_to_os_y),
       table_distance
     ),
-    os::Position::Angular(Rotation(pose.angular()[0], Axis::UnitZ()))
+    os::Position::Angular(Rotation(-pose.angular()[0], Axis::UnitZ()))
   );
 }
 
