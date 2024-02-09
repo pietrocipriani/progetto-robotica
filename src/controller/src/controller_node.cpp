@@ -34,8 +34,8 @@ int main(int argc, char **argv) {
 
 	constexpr Time dt = 0.01;
 	constexpr double frequency_hz = 1 / dt;
-	constexpr double open_gripper = 0.5;
-	constexpr double closed_gripper = -0.2;
+	constexpr double open_gripper = 0.9;
+	constexpr double closed_gripper = 0.2;
 	constexpr double gripper_speed = 0.8;
 	model::UR5 robot;
 
@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		if (i%2 == 0) {
-			block_spawner.spawn_block(world::BlockType::B_1x1_H,
+			block_spawner.spawn_block(world::BlockType::B_2x2_U,
 				poses[i].pose.linear().x(), poses[i].pose.linear().y(),
 				0, false,
 				util::Color{255, 0, 0, 255});
