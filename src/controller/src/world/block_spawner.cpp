@@ -123,8 +123,8 @@ void BlockSpawner::spawn_block(
 	geometry_msgs::Quaternion quaternion;
     if (upside_down) {
         quaternion.w = 0.0;
-        quaternion.x = std::cos(angle / 2);
-        quaternion.y = -std::sin(angle / 2);
+        quaternion.x = std::sin(angle / 2);
+        quaternion.y = std::cos(angle / 2);
         quaternion.z = 0.0;
     } else {
         quaternion.w = std::cos(angle / 2);
