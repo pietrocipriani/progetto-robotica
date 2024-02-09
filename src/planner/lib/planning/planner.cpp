@@ -87,13 +87,13 @@ bool MovementSequence::ConfigGenerator::const_iterator::operator!=(const const_i
 }
 
 bool MovementSequence::ConfigGenerator::const_iterator::operator==(const const_iterator& other) const {
-  return *this != other;
+  return !(*this != other);
 }
 
 MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() {
   return std::get<Point>(current);
 }
-  
+
 MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() const {
   return std::get<Point>(current);
 }
