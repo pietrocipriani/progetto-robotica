@@ -12,35 +12,8 @@
 #include "model.hpp"
 
 #include "controller/world/block_spawner.hpp"
+#include "controller/control/config_publisher.hpp"
 using namespace controller;
-
-constexpr int ur5_joint_count = model::UR5::dof;
-constexpr int gripper_joint_count = 3;
-std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& config, double gripper_pos) {
-	std_msgs::Float64MultiArray data;
-	const auto& v = config.vector().data();
-	ROS_INFO("kinematics %.3lf %.3lf %.3lf - %.3lf %.3lf %.3lf", v[0], v[1], v[2], v[3], v[4], v[5]);
-	data.data = std::vector<double>(ur5_joint_count + gripper_joint_count, gripper_pos);
-	for (int i=0; i<ur5_joint_count; ++i) {
-		data.data[i] = v[i];
-	}
-	return data;
-}
-
-void publish_configs(
-	ros::Publisher& publisher,
-	const model::UR5& robot,
-	Time dt,
-	planner::MovementSequence::ConfigSequence& q,
-	double gripper_pos
-) {
-	ros::Rate rate(1 / dt);
-	while (!q.empty()) {
-		publisher.publish(config_to_ros(q.front(), gripper_pos));
-		q.pop();
-		rate.sleep();
-	}
-}
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "controller");
@@ -51,8 +24,11 @@ int main(int argc, char **argv) {
 	ROS_INFO("initialized controller");
 
     ros::NodeHandle n;
-	ros::Publisher publisher = n.advertise<std_msgs::Float64MultiArray>(
-		"/ur5/joint_group_pos_controller/command", 1);
+	control::ConfigPublisher config_publisher{
+		n.advertise<std_msgs::Float64MultiArray>(
+			"/ur5/joint_group_pos_controller/command", 1),
+		2,
+	};
 	world::BlockSpawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
 	ROS_INFO("created publisher and client");
 
@@ -90,8 +66,8 @@ int main(int argc, char **argv) {
 		auto configs = planner::plan_movement(robot, movement, dt);
 		ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
 
-		publish_configs(publisher, robot, dt/scale, configs.picking, 0);
-		publish_configs(publisher, robot, dt/scale, configs.dropping, 2.6);
+		config_publisher.publish_config_sequence(configs.picking, 0, scale / dt);
+		config_publisher.publish_config_sequence(configs.dropping, 2.6, scale / dt);
 		ROS_INFO("finished");
 	}
 }
