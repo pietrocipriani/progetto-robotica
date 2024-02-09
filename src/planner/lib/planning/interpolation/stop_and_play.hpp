@@ -22,10 +22,10 @@ struct Timestamps {
 
   template<class Point>
   Timestamps(const Params<Point>& start, const Params<Point>& end) 
-    : start(start.time), end(end.time)
-    , start_linear(start.time + start.accel_delta)
-    , end_linear(end.time - end.accel_delta)
-    , delta(end.time - start.time - (start.accel_delta + end.accel_delta) / 2) {}
+    : start(start.times.time), end(end.times.time)
+    , start_linear(start.times.time + start.times.accel_delta)
+    , end_linear(end.times.time - end.times.accel_delta)
+    , delta(end.times.time - start.times.time - (start.times.accel_delta + end.times.accel_delta) / 2) {}
   
 };
 
@@ -49,9 +49,9 @@ void interpolation2(
   // Velocity.
   auto v = unlazy((end.point - start.point) / t.delta);
 
-  auto q1 = quadratic_acceleration(start.point, v, t.start, start.accel_delta);
-  auto l = linear_interpolation(start.point, end.point, t.start + start.accel_delta / 2, t.delta);
-  auto q2 = quadratic_deceleration(end.point, v, t.end, end.accel_delta);
+  auto q1 = quadratic_acceleration(start.point, v, t.start, start.times.accel_delta);
+  auto l = linear_interpolation(start.point, end.point, t.start + start.times.accel_delta / 2, t.delta);
+  auto q2 = quadratic_deceleration(end.point, v, t.end, end.times.accel_delta);
 
   // Adds all the functions to the chain.
   chain.emplace_back(q1, t.start);
@@ -86,7 +86,7 @@ auto stop_and_play_interpolation(
 
   if (points.size() == 0) {
     // Constant function in case of only one point.
-    chain.emplace_back([p = start.point]([[maybe_unused]] const Time& _) {return p;}, start.time);
+    chain.emplace_back([p = start.point]([[maybe_unused]] const Time& _) {return p;}, start.times.time);
   } else {
     // This is a valid iterator as points.size() >= 1.
     auto i1 = points.begin();

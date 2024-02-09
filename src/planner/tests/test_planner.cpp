@@ -67,7 +67,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
   #ifndef USE_EULER_ANGLES
-    Axis axis = pose.angular() * (Axis::UnitX() * 0.02);
+    Axis axis = pose.angular() * (Axis::UnitZ() * 0.02);
   #else
     auto axis = euler::rotate_axis<os_size>(pose.angular(), Axis::UnitZ() * 0.02);
   #endif
@@ -103,13 +103,11 @@ bool test_planner() {
 
   auto configs = planner::plan_movement(robot, movement, dt);
 
-  while (!configs.picking.empty()) {
-    file << kinematics::direct(robot, configs.picking.front()) << '\n';
-    configs.picking.pop();
+  for (auto&& config : configs.lazy_picking) {
+    file << kinematics::direct(robot, config) << '\n';
   }
-  while (!configs.dropping.empty()) {
-    file << kinematics::direct(robot, configs.dropping.front()) << '\n';
-    configs.dropping.pop();
+  for (auto&& config : configs.lazy_dropping) {
+    file << kinematics::direct(robot, config) << '\n';
   }
 
   return true;

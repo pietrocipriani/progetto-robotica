@@ -18,6 +18,8 @@ private:
 
 public:
 
+  JointSpace() noexcept : _vector(Base::Zero()) {}
+
   explicit JointSpace(const Base& base)
     : _vector(base) {}
   
