@@ -33,6 +33,23 @@ void ConfigPublisher::publish_config(
     publisher.publish(msg);
 }
 
+void ConfigPublisher::publish_gripper_sequence(
+    const model::UR5::Configuration& lastConfig,
+    double gripper_pos_beg,
+    double gripper_pos_end,
+    double gripper_speed,
+    double frequency_hz
+) {
+    const int steps = std::abs(gripper_pos_end - gripper_pos_beg) / gripper_speed * frequency_hz;
+
+	ros::Rate rate(frequency_hz);
+    for (int i = 0; i < steps; ++i) {
+        publish_config(lastConfig, (gripper_pos_beg * (steps - i) + gripper_pos_end * i) / steps);
+		rate.sleep();
+    }
+
+    publish_config(lastConfig, gripper_pos_end);
+}
 
 model::UR5::Configuration ConfigPublisher::publish_config_sequence(
     planner::MovementSequence::ConfigGenerator& configs,

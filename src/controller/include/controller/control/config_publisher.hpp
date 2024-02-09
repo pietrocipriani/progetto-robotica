@@ -27,6 +27,14 @@ public:
         double gripper_pos
     );
 
+    void publish_gripper_sequence(
+        const model::UR5::Configuration& lastConfig,
+        double gripper_pos_beg,
+        double gripper_pos_end,
+        double gripper_speed, // [pos]/s
+        double frequency_hz
+    );
+
     /**
      * @return the last configuration obtained from the config sequence
     */

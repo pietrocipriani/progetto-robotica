@@ -33,7 +33,10 @@ int main(int argc, char **argv) {
 	ROS_INFO("created publisher and client");
 
 	constexpr Time dt = 0.01;
-	constexpr double scale = 1;
+	constexpr double frequency_hz = 1 / dt;
+	constexpr double open_gripper = 0.5;
+	constexpr double closed_gripper = -0.2;
+	constexpr double gripper_speed = 0.8;
 	model::UR5 robot;
 
 	std::vector<planner::BlockPose> poses{
@@ -66,8 +69,10 @@ int main(int argc, char **argv) {
 		auto configs = planner::plan_movement(robot, movement, dt);
 		ROS_INFO("Movement planned");
 
-		config_publisher.publish_config_sequence(configs.lazy_picking, 0, scale / dt);
-		config_publisher.publish_config_sequence(configs.lazy_dropping, 2.6, scale / dt);
+		auto cfg1 = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(cfg1, open_gripper, closed_gripper, gripper_speed, frequency_hz);
+		auto cfg2 = config_publisher.publish_config_sequence(configs.lazy_dropping, closed_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(cfg2, closed_gripper, open_gripper, gripper_speed, frequency_hz);
 		ROS_INFO("Finished");
 	}
 }
