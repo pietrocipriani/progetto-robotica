@@ -86,11 +86,6 @@ struct UR5 {
   const RevoluteJoint& wrist3    = joints[5];
 
   /**
-   * Constructs an UR5 in the default homing configuration.
-   */
-  UR5() noexcept;
-
-  /**
    * Constructs an UR5 with the given initial configuration.
    * @param homing_config The initial configuration.
    */

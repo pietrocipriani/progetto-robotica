@@ -35,21 +35,26 @@ int main(int argc, char **argv) {
 	constexpr Time dt = 0.01;
 	constexpr double frequency_hz = 1 / dt;
 	constexpr double gripper_speed = 0.8;
-	model::UR5 robot;
 
 	std::vector<planner::BlockPose> poses{
-		planner::BlockPose(planner::Block::B_4x1_L, 0.5, 0.5, 0.5),
-		planner::BlockPose(planner::Block::B_4x1_L, 0.8, 0.6, 1),
-		planner::BlockPose(planner::Block::B_2x2_H, 0.6, 0.7, 2),
-		planner::BlockPose(planner::Block::B_2x2_H, 0.2, 0.6, 3),
-		planner::BlockPose(planner::Block::B_1x1_H, 0.1, 0.4, 4),
-		planner::BlockPose(planner::Block::B_1x1_H, 0.8, 0.4, 5),
+		planner::BlockPose(planner::Block::B_1x1_H, 0.5, 0.5, 0.5),
+		planner::BlockPose(planner::Block::B_1x1_H, 0.8, 0.6, 1),
+		planner::BlockPose(planner::Block::B_4x1_H, 0.1, 0.4, 4),
+		planner::BlockPose(planner::Block::B_4x1_H, 0.8, 0.4, 5),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.6, 0.7, 2),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.2, 0.6, 3),
 	};
 
 	// for (int i=0; i<poses.size()-1; i += 1) {
 	// 	spawn_block(client, poses[i].pose.linear().x(), poses[i].pose.linear().y());
 	// }
 	// return 0;
+
+	// Default homing configuration for the UR5 manipulator. Exported by `params.py`.
+	constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
+	model::UR5::Configuration prev_config{Vector<6>(ur5_default_homing_config_init)};
+	double prev_gripper_pos = 0.0;
+	model::UR5 robot{prev_config};
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		block_spawner.spawn_block(poses[i].block,
@@ -69,10 +74,19 @@ int main(int argc, char **argv) {
 		const double open_gripper = planner::get_open_gripper_pos(poses[i].block);
 		const double closed_gripper = planner::get_closed_gripper_pos(poses[i].block);
 
-		auto cfg1 = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
-		config_publisher.publish_gripper_sequence(cfg1, open_gripper, closed_gripper, gripper_speed, frequency_hz);
-		auto cfg2 = config_publisher.publish_config_sequence(configs.lazy_dropping, closed_gripper, frequency_hz);
-		config_publisher.publish_gripper_sequence(cfg2, closed_gripper, open_gripper, gripper_speed, frequency_hz);
+		if (open_gripper > prev_gripper_pos) {
+			// if picking up the next block requires a more open position, open the gripper right away
+			config_publisher.publish_gripper_sequence(prev_config, prev_gripper_pos, open_gripper, gripper_speed, frequency_hz);
+			prev_gripper_pos = open_gripper;
+		} // otherwise keep prev_gripper_pos to make a single closing movement later
+
+		auto interm_config = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(interm_config, prev_gripper_pos, closed_gripper, gripper_speed, frequency_hz);
+
+		prev_config = config_publisher.publish_config_sequence(configs.lazy_dropping, closed_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(prev_config, closed_gripper, open_gripper, gripper_speed, frequency_hz);
+		prev_gripper_pos = open_gripper;
+
 		ROS_INFO("Finished");
 	}
 }

@@ -54,7 +54,7 @@ constexpr double get_gripping_height(const Block& block_type) {
         case Block::B_2x1_T: case Block::B_2x1_H: case Block::B_2x1_U:
         case Block::B_3x1_H: case Block::B_3x1_U:
         case Block::B_4x1_H:
-            return 0.005; // keep a bit away from the table for high blocks
+            return 0.02; // keep a bit away from the table for high blocks
         case Block::B_2x1_L: case Block::B_4x1_L:
             return 0.0; // touch the table for low blocks
         case Block::B_2x2_H: case Block::B_2x2_U:
@@ -64,23 +64,20 @@ constexpr double get_gripping_height(const Block& block_type) {
 }
 
 constexpr double get_open_gripper_pos(const Block& block_type) {
-    switch (block_type) {
-        // avoid 2x2 blocks from wedging in the gripper's upper part,
-        // so open the gripper as much as possible
-        case Block::B_2x2_H: case Block::B_2x2_U:
-            return 0.9;
-        default:
-            return 0.5;
-    }
+    return 0.9; // better to always open the gripper as much as possible
 }
 
 constexpr double get_closed_gripper_pos(const Block& block_type) {
     switch (block_type) {
-        // 2x2 blocks are larger
+        case Block::B_1x1_H:
+        case Block::B_2x1_T: case Block::B_2x1_H: case Block::B_2x1_U:
+        case Block::B_3x1_H: case Block::B_3x1_U:
+        case Block::B_4x1_H:
+            return -0.17;
+        case Block::B_2x1_L: case Block::B_4x1_L:
+            return -0.2; // low blocks require a bit more closing
         case Block::B_2x2_H: case Block::B_2x2_U:
-            return 0.2;
-        default:
-            return -0.2;
+            return 0.2; // 2x2 blocks are larger
     }
     assert(false);
 }

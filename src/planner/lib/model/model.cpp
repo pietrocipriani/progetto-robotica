@@ -13,16 +13,6 @@ constexpr RevoluteJoint::RevoluteJoint(
 
 
 /**
- * Default homing configuration for the UR5 manipulator.
- * Exported by `params.py`.
- */
-// TODO: not hardcoded: Json?
-inline constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
-inline const UR5::Configuration ur5_default_homing_config{Vector<6>(ur5_default_homing_config_init)};
-
-UR5::UR5() noexcept : UR5(ur5_default_homing_config) {}
-
-/**
  * Generates the UR5 joint parameters for a robot.
  * @param config The config of the robot to which link the thetas.
  * @return The list of parameters.
