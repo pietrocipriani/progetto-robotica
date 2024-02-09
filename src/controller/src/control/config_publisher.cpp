@@ -27,10 +27,8 @@ void ConfigPublisher::publish_config(
     std_msgs::Float64MultiArray msg = config_to_ros(config, gripper_pos);
 
     std::stringstream ss;
-    ss << "Publishing config: ";
     std::copy(msg.data.begin(), msg.data.end(), std::ostream_iterator<double>(ss, " "));
-    ss << std::endl;
-	ROS_INFO_STREAM(ss.str());
+	ROS_INFO("Publishing config: %s", ss.str().c_str());
 
     publisher.publish(msg);
 }
