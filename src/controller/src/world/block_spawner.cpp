@@ -106,7 +106,7 @@ constexpr const char* MODEL_SDF = R"(
 BlockSpawner::BlockSpawner(ros::ServiceClient&& _client) : client{_client} {}
 
 void BlockSpawner::spawn_block(
-    BlockType block_type,
+    planner::Block block_type,
     double x,
     double y,
     double angle,

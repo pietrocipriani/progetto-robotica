@@ -5,6 +5,7 @@
 #include "spaces.hpp"
 #include "utils.hpp"
 #include "kinematics.hpp"
+#include "block_type.hpp"
 #include <queue>
 #include <stdexcept>
 #include <variant>
@@ -22,12 +23,6 @@ using Position = model::UR5::Configuration;
 using Velocity = model::UR5::Velocity;
 using Acceleration = model::UR5::Acceleration;
 }
-
-/// Enum representing the types of blocks.
-///
-enum class Block {
-  NO_BLOCK, BLOCK_1, BLOCK_2, BLOCK_3
-};
 
 /// The class representing the pose of a block on the table.
 ///
@@ -50,7 +45,7 @@ public:
   BlockPose(
     Scalar x, Scalar y, Scalar angle,
     Scalar hit_box_radius,
-    Block block = Block::NO_BLOCK
+    Block block = Block::B_1x1_H
   ) noexcept;
 
   /// Checks if @p this block collides with @p other.
@@ -154,7 +149,7 @@ struct MovementSequence {
 
 /// Generates dependencies between the positioning of the blocks.
 /// Some blocks could be into the target position of another block.
-/// @param blocks The initial positions of the recognized blocks. 
+/// @param blocks The initial positions of the recognized blocks.
 /// @param targets The desired block target positions.
 /// @return A queue of `BlockMovement` with the order of movements in order to avoid conflicts.
 /// @throw std::invalid_argument If @p blocks contains more than one block of each type.

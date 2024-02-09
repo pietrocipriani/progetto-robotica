@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		if (i%2 == 0) {
-			block_spawner.spawn_block(world::BlockType::B_2x2_U,
+			block_spawner.spawn_block(planner::Block::B_2x2_U,
 				poses[i].pose.linear().x(), poses[i].pose.linear().y(),
 				poses[i].pose.angular()[0], true,
 				util::Color{255, 0, 0, 255});

@@ -4,7 +4,7 @@
 
 #include <ros/ros.h>
 
-#include "controller/world/block_type.hpp"
+#include "block_type.hpp"
 #include "controller/util/color.hpp"
 
 namespace controller::world {
@@ -17,7 +17,7 @@ public:
     BlockSpawner(ros::ServiceClient&& client);
 
     void spawn_block(
-        BlockType block_type,
+        planner::Block block_type,
         double x,
         double y,
         double angle,
