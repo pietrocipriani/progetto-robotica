@@ -24,7 +24,7 @@ std::string string_format( const std::string& format, Args ... args )
 constexpr const char* MODEL_SDF = R"(
 <?xml version="1.0" ?>
 <sdf version="1.4">
-<model name="brick_1x1H">
+<model name="brick_1x1_H">
 <link name="link">
 	<inertial>
 		<mass>4.0</mass>
@@ -41,7 +41,7 @@ constexpr const char* MODEL_SDF = R"(
 	<collision name="collision">
 		<geometry>
 			<mesh>
-			<uri>model://brick_1x1H/mesh.stl</uri>
+			<uri>model://brick_1x1_H/mesh.stl</uri>
 			</mesh>
 		</geometry>
 	</collision>
@@ -49,7 +49,7 @@ constexpr const char* MODEL_SDF = R"(
 	<visual name="visual">
 		<geometry>
 			<mesh>
-			<uri>model://brick_1x1H/mesh.stl</uri>
+			<uri>model://brick_1x1_H/mesh.stl</uri>
 			</mesh>
 		</geometry>
 		<material>

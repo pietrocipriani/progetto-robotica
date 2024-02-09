@@ -67,8 +67,8 @@ class PrecisePlacement:
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("position_detection"), "blocks")
         self.meshes={}
-        
-        mesh = open3d.io.read_triangle_mesh(os.path.join(model_path,"X1-Y1-Z2.stl"))
+
+        mesh = open3d.io.read_triangle_mesh("model://brick_1x1_H/mesh.stl")
         print(mesh)
 
     def image_callback(self, data: Image):
@@ -78,7 +78,7 @@ class PrecisePlacement:
 
     def callback_cloud(self, data: PointCloud2):
         self.point_cloud = convertCloudFromRosToOpen3d(data)
-        print(self.point_cloud)
+        #print(self.point_cloud)
 
         # visualizzation
         open3d.visualization.draw_geometries([data],
