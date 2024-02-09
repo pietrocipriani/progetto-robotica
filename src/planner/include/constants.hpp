@@ -9,7 +9,7 @@ namespace planner {
 /**
  * The distance of the table from the base of the robot.
  */
-constexpr Scalar table_distance = 0.705;
+constexpr Scalar table_distance = 0.73;
 
 /**
  * The offset along the x axis of the arm operational space with respect to the gazebo frame.

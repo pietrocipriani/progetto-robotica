@@ -34,8 +34,6 @@ int main(int argc, char **argv) {
 
 	constexpr Time dt = 0.01;
 	constexpr double frequency_hz = 1 / dt;
-	constexpr double open_gripper = 0.9;
-	constexpr double closed_gripper = 0.2;
 	constexpr double gripper_speed = 0.8;
 	model::UR5 robot;
 
@@ -44,8 +42,8 @@ int main(int argc, char **argv) {
 		planner::BlockPose(planner::Block::B_4x1_L, 0.8, 0.6, 1),
 		planner::BlockPose(planner::Block::B_2x2_H, 0.6, 0.7, 2),
 		planner::BlockPose(planner::Block::B_2x2_H, 0.2, 0.6, 3),
-		planner::BlockPose(planner::Block::B_2x2_U, 0.1, 0.4, 4),
-		planner::BlockPose(planner::Block::B_2x2_U, 0.8, 0.4, 5),
+		planner::BlockPose(planner::Block::B_1x1_H, 0.1, 0.4, 4),
+		planner::BlockPose(planner::Block::B_1x1_H, 0.8, 0.4, 5),
 	};
 
 	// for (int i=0; i<poses.size()-1; i += 1) {
@@ -54,12 +52,10 @@ int main(int argc, char **argv) {
 	// return 0;
 
 	for (int i=0; i<poses.size()-1; i += 2) {
-		if (i%2 == 0) {
-			block_spawner.spawn_block(poses[i].block,
-				poses[i].pose.linear().x(), poses[i].pose.linear().y(),
-				poses[i].pose.angular()[0], false,
-				util::Color{255, 0, 0, 255});
-		}
+		block_spawner.spawn_block(poses[i].block,
+			poses[i].pose.linear().x(), poses[i].pose.linear().y(),
+			poses[i].pose.angular()[0], false,
+			util::Color{255, 0, 0, 255});
 
 		const planner::BlockMovement movement{
 			poses[i],
@@ -68,6 +64,10 @@ int main(int argc, char **argv) {
 
 		auto configs = planner::plan_movement(robot, movement, dt);
 		ROS_INFO("Movement planned");
+
+
+		const double open_gripper = planner::get_open_gripper_pos(poses[i].block);
+		const double closed_gripper = planner::get_closed_gripper_pos(poses[i].block);
 
 		auto cfg1 = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
 		config_publisher.publish_gripper_sequence(cfg1, open_gripper, closed_gripper, gripper_speed, frequency_hz);

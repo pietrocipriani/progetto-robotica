@@ -45,7 +45,7 @@ constexpr const char* get_name(const Block& block_type) {
         case Block::B_4x1_L:
             return "4x1_L";
     }
-    return ""; // unreachable
+    assert(false);
 }
 
 constexpr double get_gripping_height(const Block& block_type) {
@@ -60,7 +60,29 @@ constexpr double get_gripping_height(const Block& block_type) {
         case Block::B_2x2_H: case Block::B_2x2_U:
             return 0.025; // avoid 2x2 blocks from wedging in the gripper's upper part
     }
-    return 0.0; // unreachable
+    assert(false);
+}
+
+constexpr double get_open_gripper_pos(const Block& block_type) {
+    switch (block_type) {
+        // avoid 2x2 blocks from wedging in the gripper's upper part,
+        // so open the gripper as much as possible
+        case Block::B_2x2_H: case Block::B_2x2_U:
+            return 0.9;
+        default:
+            return 0.5;
+    }
+}
+
+constexpr double get_closed_gripper_pos(const Block& block_type) {
+    switch (block_type) {
+        // 2x2 blocks are larger
+        case Block::B_2x2_H: case Block::B_2x2_U:
+            return 0.2;
+        default:
+            return -0.2;
+    }
+    assert(false);
 }
 
 /// The bounding box in order to perform safe movements.
@@ -92,7 +114,7 @@ constexpr double get_hit_box_radius(const Block& block_type) {
         case Block::B_4x1_L:
             return 0.0;
     }
-    return 0.0; // unreachable
+    assert(false);
 }
 
 } // namespace controller::world
