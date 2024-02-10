@@ -68,36 +68,34 @@ auto generate_positions(
   const model::UR5& robot,
   const model::UR5::Configuration& current_config,
   const kinematics::Pose<as, ls>& current_pose,
-  const BlockPose::Pose& target
+  const os::Position& pose
 ) {
   using Position = kinematics::Pose<as, ls>;
 
-  Position pose = block_pose_to_pose(target);
-  
   // Pose outside of the low-zone just above the `pose`.
   Position safe_pose = planner::safe_pose(pose);
 
   const Position safe_current_pose = planner::safe_pose(current_pose);
 
   const auto js_pos = kinematics::inverse(robot, safe_pose);
-  
+
   // Just to throw exceptions prematurely in case of unreachability.
   kinematics::inverse(robot, pose);
 
   ViaPoints via_points;
 
   if (unsafe(current_pose)) via_points.push_back(safe_current_pose);
-  
+
   // TODO FIXME: this fails when the joint space requires a rotation > 2pi.
   // The midpoint will force a rotation in the wrong direction.
   // This can be fixed with a more sophisticated inverse kinematics.
   if constexpr (as == coord::Lie) {
     // The mid point in the joint space interpolation.
     const auto js_pos_mid = current_config + (js_pos - current_config) / 2 * 1;
-  
+
     // The mid point in the operational space interpolation.
     const auto os_pos_mid = safe_current_pose + (safe_pose - safe_current_pose) / 2 * 1;
-    
+
     // The operational space view of `js_pos_mid`.
     const Position os_js_pos_mid = kinematics::direct(robot, js_pos_mid);
 
@@ -121,20 +119,6 @@ auto generate_positions(
   return std::make_tuple(via_points, pose, js_pos);
 }
 
-template<coord::LinearSystem ls, coord::AngularSystem as>
-auto generate_positions(
-  const model::UR5& robot,
-  const model::UR5::Configuration& current_config,
-  const BlockPose::Pose& start,
-  const BlockPose::Pose& target
-) {
-  using Position = kinematics::Pose<as, ls>;
-
-  const Position current_pose = block_pose_to_pose(start);
-
-  return generate_positions<ls, as>(robot, current_config, current_pose, target);
-}
-
 /// Generates the sequence of movements from the initial @p robot configuration, throught the picking
 /// of one block from its starting position, to the relase of the block into its target position.
 /// @param robot The current robot configuration.
@@ -151,11 +135,11 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
   os::Position current_pose = kinematics::direct(robot);
 
   const auto [picking_viapt, picking_end, picking_end_config] = generate_positions<ls, as>(
-    robot, robot.config, current_pose, movement.start.pose
+    robot, robot.config, current_pose, movement.start.to_os_position()
   );
 
   const auto [dropping_viapt, dropping_end, _] = generate_positions<ls, as>(
-    robot, picking_end_config, movement.start.pose, movement.target.pose
+    robot, picking_end_config, movement.start.to_os_position(), movement.target.to_os_position()
   );
 
   Time finish_time_picking;
@@ -163,7 +147,7 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
 
   auto picking = via_point_sequencer<ls, as>(current_pose, picking_viapt, picking_end, finish_time_picking);
   auto dropping = via_point_sequencer<ls, as>(picking_end, dropping_viapt, dropping_end, finish_time_dropping);
-  
+
   MovementSequence seq{
     to_js_trajectory(robot, current_pose, picking, finish_time_picking, dt),
     to_js_trajectory(robot, picking_end, dropping, finish_time_dropping, dt),

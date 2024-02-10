@@ -7,89 +7,13 @@
 #include <string>
 #include <stdexcept>
 #include <random>
+
 #include "planner.hpp"
 #include "model.hpp"
 
-template<typename ... Args>
-std::string string_format( const std::string& format, Args ... args )
-{
-    int size_s = std::snprintf( nullptr, 0, format.c_str(), args ... ) + 1; // Extra space for '\0'
-    if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
-    auto size = static_cast<size_t>( size_s );
-    std::unique_ptr<char[]> buf( new char[ size ] );
-    std::snprintf( buf.get(), size, format.c_str(), args ... );
-    return std::string( buf.get(), buf.get() + size - 1 ); // We don't want the '\0' inside
-}
-
-constexpr const char* MODEL_SDF = R"(
-<?xml version="1.0" ?>
-<sdf version="1.4">
-<model name="brick_1x1H">
-<link name="link">
-	<inertial>
-		<mass>4.0</mass>
-		<inertia>
-		  <ixx>0.083</ixx>
-		  <ixy>0.0</ixy>
-		  <ixz>0.0</ixz>
-		  <iyy>0.083</iyy>
-		  <iyz>0.0</iyz>
-		  <izz>0.083</izz>
-		</inertia>
-	</inertial>
-
-	<collision name="collision">
-		<geometry>
-			<mesh>
-			<uri>model://brick_1x1H/mesh.stl</uri>
-			</mesh>
-		</geometry>
-	</collision>
-
-	<visual name="visual">
-		<geometry>
-			<mesh>
-			<uri>model://brick_1x1H/mesh.stl</uri>
-			</mesh>
-		</geometry>
-		<material>
-			<ambient>%1f %2f %3f %4f</ambient>
-			<diffuse>1.0 1.0 1.0 1.0</diffuse>
-			<specular>0.1 0.1 0.1 1</specular>
-			<emissive>0 0 0 0</emissive>
-		</material>
-	</visual>
-</link>
-</model>
-</sdf>
-)";
-
-std_msgs::Float64MultiArray config_to_ros(const model::UR5::Configuration& config, double gripper_pos) {
-	std_msgs::Float64MultiArray data;
-	const auto& v = config.vector().data();
-	ROS_INFO("kinematics %.3lf %.3lf %.3lf - %.3lf %.3lf %.3lf", v[0], v[1], v[2], v[3], v[4], v[5]);
-	data.data = std::vector<double>(8, 0.0);
-	for (int i=0; i<6; ++i) {
-		data.data[i] = v[i];
-	}
-	data.data[6] = data.data[7] = gripper_pos;
-	return data;
-}
-
-void publish_configs(
-	ros::Publisher& publisher,
-	const model::UR5& robot,
-	Time dt,
-	planner::MovementSequence::ConfigSequence& q,
-	double gripper_pos
-) {
-	ros::Rate rate(1 / dt);
-	while (!q.empty()) {
-		publisher.publish(config_to_ros(q.front(), gripper_pos));
-		q.pop();
-		rate.sleep();
-	}
-}
+#include "controller/world/block_spawner.hpp"
+#include "controller/control/config_publisher.hpp"
+using namespace controller;
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "controller");
@@ -100,53 +24,69 @@ int main(int argc, char **argv) {
 	ROS_INFO("initialized controller");
 
     ros::NodeHandle n;
-	ros::Publisher publisher = n.advertise<std_msgs::Float64MultiArray>(
-		"/ur5/joint_group_pos_controller/command", 1);
-	ROS_INFO("created publisher");
+	control::ConfigPublisher config_publisher{
+		n.advertise<std_msgs::Float64MultiArray>(
+			"/ur5/joint_group_pos_controller/command", 1),
+		2,
+	};
+	world::BlockSpawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
+	ROS_INFO("created publisher and client");
 
-	model::UR5 robot;
-	const planner::BlockMovement movement(
-		planner::BlockPose(0.5, 0.5, 0, 0),
-		planner::BlockPose(0.8, 0.6, 0, 0)
-	);
 	constexpr Time dt = 0.01;
-	constexpr double scale = 3;
-	auto configs = planner::plan_movement(robot, movement, dt);
-	ROS_INFO("movement planned %ld %ld", configs.picking.size(), configs.dropping.size());
+	constexpr double frequency_hz = 1 / dt;
+	constexpr double gripper_speed = 0.8;
 
-	std::random_device dev;
-    std::mt19937 rng(dev());
+	std::vector<planner::BlockPose> poses{
+		planner::BlockPose(planner::Block::B_1x1_H, 0.5, 0.5, 0.5),
+		planner::BlockPose(planner::Block::B_1x1_H, 0.8, 0.6, 1),
+		planner::BlockPose(planner::Block::B_4x1_H, 0.1, 0.4, 4),
+		planner::BlockPose(planner::Block::B_4x1_H, 0.8, 0.4, 5),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.6, 0.7, 2),
+		planner::BlockPose(planner::Block::B_2x2_U, 0.2, 0.6, 3),
+	};
 
-    ros::ServiceClient client = n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model");
-    gazebo_msgs::SpawnModel srv;
-	srv.request.model_name = string_format("nome_bellissimo %d", rng());
-	srv.request.model_xml = string_format(MODEL_SDF, 1.0, 1.0, 0.0, 1.0);
-	srv.request.robot_namespace = "/gazebo/";
+	// for (int i=0; i<poses.size()-1; i += 1) {
+	// 	spawn_block(client, poses[i].pose.linear().x(), poses[i].pose.linear().y());
+	// }
+	// return 0;
 
-	geometry_msgs::Pose pose;
-	geometry_msgs::Point point;
-	geometry_msgs::Quaternion quaternion;
-	point.x = 0.5;
-	point.y = 0.5;
-	point.z = 0.88;
-	quaternion.x = 0.0;
-	quaternion.y = 0.0;
-	quaternion.z = 0.0;
-	quaternion.w = 1.0;
-	pose.position = point;
-	pose.orientation = quaternion;
-	srv.request.initial_pose = pose;
+	// Default homing configuration for the UR5 manipulator. Exported by `params.py`.
+	constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
+	model::UR5::Configuration prev_config{Vector<6>(ur5_default_homing_config_init)};
+	double prev_gripper_pos = 0.0;
+	model::UR5 robot{prev_config};
+
+	for (int i=0; i<poses.size()-1; i += 2) {
+		block_spawner.spawn_block(poses[i].block,
+			poses[i].pose.linear().x(), poses[i].pose.linear().y(),
+			poses[i].pose.angular()[0], false,
+			util::Color{255, 0, 0, 255});
+
+		const planner::BlockMovement movement{
+			poses[i],
+			poses[i+1]
+		};
+
+		auto configs = planner::plan_movement(robot, movement, dt);
+		ROS_INFO("Movement planned");
 
 
+		const double open_gripper = planner::get_open_gripper_pos(poses[i].block);
+		const double closed_gripper = planner::get_closed_gripper_pos(poses[i].block);
 
-    if (client.call(srv)) {
-        ROS_INFO("Spawned block, success: %d status: %s", (int)srv.response.success, srv.response.status_message.c_str());
-    } else {
-        ROS_ERROR("Failed to call service");
-        return 1;
-    }
+		if (open_gripper > prev_gripper_pos) {
+			// if picking up the next block requires a more open position, open the gripper right away
+			config_publisher.publish_gripper_sequence(prev_config, prev_gripper_pos, open_gripper, gripper_speed, frequency_hz);
+			prev_gripper_pos = open_gripper;
+		} // otherwise keep prev_gripper_pos to make a single closing movement later
 
-	publish_configs(publisher, robot, dt/scale, configs.picking, 1.0);
-	publish_configs(publisher, robot, dt/scale, configs.dropping, -0.1);
-	ROS_INFO("finished");
+		auto interm_config = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(interm_config, prev_gripper_pos, closed_gripper, gripper_speed, frequency_hz);
+
+		prev_config = config_publisher.publish_config_sequence(configs.lazy_dropping, closed_gripper, frequency_hz);
+		config_publisher.publish_gripper_sequence(prev_config, closed_gripper, open_gripper, gripper_speed, frequency_hz);
+		prev_gripper_pos = open_gripper;
+
+		ROS_INFO("Finished");
+	}
 }

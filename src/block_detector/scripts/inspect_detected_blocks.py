@@ -8,59 +8,67 @@ from block_detector.srv import DetectBlocks, DetectBlocksResponse
 import torchvision
 import torch
 import cv2
-
+import threading
 
 WINDOW_TITLE = "Detected blocks"
 IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
 
 
 def draw_bbox(image, bbox, txt_labels=None):
-    x = (torchvision.transforms.functional.to_tensor(image) * 255.).to(torch.uint8)
-    bbox = bbox.to(torch.int)
-    res = torchvision.utils.draw_bounding_boxes(x, bbox, txt_labels, width=2)
-    return res.permute(1,2,0).cpu().numpy()
+    with torch.no_grad():
+        x = (torchvision.transforms.functional.to_tensor(image) * 255.).to(torch.uint8)
+        bbox = bbox.to(torch.int)
+        res = torchvision.utils.draw_bounding_boxes(x, bbox, txt_labels, width=1)
+        return res.permute(1,2,0).cpu().numpy()
 
 
 class BlockInspector:
-    def __init__(self, detect_blocks_srv):
-        self.bridge = CvBridge()
-        self.detect_blocks_srv = detect_blocks_srv
+    def __init__(self):
         self.image_sub = rospy.Subscriber(IMAGE_TOPIC, Image, self.callback, queue_size=1)
-        self.annotated_image = None
+        self.encoded_image = None
 
     def callback(self, encoded_image: Image):
-        try:
-            decoded_image = self.bridge.imgmsg_to_cv2(encoded_image, desired_encoding="bgr8")
-        except CvBridgeError as e:
-            print(e)
-            return
-
-        resp = self.detect_blocks_srv(encoded_image)
-        boxes = resp.boxes
-
-        with torch.no_grad():
-            boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in boxes])[1:]
-            rospy.loginfo(f"received boxes {boxes}")
-            self.annotated_image = draw_bbox(decoded_image, boxes)
+        self.encoded_image = encoded_image
 
 
 def main():
     rospy.init_node("inspect_detected_blocks", anonymous=True)
     rospy.loginfo("inspect_detected_blocks init")
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
-    proc = BlockInspector(detect_blocks_srv)
+    bridge = CvBridge()
+    proc = BlockInspector()
+    annotated_image = None
+    thread = None
+
+    def process_image(encoded_image):
+        decoded_image = bridge.imgmsg_to_cv2(encoded_image, desired_encoding="bgr8")
+        decoded_image = decoded_image[396:912, 676:1544, :]
+        resp = detect_blocks_srv(bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
+        data = resp.boxes
+
+        boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in data])[1:]
+        rospy.loginfo(f"received boxes {boxes}")
+        nonlocal annotated_image
+        annotated_image = draw_bbox(decoded_image, boxes, [b.label for b in data])
 
     try:
         while True:
-            if proc.annotated_image is not None:
-                cv2.imshow(WINDOW_TITLE, proc.annotated_image)
+            if thread is None or not thread.is_alive():
+                encoded_image, proc.encoded_image = proc.encoded_image, None
+                if encoded_image is not None:
+                    thread = threading.Thread(target=process_image, name="process_image", args=[encoded_image])
+                    thread.start()
+
+            if annotated_image is not None:
+                cv2.imshow(WINDOW_TITLE, annotated_image)
                 k = cv2.waitKey(1) & 0xFF
-                if k == 27 or cv2.getWindowProperty(WINDOW_TITLE, 0) < 0:
-                    break
-    except cv2.error:
-        print("cv2.error, shutting down")
+                try:
+                    if k == 27 or cv2.getWindowProperty(WINDOW_TITLE, 0) < 0:
+                        break
+                except cv2.error:
+                    print("cv2.error, shutting down")
     except KeyboardInterrupt:
-        print("Shutting down")
+        print("KeyboardInterrupt, shutting down")
 
 if __name__ == "__main__":
     try:

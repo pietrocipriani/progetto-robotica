@@ -5,17 +5,25 @@
 namespace planner {
 
 
-BlockPose::BlockPose(
-  Scalar x, Scalar y, Scalar angle,
-  Scalar hit_box_radius,
-  Block block
-) noexcept : block(block), pose({x, y}, BlockPose::Pose::Angular(angle)), hit_box_radius(hit_box_radius) {}
+BlockPose::BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept
+  : block(block), pose({x, y}, BlockPose::Pose::Angular(angle)) {}
 
 bool BlockPose::collides(const BlockPose& other) const {
   auto distance = pose.linear() - other.pose.linear();
   Scalar min_distance = hit_box_radius + other.hit_box_radius;
 
   return distance.norm() < min_distance;
+}
+
+os::Position BlockPose::to_os_position() const {
+  return os::Position(
+    os::Position::Linear(
+      pose.linear().x() - gazebo_to_os_x,
+      -(pose.linear().y() - gazebo_to_os_y),
+      table_distance - get_gripping_height(block)
+    ),
+    os::Position::Angular(Rotation(-pose.angular()[0], Axis::UnitZ()))
+  );
 }
 
 
@@ -49,17 +57,6 @@ bool unsafe(const os::Position& pose) {
 }
 
 
-os::Position block_pose_to_pose(const BlockPose::Pose& pose) {
-  return os::Position(
-    os::Position::Linear(
-      pose.linear().x() - gazebo_to_os_x,
-      -(pose.linear().y() - gazebo_to_os_y),
-      table_distance
-    ),
-    os::Position::Angular(Rotation(pose.angular()[0], Axis::UnitZ()))
-  );
-}
-
 MovementSequence::ConfigGenerator::ConfigGenerator(std::function<Ret()>&& next)
     : next(std::move(next)) {}
 
@@ -74,13 +71,13 @@ bool MovementSequence::ConfigGenerator::const_iterator::operator!=(const const_i
 }
 
 bool MovementSequence::ConfigGenerator::const_iterator::operator==(const const_iterator& other) const {
-  return *this != other;
+  return !(*this != other);
 }
 
 MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() {
   return std::get<Point>(current);
 }
-  
+
 MovementSequence::ConfigGenerator::const_iterator::const_reference MovementSequence::ConfigGenerator::const_iterator::operator*() const {
   return std::get<Point>(current);
 }
