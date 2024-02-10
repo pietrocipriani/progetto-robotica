@@ -65,7 +65,7 @@ model::UR5::Configuration ConfigPublisher::publish_config_sequence(
     model::UR5::Configuration last(model::UR5::Configuration::Base{});
 
 	for (auto config : configs) {
-		publisher.publish(config_to_ros(config, gripper_pos));
+		publish_config(config, gripper_pos);
         std::swap(config, last);
 		rate.sleep();
 	}
