@@ -14,15 +14,12 @@
 
 #include "controller/world/block_spawner.hpp"
 #include "controller/control/config_publisher.hpp"
+#include "controller/control/config_reader.hpp"
 using namespace controller;
 
 constexpr Time dt = 0.01;
 constexpr double frequency_hz = 1 / dt;
 constexpr double gripper_speed = 0.8;
-
-// Default homing configuration for the UR5 manipulator. Exported by `params.py`.
-constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
-constexpr double ur5_default_homing_gripper_pos = 0.0;
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "controller");
@@ -41,29 +38,10 @@ int main(int argc, char **argv) {
 	world::BlockSpawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
 	ROS_INFO("created publisher and client");
 
-	sensor_msgs::JointState::ConstPtr initial_joint_state =
-		ros::topic::waitForMessage<sensor_msgs::JointState>("/ur5/joint_states", n);
-	Vector<6> initial_config(ur5_default_homing_config_init);
-	double initial_gripper_pos = ur5_default_homing_gripper_pos;
-	for (int i=0; i<initial_joint_state->name.size(); ++i) {
-		const auto& name = initial_joint_state->name[i];
-		const auto& position = initial_joint_state->position[i];
-		if (name == "elbow_joint") {
-			initial_config[2] = position;
-		} else if (name == "hand_1_joint") {
-			initial_gripper_pos = position;
-		} else if (name == "shoulder_lift_joint") {
-			initial_config[1] = position;
-		} else if (name == "shoulder_pan_joint") {
-			initial_config[0] = position;
-		} else if (name == "wrist_1_joint") {
-			initial_config[3] = position;
-		} else if (name == "wrist_2_joint") {
-			initial_config[4] = position;
-		} else if (name == "wrist_3_joint") {
-			initial_config[5] = position;
-		}
-	}
+	auto [prev_config, prev_gripper_pos] = control::joint_state_to_config(
+		ros::topic::waitForMessage<sensor_msgs::JointState>("/ur5/joint_states", n));
+	model::UR5 robot{prev_config};
+
 
 	std::vector<planner::BlockPose> poses{
 		planner::BlockPose(planner::Block::B_1x1_H, 0.5, 0.5, 0.5),
@@ -74,10 +52,6 @@ int main(int argc, char **argv) {
 		planner::BlockPose(planner::Block::B_2x2_U, 0.2, 0.6, 3),
 	};
 
-
-	model::UR5::Configuration prev_config{initial_config};
-	double prev_gripper_pos = initial_gripper_pos;
-	model::UR5 robot{prev_config};
 
 	for (int i=0; i<poses.size()-1; i += 2) {
 		block_spawner.spawn_block(poses[i].block,
