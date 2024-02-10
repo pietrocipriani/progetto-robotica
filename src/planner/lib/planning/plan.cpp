@@ -151,7 +151,6 @@ MovementSequence plan_movement(model::UR5& robot, const BlockMovement& movement,
   MovementSequence seq{
     to_js_trajectory(robot, current_pose, picking, finish_time_picking, dt),
     to_js_trajectory(robot, picking_end, dropping, finish_time_dropping, dt),
-    {}, {}
   };
 
   return seq;

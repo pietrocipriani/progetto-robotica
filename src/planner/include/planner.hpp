@@ -94,8 +94,6 @@ public:
 /// Sequence of configurations to perform the movement of a certain block.
 /// @note Two phases are returned to allow the controller to perform the picking.
 struct MovementSequence {
-  using ConfigSequence = std::queue<model::UR5::Configuration>;
-
   struct ConfigGenerator {
     using Point = model::UR5::Configuration;
     using Ret = std::tuple<Point, bool>;
@@ -137,9 +135,6 @@ struct MovementSequence {
   };
 
   ConfigGenerator lazy_picking, lazy_dropping;
-
-  [[deprecated("Use the lazy versions.")]]
-  ConfigSequence picking, dropping;
 };
 
 /// Generates dependencies between the positioning of the blocks.
