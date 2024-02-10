@@ -1,6 +1,6 @@
 import os
 
-MODEL_SDF = """<?xml version="1.0" ?>
+BRICK_SDF = """<?xml version="1.0" ?>
 <sdf version="1.4">
 <model name="%s">
 <link name="link">
@@ -91,6 +91,31 @@ MODEL_SDF = """<?xml version="1.0" ?>
 </sdf>
 """
 
+PAD_SDF = """<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='%s'>
+    <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://%s/mesh.stl</uri>
+            <scale>0.04 0.07 0.07</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>%s</ambient>
+          <diffuse>%s</diffuse>
+          <specular>%s</specular>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>0</cast_shadows>
+      </visual>
+    </link>
+    <static>1</static>
+  </model>
+</sdf>
+"""
+
 MODEL_CONFIG = """<?xml version="1.0" ?>
 <model>
     <name>%s</name>
@@ -116,12 +141,12 @@ for name in NAMES:
     with open(f"models/{brick_name}/model.config", "w") as f:
         f.write(MODEL_CONFIG % brick_name)
     with open(f"models/{brick_name}/model.sdf", "w") as f:
-        f.write(MODEL_SDF % (brick_name, brick_name, brick_name,
+        f.write(BRICK_SDF % (brick_name, brick_name, brick_name,
             BRICK_COLOR, BRICK_COLOR, BRICK_SPECULAR))
 
     os.makedirs(f"models/{pad_name}", exist_ok=True)
     with open(f"models/{pad_name}/model.config", "w") as f:
         f.write(MODEL_CONFIG % pad_name)
     with open(f"models/{pad_name}/model.sdf", "w") as f:
-        f.write(MODEL_SDF % (pad_name, pad_name, pad_name,
+        f.write(PAD_SDF % (pad_name, pad_name,
             PAD_COLOR, PAD_COLOR, PAD_SPECULAR))
