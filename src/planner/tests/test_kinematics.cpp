@@ -26,7 +26,16 @@ bool test_inverse_kinematics();
 bool test_inverse_diff_kinematics();
 bool test_euler();
 
+constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
+
+
 int main() {
+
+  UR5 robot(UR5::Configuration({-2.09851, -1.27675, -1.77258, -1.66305, -1.5708, -2.47229}));
+  auto dir = kinematics::direct(robot);
+
+  std::clog << dir.linear().transpose() << std::endl;
+  std::clog << dir.angular() << std::endl;
 
   test("euler", test_euler);
   test("direct", test_direct_kinematics);
@@ -81,7 +90,7 @@ bool test_movement() {
   constexpr Scalar dt = 0.001;
 
   // default constructed robot.
-  UR5 robot;
+  UR5 robot(UR5::Configuration(UR5::Configuration::Base{ur5_default_homing_config_init}));
 
   Pose<> position = direct(robot);
 
@@ -119,7 +128,7 @@ bool test_movement() {
   return true;
 }
 bool test_direct_kinematics() {
-  UR5 robot;
+  UR5 robot(UR5::Configuration(UR5::Configuration::Base{ur5_default_homing_config_init}));
 
   const auto pos = direct(robot);
 
@@ -137,7 +146,7 @@ bool test_direct_kinematics() {
   return (correct - pos).norm() < 1e-50;
 }
 bool test_inverse_kinematics() {
-  UR5 robot;
+  UR5 robot(UR5::Configuration(UR5::Configuration::Base{ur5_default_homing_config_init}));
 
   for (int i = 0; i < 10000; ++i) {
     robot.config = UR5::Configuration(UR5::Configuration::Base::Random() * M_PI * 2);
@@ -199,7 +208,7 @@ bool test_path() {
 
   constexpr Scalar dt = 0.001;
   
-  UR5 robot;
+  UR5 robot(UR5::Configuration(UR5::Configuration::Base{ur5_default_homing_config_init}));
 
   const UR5::Configuration initial_config = inverse(robot, initial);
 
