@@ -12,7 +12,7 @@
 #include "planner.hpp"
 #include "model.hpp"
 
-#include "controller/world/block_spawner.hpp"
+#include "controller/world/spawner.hpp"
 #include "controller/control/config_publisher.hpp"
 #include "controller/control/config_reader.hpp"
 using namespace controller;
@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 			"/ur5/joint_group_pos_controller/command", 1),
 		2,
 	};
-	world::BlockSpawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
+	world::Spawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
 	ROS_INFO("created publisher and client");
 
 	auto [prev_config, prev_gripper_pos] = control::joint_state_to_config(
