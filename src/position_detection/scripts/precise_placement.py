@@ -59,23 +59,33 @@ camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
                             [0, 0, 0, 1]])
 
 inv_camera_transform = np.linalg.inv(camera_transform)
-
+print(camera_transform*inv_camera_transform)
 #given x, y coordinates (in respect to optical center), it generates 2 points
 def generate_points(x, y):
-    [[0.1*math.tan(0.88)/960*x, 0.1*math.tan(0.88)/960*y, 0.1],
+    return [[0.1*math.tan(0.88)/960*x, 0.1*math.tan(0.88)/960*y, 0.1],
      [2*math.tan(0.88)/960*x, 2*math.tan(0.88)/960*y, 2]
      ]
     
 
 def generate_intersection_mesh(x_min, y_min, x_max, y_max):
-    points = np.empty()
-    points = np.append(points, generate_points(x_min, y_min))
-    points = np.append(points, generate_points(x_min, y_max))
-    points = np.append(points, generate_points(x_max, y_min))
-    points = np.append(points, generate_points(x_max, y_max))
+    print(generate_points(x_min, y_min))
+    points = np.array([generate_points(x_min, y_min)])
+    points = np.append(points, [generate_points(x_min, y_max)])
+    points = np.append(points, [generate_points(x_max, y_min)])
+    points = np.append(points, [generate_points(x_max, y_max)])
+    points = np.reshape(points, (8, 3))
     pcd = open3d.geometry.PointCloud()
     pcd.points = open3d.utility.Vector3dVector(points)
+    mesh, _ = pcd.compute_convex_hull()
+    mesh.compute_vertex_normals()
+    print(mesh)
+    open3d.io.write_triangle_mesh("trapezio.stl", mesh)
+    #open3d.io.write_point_cloud("trapezio.pcd", pcd)
 
+generate_intersection_mesh(-960, -540, 960, 540)
+
+
+#bbox = bbox.transform(inv_camera_transform)
 
 class PrecisePlacement:
     def __init__(self, point_cloud_srv):
@@ -113,7 +123,15 @@ class PrecisePlacement:
 
     def callback_cloud(self, data: PointCloud2):
         converted = convertCloudFromRosToOpen3d(data)
-        bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(-1., -0.4, 0.), max_bound=(1., 0.4, 1.6))
+        bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(0, 0.14, 0.86), max_bound=(1., 0.8, 0.97))
+
+        bbox = bbox.get_oriented_bounding_box()
+        bbox = bbox.rotate(inv_camera_transform[0:3, 0:3], [0, 0, 0 ])
+        bbox = bbox.translate(inv_camera_transform[0:3, 3].transpose())
+        
+        mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
+        mesh.compute_vertex_normals()
+        open3d.io.write_triangle_mesh("bbox.stl", mesh)
         #print(self.point_cloud.get_axis_aligned_bounding_box())
 
         self.point_cloud=converted.crop(bbox)
@@ -123,7 +141,7 @@ class PrecisePlacement:
         # visualizzation
         open3d.visualization.draw_geometries([self.point_cloud],
             zoom=0.3,
-            front=[0.0, -0.0, -1.0],
+            front=[0.0, -0.0, 1.0],
             lookat=[0.0, 0.0, 1.0],
             up=[-0.0, -1.0, 0.0])
 
