@@ -26,19 +26,6 @@ BlockMovement::BlockMovement(BlockPose&& start, BlockPose&& target) noexcept
   : start(std::move(start)), target(std::move(target)) {}
 
 
-std::queue<BlockMovement> generate_block_positioning_order(
-  const std::vector<BlockPose>& blocks,
-  const std::unordered_map<Block, BlockPose>& targets
-) {
-  std::queue<BlockMovement> order;
-
-  // TODO: dummy implementation.
-  for (auto& b : blocks) {
-    order.emplace(b, targets.at(b.block));
-  }
-
-  return order;
-}
 
 
 os::Position safe_pose(const os::Position& pose) {

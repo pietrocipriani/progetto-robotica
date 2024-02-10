@@ -14,10 +14,7 @@
  * @note The @p base should be an unit quaternion.
  */
 // NOTE: cannot specialize std::pow.
-// TODO: compute negative exponentiations with the conjugate.
-// TODO: template to keep it in the header without warnings. :)
-template<class Scalar>
-Quaternion pow(const Quaternion& base, Scalar&& exp) {
+inline Quaternion pow(const Quaternion& base, const Scalar& exp) {
   // Computes `slerp(exp, 1, base) = 1^(1 - exp) + base^exp = base^exp`.
   return Quaternion::Identity().slerp(exp, base);
 }

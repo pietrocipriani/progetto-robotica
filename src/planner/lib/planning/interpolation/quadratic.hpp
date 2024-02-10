@@ -93,7 +93,7 @@ TimeFunction<Point> quadratic_interpolation(
   const Time& start_time,
   const Time& duration
 ) {
-  static_assert(!internal::uses_quaternions<Point>);
+  static_assert(!internal::uses_quaternions<Point>, "Cannot quadratically interpolate quaternions.");
 
   return internal::_quadratic_interpolation(
     initial_position,
@@ -101,72 +101,6 @@ TimeFunction<Point> quadratic_interpolation(
     start_time, duration
   );
 }
-
-template<>
-inline TimeFunction<Quaternion> quadratic_interpolation<Quaternion, Quaternion>(
-  const Quaternion& initial_position,
-  const Quaternion& initial_velocity,
-  const Quaternion& final_velocity,
-  const Time& start_time,
-  const Time& duration
-) {
-  using namespace uniformed_rotation_algebra;
-
-  const bool aligned = initial_velocity.vec().cross(final_velocity.vec()).isApprox(Axis::Zero());
-
-  if (aligned) {
-    return internal::_quadratic_interpolation(
-      initial_position,
-      initial_velocity, final_velocity,
-      start_time, duration
-    );
-  } else {
-    auto mid = initial_position + initial_velocity * (duration / 2);
-    auto mid_time = start_time + duration / 2;
-
-    auto dec = quadratic_deceleration(mid, initial_velocity, mid_time, duration / 2);
-    auto acc = quadratic_acceleration(mid, final_velocity, mid_time, duration / 2);
-
-    return [=, dec = std::move(dec), acc = std::move(acc)](const Time& time) {
-      if (time < mid_time) {
-        return dec(time);
-      } else {
-        return acc(time);
-      }
-    };
-  }
-}
-
-
-template<coord::LinearSystem ls>
-TimeFunction<kinematics::Pose<coord::Lie, ls>> quadratic_interpolation(
-  const kinematics::Pose<coord::Lie, ls>& initial_position,
-  const kinematics::Velocity<coord::Lie, ls>& initial_velocity,
-  const kinematics::Velocity<coord::Lie, ls>& final_velocity,
-  const Time& start_time,
-  const Time& duration
-) {
-  using namespace uniformed_rotation_algebra;
-
-  auto linear_fun = quadratic_interpolation(
-    initial_position.linear(),
-    initial_velocity.linear(),
-    final_velocity.linear(),
-    start_time, duration
-  );
-  auto angular_fun = quadratic_interpolation(
-    initial_position.angular(),
-    initial_velocity.angular(),
-    final_velocity.angular(),
-    start_time, duration
-  );
-
-  return [=, l = std::move(linear_fun), a = std::move(angular_fun)](const Time& time) {
-    return kinematics::Pose<coord::Lie, ls>(l(time), a(time));
-  };
-}
-
-
 
 }
 

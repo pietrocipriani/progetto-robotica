@@ -71,6 +71,16 @@ public:
     return _vector;
   }
 
+  const auto& operator[](size_t index) const {
+    // NOTE: assert check.
+    return _vector[index];
+  }
+
+  auto& operator[](size_t index) {
+    // NOTE: assert check.
+    return _vector[index];
+  }
+
   // For uniformity with Eigen only.
   JointSpace& eval() { return *this; }
 

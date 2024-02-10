@@ -19,7 +19,7 @@ bool test_linear_interpolator();
 
 int main() {
 
-  //test("conflict management", test_conflict_management);
+  test("conflict management", test_conflict_management);
   //test("conflict management", test_movement_planning);
   test("linear", test_linear_interpolator);
   test("planner", test_planner);
@@ -29,7 +29,7 @@ int main() {
   return EXIT_SUCCESS;
 }
 
-/*bool test_conflict_management() {
+bool test_conflict_management() {
   std::vector<BlockPose> poses {
     BlockPose(0, 0, 0, 1, Block::BLOCK_1),
     BlockPose(3, 0, 0, 1, Block::BLOCK_2),
@@ -46,7 +46,7 @@ int main() {
   if (
     movements.front().start.block != Block::BLOCK_3 ||
     (movements.pop(), movements.front().start.block != Block::BLOCK_2) ||
-    (movements.pop(), movements.front().start.block != Block::BLOCK_3)
+    (movements.pop(), movements.front().start.block != Block::BLOCK_1)
   ) {
     throw std::runtime_error("unexpected sequence");
   }
@@ -55,7 +55,7 @@ int main() {
   // TODO: check exceptions.
 
   return true;
-}*/
+}
 
 #include "../lib/planning/interpolation.hpp"
 #include "../lib/planning/sequencer.hpp"
