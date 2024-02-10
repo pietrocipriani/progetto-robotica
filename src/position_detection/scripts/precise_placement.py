@@ -10,6 +10,7 @@ import numpy as np
 from ctypes import *
 from block_detector.srv import DetectBlocks
 import os
+import math
 
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
@@ -52,9 +53,28 @@ def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     # return
     return open3d_cloud
 
+camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
+                            [ -1,  0,  0,  0.59],
+                            [ 0, -0.866, -0.5, 1.4],
+                            [0, 0, 0, 1]])
 
+inv_camera_transform = np.linalg.inv(camera_transform)
 
+#given x, y coordinates (in respect to optical center), it generates 2 points
+def generate_points(x, y):
+    [[0.1*math.tan(0.88)/960*x, 0.1*math.tan(0.88)/960*y, 0.1],
+     [2*math.tan(0.88)/960*x, 2*math.tan(0.88)/960*y, 2]
+     ]
+    
 
+def generate_intersection_mesh(x_min, y_min, x_max, y_max):
+    points = np.empty()
+    points = np.append(points, generate_points(x_min, y_min))
+    points = np.append(points, generate_points(x_min, y_max))
+    points = np.append(points, generate_points(x_max, y_min))
+    points = np.append(points, generate_points(x_max, y_max))
+    pcd = open3d.geometry.PointCloud()
+    pcd.points = open3d.utility.Vector3dVector(points)
 
 
 class PrecisePlacement:
@@ -65,11 +85,26 @@ class PrecisePlacement:
 
         #load meshes
         rospack = rospkg.RosPack()
-        model_path = os.path.join(rospack.get_path("position_detection"), "blocks")  
-        self.meshes={}
-
-        mesh = open3d.io.read_triangle_mesh("model://brick_1x1_H/mesh.stl")
-        print(mesh)
+        model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
+        self.meshes={
+            "brick_1x1_H": None,
+            "brick_2x1_T": None,
+            "brick_2x1_L": None,
+            "brick_2x1_H": None,
+            "brick_2x1_U": None,
+            "brick_2x2_H": None,
+            "brick_2x2_U": None,
+            "brick_3x1_H": None,
+            "brick_3x1_U": None,
+            "brick_4x1_H": None,
+            "brick_4x1_L": None,
+            }
+        for key in self.meshes.keys():
+            cur_model_path = os.path.join(model_path, os.path.join(key, "mesh.stl"))
+            self.meshes[key] = open3d.io.read_triangle_mesh(cur_model_path)
+            print(self.meshes[key])
+        
+        
 
     def image_callback(self, data: Image):
         data = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
@@ -77,19 +112,26 @@ class PrecisePlacement:
         cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
-        self.point_cloud = convertCloudFromRosToOpen3d(data)
-        #print(self.point_cloud)
+        converted = convertCloudFromRosToOpen3d(data)
+        bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(-1., -0.4, 0.), max_bound=(1., 0.4, 1.6))
+        #print(self.point_cloud.get_axis_aligned_bounding_box())
 
+        self.point_cloud=converted.crop(bbox)
+        self.point_cloud = self.point_cloud.transform(camera_transform)
+        print(self.point_cloud)
+        open3d.io.write_point_cloud("test.pcd", self.point_cloud)
         # visualizzation
         open3d.visualization.draw_geometries([self.point_cloud],
-            zoom=0.3412,
-            front=[0.4257, -0.2125, -0.8795],
-            lookat=[2.6172, 2.0475, 1.532],
-            up=[-0.0694, -0.9768, 0.2024])
+            zoom=0.3,
+            front=[0.0, -0.0, -1.0],
+            lookat=[0.0, 0.0, 1.0],
+            up=[-0.0, -1.0, 0.0])
 
 #cv_bridge = CvBridge()
 
     #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+
+
 
 
 
@@ -98,8 +140,10 @@ def main():
     rospy.init_node("position_detection")
     rospy.loginfo("position_detection init")
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
+
     cloud_srv="/ur5/zed_node/point_cloud/cloud_registered"
     precise =PrecisePlacement(cloud_srv, )
+    
     rospy.loginfo("registered")
     #rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, callback_image)
     
