@@ -1,6 +1,8 @@
+import os
+
 MODEL_SDF = """<?xml version="1.0" ?>
 <sdf version="1.4">
-<model name="brick_%s">
+<model name="%s">
 <link name="link">
 	<inertial>
 		<mass>1</mass>
@@ -19,7 +21,7 @@ MODEL_SDF = """<?xml version="1.0" ?>
         <max_contacts>10</max_contacts>
 		<geometry>
 			<mesh>
-			    <uri>model://brick_%s/mesh.stl</uri>
+			    <uri>model://%s/mesh.stl</uri>
 			</mesh>
 		</geometry>
         <surface>
@@ -72,13 +74,13 @@ MODEL_SDF = """<?xml version="1.0" ?>
 	<visual name="visual">
 		<geometry>
 			<mesh>
-			<uri>model://brick_%s/mesh.stl</uri>
+			<uri>model://%s/mesh.stl</uri>
 			</mesh>
 		</geometry>
 		<material>
-			<ambient>1.0 1.0 0.7 1.0</ambient>
-			<diffuse>1.0 1.0 0.7 1.0</diffuse>
-			<specular>0.01 0.01 0.01 1 1.5</specular>
+			<ambient>%s</ambient>
+			<diffuse>%s</diffuse>
+			<specular>%s</specular>
 			<emissive>0.0 0.0 0.0 0.0</emissive>
 		</material>
         <transparency>0</transparency>
@@ -91,7 +93,7 @@ MODEL_SDF = """<?xml version="1.0" ?>
 
 MODEL_CONFIG = """<?xml version="1.0" ?>
 <model>
-    <name>brick_%s</name>
+    <name>%s</name>
     <version>1.0</version>
     <sdf version="1.7">model.sdf</sdf>
     <author>
@@ -104,8 +106,22 @@ MODEL_CONFIG = """<?xml version="1.0" ?>
 
 NAMES = ["1x1_H", "2x1_T", "2x1_L", "2x1_H", "2x1_U", "2x2_H", "2x2_U", "3x1_H", "3x1_U", "4x1_H", "4x1_L"]
 
+BRICK_COLOR = "1.0 1.0 0.7 1.0"
+BRICK_SPECULAR = "0.01 0.01 0.01 1 1.5"
+PAD_COLOR = "0.0 0.0 0.0 1.0"
+PAD_SPECULAR = "0.1 0.1 0.1 1.0 5.0"
+
 for name in NAMES:
-    with open(f"models/brick_{name}/model.config", "w") as f:
-        f.write(MODEL_CONFIG % name)
-    with open(f"models/brick_{name}/model.sdf", "w") as f:
-        f.write(MODEL_SDF % (name, name, name))
+    brick_name, pad_name = f"brick_{name}", f"pad_{name}"
+    with open(f"models/{brick_name}/model.config", "w") as f:
+        f.write(MODEL_CONFIG % brick_name)
+    with open(f"models/{brick_name}/model.sdf", "w") as f:
+        f.write(MODEL_SDF % (brick_name, brick_name, brick_name,
+            BRICK_COLOR, BRICK_COLOR, BRICK_SPECULAR))
+
+    os.makedirs(f"models/{pad_name}", exist_ok=True)
+    with open(f"models/{pad_name}/model.config", "w") as f:
+        f.write(MODEL_CONFIG % pad_name)
+    with open(f"models/{pad_name}/model.sdf", "w") as f:
+        f.write(MODEL_SDF % (pad_name, pad_name, pad_name,
+            PAD_COLOR, PAD_COLOR, PAD_SPECULAR))
