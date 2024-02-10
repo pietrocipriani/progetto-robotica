@@ -209,7 +209,7 @@ void Spawner::spawn_pad(
     const char* block_name = get_name(pad_for_block_type);
     // do not use random names for pads, since we never want more than one instance for each
 	srv.request.model_name = string_format("pad_%s", block_name);
-	srv.request.model_xml = string_format(BLOCK_SDF, block_name, block_name);
+	srv.request.model_xml = string_format(PAD_SDF, block_name, block_name);
 	srv.request.robot_namespace = "/gazebo/";
 	srv.request.initial_pose = pose;
 

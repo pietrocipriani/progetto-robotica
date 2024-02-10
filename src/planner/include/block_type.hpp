@@ -22,6 +22,20 @@ enum class Block {
     B_4x1_L = 10,
 };
 
+constexpr Block all_blocks[] = {
+    Block::B_1x1_H,
+    Block::B_2x1_T,
+    Block::B_2x1_L,
+    Block::B_2x1_H,
+    Block::B_2x1_U,
+    Block::B_2x2_H,
+    Block::B_2x2_U,
+    Block::B_3x1_H,
+    Block::B_3x1_U,
+    Block::B_4x1_H,
+    Block::B_4x1_L,
+};
+
 constexpr const char* get_name(const Block& block_type) {
     switch (block_type) {
         case Block::B_1x1_H:
@@ -112,6 +126,35 @@ constexpr double get_hit_box_radius(const Block& block_type) {
             return 0.0;
         case Block::B_4x1_L:
             return 0.0;
+    }
+    assert(false);
+}
+
+/// (x, y, angle)
+constexpr std::tuple<double, double, double> get_pad_position(const Block& block_type) {
+    switch (block_type) {
+        case Block::B_1x1_H:
+            return {0.03, 0.50, M_PI_2};
+        case Block::B_2x1_T:
+            return {0.92, 0.30, 0.0};
+        case Block::B_2x1_L:
+            return {0.92, 0.38, 0.0};
+        case Block::B_2x1_H:
+            return {0.92, 0.46, 0.0};
+        case Block::B_2x1_U:
+            return {0.92, 0.54, 0.0};
+        case Block::B_2x2_H:
+            return {0.05, 0.73, M_PI_4};
+        case Block::B_2x2_U:
+            return {0.05, 0.61, M_PI_2};
+        case Block::B_3x1_H:
+            return {0.92, 0.62, 0.0};
+        case Block::B_3x1_U:
+            return {0.92, 0.73, -M_PI_4};
+        case Block::B_4x1_H:
+            return {0.02, 0.35, M_PI_2};
+        case Block::B_4x1_L:
+            return {0.25, 0.75, 0.0};
     }
     assert(false);
 }

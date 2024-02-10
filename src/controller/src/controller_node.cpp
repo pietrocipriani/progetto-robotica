@@ -13,6 +13,7 @@
 #include "model.hpp"
 
 #include "controller/world/spawner.hpp"
+#include "controller/world/pads.hpp"
 #include "controller/control/config_publisher.hpp"
 #include "controller/control/config_reader.hpp"
 using namespace controller;
@@ -35,7 +36,7 @@ int main(int argc, char **argv) {
 			"/ur5/joint_group_pos_controller/command", 1),
 		2,
 	};
-	world::Spawner block_spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
+	world::Spawner spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
 	ROS_INFO("created publisher and client");
 
 	auto [prev_config, prev_gripper_pos] = control::joint_state_to_config(
@@ -53,8 +54,12 @@ int main(int argc, char **argv) {
 	};
 
 
+	// spawn pads, i.e. the block targets
+	world::spawn_missing_pads(spawner);
+
+
 	for (int i=0; i<poses.size()-1; i += 2) {
-		block_spawner.spawn_block(poses[i].block,
+		spawner.spawn_block(poses[i].block,
 			poses[i].pose.linear().x(), poses[i].pose.linear().y(),
 			poses[i].pose.angular()[0], false,
 			util::Color{255, 0, 0, 255});
