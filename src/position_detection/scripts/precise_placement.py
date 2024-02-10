@@ -65,7 +65,7 @@ class PrecisePlacement:
 
         #load meshes
         rospack = rospkg.RosPack()
-        model_path = os.path.join(rospack.get_path("position_detection"), "blocks")
+        model_path = os.path.join(rospack.get_path("position_detection"), "blocks")  
         self.meshes={}
 
         mesh = open3d.io.read_triangle_mesh("model://brick_1x1_H/mesh.stl")
@@ -81,7 +81,7 @@ class PrecisePlacement:
         #print(self.point_cloud)
 
         # visualizzation
-        open3d.visualization.draw_geometries([data],
+        open3d.visualization.draw_geometries([self.point_cloud],
             zoom=0.3412,
             front=[0.4257, -0.2125, -0.8795],
             lookat=[2.6172, 2.0475, 1.532],
