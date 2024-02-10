@@ -99,7 +99,7 @@ PAD_SDF = """<?xml version='1.0'?>
         <geometry>
           <mesh>
             <uri>model://%s/mesh.stl</uri>
-            <scale>0.04 0.07 0.07</scale>
+            <scale>%s</scale>
           </mesh>
         </geometry>
         <material>
@@ -133,6 +133,8 @@ NAMES = ["1x1_H", "2x1_T", "2x1_L", "2x1_H", "2x1_U", "2x2_H", "2x2_U", "3x1_H",
 
 BRICK_COLOR = "1.0 1.0 0.7 1.0"
 BRICK_SPECULAR = "0.01 0.01 0.01 1 1.5"
+
+PAD_SCALE = "0.04 0.07 0.07"
 PAD_COLOR = "0.0 0.0 0.0 1.0"
 PAD_SPECULAR = "0.1 0.1 0.1 1.0 5.0"
 
@@ -148,5 +150,5 @@ for name in NAMES:
     with open(f"models/{pad_name}/model.config", "w") as f:
         f.write(MODEL_CONFIG % pad_name)
     with open(f"models/{pad_name}/model.sdf", "w") as f:
-        f.write(PAD_SDF % (pad_name, pad_name,
+        f.write(PAD_SDF % (pad_name, pad_name, PAD_SCALE,
             PAD_COLOR, PAD_COLOR, PAD_SPECULAR))
