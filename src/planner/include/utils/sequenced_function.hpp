@@ -4,6 +4,8 @@
 
 #include <algorithm>
 #include <functional>
+#include <iostream>
+#include <iterator>
 #include <type_traits>
 
 /// Function restricted in domain by a lower bound.
@@ -71,7 +73,8 @@ private:
   
   /// Cached function to have constant time evaluation with sequential generation.
   ///
-  mutable It it = functions.cbegin();
+  mutable It it;
+
 
   /// Checks if the @p it is usable with the given @p arg.
   ///
@@ -97,6 +100,7 @@ private:
 
     // If there is no function for the given argument, the first function is extended.
     if (it == functions.cend()) it = functions.cbegin();
+
     return *it;
   }
   
@@ -104,9 +108,19 @@ public:
   /// Creates a SequencedFunction from the list of functions.
   /// The list must be sorted and contain at least one function.
   /// @param fs The list of functions.
-  SequencedFunction(Container&& fs) : functions(std::move(fs)) {
-    assert(!functions.empty() && std::is_sorted(functions.begin(), functions.end()));
+  SequencedFunction(Container&& fs) : functions(std::move(fs)), it(functions.cbegin()) {
+    assert(!functions.empty() && std::is_sorted(functions.cbegin(), functions.cend()));
   }
+
+  SequencedFunction(const SequencedFunction& other) : functions(other.functions), it(functions.cbegin()) {}
+  SequencedFunction(SequencedFunction&& other) = default;
+
+  SequencedFunction& operator=(const SequencedFunction& other) {
+    functions = other.functions;
+    it = functions.cbegin();
+    return *this;
+  }
+  SequencedFunction& operator=(SequencedFunction&& other) = default;
 
   /// Invokes the valid underlying function.
   ///
