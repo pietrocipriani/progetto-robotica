@@ -46,11 +46,11 @@ int main(int argc, char **argv) {
 
 	std::vector<planner::BlockPose> poses{
 		planner::BlockPose(planner::Block::B_1x1_H, 0.5, 0.5, 0.5),
-		planner::BlockPose(planner::Block::B_1x1_H, 0.8, 0.6, 1),
+		planner::BlockPose::pad_pose(planner::Block::B_1x1_H),
 		planner::BlockPose(planner::Block::B_4x1_H, 0.1, 0.4, 4),
-		planner::BlockPose(planner::Block::B_4x1_H, 0.8, 0.4, 5),
+		planner::BlockPose::pad_pose(planner::Block::B_4x1_H),
 		planner::BlockPose(planner::Block::B_2x2_U, 0.6, 0.7, 2),
-		planner::BlockPose(planner::Block::B_2x2_U, 0.2, 0.6, 3),
+		planner::BlockPose::pad_pose(planner::Block::B_2x2_U),
 	};
 
 

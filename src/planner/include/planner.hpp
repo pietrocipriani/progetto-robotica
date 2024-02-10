@@ -41,6 +41,8 @@ public:
 
   BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept;
 
+  static BlockPose pad_pose(Block block) noexcept;
+
   /// Checks if @p this block collides with @p other.
   /// Collision is computed according to position and @p hit_box_radius.
   /// @param other The other `BlockPose` to check the collision with.
