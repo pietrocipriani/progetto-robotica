@@ -2,6 +2,8 @@
 #ifndef _BLOCK_TYPE_HPP_
 #define _BLOCK_TYPE_HPP_
 
+#include <cassert>
+
 namespace planner {
 
 /// Enum representing the types of blocks.

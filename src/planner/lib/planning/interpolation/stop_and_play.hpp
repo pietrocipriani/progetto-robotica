@@ -46,17 +46,19 @@ void interpolation2(
   // Timestamp.
   Timestamps t(start, end);
   
-  // Velocity.
+   // Velocity.
   auto v = unlazy((end.point - start.point) / t.delta);
 
   auto q1 = quadratic_acceleration(start.point, v, t.start, start.times.accel_delta);
-  auto l = linear_interpolation(start.point, end.point, t.start + start.times.accel_delta / 2, t.delta);
-  auto q2 = quadratic_deceleration(end.point, v, t.end, end.times.accel_delta);
+  chain.emplace_back(std::move(q1), t.start);
 
-  // Adds all the functions to the chain.
-  chain.emplace_back(q1, t.start);
-  chain.emplace_back(l, t.start_linear);
-  chain.emplace_back(q2, t.end_linear);
+  if (t.start_linear < t.end_linear) {
+    auto l = linear_interpolation(start.point, end.point, t.start + start.times.accel_delta / 2, t.delta);
+    chain.emplace_back(std::move(l), t.start_linear);
+  }
+
+  auto q2 = quadratic_deceleration(end.point, v, t.end, end.times.accel_delta);
+  chain.emplace_back(std::move(q2), t.end_linear);
 }
 
 }

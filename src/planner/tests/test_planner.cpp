@@ -9,6 +9,7 @@
 #include "../include/planner.hpp"
 #include "types.hpp"
 #include "utils/coordinates.hpp"
+#include "block_type.hpp"
 
 using namespace planner;
 
@@ -31,22 +32,22 @@ int main() {
 
 bool test_conflict_management() {
   std::vector<BlockPose> poses {
-    BlockPose(0, 0, 0, 1, Block::BLOCK_1),
-    BlockPose(3, 0, 0, 1, Block::BLOCK_2),
-    BlockPose(1.5, 3, 0, 1, Block::BLOCK_3),
+    BlockPose(Block::B_1x1_H, 0, 0, 0),
+    BlockPose(Block::B_2x1_H, 3, 0, 0),
+    BlockPose(Block::B_2x1_L, 1.5, 3, 0),
   };
   std::unordered_map<Block, BlockPose> targets {
-    {Block::BLOCK_1, BlockPose(4.5, 0, 0, 1)},
-    {Block::BLOCK_2, BlockPose(0, 3, 0, 1)},
-    {Block::BLOCK_3, BlockPose(3, 3, 0, 1)},
+    {Block::B_1x1_H, BlockPose(Block::B_1x1_H, 4.5, 0, 0)},
+    {Block::B_2x1_L, BlockPose(Block::B_2x1_L, 0, 3, 0)},
+    {Block::B_2x1_H, BlockPose(Block::B_2x1_H, 3, 3, 0)},
   };
 
   std::queue<BlockMovement> movements = generate_block_positioning_order(poses, targets);
 
   if (
-    movements.front().start.block != Block::BLOCK_3 ||
-    (movements.pop(), movements.front().start.block != Block::BLOCK_2) ||
-    (movements.pop(), movements.front().start.block != Block::BLOCK_1)
+    movements.front().start.block != Block::B_2x1_H ||
+    (movements.pop(), movements.front().start.block != Block::B_2x1_L) ||
+    (movements.pop(), movements.front().start.block != Block::B_1x1_H)
   ) {
     throw std::runtime_error("unexpected sequence");
   }
@@ -61,6 +62,8 @@ bool test_conflict_management() {
 #include "../lib/planning/sequencer.hpp"
 #include "../lib/planning/internal.hpp"
 #include "planner.hpp"
+
+constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
 
 std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
   Eigen::IOFormat format(Eigen::FullPrecision, Eigen::DontAlignCols, ", ");
@@ -77,11 +80,11 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 }
 
 bool test_planner() {
-  model::UR5 robot;
+  model::UR5 robot(model::UR5::Configuration(model::UR5::Configuration::Base{ur5_default_homing_config_init}));
 
   const BlockMovement movement(
-    BlockPose(0.8, 0.2, 0, 0),
-    BlockPose(0.4, 0.2, 0, 0)
+    BlockPose(Block::B_1x1_H, 0.8, 0.2, 0),
+    BlockPose(Block::B_1x1_H, 0.4, 0.2, 0)
   );
 
   constexpr Time dt = 0.001;

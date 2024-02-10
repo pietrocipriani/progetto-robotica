@@ -74,31 +74,33 @@ void interpolation3(
 
   if constexpr (start_mode == Mode::Point) {
     auto q = quadratic_acceleration(start.point, v12, t12.start, start.times.accel_delta);
-    auto l = linear_interpolation(start.point, via.point, t12.start + start.times.accel_delta / 2, t12.delta);
-
     assert((start.point - q(t12.start)).norm() < dummy_precision);
-    assert((l(t12.start_linear) - q(t12.start_linear)).norm() < dummy_precision);
-
     chain.emplace_back(std::move(q), t12.start);
-    chain.emplace_back(std::move(l), t12.start_linear);
+
+    if (t12.start_linear < t12.end_linear) {
+      auto l = linear_interpolation(start.point, via.point, t12.start + start.times.accel_delta / 2, t12.delta);
+      assert((l(t12.start_linear) - chain.back()(t12.start_linear)).norm() < dummy_precision);
+      chain.emplace_back(std::move(l), t12.start_linear);
+    }
   }
 
   auto q = quadratic_interpolation(chain.back()(t12.end_linear), v12, v23, t12.end_linear, via.times.accel_delta);
-  auto l = linear_interpolation(via.point, end.point, t23.start, t23.delta);
-
   assert((q(t12.end_linear) - chain.back()(t12.end_linear)).norm() < dummy_precision);
-  assert((q(t23.start_linear) - l(t23.start_linear)).norm() < dummy_precision);
-
   chain.emplace_back(std::move(q), t12.end_linear);
-  chain.emplace_back(std::move(l), t23.start_linear);
+
+  if (t23.start_linear < t23.end_linear) {
+    auto l = linear_interpolation(via.point, end.point, t23.start, t23.delta);
+    assert((chain.back()(t23.start_linear) - l(t23.start_linear)).norm() < dummy_precision);
+    chain.emplace_back(std::move(l), t23.start_linear);
+  }
 
   if constexpr (end_mode == Mode::Point) {
     auto q = quadratic_deceleration(end.point, v23, t23.end, end.times.accel_delta);
   
-    assert((q(t23.end_linear) - l(t23.end_linear)).norm() < dummy_precision);
+    assert((q(t23.end_linear) - chain.back()(t23.end_linear)).norm() < dummy_precision);
     assert((q(t23.end) - end.point).norm() < dummy_precision);
 
-    chain.emplace_back(q, t23.end_linear);
+    chain.emplace_back(std::move(q), t23.end_linear);
   }
 }
 
