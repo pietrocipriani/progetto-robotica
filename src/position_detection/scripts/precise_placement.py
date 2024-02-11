@@ -182,6 +182,7 @@ class PrecisePlacement:
         if self.point_cloud is None:
             return
         header = Header(seq=self.msg_seq, frame_id = "base_link", stamp=self.last_point_cloud_time)
+        point_cloud = self.point_cloud
         
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
@@ -192,7 +193,7 @@ class PrecisePlacement:
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
             
-            cropped = self.point_cloud.crop(mesh)
+            cropped = point_cloud.crop(mesh)
             if len(cropped.points)< 100:
                 continue
             cropped.paint_uniform_color(np.random.rand(3))
@@ -247,7 +248,7 @@ class PrecisePlacement:
     def callback_cloud(self, data: PointCloud2):
         ##print("point_cloud")
         self.raw_point_cloud=data
-        self.last_point_cloud_time=rospy.Time.now()
+        self.last_point_cloud_time=data.header.stamp
 
     def process_latest_point_cloud(self):
         converted = convertCloudFromRosToOpen3d(self.raw_point_cloud)

@@ -3,7 +3,8 @@
 namespace controller::pos {
 
 position_detection::BlockPositions wait_for_new_block_positions(ros::NodeHandle& n) {
-    const ros::Time initial_time = ros::Time::now();
+    ros::Time initial_time = ros::Time::now();
+    initial_time.sec += 5;
     ROS_INFO("Waiting for new block positions on topic /block_positions, initial_time=%d", initial_time.sec);
     while (true) {
         auto block_positions =

@@ -21,7 +21,7 @@
 #include "controller/util/const.hpp"
 using namespace controller;
 
-constexpr Time dt = 0.005;
+constexpr Time dt = 0.01;
 constexpr double frequency_hz = 1 / dt;
 constexpr double gripper_speed = 0.8;
 
