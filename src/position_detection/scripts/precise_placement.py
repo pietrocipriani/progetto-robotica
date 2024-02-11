@@ -2,8 +2,10 @@ import open3d;
 import rospy
 import rospkg
 import sensor_msgs.point_cloud2 as pc2
-from sensor_msgs.msg import PointCloud2
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import PointCloud2, Image
+from geometry_msgs.msg import Point
+from std_msgs.msg import Header
+#from sensor_msgs.msg import 
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
@@ -91,6 +93,7 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     #mesh.compute_vertex_normals()
     ##print(mesh)
     return mesh
+
 def approx_coordinate(x, y):
     x-=960
     y-=540
@@ -115,7 +118,7 @@ class PrecisePlacement:
             #time.sleep(0.020)
 
     def __init__(self, point_cloud_srv, use_visualizer=True):
-        
+        self.msg_seq=0
         self.point_cloud = None
         self.use_visualizer = use_visualizer
         self.raw_point_cloud = None
@@ -171,21 +174,18 @@ class PrecisePlacement:
             ##print(self.meshes[key])
         
         
-
+    #called every time an image is ready
     def image_callback(self, data: Image):
+        # if I don't have a converted point cloud it's useless
+
         if self.point_cloud is None:
             return
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
-        for i in resp.boxes:
-            ###print(i)
-            mesh=generate_intersection_mesh(676+i.x1, 676+i.x2, 396+i.y1, 396+i.y2)
-            #to_draw = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
-            #to_draw.paint_uniform_color([1, 0.706, 0])
-            #to_draw.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
-            #to_draw = to_draw.translate(camera_transform[0:3, 3].transpose())
-            #self.vis.add_geometry(to_draw, reset_bounding_box=False)
+        to_send=[]
+        for box in resp.boxes:
+            mesh=generate_intersection_mesh(676+box.x1, 676+box.x2, 396+box.y1, 396+box.y2)
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
             
@@ -199,7 +199,7 @@ class PrecisePlacement:
             transform[0:3, 3]=center
 
 
-            source= self.meshes[i.label].sample_points_uniformly(number_of_points=2000)
+            source= self.meshes[box.label].sample_points_uniformly(number_of_points=2000)
             target=cropped
             threshold = 0.01
 
@@ -226,10 +226,20 @@ class PrecisePlacement:
             if result.fitness>0.6:
                 self.vis.add_geometry(source, reset_bounding_box=False)
                 print(result.fitness)
-
-
-        cv2.imshow("test", decoded_image)
-        cv2.waitKey(1)
+            #print(transform)
+            point = Point(x= transform[0][3], y=transform[1][3], z=transform[2][3])
+            to_add = BlockPosition(block_type=box.label,
+                                   confidence=result.fitness*box.confidence,
+                                   point=point,
+                                   angle=math.acos(max(min(transform[0][0], 1), -1)))
+            to_send.append(to_add)
+            #print(to_add)
+        header = Header(seq=self.msg_seq, frame_id = "base link", stamp=rospy.Time.now())
+        to_send = BlockPositions(header=header, blocks=to_send)
+        #print(to_send)
+        self.pub.publish(to_send)
+        #cv2.imshow("test", decoded_image)
+        #cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
         ##print("point_cloud")
