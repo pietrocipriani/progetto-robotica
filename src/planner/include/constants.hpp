@@ -27,12 +27,6 @@ constexpr Scalar gazebo_to_os_y = 0.35;
  */
 constexpr Scalar margin = 0.1;
 
-/**
- * The maximum velocity in the operational space of the end effector. [m/s]
- */
-[[deprecated("Use max_linear_speed and max_angular_speed instead.")]]
-constexpr Scalar max_speed = 0.01;
-
 /// The maximum linear speed in the operational space for the end effector. [m/s]
 ///
 constexpr Scalar max_linear_speed = 0.3;
@@ -61,6 +55,6 @@ static constexpr size_t os_size = 3;
 
 }
 
-Scalar constexpr dummy_precision = 1e-8;
+Scalar constexpr dummy_precision = 1e-11;
 
 #endif /* CONSTANTS_HPP_INCLUDED */

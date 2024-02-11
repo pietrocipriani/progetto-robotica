@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
   #ifndef USE_EULER_ANGLES
-    Axis axis = pose.angular() * (Axis::UnitX() * 0.02);
+    Axis axis = pose.angular() * (Axis::UnitZ() * 0.02);
   #else
     auto axis = euler::rotate_axis<os_size>(pose.angular(), Axis::UnitZ() * 0.02);
   #endif

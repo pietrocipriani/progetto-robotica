@@ -80,7 +80,7 @@ constexpr double get_gripping_height(const Block& block_type) {
     assert(false);
 }
 
-constexpr double get_open_gripper_pos(const Block& block_type) {
+constexpr double get_open_gripper_pos([[maybe_unused]] const Block& block_type) {
     return 0.9; // better to always open the gripper as much as possible
 }
 

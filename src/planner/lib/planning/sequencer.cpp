@@ -21,11 +21,9 @@ using namespace coord;
 using LinearParams = Params<os::Position::Linear>;
 using AngularParams = Params<os::Position::Angular>;
 
-// TODO: avoid conversions.
-template<class Point>
-Scalar max_acceleration(Point&& pose) {
-  // TODO: radius awareness.
-  return model::UR5::max_joint_accel;
+Scalar max_acceleration(const os::Position& pose) {
+  // NOTE: dummy implementation for radius awareness.
+  return model::UR5::max_joint_accel * pose.linear().norm();
 }
 Scalar max_angular_acceleration() {
   return model::UR5::max_joint_accel;
@@ -126,6 +124,8 @@ auto generate_parameters(
   const Scalar max_ang_acc_2 = max_angular_acceleration();
 
   auto t_lin = get_desired_speed<TargetPoint>(linear_speed, linear_distance, max_lin_acc_1, max_lin_acc_2);
+
+  [[maybe_unused]]
   auto t_ang = get_desired_speed<TargetPoint>(angular_speed, angular_distance, max_ang_acc_1, max_ang_acc_2);
 
   const Time current_time = time;
@@ -146,6 +146,7 @@ template<LinearSystem linear_system, AngularSystem angular_system>
 auto generate_parameters(
   const kinematics::Pose<angular_system, linear_system>& point,
   const SpeedLimits& linear_speed,
+  [[maybe_unused]]
   const SpeedLimits& angular_speed,
   Time& time
 ) {
@@ -156,6 +157,7 @@ auto generate_parameters(
   // We are imposing the max acceleration on the end effector movement.
   const Scalar max_lin_acc = max_acceleration(point);
 
+  [[maybe_unused]]
   const Scalar max_ang_acc = max_angular_acceleration();
 
   const Scalar delta_t = std::max(linear_speed.prev / max_lin_acc, 0.0/*angular_speed.prev / max_ang_acc*/);
