@@ -1,16 +1,14 @@
 #include "controller/control/config_reader.hpp"
 
-namespace controller::control {
+#include "controller/util/const.hpp"
 
-// Default homing configuration for the UR5 manipulator. Exported by `params.py`.
-constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
-constexpr double ur5_default_homing_gripper_pos = 0.0;
+namespace controller::control {
 
 std::pair<model::UR5::Configuration, double> joint_state_to_config(
     sensor_msgs::JointState::ConstPtr joint_state
 ) {
-    Vector<6> config(ur5_default_homing_config_init);
-	double gripper_pos = ur5_default_homing_gripper_pos;
+    Vector<6> config = util::ur5_default_homing_config_vec;
+	double gripper_pos = util::ur5_default_homing_gripper_pos;
 	for (int i=0; i<joint_state->name.size(); ++i) {
 		const auto& name = joint_state->name[i];
 		const auto& position = joint_state->position[i];
