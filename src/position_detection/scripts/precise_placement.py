@@ -144,6 +144,7 @@ class PrecisePlacement:
         rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
         rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
+        self.pub = rospy.Publisher("block_positions", std_msgs.msg.String, queue_size=1)
         #load meshes
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
@@ -262,13 +263,10 @@ def main():
     ##print(open3d.__version__)
     rospy.init_node("position_detection")
     rospy.loginfo("position_detection init")
-    detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
 
     cloud_srv="/ur5/zed_node/point_cloud/cloud_registered"
     precise =PrecisePlacement(cloud_srv)
-    
-    rospy.loginfo("registered")
-    
+    rospy.loginfo("Ready")
     
     #proc = PrecisePlacement()
     #rospy.Service("detect_blocks", DetectBlocks, proc.callback)
