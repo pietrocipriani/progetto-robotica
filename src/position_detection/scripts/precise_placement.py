@@ -180,6 +180,8 @@ class PrecisePlacement:
 
         if self.point_cloud is None:
             return
+        header = Header(seq=self.msg_seq, frame_id = "base link", stamp=rospy.Time.now())
+        
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
@@ -234,7 +236,7 @@ class PrecisePlacement:
                                    angle=math.acos(max(min(transform[0][0], 1), -1)))
             to_send.append(to_add)
             #print(to_add)
-        header = Header(seq=self.msg_seq, frame_id = "base link", stamp=rospy.Time.now())
+        
         to_send = BlockPositions(header=header, blocks=to_send)
         #print(to_send)
         self.pub.publish(to_send)
