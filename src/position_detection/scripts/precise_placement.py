@@ -13,6 +13,8 @@ import os
 import math
 import threading
 import time
+from open3d.pipelines import registration as treg
+
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
         (rgb_uint32 & 0x00ff0000)>>16, (rgb_uint32 & 0x0000ff00)>>8, (rgb_uint32 & 0x000000ff)
@@ -86,6 +88,10 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     #mesh.compute_vertex_normals()
     #print(mesh)
     return mesh
+def approx_coordinate(x, y):
+    x-=960
+    y-=540
+    
 
 class PrecisePlacement:
     def update_visualizer(self):
@@ -141,38 +147,75 @@ class PrecisePlacement:
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
         self.meshes={
-            "brick_1x1_H": None,
-            "brick_2x1_T": None,
-            "brick_2x1_L": None,
-            "brick_2x1_H": None,
-            "brick_2x1_U": None,
-            "brick_2x2_H": None,
-            "brick_2x2_U": None,
-            "brick_3x1_H": None,
-            "brick_3x1_U": None,
-            "brick_4x1_H": None,
-            "brick_4x1_L": None,
+            "1x1_H": None,
+            "2x1_T": None,
+            "2x1_L": None,
+            "2x1_H": None,
+            "2x1_U": None,
+            "2x2_H": None,
+            "2x2_U": None,
+            "3x1_H": None,
+            "3x1_U": None,
+            "4x1_H": None,
+            "4x1_L": None,
             }
         for key in self.meshes.keys():
-            cur_model_path = os.path.join(model_path, os.path.join(key, "mesh.stl"))
+            cur_model_path = os.path.join(model_path, os.path.join("brick_" + key, "mesh.stl"))
             self.meshes[key] = open3d.io.read_triangle_mesh(cur_model_path)
+            self.meshes[key].compute_vertex_normals()
+
             print(self.meshes[key])
         
         
 
     def image_callback(self, data: Image):
+        if self.point_cloud is None:
+            return
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
         for i in resp.boxes:
             #print(i)
             mesh=generate_intersection_mesh(676+i.x1-10, 676+i.x2+10, 396+i.y1-10, 396+i.y2+10)
-            mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
+            #mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
+            #mesh.paint_uniform_color([1, 0.706, 0])
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
-            mesh.paint_uniform_color([1, 0.706, 0])
+            
+            cropped = self.point_cloud.crop(mesh)
+            cropped.paint_uniform_color(np.random.rand(3))
+            self.vis.add_geometry(cropped, reset_bounding_box=False)
+            center = cropped.get_center()
+            transform = np.eye(4)
+            transform[0:3, 3]=center
+
+            estimation = treg.TransformationEstimationPointToPoint()
+            max_correspondence_distance = 0.15
+            callback_after_iteration = lambda updated_result_dict : print("Iteration Index: {}, Fitness: {}, Inlier RMSE: {},".format(
+                updated_result_dict["iteration_index"].item(),
+                updated_result_dict["fitness"].item(),
+                updated_result_dict["inlier_rmse"].item()))
+            source= self.meshes[i.label].sample_points_uniformly(number_of_points=2000)
+            target=cropped
+            init_source_to_target=np.eye(4)
+            voxel_size=0.025
+            # Convergence-Criteria for Vanilla ICP
+            criteria = treg.ICPConvergenceCriteria(relative_fitness=0.000001,
+                                                relative_rmse=0.000001,
+                                                max_iteration=50)
+            threshold = 0.1
+            icp_iteration = 100
+            save_image = False
+            result = open3d.pipelines.registration.registration_icp(
+                source, target, threshold, transform,
+                open3d.pipelines.registration.TransformationEstimationPointToPoint(),
+                open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=50))
+                #source.transform(reg_p2l.transformation)
+            print(result.transformation)
+            print(result)
+            print(cropped)
             #mesh.transform(camera_transform)
-            self.vis.add_geometry(mesh, reset_bounding_box=False)
+            #self.vis.add_geometry(mesh, reset_bounding_box=False)
             #mesh=mesh.transform(camera_transform)
             #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
             #print(mesh)
