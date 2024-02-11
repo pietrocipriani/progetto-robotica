@@ -122,6 +122,7 @@ class PrecisePlacement:
         self.point_cloud = None
         self.use_visualizer = use_visualizer
         self.raw_point_cloud = None
+        self.last_point_cloud_time = 0
 
         if use_visualizer:
             self.vis=open3d.visualization.Visualizer()
@@ -180,7 +181,7 @@ class PrecisePlacement:
 
         if self.point_cloud is None:
             return
-        header = Header(seq=self.msg_seq, frame_id = "base link", stamp=rospy.Time.now())
+        header = Header(seq=self.msg_seq, frame_id = "base_link", stamp=self.last_point_cloud_time)
         
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
@@ -238,7 +239,7 @@ class PrecisePlacement:
             #print(to_add)
         
         to_send = BlockPositions(header=header, blocks=to_send)
-        #print(to_send)
+        print("SENDING!", to_send)
         self.pub.publish(to_send)
         #cv2.imshow("test", decoded_image)
         #cv2.waitKey(1)
@@ -246,6 +247,7 @@ class PrecisePlacement:
     def callback_cloud(self, data: PointCloud2):
         ##print("point_cloud")
         self.raw_point_cloud=data
+        self.last_point_cloud_time=rospy.Time.now()
 
     def process_latest_point_cloud(self):
         converted = convertCloudFromRosToOpen3d(self.raw_point_cloud)

@@ -53,6 +53,7 @@
   <depend>std_msgs</depend>
   <depend>gazebo_msgs</depend>
   <depend>planner</depend>
+  <depend>position_detection</depend>
   <exec_depend>gazebo_ros</exec_depend>
 
   <!-- The export tag contains other, unspecified, tags -->

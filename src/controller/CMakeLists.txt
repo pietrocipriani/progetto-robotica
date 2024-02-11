@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   planner
+  position_detection
 )
 
 ## System dependencies are found with CMake's conventions

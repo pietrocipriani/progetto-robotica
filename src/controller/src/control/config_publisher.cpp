@@ -28,7 +28,7 @@ void ConfigPublisher::publish_config(
 
     std::stringstream ss;
     std::copy(msg.data.begin(), msg.data.end(), std::ostream_iterator<double>(ss, " "));
-	ROS_INFO("Publishing config: %s", ss.str().c_str());
+	ROS_DEBUG("Publishing config: %s", ss.str().c_str());
 
     publisher.publish(msg);
 }
