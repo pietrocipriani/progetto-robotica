@@ -3,6 +3,7 @@
 #define _BLOCK_TYPE_HPP_
 
 #include <cassert>
+#include "utils/math.hpp"
 
 namespace planner {
 
@@ -102,30 +103,30 @@ constexpr double get_closed_gripper_pos(const Block& block_type) {
 /// Circular in order to simplify the checking.
 ///
 constexpr double get_hit_box_radius(const Block& block_type) {
-    // TODO fill values
+    constexpr double UNIT_SIZE = 0.031; // all sides of the 1x1 block are this long
     switch (block_type) {
         case Block::B_1x1_H:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(1, 1);
         case Block::B_2x1_T:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 1);
         case Block::B_2x1_L:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 1);
         case Block::B_2x1_H:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 1);
         case Block::B_2x1_U:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 1);
         case Block::B_2x2_H:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 2);
         case Block::B_2x2_U:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(2, 2);
         case Block::B_3x1_H:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(3, 1);
         case Block::B_3x1_U:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(3, 1);
         case Block::B_4x1_H:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(4, 1);
         case Block::B_4x1_L:
-            return 0.0;
+            return UNIT_SIZE * rectangle_radius(4, 1);
     }
     assert(false);
 }

@@ -37,8 +37,6 @@ public:
 
   Pose pose;
 
-  Scalar hit_box_radius;
-
   BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept;
 
   static BlockPose pad_pose(Block block) noexcept;
