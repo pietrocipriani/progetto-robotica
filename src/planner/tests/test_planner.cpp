@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 
   out << pose.linear().transpose().format(format) << format.coeffSeparator;
   #ifndef USE_EULER_ANGLES
-    Axis axis = pose.angular() * (Axis::UnitZ() * 0.02);
+    Axis axis = pose.angular() * (Axis::UnitX() * 0.02);
   #else
     auto axis = euler::rotate_axis<os_size>(pose.angular(), Axis::UnitZ() * 0.02);
   #endif
@@ -87,7 +87,7 @@ bool test_planner() {
     BlockPose(Block::B_1x1_H, 0.4, 0.2, 0)
   );
 
-  constexpr Time dt = 0.001;
+  constexpr Time dt = 0.0001;
 
   char filename[] = "/tmp/test_via_points_XXXXXX\0csv";
   char *temp = mktemp(filename);

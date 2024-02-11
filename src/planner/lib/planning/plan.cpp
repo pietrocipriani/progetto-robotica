@@ -11,6 +11,7 @@
 #include <cmath>
 #include <functional>
 #include <initializer_list>
+#include <iostream>
 #include <limits>
 #include <list>
 
@@ -50,13 +51,14 @@ std::function<std::tuple<typename Robot::Configuration, bool>()> to_js_trajector
 
     // Enforcing max joint speed with time dilation.
     // TODO: check error convergence.
-    const Scalar time_factor = std::min(1.0, Robot::max_joint_speed / jv.norm());
+    const Scalar time_factor = 1.0; //std::min(1.0, Robot::max_joint_speed / jv.norm());
     robot.config += jv * (dt * time_factor);
 
     t += dt * time_factor;
 
     // Could be different from `next_pose`.
-    current = f(t);
+    current = next_pose; // f(t);
+
     #endif
 
     return std::make_tuple(robot.config, t >= duration);

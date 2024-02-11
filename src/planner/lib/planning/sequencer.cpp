@@ -22,7 +22,8 @@ using LinearParams = Params<os::Position::Linear>;
 using AngularParams = Params<os::Position::Angular>;
 
 // TODO: avoid conversions.
-Scalar max_acceleration(const os::Position& pose) {
+template<class Point>
+Scalar max_acceleration(Point&& pose) {
   // TODO: radius awareness.
   return model::UR5::max_joint_accel;
 }
@@ -66,12 +67,13 @@ void get_maximum_speed(
 }
 
 template<class Point>
-void /*typename Params<Point>::Times*/ get_desired_speed(
+typename Params<Point>::Times get_desired_speed(
   SpeedLimits& limits, const Scalar& distance,
   const Scalar& acc_1, const Scalar& acc_2
 ) {
   assert(limits.prev >= 0 && limits.current >= 0 && limits.next >= 0);
   assert(distance >= 0);
+  assert(acc_1 > 0 && acc_2 > 0);
 
   
   
@@ -81,7 +83,16 @@ void /*typename Params<Point>::Times*/ get_desired_speed(
   // Local optimization. No awareness of the global frame.
   get_maximum_speed(distance, limits, acc_1, acc_2);
 
+  Scalar delta_t_1 = (limits.prev + limits.current) / acc_1;
+  Scalar delta_t_2 = (limits.next + limits.current) / acc_2;
+
+  Time time = limits.current < dummy_precision
+    ? delta_t_1 / 2 + delta_t_2 / 2
+    : distance / limits.current;
+
   assert(limits.current >= 0);
+
+  return {time, delta_t_1};
 }
 
 // TODO: consider orientation.
@@ -114,21 +125,16 @@ auto generate_parameters(
   const Scalar max_ang_acc_1 = max_angular_acceleration();
   const Scalar max_ang_acc_2 = max_angular_acceleration();
 
-  assert(max_lin_acc_1 >= 0 && max_lin_acc_2 >= 0);
-  assert(max_ang_acc_1 >= 0 && max_ang_acc_2 >= 0);
-
-  get_desired_speed<TargetPoint>(linear_speed, linear_distance, max_lin_acc_1, max_lin_acc_2);
-  get_desired_speed<TargetPoint>(angular_speed, angular_distance, max_ang_acc_1, max_ang_acc_2);
+  auto t_lin = get_desired_speed<TargetPoint>(linear_speed, linear_distance, max_lin_acc_1, max_lin_acc_2);
+  auto t_ang = get_desired_speed<TargetPoint>(angular_speed, angular_distance, max_ang_acc_1, max_ang_acc_2);
 
   const Time current_time = time;
 
-  time += std::max(linear_distance / linear_speed.current, 0.0 /*angular_distance / angular_speed.current*/);
+  time += std::max(t_lin.time, 0.0/*t_ang.time*/);
 
-  Scalar delta_t = std::max(
-    (linear_speed.prev + linear_speed.current) / max_lin_acc_1,
-    0.0/*(angular_speed.prev + angular_speed.current) / max_ang_acc_1*/
-  );
-  
+  // TODO: once time is choosen, delta_t can be choosen more accurately.
+  Scalar delta_t = std::max(t_lin.accel_delta, 0.0/*t_ang.accel_delta*/);
+
   #ifdef JOINT_SPACE_PLANNING
   return Params<model::UR5::Configuration>(kinematics::inverse(model::UR5(), point), current_time, delta_t);
   #else
@@ -152,7 +158,7 @@ auto generate_parameters(
 
   const Scalar max_ang_acc = max_angular_acceleration();
 
-  const Scalar delta_t = std::max(linear_speed.prev / max_lin_acc, angular_speed.prev / max_ang_acc);
+  const Scalar delta_t = std::max(linear_speed.prev / max_lin_acc, 0.0/*angular_speed.prev / max_ang_acc*/);
 
   time += delta_t / 2;
 
@@ -169,7 +175,6 @@ TimeFunction<Point> via_point_interpolation(
   Container<Params<Point>>&& via_points,
   Params<Point>&& end
 ) {
-  #ifndef FORCE_PARABOLIC_INTERPOLATION
   constexpr bool is_quat_pose = is_quasi<Point, kinematics::Pose<coord::Lie, coord::Cylindrical>> ||
                                 is_quasi<Point, kinematics::Pose<coord::Lie, coord::Cartesian>>;
 
@@ -203,9 +208,6 @@ TimeFunction<Point> via_point_interpolation(
   } else {
     return parabolic_interpolation(start, via_points, end);
   }
-  #else
-  return parabolic_interpolation(start, via_points, end);
-  #endif
 }
 
 
@@ -224,6 +226,8 @@ via_point_sequencer(
   const os::Position& target_pose,
   Time& finish_time
 ) {
+  using namespace uniformed_rotation_algebra;
+
   // TODO: too many special cases.
 
   auto vp_it = viapoints.begin();
@@ -246,18 +250,18 @@ via_point_sequencer(
   SpeedLimits linear_limits{0, max_linear_speed, viapoints.size() == 0 ? 0 : max_linear_speed};
   SpeedLimits angular_limits{0, max_angular_speed, viapoints.size() == 0 ? 0 : max_angular_speed};
 
-  Scalar prev_time = 0;
+  Scalar time = 0;
 
   auto start = generate_parameters<linear_system, angular_system>(
-    *current, *next, linear_limits, angular_limits, prev_time
+    *current, *next, linear_limits, angular_limits, time
   );
 
-  prev_time += start.times.accel_delta / 2;
+  time += start.times.accel_delta / 2;
 
   std::vector<decltype(start)> via_points;
   via_points.reserve(viapoints.size());
 
-  for (const auto& vp : viapoints) {
+  for ([[maybe_unused]] const auto& vp : viapoints) {
     current = next;
     next = next_next;
     next_next = get_next();
@@ -266,7 +270,7 @@ via_point_sequencer(
     angular_limits.shift(next_next == nullptr ? 0 : max_angular_speed);
 
     auto params = generate_parameters<linear_system, angular_system>(
-      *current, *next, linear_limits, angular_limits, prev_time
+      *current, *next, linear_limits, angular_limits, time
     );
 
     via_points.push_back(std::move(params));
@@ -277,7 +281,7 @@ via_point_sequencer(
 
   
   auto end = generate_parameters<linear_system, angular_system>(
-    target_pose, linear_limits, angular_limits, prev_time
+    target_pose, linear_limits, angular_limits, time
   );
 
   finish_time = end.times.time;

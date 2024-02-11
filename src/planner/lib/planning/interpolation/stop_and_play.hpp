@@ -94,12 +94,14 @@ auto stop_and_play_interpolation(
     auto i1 = points.begin();
 
     interpolation2(start, *i1, chain);
-    for (auto i2 = std::next(i1); i2 != points.end(); i1 = i2, i2 = std::next(i1)) {
-      interpolation2(*i1, *i2, chain);
+    for (; std::next(i1) != points.end(); i1 = std::next(i1)) {
+      interpolation2(*i1, *std::next(i1), chain);
     }
   }
 
-  return Sequence(std::move(chain));
+  auto s = Sequence(std::move(chain));
+
+  return s;
 }
 
 

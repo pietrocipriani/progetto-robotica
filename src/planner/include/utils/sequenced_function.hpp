@@ -99,7 +99,7 @@ private:
     it = std::lower_bound(functions.cbegin(), functions.cend(), arg);
 
     // If there is no function for the given argument, the first function is extended.
-    if (it == functions.cend()) it = functions.cbegin();
+    if (it != functions.cbegin()) it = std::prev(it);
 
     return *it;
   }

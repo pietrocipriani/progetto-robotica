@@ -60,6 +60,7 @@ TimeFunction<Point> quadratic_acceleration(
 ) {
   using namespace uniformed_rotation_algebra;
 
+
   auto acc2 = unlazy(final_velocity / (2 * duration));
 
   return [=, acc = std::move(acc2)](const Time& time) {

@@ -2,6 +2,7 @@
 #define LINEAR_HPP_INCLUDED
 
 
+#include "constants.hpp"
 #include "planner.hpp"
 
 namespace planner {
@@ -14,11 +15,15 @@ namespace planner {
 /// @param duration The time to move from @p initial_position to @p final_position.
 /// @return An interpolating function of time between the two positions.
 template<class Point>
-auto linear_interpolation(
+TimeFunction<Point> linear_interpolation(
   const Point& initial_position, const Point& final_position,
   const Time& start_time, const Time& duration
 ) {
   using namespace uniformed_rotation_algebra;
+
+  if (duration < dummy_precision) {
+    return [=]([[maybe_unused]] const Time& time) { return final_position; };
+  }
 
   auto velocity = unlazy((final_position - initial_position) / duration);
 
