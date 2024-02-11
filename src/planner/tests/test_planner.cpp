@@ -87,7 +87,7 @@ bool test_planner() {
     BlockPose(Block::B_1x1_H, 0.4, 0.2, 0)
   );
 
-  constexpr Time dt = 0.0001;
+  constexpr Time dt = 0.001;
 
   char filename[] = "/tmp/test_via_points_XXXXXX\0csv";
   char *temp = mktemp(filename);

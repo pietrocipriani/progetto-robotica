@@ -153,17 +153,17 @@ InvJacobian<Robot> inverse_geometrical_jacobian(const Robot& robot, const Defaul
 template<class Robot>
 typename Robot::Velocity inverse_diff(
   const Robot& robot,
-  const DefaultPose::Derivative::Base& movement,
+  const DefaultPose::Derivative& movement,
   const DefaultPose& current_pose
 ) {
   const auto inverse = inverse_geometrical_jacobian(robot, current_pose);
 
-  return typename Robot::Velocity(inverse * movement);
+  return typename Robot::Velocity(inverse * movement.vector());
 }
 
 template<class Robot>
 typename Robot::Velocity inverse_diff(const Robot& robot, const DefaultPose::Derivative& movement) {
-  return inverse_diff(robot, movement.vector(), direct(robot));
+  return inverse_diff(robot, movement, direct(robot));
 }
 
 template<class Robot>
@@ -179,11 +179,11 @@ typename Robot::Velocity dpa_inverse_diff(
   // Compute the error, movement is required.
   // TODO: introduce a weight coefficient.
   // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
-  auto error = unlazy((desired_pose - effective_position).vector() / dt);
+  auto error = (desired_pose - effective_position) / dt;
 
   // Compose the error with the desired movement.
   // TODO: prove the error converges to 0.
-  error += movement.vector();
+  error += movement;
 
   return inverse_diff(robot, error, effective_position);
 }

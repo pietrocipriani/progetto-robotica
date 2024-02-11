@@ -46,13 +46,13 @@ std::function<std::tuple<typename Robot::Configuration, bool>()> to_js_trajector
     t += dt;
     #else
     const os::Position next_pose = f(t + dt);
-    const os::Velocity ov = (next_pose - current) / dt;
-    const js::Velocity jv = kinematics::dpa_inverse_diff(robot, ov, current, dt);
+    const os::Velocity ov = (next_pose - current) / 1.0;
+    const js::Velocity jv = kinematics::dpa_inverse_diff(robot, ov, current, 1.0);
 
     // Enforcing max joint speed with time dilation.
     // TODO: check error convergence.
-    const Scalar time_factor = 1.0; //std::min(1.0, Robot::max_joint_speed / jv.norm());
-    robot.config += jv * (dt * time_factor);
+    const Scalar time_factor = std::min(1.0, Robot::max_joint_speed / jv.norm() * dt);
+    robot.config += jv * time_factor;
 
     t += dt * time_factor;
 
