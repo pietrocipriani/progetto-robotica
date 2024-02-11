@@ -49,7 +49,7 @@ def main():
         boxes = torch.asarray([[0,0,0,0]] + [[b.x1, b.y1, b.x2, b.y2] for b in data])[1:]
         rospy.loginfo(f"received boxes {boxes}")
         nonlocal annotated_image
-        annotated_image = draw_bbox(decoded_image, boxes, [b.label for b in data])
+        annotated_image = draw_bbox(decoded_image, boxes, [f"{b.label} {b.confidence:.2f}" for b in data])
 
     try:
         while True:

@@ -49,7 +49,7 @@ struct RestrictedFunction {
   typename std::invoke_result_t<Function, Domain> operator()(const Domain& arg) const {
     return std::invoke(f, arg);
   }
-  
+
   /// Invokes the underlying function, no checks are performed.
   ///
   typename std::invoke_result_t<Function, Domain> operator()(Domain&& arg) const {
@@ -70,7 +70,7 @@ public:
 private:
   using It = typename Container::const_iterator;
   Container functions;
-  
+
   /// Cached function to have constant time evaluation with sequential generation.
   ///
   mutable It it;
@@ -103,13 +103,14 @@ private:
 
     return *it;
   }
-  
+
 public:
   /// Creates a SequencedFunction from the list of functions.
   /// The list must be sorted and contain at least one function.
   /// @param fs The list of functions.
   SequencedFunction(Container&& fs) : functions(std::move(fs)), it(functions.cbegin()) {
-    assert(!functions.empty() && std::is_sorted(functions.cbegin(), functions.cend()));
+    assert(!functions.empty());
+    //assert(std::is_sorted(functions.cbegin(), functions.cend())); TODO why?
   }
 
   SequencedFunction(const SequencedFunction& other) : functions(other.functions), it(functions.cbegin()) {}

@@ -8,9 +8,14 @@ namespace planner {
 BlockPose::BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept
   : block(block), pose({x, y}, BlockPose::Pose::Angular(angle)) {}
 
+BlockPose BlockPose::pad_pose(Block block) noexcept {
+  auto [x, y, angle] = get_pad_position(block);
+  return BlockPose(block, x, y, angle);
+}
+
 bool BlockPose::collides(const BlockPose& other) const {
   auto distance = pose.linear() - other.pose.linear();
-  Scalar min_distance = hit_box_radius + other.hit_box_radius;
+  Scalar min_distance = get_hit_box_radius(block) + get_hit_box_radius(other.block);
 
   return distance.norm() < min_distance;
 }

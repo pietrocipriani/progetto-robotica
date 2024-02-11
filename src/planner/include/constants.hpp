@@ -35,7 +35,7 @@ constexpr Scalar max_speed = 0.01;
 
 /// The maximum linear speed in the operational space for the end effector. [m/s]
 ///
-constexpr Scalar max_linear_speed = 0.3;
+constexpr Scalar max_linear_speed = 0.1;
 
 /// The maximum angular speed for the end effector. [rad/s].
 ///

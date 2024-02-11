@@ -1,0 +1,23 @@
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='pad_2x2_U'>
+    <link name='link'>
+      <visual name='visual'>
+        <geometry>
+          <mesh>
+            <uri>model://pad_2x2_U/mesh.stl</uri>
+            <scale>0.04 0.07 0.07</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 0.0 1.0</ambient>
+          <diffuse>0.0 0.0 0.0 1.0</diffuse>
+          <specular>0.1 0.1 0.1 1.0 5.0</specular>
+        </material>
+        <transparency>0</transparency>
+        <cast_shadows>0</cast_shadows>
+      </visual>
+    </link>
+    <static>1</static>
+  </model>
+</sdf>

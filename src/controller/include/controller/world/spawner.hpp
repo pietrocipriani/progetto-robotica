@@ -9,12 +9,12 @@
 
 namespace controller::world {
 
-class BlockSpawner {
+class Spawner {
 
     ros::ServiceClient client;
 
 public:
-    BlockSpawner(ros::ServiceClient&& client);
+    Spawner(ros::ServiceClient&& client);
 
     void spawn_block(
         planner::Block block_type,
@@ -22,7 +22,15 @@ public:
         double y,
         double angle,
         bool upside_down,
-        const util::Color& color
+        const util::Color& color,
+        bool random_name
+    );
+
+    void spawn_pad(
+        planner::Block pad_for_block_type,
+        double x,
+        double y,
+        double angle
     );
 };
 

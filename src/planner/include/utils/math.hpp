@@ -26,6 +26,28 @@ Scalar sigmoid(Scalar&& x) {
   return (std::exp(2 * x) - 1) / (std::exp(2 * x) + 1);
 }
 
+constexpr double _constexpr_sqrt_newton_raphson(double x, double curr, double prev) {
+  return curr == prev
+    ? curr
+    : _constexpr_sqrt_newton_raphson(x, 0.5 * (curr + x / curr), curr);
+}
 
+/*
+* Constexpr version of the square root
+* Return value:
+*   - For a finite and non-negative value of "x", returns an approximation for the square root of "x"
+*   - Otherwise, returns NaN
+* Taken from https://stackoverflow.com/a/34134071
+*/
+constexpr double constexpr_sqrt(double x) {
+  return x >= 0 && x < std::numeric_limits<double>::infinity()
+    ? _constexpr_sqrt_newton_raphson(x, x, 0)
+    : std::numeric_limits<double>::quiet_NaN();
+}
+
+constexpr double rectangle_radius(double w, double h) {
+  // the collision "radius" of a rectangle is half of its diagonal
+  return constexpr_sqrt(w*w + h*h) / 2;
+}
 
 #endif /* UTILS_MATH_HPP_INCLUDED */

@@ -37,9 +37,9 @@ public:
 
   Pose pose;
 
-  Scalar hit_box_radius;
-
   BlockPose(Block block, Scalar x, Scalar y, Scalar angle) noexcept;
+
+  static BlockPose pad_pose(Block block) noexcept;
 
   /// Checks if @p this block collides with @p other.
   /// Collision is computed according to position and @p hit_box_radius.
@@ -94,7 +94,6 @@ public:
 /// Sequence of configurations to perform the movement of a certain block.
 /// @note Two phases are returned to allow the controller to perform the picking.
 struct MovementSequence {
-
   struct ConfigGenerator {
     using Point = model::UR5::Configuration;
     using Ret = std::tuple<Point, bool>;
@@ -136,7 +135,6 @@ struct MovementSequence {
   };
 
   ConfigGenerator lazy_picking, lazy_dropping;
-
 };
 
 /// Generates dependencies between the positioning of the blocks.
