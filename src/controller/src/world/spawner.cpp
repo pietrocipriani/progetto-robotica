@@ -29,58 +29,11 @@ constexpr const char* BLOCK_SDF = R"(
 	</inertial>
 
 	<collision name="collision">
-        <laser_retro>0</laser_retro>
-        <max_contacts>10</max_contacts>
 		<geometry>
 			<mesh>
 			    <uri>model://brick_%s/mesh.stl</uri>
 			</mesh>
 		</geometry>
-        <surface>
-            <friction>
-                <ode>
-                    <mu>1</mu>
-                    <mu2>1</mu2>
-                    <fdir1>0 0 0</fdir1>
-                    <slip1>0</slip1>
-                    <slip2>0</slip2>
-                </ode>
-                <torsional>
-                    <coefficient>1</coefficient>
-                    <patch_radius>0</patch_radius>
-                    <surface_radius>0</surface_radius>
-                    <use_patch_radius>1</use_patch_radius>
-                    <ode>
-                        <slip>0</slip>
-                    </ode>
-                </torsional>
-            </friction>
-            <bounce>
-                <restitution_coefficient>0</restitution_coefficient>
-                <threshold>1e+06</threshold>
-            </bounce>
-            <contact>
-                <collide_without_contact>0</collide_without_contact>
-                <collide_without_contact_bitmask>1</collide_without_contact_bitmask>
-                <collide_bitmask>1</collide_bitmask>
-                <ode>
-                    <soft_cfm>0</soft_cfm>
-                    <soft_erp>0.2</soft_erp>
-                    <kp>1e+13</kp>
-                    <kd>1</kd>
-                    <max_vel>0.01</max_vel>
-                    <min_depth>0</min_depth>
-                </ode>
-                <bullet>
-                    <split_impulse>1</split_impulse>
-                    <split_impulse_penetration_threshold>-0.01</split_impulse_penetration_threshold>
-                    <soft_cfm>0</soft_cfm>
-                    <soft_erp>0.2</soft_erp>
-                    <kp>1e+13</kp>
-                    <kd>1</kd>
-                </bullet>
-            </contact>
-        </surface>
 	</collision>
 
 	<visual name="visual">
@@ -144,7 +97,7 @@ void Spawner::spawn_block(
 	geometry_msgs::Point point;
 	point.x = x;
 	point.y = y;
-	point.z = upside_down ? 0.93 : 0.88;
+	point.z = upside_down ? 0.93 : 0.87;
 
 	geometry_msgs::Quaternion quaternion;
     if (upside_down) {
@@ -193,7 +146,7 @@ void Spawner::spawn_pad(
 	geometry_msgs::Point point;
 	point.x = x;
 	point.y = y;
-	point.z = 0.88;
+	point.z = 0.87;
 
 	geometry_msgs::Quaternion quaternion;
     quaternion.w = std::cos(angle / 2);

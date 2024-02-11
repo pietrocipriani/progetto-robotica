@@ -45,36 +45,47 @@ int main(int argc, char **argv) {
 
 
 	std::vector<planner::BlockPose> poses{
-		planner::BlockPose(planner::Block::B_1x1_H, 0.5, 0.5, 0.5),
-		planner::BlockPose::pad_pose(planner::Block::B_1x1_H),
-		planner::BlockPose(planner::Block::B_4x1_H, 0.1, 0.4, 4),
-		planner::BlockPose::pad_pose(planner::Block::B_4x1_H),
-		planner::BlockPose(planner::Block::B_2x2_U, 0.6, 0.7, 2),
-		planner::BlockPose::pad_pose(planner::Block::B_2x2_U),
+		planner::BlockPose(planner::Block::B_4x1_L, 0.6, 0.7, 2),
+		planner::BlockPose::pad_pose(planner::Block::B_4x1_L),
+		planner::BlockPose(planner::Block::B_3x1_U, 0.5, 0.5, 0.5),
+		planner::BlockPose::pad_pose(planner::Block::B_3x1_U),
+		planner::BlockPose(planner::Block::B_2x1_L, 0.1, 0.4, 4),
+		planner::BlockPose::pad_pose(planner::Block::B_2x1_L),
 	};
 
 
 	// spawn pads, i.e. the block targets
 	world::spawn_missing_pads(spawner);
 
+	// for (int i=0; i<poses.size()-1; i += 2) {
+	// 	const planner::Block block = poses[i].block;
 
-	for (int i=0; i<poses.size()-1; i += 2) {
-		spawner.spawn_block(poses[i].block,
-			poses[i].pose.linear().x(), poses[i].pose.linear().y(),
-			poses[i].pose.angular()[0], false,
+	// 	spawner.spawn_block(block,
+	// 		poses[i].pose.linear().x(), poses[i].pose.linear().y(),
+	// 		poses[i].pose.angular()[0], false,
+	// 		util::Color{255, 0, 0, 255});
+
+	// 	const planner::BlockMovement movement{
+	// 		poses[i],
+	// 		poses[i+1]
+	// 	};
+
+	constexpr double x=0.5, y=0.5, angle=0;
+	for (const planner::Block block : planner::all_blocks) {
+		spawner.spawn_block(block, x, y, angle, false,
 			util::Color{255, 0, 0, 255});
 
 		const planner::BlockMovement movement{
-			poses[i],
-			poses[i+1]
+			planner::BlockPose(block, x, y, angle),
+			planner::BlockPose::pad_pose(block)
 		};
 
 		auto configs = planner::plan_movement(robot, movement, dt);
 		ROS_INFO("Movement planned");
 
 
-		const double open_gripper = planner::get_open_gripper_pos(poses[i].block);
-		const double closed_gripper = planner::get_closed_gripper_pos(poses[i].block);
+		const double open_gripper = planner::get_open_gripper_pos(block);
+		const double closed_gripper = planner::get_closed_gripper_pos(block);
 
 		if (open_gripper > prev_gripper_pos) {
 			// if picking up the next block requires a more open position, open the gripper right away
@@ -84,6 +95,7 @@ int main(int argc, char **argv) {
 
 		auto interm_config = config_publisher.publish_config_sequence(configs.lazy_picking, open_gripper, frequency_hz);
 		config_publisher.publish_gripper_sequence(interm_config, prev_gripper_pos, closed_gripper, gripper_speed, frequency_hz);
+		ros::Duration(1, 0).sleep();
 
 		prev_config = config_publisher.publish_config_sequence(configs.lazy_dropping, closed_gripper, frequency_hz);
 		config_publisher.publish_gripper_sequence(prev_config, closed_gripper, open_gripper, gripper_speed, frequency_hz);
