@@ -73,7 +73,7 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     x_max-=960
     y_min-=540
     y_max-=540
-    print(generate_points(x_min, y_min))
+    #print(generate_points(x_min, y_min))
     points = np.array([generate_points(x_min, y_min)])
     points = np.append(points, [generate_points(x_min, y_max)])
     points = np.append(points, [generate_points(x_max, y_min)])
@@ -84,7 +84,7 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     mesh = pcd.get_oriented_bounding_box()
     #mesh, _ = pcd.compute_convex_hull()
     #mesh.compute_vertex_normals()
-    print(mesh)
+    #print(mesh)
     return mesh
     #
     #open3d.io.write_point_cloud("trapezio.pcd", pcd)
@@ -95,17 +95,29 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
 #bbox = bbox.transform(inv_camera_transform)
 
 class PrecisePlacement:
-    def update(self):
+    def update_visualizer(self):
         while True:
             #print("run")
             self.vis.poll_events()
             self.vis.update_renderer()
             time.sleep(0.020)
+    def point_cloud_processer(self):
+        while True:
+            if self.raw_point_cloud is None:
+                time.sleep(0.1)
+            else:
+                self.process_latest_point_cloud()
+            #print("run")
+            #self.vis.poll_events()
+            #self.vis.update_renderer()
+            #time.sleep(0.020)
 
     def __init__(self, point_cloud_srv, use_visualizer=True):
         
         self.point_cloud = None
         self.use_visualizer = use_visualizer
+        self.raw_point_cloud = None
+
         if use_visualizer:
             self.vis=open3d.visualization.Visualizer()
             self.vis.create_window()
@@ -117,15 +129,20 @@ class PrecisePlacement:
             #self.vis.reset_view_point( reset_bounding_box=True)
             bbox = generate_intersection_mesh(0, 100, 0, 100)
             bbox = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
+            bbox.paint_uniform_color([1, 0.706, 0])
+            bbox.transform(camera_transform)
             self.vis.add_geometry(bbox)
-            self.thread = threading.Thread(target=self.update, name="process_visualization")
-            self.thread.start()
+
+            self.thread_visualizer = threading.Thread(target=self.update_visualizer, name="process_visualization")
+            self.thread_visualizer.start()
         
+        self.thread_point_cloud_processer = threading.Thread(target=self.point_cloud_processer, name="process_visualization")
+        self.thread_point_cloud_processer.start()
 
         self.bridge = CvBridge()
         
         rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
-        #rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
+        rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
         #load meshes
         rospack = rospkg.RosPack()
@@ -155,10 +172,13 @@ class PrecisePlacement:
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
         for i in resp.boxes:
-            print(i)
+            #print(i)
             mesh=generate_intersection_mesh(676+i.x1-10, 676+i.x2+10, 396+i.y1-10, 396+i.y2+10)
-            mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
-            mesh = mesh.translate(camera_transform[0:3, 3].transpose())
+            mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
+            #mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
+            #mesh = mesh.translate(camera_transform[0:3, 3].transpose())
+            mesh.paint_uniform_color([1, 0.706, 0])
+            mesh.transform(camera_transform)
             #self.vis.add_geometry(mesh, reset_bounding_box=False)
             #mesh=mesh.transform(camera_transform)
             #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
@@ -169,8 +189,11 @@ class PrecisePlacement:
         cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
-        print("point_clouddd")
-        converted = convertCloudFromRosToOpen3d(data)
+        print("point_cloud")
+        self.raw_point_cloud=data
+
+    def process_latest_point_cloud(self):
+        converted = convertCloudFromRosToOpen3d(self.raw_point_cloud)
         bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(0, 0.16, 0.87), max_bound=(1., 0.8, 0.97))
 
         bbox = bbox.get_oriented_bounding_box()
