@@ -154,6 +154,20 @@ std::queue<BlockMovement> generate_block_positioning_order(
   const std::unordered_map<Block, BlockPose>& targets
 );
 
+
+/// Generates the sequence of movements from the initial @p robot configuration, throught the picking
+/// of one block from its starting position, to the relase of the block into its target position.
+/// @param robot The current robot configuration.
+/// @param end The destination.
+/// @param dt The time granularity.
+/// @return A sequence of configurations in order to perform the given movement.
+/// @throw std::domain_error If one of the positions is not in the operational space.
+MovementSequence::ConfigGenerator plan_movement(
+  model::UR5& robot,
+  const os::Position& end,
+  const Time& dt
+);
+
 /// Generates the sequence of movements from the initial @p robot configuration, throught the picking
 /// of one block from its starting position, to the relase of the block into its target position.
 /// @param robot The current robot configuration.
@@ -161,8 +175,6 @@ std::queue<BlockMovement> generate_block_positioning_order(
 /// @param dt The time granularity.
 /// @return A sequence of configurations in order to perform the given movement.
 /// @throw std::domain_error If one of the positions is not in the operational space.
-// TODO: Is it worth to run this into a thread in order to perform the next calculations
-//  during the physical driving of the robot for the previous movement?
 MovementSequence plan_movement(
   model::UR5& robot,
   const BlockMovement& movement,

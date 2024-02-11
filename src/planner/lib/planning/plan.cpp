@@ -113,10 +113,37 @@ auto generate_positions(
     }
   }
 
-  via_points.push_back(std::move(safe_pose));
+  if (unsafe(pose)) {
+    via_points.push_back(std::move(safe_pose));
+  }
 
 
   return std::make_tuple(via_points, pose, js_pos);
+}
+
+
+/// Generates the sequence of movements from the initial @p robot configuration, throught the picking
+/// of one block from its starting position, to the relase of the block into its target position.
+/// @param robot The current robot configuration.
+/// @param end The destination position.
+/// @param dt The time granularity.
+/// @return A sequence of configurations in order to perform the given movement.
+/// @throw std::domain_error If one of the positions is not in the operational space.
+MovementSequence::ConfigGenerator plan_movement(model::UR5& robot, const os::Position& end, const Time& dt) {
+  constexpr coord::LinearSystem ls = coord::Cylindrical;
+  constexpr coord::AngularSystem as = coord::Lie;
+
+  os::Position current_pose = kinematics::direct(robot);
+
+  const auto [viapt, end_pose, end_config] = generate_positions<ls, as>(
+    robot, robot.config, current_pose, end
+  );
+
+  Time finish_time;
+
+  auto movement = via_point_sequencer<ls, as>(current_pose, viapt, end_pose, finish_time);
+
+  return to_js_trajectory(robot, current_pose, movement, finish_time, dt);
 }
 
 /// Generates the sequence of movements from the initial @p robot configuration, throught the picking
