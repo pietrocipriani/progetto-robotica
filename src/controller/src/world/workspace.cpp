@@ -71,4 +71,11 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
     }
 }
 
+void clear_workspace(Deleter& deleter) {
+    for (const planner::Block& block : planner::all_blocks) {
+        deleter.delete_pad(block);
+        deleter.delete_block(block);
+    }
+}
+
 } // namespace controller::world

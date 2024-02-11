@@ -1,6 +1,7 @@
 #include <ros/ros.h>
 #include <std_msgs/Float64MultiArray.h>
 #include <gazebo_msgs/SpawnModel.h>
+#include <gazebo_msgs/DeleteModel.h>
 #include <geometry_msgs/Pose.h>
 #include <sensor_msgs/JointState.h>
 #include <iostream>
@@ -37,11 +38,14 @@ int main(int argc, char **argv) {
 		2,
 	};
 	world::Spawner spawner{n.serviceClient<gazebo_msgs::SpawnModel>("/gazebo/spawn_sdf_model")};
+	world::Deleter deleter{n.serviceClient<gazebo_msgs::DeleteModel>("/gazebo/delete_model")};
 	ROS_INFO("created publisher and client");
 
 	auto [prev_config, prev_gripper_pos] = control::joint_state_to_config(
 		ros::topic::waitForMessage<sensor_msgs::JointState>("/ur5/joint_states", n));
 	model::UR5 robot{prev_config};
+
+	world::clear_workspace(deleter);
 
 	// setup the workspace by spawning blocks and block targets (aka pads)
 	world::setup_workspace(spawner, true);
