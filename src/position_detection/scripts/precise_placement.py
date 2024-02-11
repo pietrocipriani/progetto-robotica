@@ -29,7 +29,7 @@ def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     # Check empty
     open3d_cloud = open3d.geometry.PointCloud()
     if len(cloud_data)==0:
-        print("Converting an empty cloud")
+        #print("Converting an empty cloud")
         return None
 
     # Set open3d_cloud
@@ -62,12 +62,13 @@ camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
                             [0, 0, 0, 1]])
 
 inv_camera_transform = np.linalg.inv(camera_transform)
-print(camera_transform*inv_camera_transform)
+#print(camera_transform*inv_camera_transform)
 #given x, y coordinates (in respect to optical center), it generates 2 points
-def generate_points(x, y):
+def generate_points(x, y, y_min):
+    dist=0.53/(0.00109*y_min+0.5)
+    #print(dist, y_min)
     return [[0.1*math.tan(0.88)/960*x, 0.1*math.tan(0.88)/960*y, 0.1],
-     [2*math.tan(0.88)/960*x, 2*math.tan(0.88)/960*y, 2]
-     ]
+     [dist*math.tan(0.88)/960*x, dist*math.tan(0.88)/960*y, dist]]
     
 
 def generate_intersection_mesh(x_min, x_max, y_min, y_max):
@@ -75,18 +76,18 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     x_max-=960
     y_min-=540
     y_max-=540
-    #print(generate_points(x_min, y_min))
-    points = np.array([generate_points(x_min, y_min)])
-    points = np.append(points, [generate_points(x_min, y_max)])
-    points = np.append(points, [generate_points(x_max, y_min)])
-    points = np.append(points, [generate_points(x_max, y_max)])
+    ##print(generate_points(x_min, y_min))
+    points = np.array([generate_points(x_min, y_min, y_min)])
+    points = np.append(points, [generate_points(x_min, y_max, y_min)])
+    points = np.append(points, [generate_points(x_max, y_min, y_min)])
+    points = np.append(points, [generate_points(x_max, y_max, y_min)])
     points = np.reshape(points, (8, 3))
     pcd = open3d.geometry.PointCloud()
     pcd.points = open3d.utility.Vector3dVector(points)
     mesh = pcd.get_oriented_bounding_box()
     #mesh, _ = pcd.compute_convex_hull()
     #mesh.compute_vertex_normals()
-    #print(mesh)
+    ##print(mesh)
     return mesh
 def approx_coordinate(x, y):
     x-=960
@@ -96,7 +97,7 @@ def approx_coordinate(x, y):
 class PrecisePlacement:
     def update_visualizer(self):
         while True:
-            #print("run")
+            ##print("run")
             self.vis.poll_events()
             self.vis.update_renderer()
             time.sleep(0.020)
@@ -106,7 +107,7 @@ class PrecisePlacement:
                 time.sleep(0.1)
             else:
                 self.process_latest_point_cloud()
-            #print("run")
+            ##print("run")
             #self.vis.poll_events()
             #self.vis.update_renderer()
             #time.sleep(0.020)
@@ -164,7 +165,7 @@ class PrecisePlacement:
             self.meshes[key] = open3d.io.read_triangle_mesh(cur_model_path)
             self.meshes[key].compute_vertex_normals()
 
-            print(self.meshes[key])
+            ##print(self.meshes[key])
         
         
 
@@ -175,53 +176,56 @@ class PrecisePlacement:
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
         for i in resp.boxes:
-            #print(i)
-            mesh=generate_intersection_mesh(676+i.x1-10, 676+i.x2+10, 396+i.y1-10, 396+i.y2+10)
-            #mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
-            #mesh.paint_uniform_color([1, 0.706, 0])
+            ###print(i)
+            mesh=generate_intersection_mesh(676+i.x1, 676+i.x2, 396+i.y1, 396+i.y2)
+            #to_draw = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
+            #to_draw.paint_uniform_color([1, 0.706, 0])
+            #to_draw.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
+            #to_draw = to_draw.translate(camera_transform[0:3, 3].transpose())
+            #self.vis.add_geometry(to_draw, reset_bounding_box=False)
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
             
             cropped = self.point_cloud.crop(mesh)
+            if len(cropped.points)< 100:
+                continue
             cropped.paint_uniform_color(np.random.rand(3))
             self.vis.add_geometry(cropped, reset_bounding_box=False)
             center = cropped.get_center()
             transform = np.eye(4)
             transform[0:3, 3]=center
 
-            callback_after_iteration = lambda updated_result_dict : print("Iteration Index: {}, Fitness: {}, Inlier RMSE: {},".format(
-                updated_result_dict["iteration_index"].item(),
-                updated_result_dict["fitness"].item(),
-                updated_result_dict["inlier_rmse"].item()))
+
             source= self.meshes[i.label].sample_points_uniformly(number_of_points=2000)
             target=cropped
-            threshold = 0.1
+            threshold = 0.01
 
             start = time.time()
+            target.estimate_normals()
             result = open3d.pipelines.registration.registration_icp(
                 source, target, threshold, transform,
                 open3d.pipelines.registration.TransformationEstimationPointToPoint(),
-                open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=50))
+                open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=100))
             source.transform(result.transformation)
             end = time.time()
-            print("elapsed" + str(start-end))
+            ##print("elapsed" + str(end-start))
             self.vis.add_geometry(source, reset_bounding_box=False)
 
-            #print(result.transformation)
-            #print(result)
-            #print(cropped)
+            ###print(result.transformation)
+            ##print(result)
+            ###print(cropped)
             #mesh.transform(camera_transform)
             #self.vis.add_geometry(mesh, reset_bounding_box=False)
             #mesh=mesh.transform(camera_transform)
             #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
-            #print(mesh)
+            ###print(mesh)
 
 
         cv2.imshow("test", decoded_image)
         cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
-        print("point_cloud")
+        ##print("point_cloud")
         self.raw_point_cloud=data
 
     def process_latest_point_cloud(self):
@@ -235,11 +239,11 @@ class PrecisePlacement:
         mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
         mesh.compute_vertex_normals()
         open3d.io.write_triangle_mesh("bbox.stl", mesh)
-        #print(self.point_cloud.get_axis_aligned_bounding_box())
+        ###print(self.point_cloud.get_axis_aligned_bounding_box())
         #is_none = self.point_cloud is None
         point_cloud=converted.crop(bbox)
         self.point_cloud = point_cloud.transform(camera_transform)
-        print(self.point_cloud)
+        ##print(self.point_cloud)
 
         # visualizzation
         if self.use_visualizer:
@@ -255,7 +259,7 @@ class PrecisePlacement:
 
 
 def main():
-    print(open3d.__version__)
+    ##print(open3d.__version__)
     rospy.init_node("position_detection")
     rospy.loginfo("position_detection init")
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
@@ -272,6 +276,7 @@ def main():
         while True:
             rospy.spin()
     except KeyboardInterrupt:
+        
         print("Shutting down")
 
 if __name__ == "__main__":
