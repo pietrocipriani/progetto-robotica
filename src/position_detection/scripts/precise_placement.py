@@ -86,13 +86,6 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     #mesh.compute_vertex_normals()
     #print(mesh)
     return mesh
-    #
-    #open3d.io.write_point_cloud("trapezio.pcd", pcd)
-
-#generate_intersection_mesh(-960, -540, 960, 540)
-
-
-#bbox = bbox.transform(inv_camera_transform)
 
 class PrecisePlacement:
     def update_visualizer(self):
@@ -175,11 +168,11 @@ class PrecisePlacement:
             #print(i)
             mesh=generate_intersection_mesh(676+i.x1-10, 676+i.x2+10, 396+i.y1-10, 396+i.y2+10)
             mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
-            #mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
-            #mesh = mesh.translate(camera_transform[0:3, 3].transpose())
+            mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
+            mesh = mesh.translate(camera_transform[0:3, 3].transpose())
             mesh.paint_uniform_color([1, 0.706, 0])
-            mesh.transform(camera_transform)
-            #self.vis.add_geometry(mesh, reset_bounding_box=False)
+            #mesh.transform(camera_transform)
+            self.vis.add_geometry(mesh, reset_bounding_box=False)
             #mesh=mesh.transform(camera_transform)
             #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
             #print(mesh)
@@ -205,20 +198,14 @@ class PrecisePlacement:
         open3d.io.write_triangle_mesh("bbox.stl", mesh)
         #print(self.point_cloud.get_axis_aligned_bounding_box())
         #is_none = self.point_cloud is None
-        self.point_cloud=converted.crop(bbox)
-        self.point_cloud = self.point_cloud.transform(camera_transform)
+        point_cloud=converted.crop(bbox)
+        self.point_cloud = point_cloud.transform(camera_transform)
         print(self.point_cloud)
-        #open3d.io.write_point_cloud("test.pcd", self.point_cloud)
+
         # visualizzation
         if self.use_visualizer:
             self.vis.clear_geometries()
             self.vis.add_geometry(self.point_cloud, reset_bounding_box=False)
-        
-        #open3d.visualization.draw_geometries([self.point_cloud],
-        #    zoom=0.3,
-        #    front=[-0.866, -0.0, 0.5],
-        #    lookat=[0.4, 0.5, 0.86],
-        #    up=[-0.0, 0.0, 1.0])
 
 #cv_bridge = CvBridge()
 
