@@ -41,8 +41,19 @@ class BlockDetector:
         rospy.loginfo(f"block_detector boxes {result.boxes.xyxy}")
         return DetectBlocksResponse(
             boxes = [
-                BlockDetectorBox(x1=x1.item(), y1=y1.item(), x2=x2.item(), y2=y2.item(), label=result.names[int(label)])
-                for ((x1, y1, x2, y2), label) in zip(result.boxes.xyxy, result.boxes.cls)
+                BlockDetectorBox(
+                    x1=x1.item(),
+                    y1=y1.item(),
+                    x2=x2.item(),
+                    y2=y2.item(),
+                    label=result.names[int(label)],
+                    confidence=conf,
+                )
+                for ((x1, y1, x2, y2), label, conf) in zip(
+                    result.boxes.xyxy,
+                    result.boxes.cls,
+                    result.boxes.conf,
+                )
             ]
         )
 
