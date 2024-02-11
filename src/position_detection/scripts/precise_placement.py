@@ -11,7 +11,8 @@ from ctypes import *
 from block_detector.srv import DetectBlocks
 import os
 import math
-
+import threading
+import time
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
         (rgb_uint32 & 0x00ff0000)>>16, (rgb_uint32 & 0x0000ff00)>>8, (rgb_uint32 & 0x000000ff)
@@ -67,7 +68,11 @@ def generate_points(x, y):
      ]
     
 
-def generate_intersection_mesh(x_min, y_min, x_max, y_max):
+def generate_intersection_mesh(x_min, x_max, y_min, y_max):
+    x_min-=960
+    x_max-=960
+    y_min-=540
+    y_max-=540
     print(generate_points(x_min, y_min))
     points = np.array([generate_points(x_min, y_min)])
     points = np.append(points, [generate_points(x_min, y_max)])
@@ -76,23 +81,52 @@ def generate_intersection_mesh(x_min, y_min, x_max, y_max):
     points = np.reshape(points, (8, 3))
     pcd = open3d.geometry.PointCloud()
     pcd.points = open3d.utility.Vector3dVector(points)
-    mesh, _ = pcd.compute_convex_hull()
-    mesh.compute_vertex_normals()
+    mesh = pcd.get_oriented_bounding_box()
+    #mesh, _ = pcd.compute_convex_hull()
+    #mesh.compute_vertex_normals()
     print(mesh)
-    open3d.io.write_triangle_mesh("trapezio.stl", mesh)
+    return mesh
+    #
     #open3d.io.write_point_cloud("trapezio.pcd", pcd)
 
-generate_intersection_mesh(-960, -540, 960, 540)
+#generate_intersection_mesh(-960, -540, 960, 540)
 
 
 #bbox = bbox.transform(inv_camera_transform)
 
 class PrecisePlacement:
-    def __init__(self, point_cloud_srv):
-        self.bridge = CvBridge()
-        self.point_cloud = None
-        rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
+    def update(self):
+        while True:
+            #print("run")
+            self.vis.poll_events()
+            self.vis.update_renderer()
+            time.sleep(0.020)
 
+    def __init__(self, point_cloud_srv, use_visualizer=True):
+        
+        self.point_cloud = None
+        self.use_visualizer = use_visualizer
+        if use_visualizer:
+            self.vis=open3d.visualization.Visualizer()
+            self.vis.create_window()
+            v_control = self.vis.get_view_control()
+            v_control.set_zoom(0.3)
+            v_control.set_front([-1, -0.0, 0.])
+            v_control.set_lookat([0.4, 0.5, 0.86])
+            v_control.set_up([-0.0, 0.0, 1.0])
+            #self.vis.reset_view_point( reset_bounding_box=True)
+            bbox = generate_intersection_mesh(0, 100, 0, 100)
+            bbox = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
+            self.vis.add_geometry(bbox)
+            self.thread = threading.Thread(target=self.update, name="process_visualization")
+            self.thread.start()
+        
+
+        self.bridge = CvBridge()
+        
+        rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
+        #rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
+        self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
         #load meshes
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
@@ -117,13 +151,27 @@ class PrecisePlacement:
         
 
     def image_callback(self, data: Image):
-        data = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
-        cv2.imshow("test", data)
+        decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
+        decoded_image = decoded_image[396:912, 676:1544, :]
+        resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
+        for i in resp.boxes:
+            print(i)
+            mesh=generate_intersection_mesh(676+i.x1-10, 676+i.x2+10, 396+i.y1-10, 396+i.y2+10)
+            mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
+            mesh = mesh.translate(camera_transform[0:3, 3].transpose())
+            #self.vis.add_geometry(mesh, reset_bounding_box=False)
+            #mesh=mesh.transform(camera_transform)
+            #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
+            #print(mesh)
+
+
+        cv2.imshow("test", decoded_image)
         cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
+        print("point_clouddd")
         converted = convertCloudFromRosToOpen3d(data)
-        bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(0, 0.14, 0.86), max_bound=(1., 0.8, 0.97))
+        bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(0, 0.16, 0.87), max_bound=(1., 0.8, 0.97))
 
         bbox = bbox.get_oriented_bounding_box()
         bbox = bbox.rotate(inv_camera_transform[0:3, 0:3], [0, 0, 0 ])
@@ -133,17 +181,21 @@ class PrecisePlacement:
         mesh.compute_vertex_normals()
         open3d.io.write_triangle_mesh("bbox.stl", mesh)
         #print(self.point_cloud.get_axis_aligned_bounding_box())
-
+        #is_none = self.point_cloud is None
         self.point_cloud=converted.crop(bbox)
         self.point_cloud = self.point_cloud.transform(camera_transform)
         print(self.point_cloud)
-        open3d.io.write_point_cloud("test.pcd", self.point_cloud)
+        #open3d.io.write_point_cloud("test.pcd", self.point_cloud)
         # visualizzation
-        open3d.visualization.draw_geometries([self.point_cloud],
-            zoom=0.3,
-            front=[0.0, -0.0, 1.0],
-            lookat=[0.0, 0.0, 1.0],
-            up=[-0.0, -1.0, 0.0])
+        if self.use_visualizer:
+            self.vis.clear_geometries()
+            self.vis.add_geometry(self.point_cloud, reset_bounding_box=False)
+        
+        #open3d.visualization.draw_geometries([self.point_cloud],
+        #    zoom=0.3,
+        #    front=[-0.866, -0.0, 0.5],
+        #    lookat=[0.4, 0.5, 0.86],
+        #    up=[-0.0, 0.0, 1.0])
 
 #cv_bridge = CvBridge()
 
@@ -160,10 +212,10 @@ def main():
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
 
     cloud_srv="/ur5/zed_node/point_cloud/cloud_registered"
-    precise =PrecisePlacement(cloud_srv, )
+    precise =PrecisePlacement(cloud_srv)
     
     rospy.loginfo("registered")
-    #rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, callback_image)
+    
     
     #proc = PrecisePlacement()
     #rospy.Service("detect_blocks", DetectBlocks, proc.callback)
