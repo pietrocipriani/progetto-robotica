@@ -256,7 +256,7 @@ bool test_path() {
     auto effective_pos = direct(robot);
 
     std::clog << "Final error: " << (final_pose - effective_pos).norm() << std::endl;
-    std::clog << "Orientation error: " << (final_pose - effective_pos).angular().norm() << std::endl;
+    std::clog << "Orientation error: " << (final_pose - effective_pos).linear().norm() << std::endl;
     std::clog << "Configuration: " << robot.config.vector().transpose() << std::endl;
   }
 

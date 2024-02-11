@@ -19,7 +19,7 @@ using DefaultPose = Pose<coord::Lie, coord::Cartesian>;
 /// Determinant of J·J^T to be considered near to a singularity.
 ///
 // TODO: calibrate threshold.
-constexpr Scalar min_safe_determinant = 1e-3;
+constexpr Scalar min_safe_determinant = 1e-8;
 
 /// Type representing the geometric or analytical jacobian.
 /// @note Specific for UR5.
