@@ -134,27 +134,27 @@ constexpr double get_hit_box_radius(const Block& block_type) {
 constexpr std::tuple<double, double, double> get_pad_position(const Block& block_type) {
     switch (block_type) {
         case Block::B_1x1_H:
-            return {0.03, 0.50, M_PI_2};
+            return {0.03, 0.50, M_PI};
         case Block::B_2x1_T:
-            return {0.92, 0.30, 0.0};
+            return {0.92, 0.30, M_PI_2};
         case Block::B_2x1_L:
-            return {0.92, 0.38, 0.0};
+            return {0.92, 0.38, M_PI_2};
         case Block::B_2x1_H:
-            return {0.92, 0.46, 0.0};
+            return {0.92, 0.46, M_PI_2};
         case Block::B_2x1_U:
-            return {0.92, 0.54, 0.0};
+            return {0.92, 0.54, M_PI_2};
         case Block::B_2x2_H:
-            return {0.05, 0.73, M_PI_4};
+            return {0.05, 0.73, 3 * M_PI_4};
         case Block::B_2x2_U:
-            return {0.05, 0.61, M_PI_2};
+            return {0.03, 0.61, M_PI};
         case Block::B_3x1_H:
-            return {0.92, 0.62, 0.0};
+            return {0.92, 0.62, M_PI_2};
         case Block::B_3x1_U:
-            return {0.92, 0.73, -M_PI_4};
+            return {0.92, 0.73, M_PI_4};
         case Block::B_4x1_H:
-            return {0.02, 0.35, M_PI_2};
+            return {0.03, 0.35, M_PI};
         case Block::B_4x1_L:
-            return {0.25, 0.75, 0.0};
+            return {0.25, 0.75, M_PI_2};
     }
     assert(false);
 }

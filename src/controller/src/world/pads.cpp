@@ -8,7 +8,7 @@ void spawn_missing_pads(Spawner& spawner) {
         auto [x, y, angle] = planner::get_pad_position(block);
         // if the pad already exists this will fail,
         // but it's ok since we don't want duplicate pads
-        spawner.spawn_pad(block, x, y, angle);
+        spawner.spawn_pad(block, x, y, angle - M_PI_2);
     }
 }
 
