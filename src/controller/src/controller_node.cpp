@@ -17,6 +17,7 @@
 #include "controller/world/workspace.hpp"
 #include "controller/control/config_publisher.hpp"
 #include "controller/control/config_reader.hpp"
+#include "controller/util/const.hpp"
 using namespace controller;
 
 constexpr Time dt = 0.001;
@@ -117,8 +118,20 @@ void main_workspace(
 	model::UR5& robot,
 	double& prev_gripper_pos
 ) {
-	world::clear_workspace(deleter);
+	auto configs = planner::plan_movement(
+		robot,
+		kinematics::direct(
+			robot,
+			model::UR5::Configuration(util::ur5_default_homing_config_vec)
+		),
+		dt
+	);
+	config_publisher.publish_config_sequence(configs, prev_gripper_pos, frequency_hz);
+	ROS_INFO("Homing config reached");
+
+	//world::clear_workspace(deleter);
 	world::setup_workspace(spawner, true);
+	ROS_INFO("Workspace ready");
 }
 
 int main(int argc, char **argv) {
