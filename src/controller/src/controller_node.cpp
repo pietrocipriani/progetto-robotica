@@ -13,7 +13,7 @@
 #include "model.hpp"
 
 #include "controller/world/spawner.hpp"
-#include "controller/world/pads.hpp"
+#include "controller/world/workspace.hpp"
 #include "controller/control/config_publisher.hpp"
 #include "controller/control/config_reader.hpp"
 using namespace controller;
@@ -43,6 +43,10 @@ int main(int argc, char **argv) {
 		ros::topic::waitForMessage<sensor_msgs::JointState>("/ur5/joint_states", n));
 	model::UR5 robot{prev_config};
 
+	// setup the workspace by spawning blocks and block targets (aka pads)
+	world::setup_workspace(spawner, true);
+	return 0;
+
 
 	std::vector<planner::BlockPose> poses{
 		planner::BlockPose(planner::Block::B_4x1_L, 0.6, 0.7, 2),
@@ -52,10 +56,6 @@ int main(int argc, char **argv) {
 		planner::BlockPose(planner::Block::B_2x1_L, 0.1, 0.4, 4),
 		planner::BlockPose::pad_pose(planner::Block::B_2x1_L),
 	};
-
-
-	// spawn pads, i.e. the block targets
-	world::spawn_missing_pads(spawner);
 
 	// for (int i=0; i<poses.size()-1; i += 2) {
 	// 	const planner::Block block = poses[i].block;

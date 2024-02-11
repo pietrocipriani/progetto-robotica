@@ -16,6 +16,9 @@ union Color {
     uint32_t rgba_hex = 0x000000ff; // black
 };
 
+Color color_from_double_components(double r, double g, double b, double a);
+Color gen_bright_color();
+
 } // namespace util
 
 #endif // _UTIL_COLOR_HPP_
