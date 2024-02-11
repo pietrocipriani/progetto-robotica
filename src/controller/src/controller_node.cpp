@@ -161,9 +161,7 @@ void main_real(
 	world::setup_workspace(spawner, true);
 	ROS_INFO("Workspace ready");
 
-	std::vector<position_detection::BlockPosition> blocks =
-		pos::wait_for_new_block_positions(node_handle).blocks;
-	sort(blocks.begin(), blocks.end(), [](const auto& a, const auto& b) { return a.confidence > b.confidence; });
+	auto blocks = pos::wait_for_new_block_positions(node_handle);
 
 	for (const position_detection::BlockPosition block_pos : blocks) {
 		planner::Block block = planner::Block::B_1x1_H;

@@ -7,7 +7,7 @@
 
 namespace controller::pos {
 
-position_detection::BlockPositions wait_for_new_block_positions(ros::NodeHandle& node_handle);
+std::vector<position_detection::BlockPosition> wait_for_new_block_positions(ros::NodeHandle& node_handle);
 
 } // namespace controller::receive
 
