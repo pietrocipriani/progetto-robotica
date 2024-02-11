@@ -189,31 +189,27 @@ class PrecisePlacement:
             transform = np.eye(4)
             transform[0:3, 3]=center
 
-            estimation = treg.TransformationEstimationPointToPoint()
-            max_correspondence_distance = 0.15
             callback_after_iteration = lambda updated_result_dict : print("Iteration Index: {}, Fitness: {}, Inlier RMSE: {},".format(
                 updated_result_dict["iteration_index"].item(),
                 updated_result_dict["fitness"].item(),
                 updated_result_dict["inlier_rmse"].item()))
             source= self.meshes[i.label].sample_points_uniformly(number_of_points=2000)
             target=cropped
-            init_source_to_target=np.eye(4)
-            voxel_size=0.025
-            # Convergence-Criteria for Vanilla ICP
-            criteria = treg.ICPConvergenceCriteria(relative_fitness=0.000001,
-                                                relative_rmse=0.000001,
-                                                max_iteration=50)
             threshold = 0.1
-            icp_iteration = 100
-            save_image = False
+
+            start = time.time()
             result = open3d.pipelines.registration.registration_icp(
                 source, target, threshold, transform,
                 open3d.pipelines.registration.TransformationEstimationPointToPoint(),
                 open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=50))
-                #source.transform(reg_p2l.transformation)
-            print(result.transformation)
-            print(result)
-            print(cropped)
+            source.transform(result.transformation)
+            end = time.time()
+            print("elapsed" + str(start-end))
+            self.vis.add_geometry(source, reset_bounding_box=False)
+
+            #print(result.transformation)
+            #print(result)
+            #print(cropped)
             #mesh.transform(camera_transform)
             #self.vis.add_geometry(mesh, reset_bounding_box=False)
             #mesh=mesh.transform(camera_transform)
