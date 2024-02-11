@@ -45,7 +45,7 @@ TimeFunction<Point> _quadratic_interpolation(
 
   return [=, acc = std::move(acceleration2)](const Time& time) {
     auto t = time - start_time;
-    return initial_position + (initial_velocity + acc * t) * t;
+    return initial_position + initial_velocity * t + acc * t * t;
   };
 }
 
