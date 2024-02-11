@@ -13,6 +13,8 @@ import os
 import math
 import threading
 import time
+from open3d.pipelines import registration as treg
+from position_detection.msg import BlockPosition, BlockPositions 
 import copy
 
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
@@ -144,7 +146,7 @@ class PrecisePlacement:
         rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
         rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
-        self.pub = rospy.Publisher("block_positions", std_msgs.msg.String, queue_size=1)
+        self.pub = rospy.Publisher("block_positions", BlockPositions, queue_size=1)
         #load meshes
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
