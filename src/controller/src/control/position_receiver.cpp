@@ -1,6 +1,6 @@
-#include "controller/pos/position_receiver.hpp"
+#include "controller/control/position_receiver.hpp"
 
-namespace controller::pos {
+namespace controller::control {
 
 std::vector<position_detection::BlockPosition> wait_for_new_block_positions(ros::NodeHandle& n) {
     ros::Time initial_time = ros::Time::now();
