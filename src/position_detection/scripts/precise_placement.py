@@ -13,7 +13,7 @@ import os
 import math
 import threading
 import time
-from open3d.pipelines import registration as treg
+import copy
 
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
@@ -206,19 +206,23 @@ class PrecisePlacement:
                 source, target, threshold, transform,
                 open3d.pipelines.registration.TransformationEstimationPointToPoint(),
                 open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=100))
-            source.transform(result.transformation)
-            end = time.time()
-            ##print("elapsed" + str(end-start))
-            self.vis.add_geometry(source, reset_bounding_box=False)
+            transform = copy.deepcopy(result.transformation)
 
-            ###print(result.transformation)
-            ##print(result)
-            ###print(cropped)
-            #mesh.transform(camera_transform)
-            #self.vis.add_geometry(mesh, reset_bounding_box=False)
-            #mesh=mesh.transform(camera_transform)
-            #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
-            ###print(mesh)
+            
+            def zeroed(vec):
+                vec[2]=0
+                mod=1/(vec[1]*vec[1]+vec[0]*vec[0])
+                return vec*mod
+
+            transform[3][3]=1
+            transform[1, 0:3] = zeroed(transform[1, 0:3])
+            transform[0, 0:3] = zeroed(transform[0, 0:3])
+            transform[0:3, 1] = zeroed(transform[0:3, 1])
+            transform[0:3, 0] = zeroed(transform[0:3, 0])
+            source.transform(transform)
+            if result.fitness>0.6:
+                self.vis.add_geometry(source, reset_bounding_box=False)
+                print(result.fitness)
 
 
         cv2.imshow("test", decoded_image)
