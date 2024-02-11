@@ -4,6 +4,7 @@
 
 namespace controller::world {
 
+constexpr const char* BLOCK_PREFIX = "brick_";
 constexpr const char* PAD_PREFIX = "pad_";
 
 } // namespace controller::world

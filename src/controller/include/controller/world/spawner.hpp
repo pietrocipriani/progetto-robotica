@@ -22,7 +22,8 @@ public:
         double y,
         double angle,
         bool upside_down,
-        const util::Color& color
+        const util::Color& color,
+        bool random_name
     );
 
     void spawn_pad(

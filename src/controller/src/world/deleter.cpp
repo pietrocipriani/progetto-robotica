@@ -26,7 +26,7 @@ void Deleter::delete_model(const std::string& model_name) {
 }
 
 void Deleter::delete_block(planner::Block block_type) {
-    delete_model(planner::get_name(block_type));
+    delete_model(std::string(BLOCK_PREFIX) + planner::get_name(block_type));
 }
 
 void Deleter::delete_pad(planner::Block block_type) {

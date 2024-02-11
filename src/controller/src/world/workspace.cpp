@@ -60,7 +60,7 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
             }
 
             used_poses.push_back(pose);
-            spawner.spawn_block(block, x, y, angle, false, util::gen_bright_color());
+            spawner.spawn_block(block, x, y, angle, false, util::gen_bright_color(), false);
             placed = true;
             break;
         }

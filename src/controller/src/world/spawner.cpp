@@ -8,6 +8,7 @@
 
 #include "controller/util/string_format.hpp"
 using controller::util::string_format;
+#include "controller/world/names.hpp"
 
 namespace controller::world {
 
@@ -90,10 +91,9 @@ void Spawner::spawn_block(
     double y,
     double angle,
     bool upside_down,
-    const util::Color& color
+    const util::Color& color,
+    bool random_name
 ) {
-    static std::mt19937 rng = std::mt19937(std::random_device()());
-
 	geometry_msgs::Point point;
 	point.x = x;
 	point.y = y;
@@ -118,7 +118,9 @@ void Spawner::spawn_block(
 
     gazebo_msgs::SpawnModel srv;
     const char* block_name = get_name(block_type);
-	srv.request.model_name = string_format("%s_#%X_%d", block_name, color.rgba_hex, abs(int(rng())));
+	srv.request.model_name = random_name
+        ? string_format("%s%s_#%X", BLOCK_PREFIX, block_name, color.rgba_hex)
+        : string_format("%s%s", BLOCK_PREFIX, block_name);
 	srv.request.model_xml = string_format(BLOCK_SDF, block_name, block_name, block_name,
         color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f,
         color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
@@ -162,7 +164,7 @@ void Spawner::spawn_pad(
     gazebo_msgs::SpawnModel srv;
     const char* block_name = get_name(pad_for_block_type);
     // do not use random names for pads, since we never want more than one instance for each
-	srv.request.model_name = string_format("pad_%s", block_name);
+	srv.request.model_name = string_format("%s%s", PAD_PREFIX, block_name);
 	srv.request.model_xml = string_format(PAD_SDF, block_name, block_name);
 	srv.request.robot_namespace = "/gazebo/";
 	srv.request.initial_pose = pose;

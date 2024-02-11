@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 	// 	spawner.spawn_block(block,
 	// 		poses[i].pose.linear().x(), poses[i].pose.linear().y(),
 	// 		poses[i].pose.angular()[0], false,
-	// 		util::Color{255, 0, 0, 255});
+	// 		util::Color{255, 0, 0, 255}, true);
 
 	// 	const planner::BlockMovement movement{
 	// 		poses[i],
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 	constexpr double x=0.5, y=0.5, angle=0;
 	for (const planner::Block block : planner::all_blocks) {
 		spawner.spawn_block(block, x, y, angle, false,
-			util::Color{255, 0, 0, 255});
+			util::Color{255, 0, 0, 255}, true);
 
 		const planner::BlockMovement movement{
 			planner::BlockPose(block, x, y, angle),
