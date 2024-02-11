@@ -44,7 +44,7 @@ constexpr const char* BLOCK_SDF = R"(
 		</geometry>
 		<material>
 			<ambient>%f %f %f %f</ambient>
-			<diffuse>0.7 0.7 0.7 1.0</diffuse>
+			<diffuse>%f %f %f %f</diffuse>
 			<specular>0.01 0.01 0.01 1 1.5</specular>
 			<emissive>0.0 0.0 0.0 0.0</emissive>
 		</material>
@@ -120,6 +120,7 @@ void Spawner::spawn_block(
     const char* block_name = get_name(block_type);
 	srv.request.model_name = string_format("%s_#%X_%d", block_name, color.rgba_hex, abs(int(rng())));
 	srv.request.model_xml = string_format(BLOCK_SDF, block_name, block_name, block_name,
+        color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f,
         color.r / 255.f, color.g / 255.f, color.b / 255.f, color.a / 255.f);
 	srv.request.robot_namespace = "/gazebo/";
 	srv.request.initial_pose = pose;
