@@ -2,8 +2,10 @@ import open3d;
 import rospy
 import rospkg
 import sensor_msgs.point_cloud2 as pc2
-from sensor_msgs.msg import PointCloud2
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import PointCloud2, Image
+from geometry_msgs.msg import Point
+from std_msgs.msg import Header
+#from sensor_msgs.msg import 
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
@@ -15,6 +17,7 @@ import threading
 import time
 from open3d.pipelines import registration as treg
 from position_detection.msg import BlockPosition, BlockPositions 
+import copy
 
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
@@ -90,6 +93,7 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     #mesh.compute_vertex_normals()
     ##print(mesh)
     return mesh
+
 def approx_coordinate(x, y):
     x-=960
     y-=540
@@ -114,7 +118,7 @@ class PrecisePlacement:
             #time.sleep(0.020)
 
     def __init__(self, point_cloud_srv, use_visualizer=True):
-        
+        self.msg_seq=0
         self.point_cloud = None
         self.use_visualizer = use_visualizer
         self.raw_point_cloud = None
@@ -170,21 +174,20 @@ class PrecisePlacement:
             ##print(self.meshes[key])
         
         
-
+    #called every time an image is ready
     def image_callback(self, data: Image):
+        # if I don't have a converted point cloud it's useless
+
         if self.point_cloud is None:
             return
+        header = Header(seq=self.msg_seq, frame_id = "base link", stamp=rospy.Time.now())
+        
         decoded_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
         decoded_image = decoded_image[396:912, 676:1544, :]
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
-        for i in resp.boxes:
-            ###print(i)
-            mesh=generate_intersection_mesh(676+i.x1, 676+i.x2, 396+i.y1, 396+i.y2)
-            #to_draw = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(mesh)
-            #to_draw.paint_uniform_color([1, 0.706, 0])
-            #to_draw.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
-            #to_draw = to_draw.translate(camera_transform[0:3, 3].transpose())
-            #self.vis.add_geometry(to_draw, reset_bounding_box=False)
+        to_send=[]
+        for box in resp.boxes:
+            mesh=generate_intersection_mesh(676+box.x1, 676+box.x2, 396+box.y1, 396+box.y2)
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
             
@@ -198,7 +201,7 @@ class PrecisePlacement:
             transform[0:3, 3]=center
 
 
-            source= self.meshes[i.label].sample_points_uniformly(number_of_points=2000)
+            source= self.meshes[box.label].sample_points_uniformly(number_of_points=2000)
             target=cropped
             threshold = 0.01
 
@@ -208,23 +211,37 @@ class PrecisePlacement:
                 source, target, threshold, transform,
                 open3d.pipelines.registration.TransformationEstimationPointToPoint(),
                 open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=100))
-            source.transform(result.transformation)
-            end = time.time()
-            ##print("elapsed" + str(end-start))
-            self.vis.add_geometry(source, reset_bounding_box=False)
+            transform = copy.deepcopy(result.transformation)
 
-            ###print(result.transformation)
-            ##print(result)
-            ###print(cropped)
-            #mesh.transform(camera_transform)
-            #self.vis.add_geometry(mesh, reset_bounding_box=False)
-            #mesh=mesh.transform(camera_transform)
-            #open3d.io.write_triangle_mesh("trapezio.stl", mesh)
-            ###print(mesh)
+            
+            def zeroed(vec):
+                vec[2]=0
+                mod=1/(vec[1]*vec[1]+vec[0]*vec[0])
+                return vec*mod
 
-
-        cv2.imshow("test", decoded_image)
-        cv2.waitKey(1)
+            transform[3][3]=1
+            transform[1, 0:3] = zeroed(transform[1, 0:3])
+            transform[0, 0:3] = zeroed(transform[0, 0:3])
+            transform[0:3, 1] = zeroed(transform[0:3, 1])
+            transform[0:3, 0] = zeroed(transform[0:3, 0])
+            source.transform(transform)
+            if result.fitness>0.6:
+                self.vis.add_geometry(source, reset_bounding_box=False)
+                print(result.fitness)
+            #print(transform)
+            point = Point(x= transform[0][3], y=transform[1][3], z=transform[2][3])
+            to_add = BlockPosition(block_type=box.label,
+                                   confidence=result.fitness*box.confidence,
+                                   point=point,
+                                   angle=math.acos(max(min(transform[0][0], 1), -1)))
+            to_send.append(to_add)
+            #print(to_add)
+        
+        to_send = BlockPositions(header=header, blocks=to_send)
+        #print(to_send)
+        self.pub.publish(to_send)
+        #cv2.imshow("test", decoded_image)
+        #cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
         ##print("point_cloud")
