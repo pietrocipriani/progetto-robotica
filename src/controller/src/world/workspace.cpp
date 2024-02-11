@@ -47,6 +47,12 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
         for (int i = 0; i < MAX_TRIES_TO_PLACE_BLOCK; ++i) {
             const double x = gen_x(rng), y = gen_y(rng), angle = gen_angle(rng);
             const planner::BlockPose pose(block, x, y, angle);
+            if (std::hypot(x - planner::gazebo_to_os_x, y - planner::gazebo_to_os_y) < 0.14) {
+                // avoid interal cylinder, where picking up blocks wouldn't be possible with
+                // the wrist perpendicular to the workspace plane, but would require picking
+                // up the blocks from the side
+                continue;
+            }
 
             bool obstructed = false;
             for (const planner::BlockPose& other_pose : used_poses) {
