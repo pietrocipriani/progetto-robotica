@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <random>
+#include <future>
 
 #include "planner.hpp"
 #include "controller/util/color.hpp"
@@ -72,9 +73,13 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
 }
 
 void clear_workspace(Deleter& deleter) {
+    std::vector<std::thread> threads;
     for (const planner::Block& block : planner::all_blocks) {
-        deleter.delete_pad(block);
-        deleter.delete_block(block);
+        threads.emplace_back(std::thread(&Deleter::delete_pad, deleter, block));
+        threads.emplace_back(std::thread(&Deleter::delete_block, deleter, block));
+    }
+    for (auto& thread : threads) {
+        thread.join();
     }
 }
 
