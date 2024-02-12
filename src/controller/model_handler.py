@@ -1,3 +1,9 @@
+"""
+This is a simple utility script to autogenerate SDF files for block models and block pads models.
+Block pads are 3d text models that contain the name of the block and indicate the target where the
+block should be moved to. The pad `.stl` meshes were generated with blender, see `pads.blend`.
+"""
+
 import os
 
 BRICK_SDF = """<?xml version="1.0" ?>
