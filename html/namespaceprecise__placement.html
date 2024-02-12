@@ -75,20 +75,27 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html">PrecisePlacement</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html" title="PrecisePlacement class, it manages all it&#39;s needed to compute the IC registration.">PrecisePlacement</a> class, it manages all it's needed to compute the IC registration.  <a href="classprecise__placement_1_1PrecisePlacement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1Visualizer.html">Visualizer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper struct in charge of the point cloud visualization.  <a href="classprecise__placement_1_1Visualizer.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0479f2a518eb4e569fcd228efff1dabe"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#a0479f2a518eb4e569fcd228efff1dabe">approx_coordinate</a> (x, y)</td></tr>
-<tr class="separator:a0479f2a518eb4e569fcd228efff1dabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba759807761b48adaa09f702646d3afc"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#aba759807761b48adaa09f702646d3afc">convertCloudFromRosToOpen3d</a> (PointCloud2 ros_cloud)</td></tr>
+<tr class="memdesc:aba759807761b48adaa09f702646d3afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function used to map from ros PointCloud 2 to Open3d PointCloud.  <a href="namespaceprecise__placement.html#aba759807761b48adaa09f702646d3afc">More...</a><br /></td></tr>
 <tr class="separator:aba759807761b48adaa09f702646d3afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78cb5aecc6c3ba87413c4d8e3feeb1b2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2">generate_intersection_mesh</a> (x_min, x_max, y_min, y_max)</td></tr>
 <tr class="separator:a78cb5aecc6c3ba87413c4d8e3feeb1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc10cc9fb803f1dbb279af2b65a9835f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f">generate_points</a> (x, y, y_min)</td></tr>
+<tr class="memdesc:abc10cc9fb803f1dbb279af2b65a9835f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "ray" from x, y of the camera (camera_space)  <a href="namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f">More...</a><br /></td></tr>
 <tr class="separator:abc10cc9fb803f1dbb279af2b65a9835f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd2f92caab6d65d366a1c0bc24dddc41"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#abd2f92caab6d65d366a1c0bc24dddc41">main</a> ()</td></tr>
 <tr class="separator:abd2f92caab6d65d366a1c0bc24dddc41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f458fd3c2b61eb3c47dffd1094a49cb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprecise__placement.html#a3f458fd3c2b61eb3c47dffd1094a49cb">remove_xy_rotation</a> (transform)</td></tr>
+<tr class="memdesc:a3f458fd3c2b61eb3c47dffd1094a49cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy  <a href="namespaceprecise__placement.html#a3f458fd3c2b61eb3c47dffd1094a49cb">More...</a><br /></td></tr>
+<tr class="separator:a3f458fd3c2b61eb3c47dffd1094a49cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -98,34 +105,6 @@ Variables</h2></td></tr>
 <tr class="separator:a02b0663018d876e57b2fee71c6c8a6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0479f2a518eb4e569fcd228efff1dabe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0479f2a518eb4e569fcd228efff1dabe">&#9670;&nbsp;</a></span>approx_coordinate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def precise_placement.approx_coordinate </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aba759807761b48adaa09f702646d3afc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aba759807761b48adaa09f702646d3afc">&#9670;&nbsp;</a></span>convertCloudFromRosToOpen3d()</h2>
 
@@ -141,6 +120,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Function used to map from ros PointCloud 2 to Open3d PointCloud. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ros_cloud</td><td>The ros PointCloud2 message </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Open3d PointCloud </dd></dl>
 
 </div>
 </div>
@@ -216,6 +204,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "ray" from x, y of the camera (camera_space) </p>
+
 </div>
 </div>
 <a id="abd2f92caab6d65d366a1c0bc24dddc41"></a>
@@ -232,6 +222,33 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f458fd3c2b61eb3c47dffd1094a49cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f458fd3c2b61eb3c47dffd1094a49cb">&#9670;&nbsp;</a></span>remove_xy_rotation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def precise_placement.remove_xy_rotation </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>transform</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">transform</td><td>input matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>ruotated matrix </dd></dl>
 
 </div>
 </div>

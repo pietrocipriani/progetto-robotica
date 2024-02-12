@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['approx_5fcoordinate_33',['approx_coordinate',['../namespaceprecise__placement.html#a0479f2a518eb4e569fcd228efff1dabe',1,'precise_placement']]]
+  ['add_5fgeometry_39',['add_geometry',['../classprecise__placement_1_1Visualizer.html#adc3965ab39d44ca05481a279a2777fa7',1,'precise_placement::Visualizer']]]
 ];

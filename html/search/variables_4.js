@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['last_5fpoint_5fcloud_5ftime_47',['last_point_cloud_time',['../classprecise__placement_1_1PrecisePlacement.html#a44c90a7a00847f8a4764c12f884862c3',1,'precise_placement::PrecisePlacement']]]
+  ['inv_5fcamera_5ftransform_55',['inv_camera_transform',['../namespaceprecise__placement.html#a02b0663018d876e57b2fee71c6c8a6eb',1,'precise_placement']]]
 ];

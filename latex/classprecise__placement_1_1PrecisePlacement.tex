@@ -1,19 +1,22 @@
 \hypertarget{classprecise__placement_1_1PrecisePlacement}{}\doxysection{Precise\+Placement Class Reference}
 \label{classprecise__placement_1_1PrecisePlacement}\index{PrecisePlacement@{PrecisePlacement}}
+
+
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration.  
+
+
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
+def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, image\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}{callback\+\_\+cloud}} (self, Point\+Cloud2 data)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a7e069f51e4f899c99ee9d8cc23d8532f}{image\+\_\+callback}} (self, Image data)
-\item 
+\begin{DoxyCompactList}\small\item\em called every time an image callback is received, it parses it and compute \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}{point\+\_\+cloud\+\_\+processer}} (self)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1db1b1ccc33a8baade6e}{process\+\_\+latest\+\_\+point\+\_\+cloud}} (self)
-\item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6ac8219e669c55cdac6}{update\+\_\+visualizer}} (self)
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -36,22 +39,27 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6
 \begin{DoxyCompactList}\small\item\em print(\char`\"{}point\+\_\+cloud\char`\"{}) \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}{thread\+\_\+point\+\_\+cloud\+\_\+processer}}
 \item 
-\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ad148c824e05c6719d3c709de735639e3}{thread\+\_\+visualizer}}
-\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}
 \item 
-\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a87884225cc70867646c7bd6c2f679f1c}{vis}}
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}{visualizer}}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration. 
+
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}\label{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}} 
+\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}\label{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}} 
 \index{PrecisePlacement@{PrecisePlacement}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{image\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
 
-
+\begin{DoxyVerb} Contructor
+@param point_cloud_srv_name the name of the zed camera point cloud
+@param use_visualizer should we use a visualizer?
+\end{DoxyVerb}
+ 
 
 \doxysubsection{Member Function Documentation}
 \mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}\label{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}} 
@@ -66,6 +74,15 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6
 \doxysubsubsection{\texorpdfstring{image\_callback()}{image\_callback()}}
 {\footnotesize\ttfamily def image\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{data }\end{DoxyParamCaption})}
 
+
+
+called every time an image callback is received, it parses it and compute 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the incoming image \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}\label{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}} 
 \index{PrecisePlacement@{PrecisePlacement}!point\_cloud\_processer@{point\_cloud\_processer}}
 \index{point\_cloud\_processer@{point\_cloud\_processer}!PrecisePlacement@{PrecisePlacement}}
@@ -77,12 +94,6 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6
 \index{process\_latest\_point\_cloud@{process\_latest\_point\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{process\_latest\_point\_cloud()}{process\_latest\_point\_cloud()}}
 {\footnotesize\ttfamily def process\+\_\+latest\+\_\+point\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
-
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6ac8219e669c55cdac6}\label{classprecise__placement_1_1PrecisePlacement_a4b8a3f3b30bee6ac8219e669c55cdac6}} 
-\index{PrecisePlacement@{PrecisePlacement}!update\_visualizer@{update\_visualizer}}
-\index{update\_visualizer@{update\_visualizer}!PrecisePlacement@{PrecisePlacement}}
-\doxysubsubsection{\texorpdfstring{update\_visualizer()}{update\_visualizer()}}
-{\footnotesize\ttfamily def update\+\_\+visualizer (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
 
 
@@ -149,23 +160,17 @@ print(\char`\"{}point\+\_\+cloud\char`\"{})
 \doxysubsubsection{\texorpdfstring{thread\_point\_cloud\_processer}{thread\_point\_cloud\_processer}}
 {\footnotesize\ttfamily thread\+\_\+point\+\_\+cloud\+\_\+processer}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ad148c824e05c6719d3c709de735639e3}\label{classprecise__placement_1_1PrecisePlacement_ad148c824e05c6719d3c709de735639e3}} 
-\index{PrecisePlacement@{PrecisePlacement}!thread\_visualizer@{thread\_visualizer}}
-\index{thread\_visualizer@{thread\_visualizer}!PrecisePlacement@{PrecisePlacement}}
-\doxysubsubsection{\texorpdfstring{thread\_visualizer}{thread\_visualizer}}
-{\footnotesize\ttfamily thread\+\_\+visualizer}
-
 \mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}\label{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}} 
 \index{PrecisePlacement@{PrecisePlacement}!use\_visualizer@{use\_visualizer}}
 \index{use\_visualizer@{use\_visualizer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{use\_visualizer}{use\_visualizer}}
 {\footnotesize\ttfamily use\+\_\+visualizer}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a87884225cc70867646c7bd6c2f679f1c}\label{classprecise__placement_1_1PrecisePlacement_a87884225cc70867646c7bd6c2f679f1c}} 
-\index{PrecisePlacement@{PrecisePlacement}!vis@{vis}}
-\index{vis@{vis}!PrecisePlacement@{PrecisePlacement}}
-\doxysubsubsection{\texorpdfstring{vis}{vis}}
-{\footnotesize\ttfamily vis}
+\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}\label{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}} 
+\index{PrecisePlacement@{PrecisePlacement}!visualizer@{visualizer}}
+\index{visualizer@{visualizer}!PrecisePlacement@{PrecisePlacement}}
+\doxysubsubsection{\texorpdfstring{visualizer}{visualizer}}
+{\footnotesize\ttfamily visualizer}
 
 
 

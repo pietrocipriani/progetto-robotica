@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['image_5fcallback_10',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#a7e069f51e4f899c99ee9d8cc23d8532f',1,'precise_placement::PrecisePlacement']]],
-  ['inv_5fcamera_5ftransform_11',['inv_camera_transform',['../namespaceprecise__placement.html#a02b0663018d876e57b2fee71c6c8a6eb',1,'precise_placement']]]
+  ['generate_5fintersection_5fmesh_10',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
+  ['generate_5fpoints_11',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
 ];
