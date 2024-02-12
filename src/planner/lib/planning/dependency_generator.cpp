@@ -9,7 +9,6 @@ namespace planner {
 ///
 using Graph = std::vector<std::vector<size_t>>;
 
-/// 
 /// @throw planner::ConflictingPositionsException If two blocks are initially too near to perform
 ///        safely the picking of any.
 Graph generate_dependency_graph(const std::vector<BlockMovement>& blocks) {
@@ -130,12 +129,14 @@ std::queue<BlockMovement> generate_block_positioning_order(
 
     if (cyclic) {
       throw DeadlockException("A deadlock has been detected.", std::move(result));
-      /*BlockPose free = get_auxiliary_block_pose();
 
-      result.push(BlockMovement(movements[block].start, free));
-      movements[block].start = free;
-
-      order.push(block);*/
+      // NOTE: a possible implementation to avoid deadlocks.
+      // BlockPose free = get_auxiliary_block_pose();
+      //
+      // result.push(BlockMovement(movements[block].start, free));
+      // movements[block].start = free;
+      //
+      // order.push(block);
     } else {
       result.push(movements[block]);
     }

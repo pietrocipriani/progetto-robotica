@@ -4,11 +4,16 @@
 #include "../types.hpp"
 
 
-
+/// The differentiable joint space.
+/// @param size The dimension of the space.
+/// @param order The time derivative order.
 template<size_t size, ssize_t order = 0>
 class JointSpace {
 public:
+  /// The underlying type.
+  ///
   using Base = Vector<size>;
+
   using Derivative = JointSpace<size, order + 1>;
   using Primitive = JointSpace<size, order - 1>;
 
@@ -31,13 +36,9 @@ public:
     return JointSpace(-_vector);
   }
 
-  /**
-   * Returns the distance between @p other and @p this.
-   * This method is substantially a wrapper for Pose::error.
-   * It is provided only for clarity in certain contexts.
-   * @param other The starting pose.
-   * @return The distance as movement.
-   */
+  /// Returns the distance between @p other and @p this.
+  /// @param other The starting pose.
+  /// @return The distance as movement.
   JointSpace operator-(const JointSpace& other) const {
     return JointSpace(*this) -= other;
   }

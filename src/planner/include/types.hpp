@@ -6,10 +6,8 @@
 #include <eigen3/Eigen/Geometry>
 #include <type_traits>
 
-/**
- * The type representing a scalar.
- * @note The project should be dependent on this alias declaration for integrity.
- */
+/// The type representing a scalar.
+/// @note The project should be dependent on this alias declaration for integrity.
 using Scalar = double;
 
 template<size_t rows, size_t cols = rows>
@@ -21,22 +19,19 @@ using Vector = Eigen::Matrix<Scalar, N, 1>;
 template<size_t size>
 using EulerAngles = Vector<size>;
 
-/**
- * Type representing a rotation in the operational space.
- */
+/// Type representing a rotation in the operational space.
+///
 using Rotation = Eigen::AngleAxis<Scalar>;
 
-/**
- * Type representing a translation in the operational space.
- */
+/// Type representing a translation in the operational space.
+///
 template<size_t size>
 using Translation = Eigen::Translation<Scalar, size>;
 
 using RotationMatrix = Rotation::RotationMatrixType;
 
-/**
- * Quaternion in `Scalar` field.
- */
+/// Quaternion in `Scalar` field.
+///
 using Quaternion = Eigen::Quaternion<Scalar>;
 
 /// Complex class to provide uniformity with Quaternion.
@@ -57,6 +52,8 @@ using Axis = Rotation::VectorType;
 
 using Time = Scalar;
 
+/// A polymorphic function of time.
+///
 template<class T>
 using TimeFunction = std::function<T(const Time&)>;
 

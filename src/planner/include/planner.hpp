@@ -94,6 +94,9 @@ public:
 /// Sequence of configurations to perform the movement of a certain block.
 /// @note Two phases are returned to allow the controller to perform the picking.
 struct MovementSequence {
+
+  /// A generator capable of constructing configs on-the-fly.
+  /// Latency is negligible.
   struct ConfigGenerator {
     using Point = model::UR5::Configuration;
     using Ret = std::tuple<Point, bool>;
@@ -146,20 +149,18 @@ struct MovementSequence {
 /// @throw planner::ConflictingPositionsException If two blocks are initially too near to perform
 ///  safely the picking of any.
 /// @throw planner::DeadlockException If it is impossible to perform movements due to circular dependencies.
-// TODO: Avoid deadlocks searching for auxiliary targets, or return non circular dependencies only.
 std::queue<BlockMovement> generate_block_positioning_order(
   const std::vector<BlockPose>& blocks,
   const std::unordered_map<Block, BlockPose>& targets
 );
 
 
-/// Generates the sequence of movements from the initial @p robot configuration, throught the picking
-/// of one block from its starting position, to the relase of the block into its target position.
+/// Generates the sequence of movements from the initial @p robot configuration to the given @p end position.
 /// @param robot The current robot configuration.
 /// @param end The destination.
 /// @param dt The time granularity.
 /// @return A sequence of configurations in order to perform the given movement.
-/// @throw std::domain_error If one of the positions is not in the operational space.
+/// @throw std::domain_error If @p end is not in the operational space.
 MovementSequence::ConfigGenerator plan_movement(
   model::UR5& robot,
   const os::Position& end,

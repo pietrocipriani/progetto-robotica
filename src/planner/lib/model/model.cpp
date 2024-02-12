@@ -12,30 +12,18 @@ constexpr RevoluteJoint::RevoluteJoint(
 ) noexcept : d(d), a(a), alpha(alpha), theta(theta), min_config(min_config), max_config(max_config) {}
 
 
-/**
- * Generates the UR5 joint parameters for a robot.
- * @param config The config of the robot to which link the thetas.
- * @return The list of parameters.
- * @note Due to design choices, the joint variable parameter (theta) has to be linked with the robot configuration.
- * @note The choosen measurement units are 'meter' and 'radiant'.
- */
+/// Generates the UR5 joint parameters for a robot.
+/// @param config The config of the robot to which link the thetas.
+/// @return The list of parameters.
+/// @note Due to design choices, the joint variable parameter (theta) has to be linked with the robot configuration.
+/// @note The choosen measurement units are [meter] and [radiant].
 std::array<RevoluteJoint, UR5::dof> generate_ur5_parameters(
   UR5::Configuration& config,
   const Scalar& scale_factor = 1.0
 ) {
-  // TODO: Only C++20 offers non-C style math constants?
   static constexpr Scalar pi2 = M_PI_2;
   static constexpr Scalar pi = M_PI;
 
-  // TODO: make config reference joints.
-  /*using Parameters = std::array<Scalar, UR5::dof>;
-
-  static constexpr Parameters ds{{0.1625, 0, 0, 0.1333, 0.0997, 0.0996}};
-  static constexpr Parameters thetas{{-0.32, -0.78, -2.56, -1.63, -1.57, 3.49}};
-  static constexpr Parameters as{{0, -0.425, -0.3922, 0, 0, 0}};
-  static constexpr Parameters alphas{{pi2, 0, 0, pi2, -pi2, 0}};*/
-
-  // TODO: add constraints.
   std::array<RevoluteJoint, UR5::dof> joints {{
     {0.1625 , config.vector()[0] ,  0      ,  pi2 , -2 * pi , 2 * pi},
     {0      , config.vector()[1] , -0.425  ,  0   , -pi     ,      0},

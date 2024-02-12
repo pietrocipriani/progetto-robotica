@@ -10,21 +10,17 @@
 
 namespace model {
 
-/**
- * Structure representing the DH parameters for a single revolute joint.
- */
+/// Structure representing the DH parameters for a single revolute joint.
+///
 struct RevoluteJoint {
 
-  /**
-   * The DH parameters as defined by the DH convention.
-   * @p theta is a reference to the correponding robot config entry.
-   */
+  /// The DH parameters as defined by the DH convention.
   Scalar d = 0, a = 0, alpha = 0;
+  /// @p theta is a reference to the correponding robot config entry.
   const Scalar& theta;
 
-  /**
-   * The physical limits of the joint.
-   */
+  /// The physical limits of the joint.
+  ///
   Scalar min_config = -std::numeric_limits<Scalar>::infinity();
   Scalar max_config = std::numeric_limits<Scalar>::infinity();
 
@@ -35,30 +31,24 @@ struct RevoluteJoint {
   ) noexcept;
 };
 
-/**
- * The UR5 manipolator model.
- */
+/// The UR5 manipolator model.
+///
 struct UR5 {
-  /**
-   * The degrees of freedom of the UR5.
-   */
+  /// The degrees of freedom of the UR5.
+  ///
   static constexpr size_t dof = 6;
 
-  /**
-   * The maximum rotational speed a joint can have. [rad/s]
-   */
+  /// The maximum rotational speed a joint can have. [rad/s]
+  ///
   static constexpr Scalar max_joint_speed = M_PI;
 
-  /**
-   * Very rough estimation of the max acceleration for the base joint with
-   * a fully extended arm. [rad/s²]
-   * Only half of the available torque is used.
-   */
+  /// Very rough estimation of the max acceleration for the base joint with
+  /// a fully extended arm. [rad/s²]
+  /// Only a fraction of the available torque is used.
   static constexpr Scalar max_joint_accel = 40 * 0.5 * 0.1;
 
-  /**
-   * The type representing a configuration for a @p dof manipulator.
-   */
+  /// The type representing a configuration for a @p dof manipulator.
+  ///
   using Configuration = JointSpace<dof>;
 
   using Velocity = Configuration::Derivative;
@@ -67,15 +57,12 @@ struct UR5 {
 
   using Parameters = std::array<RevoluteJoint, dof>;
 
-  /**
-   * The current configuration of the robot.
-   */
+  /// The current configuration of the robot.
+  ///
   Configuration config;
 
-  /**
-   * The parameters for the joints.
-   * @note The configuration have to be modified via @p config.
-   */
+  /// The parameters for the joints.
+  /// @note The configuration have to be modified via @p config.
   const Parameters joints;
 
   const RevoluteJoint& base      = joints[0];
@@ -85,16 +72,12 @@ struct UR5 {
   const RevoluteJoint& wrist2    = joints[4];
   const RevoluteJoint& wrist3    = joints[5];
 
-  /**
-   * Constructs an UR5 with the given initial configuration.
-   * @param homing_config The initial configuration.
-   */
+  /// Constructs an UR5 with the given initial configuration.
+  /// @param homing_config The initial configuration.
   explicit UR5(const Configuration& homing_config) noexcept;
 
-  /**
-   * Constructs an UR5 with the given initial configuration.
-   * @param homing_config The initial configuration.
-   */
+  /// Constructs an UR5 with the given initial configuration.
+  /// @param homing_config The initial configuration.
   explicit UR5(Configuration&& homing_config) noexcept;
 
 };

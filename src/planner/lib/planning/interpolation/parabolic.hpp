@@ -105,7 +105,7 @@ void interpolation3(
 }
 
 
-}
+} // namespace internal
 
 
 /// Creates a parabolic interpolation between the @p points.

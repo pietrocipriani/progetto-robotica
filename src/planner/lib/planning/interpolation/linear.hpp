@@ -21,10 +21,14 @@ TimeFunction<Point> linear_interpolation(
 ) {
   using namespace uniformed_rotation_algebra;
 
+  // To avoid division by zero.
   if (duration < dummy_precision) {
     return [=]([[maybe_unused]] const Time& time) { return final_position; };
   }
 
+  // FIXME: with quaternions there is the possibility that wrong velocities are produced.
+  //        The problem is that quaternions are not a good choice for velocities due to the
+  //         periodicity of the components.
   auto velocity = unlazy((final_position - initial_position) / duration);
 
   return [=, velocity = std::move(velocity)](const Time& time) {
