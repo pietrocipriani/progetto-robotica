@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['main_13',['main',['../namespaceprecise__placement.html#abd2f92caab6d65d366a1c0bc24dddc41',1,'precise_placement']]],
-  ['meshes_14',['meshes',['../classprecise__placement_1_1PrecisePlacement.html#a5428deecfa188d28deb2a96fe29066e8',1,'precise_placement::PrecisePlacement']]],
-  ['msg_5fseq_15',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
+  ['last_5fpoint_5fcloud_5ftime_14',['last_point_cloud_time',['../classprecise__placement_1_1PrecisePlacement.html#a44c90a7a00847f8a4764c12f884862c3',1,'precise_placement::PrecisePlacement']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vis_56',['vis',['../classprecise__placement_1_1PrecisePlacement.html#a87884225cc70867646c7bd6c2f679f1c',1,'precise_placement::PrecisePlacement']]]
+  ['use_5fvisualizer_62',['use_visualizer',['../classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718',1,'precise_placement::PrecisePlacement']]]
 ];

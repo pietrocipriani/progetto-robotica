@@ -4,18 +4,18 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classprecise__placement_1_1Visualizer}{Visualizer}}
+\begin{DoxyCompactList}\small\item\em Helper struct in charge of the point cloud visualization. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{namespaceprecise__placement_a0479f2a518eb4e569fcd228efff1dabe}{approx\+\_\+coordinate}} (x, y)
-\item 
 def \mbox{\hyperlink{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}{convert\+Cloud\+From\+Ros\+To\+Open3d}} (Point\+Cloud2 ros\+\_\+cloud)
-\item 
+\begin{DoxyCompactList}\small\item\em Function used to map from ros Point\+Cloud 2 to Open3d Point\+Cloud. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}{generate\+\_\+intersection\+\_\+mesh}} (x\+\_\+min, x\+\_\+max, y\+\_\+min, y\+\_\+max)
 \item 
 def \mbox{\hyperlink{namespaceprecise__placement_abc10cc9fb803f1dbb279af2b65a9835f}{generate\+\_\+points}} (x, y, y\+\_\+min)
-\item 
+\begin{DoxyCompactList}\small\item\em Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a \char`\"{}ray\char`\"{} from x, y of the camera (camera\+\_\+space) \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}{main}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
@@ -28,18 +28,24 @@ def \mbox{\hyperlink{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceprecise__placement_a0479f2a518eb4e569fcd228efff1dabe}\label{namespaceprecise__placement_a0479f2a518eb4e569fcd228efff1dabe}} 
-\index{precise\_placement@{precise\_placement}!approx\_coordinate@{approx\_coordinate}}
-\index{approx\_coordinate@{approx\_coordinate}!precise\_placement@{precise\_placement}}
-\doxysubsubsection{\texorpdfstring{approx\_coordinate()}{approx\_coordinate()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+approx\+\_\+coordinate (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
-
 \mbox{\Hypertarget{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}\label{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}} 
 \index{precise\_placement@{precise\_placement}!convertCloudFromRosToOpen3d@{convertCloudFromRosToOpen3d}}
 \index{convertCloudFromRosToOpen3d@{convertCloudFromRosToOpen3d}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{convertCloudFromRosToOpen3d()}{convertCloudFromRosToOpen3d()}}
 {\footnotesize\ttfamily def precise\+\_\+placement.\+convert\+Cloud\+From\+Ros\+To\+Open3d (\begin{DoxyParamCaption}\item[{Point\+Cloud2}]{ros\+\_\+cloud }\end{DoxyParamCaption})}
 
+
+
+Function used to map from ros Point\+Cloud 2 to Open3d Point\+Cloud. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ros\+\_\+cloud} & The ros Point\+Cloud2 message \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Open3d Point\+Cloud 
+\end{DoxyReturn}
 \mbox{\Hypertarget{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}\label{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}} 
 \index{precise\_placement@{precise\_placement}!generate\_intersection\_mesh@{generate\_intersection\_mesh}}
 \index{generate\_intersection\_mesh@{generate\_intersection\_mesh}!precise\_placement@{precise\_placement}}
@@ -51,6 +57,10 @@ def \mbox{\hyperlink{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc
 \index{generate\_points@{generate\_points}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{generate\_points()}{generate\_points()}}
 {\footnotesize\ttfamily def precise\+\_\+placement.\+generate\+\_\+points (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{y\+\_\+min }\end{DoxyParamCaption})}
+
+
+
+Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a \char`\"{}ray\char`\"{} from x, y of the camera (camera\+\_\+space) 
 
 \mbox{\Hypertarget{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}\label{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}} 
 \index{precise\_placement@{precise\_placement}!main@{main}}

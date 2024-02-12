@@ -33,6 +33,11 @@ import copy
 
 
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
+    """! Function used to map from ros PointCloud 2 to Open3d PointCloud
+    @param ros_cloud  The ros PointCloud2 message
+    @return  Open3d PointCloud
+    """
+
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
         (rgb_uint32 & 0x00ff0000)>>16, (rgb_uint32 & 0x0000ff00)>>8, (rgb_uint32 & 0x000000ff)
     )
@@ -73,15 +78,20 @@ def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     # return
     return open3d_cloud
 
+
+
+#Transform from camera to world_space
 camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
                             [ -1,  0,  0,  0.59],
                             [ 0, -0.866, -0.5, 1.4],
                             [0, 0, 0, 1]])
-
+#Inverse of camera transform
 inv_camera_transform = np.linalg.inv(camera_transform)
-#print(camera_transform*inv_camera_transform)
-#given x, y coordinates (in respect to optical center), it generates 2 points
+
+
 def generate_points(x, y, y_min):
+    """! Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "ray" from x, y of the camera (camera_space)
+    """
     dist=0.53/(0.00109*y_min+0.5)
     #print(dist, y_min)
     return [[0.1*math.tan(0.88)/960*x, 0.1*math.tan(0.88)/960*y, 0.1],
@@ -102,60 +112,70 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     pcd = open3d.geometry.PointCloud()
     pcd.points = open3d.utility.Vector3dVector(points)
     mesh = pcd.get_oriented_bounding_box()
-    #mesh, _ = pcd.compute_convex_hull()
-    #mesh.compute_vertex_normals()
-    ##print(mesh)
     return mesh
 
-def approx_coordinate(x, y):
-    x-=960
-    y-=540
-    
+class Visualizer:
+    """! Helper struct in charge of the point cloud visualization """
+    def __init__(self):
+        """! constructor, it doesn't take any parameters"""
+        self.first_visualization=False
+        self.vis=open3d.visualization.Visualizer()
+        self.vis.create_window()
+        #does this control even work? https://github.com/isl-org/Open3D/issues/6581
+        #v_control = self.vis.get_view_control()
+        #v_control.set_zoom(0.3)
+        #v_control.set_front([-1, -0.0, 0.])
+        #v_control.set_lookat([0.4, 0.5, 0.86])
+        #v_control.set_up([-0.0, 0.0, 1.0])
 
-class PrecisePlacement:
+        self.thread_visualizer = threading.Thread(target=self.update_visualizer, name="process_visualization")
+        self.thread_visualizer.start()
+
     def update_visualizer(self):
+        """! Updates the Open3d visualizer every 0.02s . it's meant to execute on a separate thread
+        @return  it never returns
+        """
         while True:
-            ##print("run")
             self.vis.poll_events()
             self.vis.update_renderer()
             time.sleep(0.020)
+
+    def add_geometry(self, geometry):
+        """! Add this geometry to the visualization"""
+        if self.first_visualization:
+            self.vis.add_geometry(geometry, reset_bounding_box=False)
+        else:
+            self.vis.add_geometry(geometry, reset_bounding_box=True)
+            self.first_visualization=True
+    
+    def clear(self):
+        """! Removes all Gemoetries from the visualization"""
+        self.vis.clear_geometries()
+
+
+class PrecisePlacement:
+    """! PrecisePlacement class, it manages all it's needed to compute the IC registration
+    """
     def point_cloud_processer(self):
         while True:
             if self.raw_point_cloud is None:
                 time.sleep(0.1)
             else:
                 self.process_latest_point_cloud()
-            ##print("run")
-            #self.vis.poll_events()
-            #self.vis.update_renderer()
-            #time.sleep(0.020)
 
     def __init__(self, point_cloud_srv_name, use_visualizer=True):
+        """ Contructor
+        @param"""
         self.msg_seq=0
         self.point_cloud = None
         self.use_visualizer = use_visualizer
         self.raw_point_cloud = None
         self.last_point_cloud_time = 0
-
+        self.visualizer = None
         if use_visualizer:
-            self.vis=open3d.visualization.Visualizer()
-            self.vis.create_window()
-            v_control = self.vis.get_view_control()
-            v_control.set_zoom(0.3)
-            v_control.set_front([-1, -0.0, 0.])
-            v_control.set_lookat([0.4, 0.5, 0.86])
-            v_control.set_up([-0.0, 0.0, 1.0])
-            #self.vis.reset_view_point( reset_bounding_box=True)
-            bbox = generate_intersection_mesh(0, 100, 0, 100)
-            bbox = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
-            bbox.paint_uniform_color([1, 0.706, 0])
-            bbox.transform(camera_transform)
-            self.vis.add_geometry(bbox)
-
-            self.thread_visualizer = threading.Thread(target=self.update_visualizer, name="process_visualization")
-            self.thread_visualizer.start()
+            self.visualizer = Visualizer()
         
-        #spawn on a different thread
+        #spawn processing on a different thread (very expensive)
         self.thread_point_cloud_processer = threading.Thread(target=self.point_cloud_processer, name="process_visualization")
         self.thread_point_cloud_processer.start()
 
@@ -166,6 +186,7 @@ class PrecisePlacement:
         rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
         self.pub = rospy.Publisher("block_positions", BlockPositions, queue_size=1)
+
         #load meshes
         rospack = rospkg.RosPack()
         model_path = os.path.join(rospack.get_path("controller"), "models")#/mesh.stl")  
@@ -182,15 +203,15 @@ class PrecisePlacement:
             "4x1_H": None,
             "4x1_L": None,
             }
+        
+        #load each block mesh
         for key in self.meshes.keys():
             cur_model_path = os.path.join(model_path, os.path.join("brick_" + key, "mesh.stl"))
             self.meshes[key] = open3d.io.read_triangle_mesh(cur_model_path)
             self.meshes[key].compute_vertex_normals()
-
-            ##print(self.meshes[key])
         
         
-    #called every time an image is ready
+    #called every time an image callback is received
     def image_callback(self, data: Image):
         # if we don't have a converted point cloud it's pointless to process it
         if self.point_cloud is None:
@@ -211,8 +232,10 @@ class PrecisePlacement:
             cropped = point_cloud.crop(mesh)
             if len(cropped.points)< 100:
                 continue
-            cropped.paint_uniform_color(np.random.rand(3))
-            self.vis.add_geometry(cropped, reset_bounding_box=False)
+            #UNCOMMENT TO DISPLAY TEMPORARY POINT CLOUD
+            #cropped.paint_uniform_color(np.random.rand(3))
+            #if self.visualizer is not None:
+            #    self.visualizer.add_geometry(cropped)
             center = cropped.get_center()
             transform = np.eye(4)
             transform[0:3, 3]=center
@@ -242,17 +265,17 @@ class PrecisePlacement:
             transform[0:3, 1] = zeroed(transform[0:3, 1])
             transform[0:3, 0] = zeroed(transform[0:3, 0])
             source.transform(transform)
-            if result.fitness>0.6:
-                self.vis.add_geometry(source, reset_bounding_box=False)
-                print(result.fitness)
-            #print(transform)
+
+            if self.visualizer is not None:
+                source.paint_uniform_color([0, 0, 1])
+                self.visualizer.add_geometry(source)
+
             point = Point(x= transform[0][3], y=transform[1][3], z=transform[2][3])
             to_add = BlockPosition(block_type=box.label,
                                    confidence=result.fitness*box.confidence,
                                    point=point,
                                    angle=math.acos(max(min(transform[0][0], 1), -1)))
             to_send.append(to_add)
-            #print(to_add)
         
         to_send = BlockPositions(header=header, blocks=to_send)
         print("SENDING!", to_send)
@@ -283,20 +306,15 @@ class PrecisePlacement:
         ##print(self.point_cloud)
 
         # visualizzation
-        if self.use_visualizer:
-            self.vis.clear_geometries()
-            self.vis.add_geometry(self.point_cloud, reset_bounding_box=False)
-
-#cv_bridge = CvBridge()
-
-    #rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-
+        if self.visualizer is not None:
+            self.visualizer.clear()
+            self.visualizer.add_geometry(self.point_cloud)
 
 
 
 
 def main():
-    ##print(open3d.__version__)
+    #init ros
     rospy.init_node("position_detection")
     rospy.loginfo("position_detection init")
 
