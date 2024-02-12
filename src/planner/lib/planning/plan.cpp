@@ -55,6 +55,8 @@ std::function<std::tuple<typename Robot::Configuration, bool>()> to_js_trajector
 
     #endif
 
+    assert(robot.valid_config());
+
     return std::make_tuple(robot.config, t >= duration);
   };
 }

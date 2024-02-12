@@ -1,4 +1,5 @@
 #include "model.hpp"
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <limits>
@@ -49,5 +50,13 @@ UR5::UR5(const Configuration& homing_config) noexcept
 UR5::UR5(Configuration&& homing_config) noexcept
   : config(std::move(homing_config)), joints(generate_ur5_parameters(config)) {}
 
+
+bool UR5::valid_config() const {
+  auto valid = [](const RevoluteJoint& j) {
+    return j.theta <= j.max_config && j.theta >= j.min_config;
+  };
+
+  return std::all_of(joints.begin(), joints.end(), valid);
+}
 
 }

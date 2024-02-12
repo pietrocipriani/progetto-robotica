@@ -43,7 +43,6 @@ BlockMovement::BlockMovement(BlockPose&& start) noexcept
 
 
 
-
 os::Position safe_pose(const os::Position& pose) {
   static constexpr Scalar safe_z = table_distance - margin - std::numeric_limits<Scalar>::epsilon();
 
