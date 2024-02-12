@@ -51,16 +51,20 @@ void interpolation2(
   auto v = unlazy((end.point - start.point) / t.delta);
 
   auto q1 = quadratic_acceleration(start.point, v, t.start, start.times.accel_delta);
+  assert((start.point - q1(t.start)).norm() - 1 < dummy_precision);
   chain.emplace_back(std::move(q1), t.start);
 
   if (t.start_linear < t.end_linear) {
     auto l = linear_interpolation(start.point, end.point, t.start + start.times.accel_delta / 2, t.delta);
+    assert((chain.back()(t.start_linear) - l(t.start_linear)).norm() - 1 < dummy_precision);
     chain.emplace_back(std::move(l), t.start_linear);
   } else {
     assert(t.start_linear - t.end_linear < dummy_precision);
   }
 
   auto q2 = quadratic_deceleration(end.point, v, t.end, end.times.accel_delta);
+  assert((q2(t.end_linear) - chain.back()(t.end_linear)).norm() - 1 < dummy_precision);
+  assert((q2(t.end_linear) - end.point).norm() - 1 < dummy_precision);
   chain.emplace_back(std::move(q2), t.end_linear);
 }
 
