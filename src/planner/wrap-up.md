@@ -1,3 +1,11 @@
+# KINEMATICS
+
+
+# PLANNING
+
+Operational space vs joint space
+
+Use of quaternions
 
 /// @note About the usage of quaternions:
 /// - Euler angles have representational singularities and need the analytical jacobian.
