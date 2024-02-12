@@ -1,0 +1,228 @@
+\doxysection{generate\+\_\+annotations Namespace Reference}
+\hypertarget{namespacegenerate__annotations}{}\label{namespacegenerate__annotations}\index{generate\_annotations@{generate\_annotations}}
+
+
+Collects images from the dataset in the {\ttfamily assigns/} folder and generates annotations in various formats to use for training object detection and recognition models.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a14a96a4279c2de6a1cc0da7eefca06c5}{clamp}} (v, minv, maxv)
+\begin{DoxyCompactList}\small\item\em Clamps v to be between minv and maxv. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a25c45061e7a6704fd929999b7e5d074f}{flatten\+\_\+2}} (arr)
+\begin{DoxyCompactList}\small\item\em Flattens a 3d array so that it becomes 1d. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a6f2394f477c7eb5af93e5d90e02c2253}{get\+\_\+coco\+\_\+json}} (root, paths, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Set {\ttfamily collapse\+\_\+to\+\_\+1\+\_\+category} to True if you want a single category without distinction between blocks classes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a1641f6cea5ac7f9ee17368ff4254383f}{get\+\_\+image\+\_\+info}} (json\+\_\+path, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Reads image info from the provided json\+\_\+path, calculates image category and collects all bounding boxes maxing sure they are not out of the screen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a6e32bc95aa505426cc4f4c5537023766}{get\+\_\+views}} (root)
+\begin{DoxyCompactList}\small\item\em Collects image paths from the {\ttfamily assign/} folder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a51af30a60f9f02777c6396b8247e356f}{main}} ()
+\begin{DoxyCompactList}\small\item\em Usage\+: \doxylink{generate__annotations_8py}{generate\+\_\+annotations.\+py} \mbox{[}with\+\_\+categories\texorpdfstring{$\vert$}{|}without\+\_\+categories\mbox{]} \mbox{[}coco\texorpdfstring{$\vert$}{|}ultralytics\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a8e4a254cc39125ae54d8c348ec5f3101}{save\+\_\+coco\+\_\+json}} (root, train, \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}}, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Saves the annotations in the COCO json format, used for training Yolos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_ae1a09fa473ffe002606c20b822f2d6dd}{save\+\_\+ultralytics}} (root, train, \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}}, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Saves the annotations in the ultralytics format, used for training YOLOv8. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a95c6008837395c5ca47ffe91eb595128}{split\+\_\+train\+\_\+test}} (paths, train\+\_\+over\+\_\+total\+\_\+ratio, seed)
+\begin{DoxyCompactList}\small\item\em Pseudorandomly splits the image paths in two sets according to the ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{namespacegenerate__annotations_aafcaf902ebf1160eef10ea24216f4ced}{FORMATS}} = \mbox{[}"{}coco"{}, "{}ultralytics"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em the format of annotations to generate \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegenerate__annotations_a4e81322eb1085aca9cd7c5527f5e4c6b}{HEIGHT}} = 1024
+\begin{DoxyCompactList}\small\item\em The height of images in the dataset. \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacegenerate__annotations_a54e9ae393c97cba8f0d9061e504028c8}{MODES}} = \mbox{[}"{}with\+\_\+categories"{}, "{}without\+\_\+categories"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em whether to include categories for multiclass detection, or not include categories for singleclass model detection \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{namespacegenerate__annotations_a082cd978f48ea157187e379eeb6fe1ee}{VERTICES\+\_\+\+TO\+\_\+\+CATEGORIES}}
+\begin{DoxyCompactList}\small\item\em the letter mapping is\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegenerate__annotations_a59c3bba4b17cd5e19f149ea175fa6989}{WIDTH}} = 1024
+\begin{DoxyCompactList}\small\item\em The width of images in the dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Collects images from the dataset in the {\ttfamily assigns/} folder and generates annotations in various formats to use for training object detection and recognition models. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacegenerate__annotations_a14a96a4279c2de6a1cc0da7eefca06c5}\label{namespacegenerate__annotations_a14a96a4279c2de6a1cc0da7eefca06c5} 
+\index{generate\_annotations@{generate\_annotations}!clamp@{clamp}}
+\index{clamp@{clamp}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{clamp()}{clamp()}}
+{\footnotesize\ttfamily clamp (\begin{DoxyParamCaption}\item[{}]{v,  }\item[{}]{minv,  }\item[{}]{maxv }\end{DoxyParamCaption})}
+
+
+
+Clamps v to be between minv and maxv. 
+
+\Hypertarget{namespacegenerate__annotations_a25c45061e7a6704fd929999b7e5d074f}\label{namespacegenerate__annotations_a25c45061e7a6704fd929999b7e5d074f} 
+\index{generate\_annotations@{generate\_annotations}!flatten\_2@{flatten\_2}}
+\index{flatten\_2@{flatten\_2}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{flatten\_2()}{flatten\_2()}}
+{\footnotesize\ttfamily flatten\+\_\+2 (\begin{DoxyParamCaption}\item[{}]{arr }\end{DoxyParamCaption})}
+
+
+
+Flattens a 3d array so that it becomes 1d. 
+
+\Hypertarget{namespacegenerate__annotations_a6f2394f477c7eb5af93e5d90e02c2253}\label{namespacegenerate__annotations_a6f2394f477c7eb5af93e5d90e02c2253} 
+\index{generate\_annotations@{generate\_annotations}!get\_coco\_json@{get\_coco\_json}}
+\index{get\_coco\_json@{get\_coco\_json}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{get\_coco\_json()}{get\_coco\_json()}}
+{\footnotesize\ttfamily get\+\_\+coco\+\_\+json (\begin{DoxyParamCaption}\item[{}]{root,  }\item[{}]{paths,  }\item[{}]{collapse\+\_\+to\+\_\+1\+\_\+category }\end{DoxyParamCaption})}
+
+
+
+Set {\ttfamily collapse\+\_\+to\+\_\+1\+\_\+category} to True if you want a single category without distinction between blocks classes. 
+
+\Hypertarget{namespacegenerate__annotations_a1641f6cea5ac7f9ee17368ff4254383f}\label{namespacegenerate__annotations_a1641f6cea5ac7f9ee17368ff4254383f} 
+\index{generate\_annotations@{generate\_annotations}!get\_image\_info@{get\_image\_info}}
+\index{get\_image\_info@{get\_image\_info}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{get\_image\_info()}{get\_image\_info()}}
+{\footnotesize\ttfamily get\+\_\+image\+\_\+info (\begin{DoxyParamCaption}\item[{}]{json\+\_\+path,  }\item[{}]{collapse\+\_\+to\+\_\+1\+\_\+category }\end{DoxyParamCaption})}
+
+
+
+Reads image info from the provided json\+\_\+path, calculates image category and collects all bounding boxes maxing sure they are not out of the screen. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+\_\+path} & the {\ttfamily view=\texorpdfstring{$\ast$}{*}.json} path to read image info from \\
+\hline
+{\em collapse\+\_\+to\+\_\+1\+\_\+category} & whether to ignore the category and just return 0 as category id \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespacegenerate__annotations_a6e32bc95aa505426cc4f4c5537023766}\label{namespacegenerate__annotations_a6e32bc95aa505426cc4f4c5537023766} 
+\index{generate\_annotations@{generate\_annotations}!get\_views@{get\_views}}
+\index{get\_views@{get\_views}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{get\_views()}{get\_views()}}
+{\footnotesize\ttfamily get\+\_\+views (\begin{DoxyParamCaption}\item[{}]{root }\end{DoxyParamCaption})}
+
+
+
+Collects image paths from the {\ttfamily assign/} folder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & the root folder to search views in \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a 3d list, where the first dimension identifies the {\ttfamily assigns/assign\texorpdfstring{$\ast$}{*}/} folder, the second dimension identifies the {\ttfamily scene\texorpdfstring{$\ast$}{*}} folders in every {\ttfamily assigns/assign\texorpdfstring{$\ast$}{*}/} folder, and the third dimension contains the list of image paths ({\ttfamily view=\texorpdfstring{$\ast$}{*}.jpeg} but without the {\ttfamily .json}) in every {\ttfamily assign\texorpdfstring{$\ast$}{*}/} folder 
+\end{DoxyReturn}
+\Hypertarget{namespacegenerate__annotations_a51af30a60f9f02777c6396b8247e356f}\label{namespacegenerate__annotations_a51af30a60f9f02777c6396b8247e356f} 
+\index{generate\_annotations@{generate\_annotations}!main@{main}}
+\index{main@{main}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Usage\+: \doxylink{generate__annotations_8py}{generate\+\_\+annotations.\+py} \mbox{[}with\+\_\+categories\texorpdfstring{$\vert$}{|}without\+\_\+categories\mbox{]} \mbox{[}coco\texorpdfstring{$\vert$}{|}ultralytics\mbox{]}. 
+
+Collects images from the dataset in the {\ttfamily assigns/} folder and generates annotations in various formats to use for training object detection and recognition models. See MODES and FORMATS for more information. \Hypertarget{namespacegenerate__annotations_a8e4a254cc39125ae54d8c348ec5f3101}\label{namespacegenerate__annotations_a8e4a254cc39125ae54d8c348ec5f3101} 
+\index{generate\_annotations@{generate\_annotations}!save\_coco\_json@{save\_coco\_json}}
+\index{save\_coco\_json@{save\_coco\_json}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{save\_coco\_json()}{save\_coco\_json()}}
+{\footnotesize\ttfamily save\+\_\+coco\+\_\+json (\begin{DoxyParamCaption}\item[{}]{root,  }\item[{}]{train,  }\item[{}]{test,  }\item[{}]{collapse\+\_\+to\+\_\+1\+\_\+category }\end{DoxyParamCaption})}
+
+
+
+Saves the annotations in the COCO json format, used for training Yolos. 
+
+\Hypertarget{namespacegenerate__annotations_ae1a09fa473ffe002606c20b822f2d6dd}\label{namespacegenerate__annotations_ae1a09fa473ffe002606c20b822f2d6dd} 
+\index{generate\_annotations@{generate\_annotations}!save\_ultralytics@{save\_ultralytics}}
+\index{save\_ultralytics@{save\_ultralytics}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{save\_ultralytics()}{save\_ultralytics()}}
+{\footnotesize\ttfamily save\+\_\+ultralytics (\begin{DoxyParamCaption}\item[{}]{root,  }\item[{}]{train,  }\item[{}]{test,  }\item[{}]{collapse\+\_\+to\+\_\+1\+\_\+category }\end{DoxyParamCaption})}
+
+
+
+Saves the annotations in the ultralytics format, used for training YOLOv8. 
+
+\Hypertarget{namespacegenerate__annotations_a95c6008837395c5ca47ffe91eb595128}\label{namespacegenerate__annotations_a95c6008837395c5ca47ffe91eb595128} 
+\index{generate\_annotations@{generate\_annotations}!split\_train\_test@{split\_train\_test}}
+\index{split\_train\_test@{split\_train\_test}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{split\_train\_test()}{split\_train\_test()}}
+{\footnotesize\ttfamily split\+\_\+train\+\_\+test (\begin{DoxyParamCaption}\item[{}]{paths,  }\item[{}]{train\+\_\+over\+\_\+total\+\_\+ratio,  }\item[{}]{seed }\end{DoxyParamCaption})}
+
+
+
+Pseudorandomly splits the image paths in two sets according to the ratio. 
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacegenerate__annotations_aafcaf902ebf1160eef10ea24216f4ced}\label{namespacegenerate__annotations_aafcaf902ebf1160eef10ea24216f4ced} 
+\index{generate\_annotations@{generate\_annotations}!FORMATS@{FORMATS}}
+\index{FORMATS@{FORMATS}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{FORMATS}{FORMATS}}
+{\footnotesize\ttfamily list FORMATS = \mbox{[}"{}coco"{}, "{}ultralytics"{}\mbox{]}}
+
+
+
+the format of annotations to generate 
+
+\Hypertarget{namespacegenerate__annotations_a4e81322eb1085aca9cd7c5527f5e4c6b}\label{namespacegenerate__annotations_a4e81322eb1085aca9cd7c5527f5e4c6b} 
+\index{generate\_annotations@{generate\_annotations}!HEIGHT@{HEIGHT}}
+\index{HEIGHT@{HEIGHT}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{HEIGHT}{HEIGHT}}
+{\footnotesize\ttfamily int HEIGHT = 1024}
+
+
+
+The height of images in the dataset. 
+
+\Hypertarget{namespacegenerate__annotations_a54e9ae393c97cba8f0d9061e504028c8}\label{namespacegenerate__annotations_a54e9ae393c97cba8f0d9061e504028c8} 
+\index{generate\_annotations@{generate\_annotations}!MODES@{MODES}}
+\index{MODES@{MODES}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{MODES}{MODES}}
+{\footnotesize\ttfamily list MODES = \mbox{[}"{}with\+\_\+categories"{}, "{}without\+\_\+categories"{}\mbox{]}}
+
+
+
+whether to include categories for multiclass detection, or not include categories for singleclass model detection 
+
+\Hypertarget{namespacegenerate__annotations_a082cd978f48ea157187e379eeb6fe1ee}\label{namespacegenerate__annotations_a082cd978f48ea157187e379eeb6fe1ee} 
+\index{generate\_annotations@{generate\_annotations}!VERTICES\_TO\_CATEGORIES@{VERTICES\_TO\_CATEGORIES}}
+\index{VERTICES\_TO\_CATEGORIES@{VERTICES\_TO\_CATEGORIES}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{VERTICES\_TO\_CATEGORIES}{VERTICES\_TO\_CATEGORIES}}
+{\footnotesize\ttfamily dict VERTICES\+\_\+\+TO\+\_\+\+CATEGORIES}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ \{}
+\DoxyCodeLine{00002\ \ \ \ \ 1971:\ (0,\ \ \textcolor{stringliteral}{"{}1x1\_H"{}}),\ \textcolor{comment}{\#\ assign1/scene1/view=0}}
+\DoxyCodeLine{00003\ \ \ \ \ 2691:\ (1,\ \ \textcolor{stringliteral}{"{}2x1\_T"{}}),\ \textcolor{comment}{\#\ assign1/scene2/view=0}}
+\DoxyCodeLine{00004\ \ \ \ \ 2609:\ (2,\ \ \textcolor{stringliteral}{"{}2x1\_L"{}}),\ \textcolor{comment}{\#\ assign1/scene4/view=0}}
+\DoxyCodeLine{00005\ \ \ \ \ 3536:\ (3,\ \ \textcolor{stringliteral}{"{}2x1\_H"{}}),\ \textcolor{comment}{\#\ assign1/scene13/view=0}}
+\DoxyCodeLine{00006\ \ \ \ \ 2881:\ (4,\ \ \textcolor{stringliteral}{"{}2x1\_U"{}}),\ \textcolor{comment}{\#\ assign1/scene16/view=0}}
+\DoxyCodeLine{00007\ \ \ \ \ 6281:\ (5,\ \ \textcolor{stringliteral}{"{}2x2\_H"{}}),\ \textcolor{comment}{\#\ assign1/scene19/view=0}}
+\DoxyCodeLine{00008\ \ \ \ \ 5306:\ (6,\ \ \textcolor{stringliteral}{"{}2x2\_U"{}}),\ \textcolor{comment}{\#\ assign1/scene3/view=0}}
+\DoxyCodeLine{00009\ \ \ \ \ 5209:\ (7,\ \ \textcolor{stringliteral}{"{}3x1\_H"{}}),\ \textcolor{comment}{\#\ assign1/scene6/view=0}}
+\DoxyCodeLine{00010\ \ \ \ \ 3396:\ (8,\ \ \textcolor{stringliteral}{"{}3x1\_U"{}}),\ \textcolor{comment}{\#\ assign1/scene5/view=0}}
+\DoxyCodeLine{00011\ \ \ \ \ 6716:\ (9,\ \ \textcolor{stringliteral}{"{}4x1\_H"{}}),\ \textcolor{comment}{\#\ assign1/scene11/view=0}}
+\DoxyCodeLine{00012\ \ \ \ \ 4711:\ (10,\ \textcolor{stringliteral}{"{}4x1\_L"{}}),\ \textcolor{comment}{\#\ assign1/scene30/view=0}}
+\DoxyCodeLine{00013\ \}}
+
+\end{DoxyCode}
+
+
+the letter mapping is\+: 
+
+
+\begin{DoxyItemize}
+\item H\+: all top squares have a circle, the base is high
+\item L\+: all top squares have a circle, the base is low
+\item T\+: only half of the top squares have a circle, the other part a half-\/triangle
+\item U\+: only half of the top squares have a circle, the other part is U-\/shaped 
+\end{DoxyItemize}\Hypertarget{namespacegenerate__annotations_a59c3bba4b17cd5e19f149ea175fa6989}\label{namespacegenerate__annotations_a59c3bba4b17cd5e19f149ea175fa6989} 
+\index{generate\_annotations@{generate\_annotations}!WIDTH@{WIDTH}}
+\index{WIDTH@{WIDTH}!generate\_annotations@{generate\_annotations}}
+\doxysubsubsection{\texorpdfstring{WIDTH}{WIDTH}}
+{\footnotesize\ttfamily int WIDTH = 1024}
+
+
+
+The width of images in the dataset. 
+

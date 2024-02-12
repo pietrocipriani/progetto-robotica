@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kinematics_0',['kinematics',['../namespacekinematics.html',1,'']]]
+  ['inspect_5fdetected_5fblocks_0',['inspect_detected_blocks',['../namespaceinspect__detected__blocks.html',1,'']]]
 ];

@@ -8,7 +8,11 @@
 namespace planner {
 
 /// Enum representing the types of blocks.
-///
+/// The letter mapping is:
+/// - `H`: all top squares have a circle, the base is high
+/// - `L`: all top squares have a circle, the base is low
+/// - `T`: only half of the top squares have a circle, the other part a half-triangle
+/// - `U`: only half of the top squares have a circle, the other part is U-shaped
 enum class Block {
     B_1x1_H = 0,
     B_2x1_T = 1,
@@ -23,6 +27,7 @@ enum class Block {
     B_4x1_L = 10,
 };
 
+/// @brief All of the blocks, to be iterated upon.
 constexpr Block all_blocks[] = {
     Block::B_1x1_H,
     Block::B_2x1_T,

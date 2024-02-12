@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structplanner_1_1MovementSequence_1_1ConfigGenerator.html" title="A generator capable of constructing configs on&#45;the&#45;fly." alt="" coords="5,5,209,50"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,135,33"/>
+<area shape="rect" id="Node000001" href="$classtrain__yolos_1_1YoloS.html" title=" " alt="" coords="183,5,238,33"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="150,17,182,17,182,22,150,22"/>
 </map>

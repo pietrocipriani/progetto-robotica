@@ -129,7 +129,7 @@ bool \mbox{\hyperlink{namespaceplanner_a4f29e032ebee22fb668de32d51155fa0}{unsafe
 \begin{DoxyCompactItemize}
 \item 
 constexpr \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{namespaceplanner_aab4666b153ef1ba1c944d3f5941d3e38}{all\+\_\+blocks}} \mbox{[}$\,$\mbox{]}
-\item 
+\begin{DoxyCompactList}\small\item\em All of the blocks, to be iterated upon. \end{DoxyCompactList}\item 
 constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_aac7acd01566d7023a8d325b2390838f6}{back\+\_\+obstacle\+\_\+distance}} = 0.\+35
 \begin{DoxyCompactList}\small\item\em The distance of the back control panel (minimum distance in the xy plane). \end{DoxyCompactList}\item 
 constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_af37c1198cab6c858f6ff1a3259cbc99b}{gazebo\+\_\+to\+\_\+os\+\_\+x}} = 0.\+5
@@ -188,7 +188,13 @@ Graph as adjlist.
 
 Enum representing the types of blocks. 
 
-\begin{DoxyEnumFields}{Enumerator}
+The letter mapping is\+:
+\begin{DoxyItemize}
+\item {\ttfamily H}\+: all top squares have a circle, the base is high
+\item {\ttfamily L}\+: all top squares have a circle, the base is low
+\item {\ttfamily T}\+: only half of the top squares have a circle, the other part a half-\/triangle
+\item {\ttfamily U}\+: only half of the top squares have a circle, the other part is U-\/shaped 
+\end{DoxyItemize}\begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{B\_1x1\_H@{B\_1x1\_H}!planner@{planner}}\index{planner@{planner}!B\_1x1\_H@{B\_1x1\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982} 
 B\+\_\+1x1\+\_\+H&\\
 \hline
@@ -891,6 +897,10 @@ The effective position at the end of the movement.
 \DoxyCodeLine{\}}
 
 \end{DoxyCode}
+
+
+All of the blocks, to be iterated upon. 
+
 \Hypertarget{namespaceplanner_aac7acd01566d7023a8d325b2390838f6}\label{namespaceplanner_aac7acd01566d7023a8d325b2390838f6} 
 \index{planner@{planner}!back\_obstacle\_distance@{back\_obstacle\_distance}}
 \index{back\_obstacle\_distance@{back\_obstacle\_distance}!planner@{planner}}

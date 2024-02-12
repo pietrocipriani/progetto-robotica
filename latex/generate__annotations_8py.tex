@@ -1,0 +1,41 @@
+\doxysection{vision\+\_\+training/generate\+\_\+annotations.py File Reference}
+\hypertarget{generate__annotations_8py}{}\label{generate__annotations_8py}\index{vision\_training/generate\_annotations.py@{vision\_training/generate\_annotations.py}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacegenerate__annotations}{generate\+\_\+annotations}}
+\begin{DoxyCompactList}\small\item\em Collects images from the dataset in the {\ttfamily assigns/} folder and generates annotations in various formats to use for training object detection and recognition models. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a14a96a4279c2de6a1cc0da7eefca06c5}{clamp}} (v, minv, maxv)
+\begin{DoxyCompactList}\small\item\em Clamps v to be between minv and maxv. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a25c45061e7a6704fd929999b7e5d074f}{flatten\+\_\+2}} (arr)
+\begin{DoxyCompactList}\small\item\em Flattens a 3d array so that it becomes 1d. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a6f2394f477c7eb5af93e5d90e02c2253}{get\+\_\+coco\+\_\+json}} (root, paths, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Set {\ttfamily collapse\+\_\+to\+\_\+1\+\_\+category} to True if you want a single category without distinction between blocks classes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a1641f6cea5ac7f9ee17368ff4254383f}{get\+\_\+image\+\_\+info}} (json\+\_\+path, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Reads image info from the provided json\+\_\+path, calculates image category and collects all bounding boxes maxing sure they are not out of the screen. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a6e32bc95aa505426cc4f4c5537023766}{get\+\_\+views}} (root)
+\begin{DoxyCompactList}\small\item\em Collects image paths from the {\ttfamily assign/} folder. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a51af30a60f9f02777c6396b8247e356f}{main}} ()
+\begin{DoxyCompactList}\small\item\em Usage\+: \doxylink{generate__annotations_8py}{generate\+\_\+annotations.\+py} \mbox{[}with\+\_\+categories\texorpdfstring{$\vert$}{|}without\+\_\+categories\mbox{]} \mbox{[}coco\texorpdfstring{$\vert$}{|}ultralytics\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a8e4a254cc39125ae54d8c348ec5f3101}{save\+\_\+coco\+\_\+json}} (root, train, \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}}, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Saves the annotations in the COCO json format, used for training Yolos. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_ae1a09fa473ffe002606c20b822f2d6dd}{save\+\_\+ultralytics}} (root, train, \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}}, collapse\+\_\+to\+\_\+1\+\_\+category)
+\begin{DoxyCompactList}\small\item\em Saves the annotations in the ultralytics format, used for training YOLOv8. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacegenerate__annotations_a95c6008837395c5ca47ffe91eb595128}{split\+\_\+train\+\_\+test}} (paths, train\+\_\+over\+\_\+total\+\_\+ratio, seed)
+\begin{DoxyCompactList}\small\item\em Pseudorandomly splits the image paths in two sets according to the ratio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{namespacegenerate__annotations_aafcaf902ebf1160eef10ea24216f4ced}{FORMATS}} = \mbox{[}"{}coco"{}, "{}ultralytics"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em the format of annotations to generate \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegenerate__annotations_a4e81322eb1085aca9cd7c5527f5e4c6b}{HEIGHT}} = 1024
+\begin{DoxyCompactList}\small\item\em The height of images in the dataset. \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacegenerate__annotations_a54e9ae393c97cba8f0d9061e504028c8}{MODES}} = \mbox{[}"{}with\+\_\+categories"{}, "{}without\+\_\+categories"{}\mbox{]}
+\begin{DoxyCompactList}\small\item\em whether to include categories for multiclass detection, or not include categories for singleclass model detection \end{DoxyCompactList}\item 
+dict \mbox{\hyperlink{namespacegenerate__annotations_a082cd978f48ea157187e379eeb6fe1ee}{VERTICES\+\_\+\+TO\+\_\+\+CATEGORIES}}
+\begin{DoxyCompactList}\small\item\em the letter mapping is\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacegenerate__annotations_a59c3bba4b17cd5e19f149ea175fa6989}{WIDTH}} = 1024
+\begin{DoxyCompactList}\small\item\em The width of images in the dataset. \end{DoxyCompactList}\end{DoxyCompactItemize}

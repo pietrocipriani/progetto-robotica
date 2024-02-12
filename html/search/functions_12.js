@@ -16,5 +16,7 @@ var searchData=
   ['to_5fos_5fposition_13',['to_os_position',['../structplanner_1_1BlockPose.html#a61bf3d4d8e72df2ec4b2e595b4f87230',1,'planner::BlockPose']]],
   ['to_5frotation_14',['to_rotation',['../namespaceeuler.html#ac8e70043928e77966aee7e1afade12af',1,'euler']]],
   ['top_5fsort_15',['top_sort',['../namespaceplanner.html#ab996d64a14f3911e0cd80939ed52ba93',1,'planner']]],
-  ['translation_5frotation_16',['translation_rotation',['../namespacekinematics.html#a925a56f148162734113080ddc4ec622d',1,'kinematics']]]
+  ['train_5fdataloader_16',['train_dataloader',['../classtrain__yolos_1_1YoloS.html#a631d56822d8772fd542294007effc9ff',1,'train_yolos::YoloS']]],
+  ['training_5fstep_17',['training_step',['../classtrain__yolos_1_1YoloS.html#af94046c3d85d97bc2bbbd26e0f4a2156',1,'train_yolos::YoloS']]],
+  ['translation_5frotation_18',['translation_rotation',['../namespacekinematics.html#a925a56f148162734113080ddc4ec622d',1,'kinematics']]]
 ];

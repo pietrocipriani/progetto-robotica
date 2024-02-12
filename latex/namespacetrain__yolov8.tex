@@ -1,0 +1,41 @@
+\doxysection{train\+\_\+yolov8 Namespace Reference}
+\hypertarget{namespacetrain__yolov8}{}\label{namespacetrain__yolov8}\index{train\_yolov8@{train\_yolov8}}
+
+
+Very simple script used to fine-\/tune a YOLOv8 model on the blocks dataset.  
+
+
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacetrain__yolov8_a508cc3106d2c29fe07dc87cbe3ea6927}{model}} = YOLO("{}yolov8n.\+pt"{})
+\item 
+\mbox{\hyperlink{namespacetrain__yolov8_a339bb5524b06e496a6aaa0a97a4a8d21}{results}} = model.\+train(data="{}assigns/ultralytics.\+yaml"{}, epochs=10000, imgsz=640)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Very simple script used to fine-\/tune a YOLOv8 model on the blocks dataset. 
+
+The ultralytics library is really great, and automatically\+:
+\begin{DoxyItemize}
+\item chooses hyperparameters
+\item performs augmentation
+\item stops training when there is no improvement
+\item generates a lot of useful visualizations in the {\ttfamily runs/} folder
+\item keeps track of the last and the best models 
+\end{DoxyItemize}
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacetrain__yolov8_a508cc3106d2c29fe07dc87cbe3ea6927}\label{namespacetrain__yolov8_a508cc3106d2c29fe07dc87cbe3ea6927} 
+\index{train\_yolov8@{train\_yolov8}!model@{model}}
+\index{model@{model}!train\_yolov8@{train\_yolov8}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily model = YOLO("{}yolov8n.\+pt"{})}
+
+\Hypertarget{namespacetrain__yolov8_a339bb5524b06e496a6aaa0a97a4a8d21}\label{namespacetrain__yolov8_a339bb5524b06e496a6aaa0a97a4a8d21} 
+\index{train\_yolov8@{train\_yolov8}!results@{results}}
+\index{results@{results}!train\_yolov8@{train\_yolov8}}
+\doxysubsubsection{\texorpdfstring{results}{results}}
+{\footnotesize\ttfamily results = model.\+train(data="{}assigns/ultralytics.\+yaml"{}, epochs=10000, imgsz=640)}
+

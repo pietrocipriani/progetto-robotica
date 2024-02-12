@@ -1,0 +1,152 @@
+\doxysection{YoloS Class Reference}
+\hypertarget{classtrain__yolos_1_1YoloS}{}\label{classtrain__yolos_1_1YoloS}\index{YoloS@{YoloS}}
+
+
+Inheritance diagram for YoloS\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{classtrain__yolos_1_1YoloS__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for YoloS\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=177pt]{classtrain__yolos_1_1YoloS__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a4dab6ab9e2d34c8704ebf8e5b673ed9f}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_a508cc3106d2c29fe07dc87cbe3ea6927}{model}}, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_a631d56822d8772fd542294007effc9ff}{train\+\_\+dataloader}}, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_aadaab50621b0c1d7dbdafb4e11b8019c}{val\+\_\+dataloader}}, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_a5d193a58dc4764896ad3eb46db3fb20b}{lr}}, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_a0d534bf7e313a06d6c4d4ca84ca530d5}{weight\+\_\+decay}}, \mbox{\hyperlink{classtrain__yolos_1_1YoloS_ab7a18b2ff11484217c4b8c7779120bf9}{batch\+\_\+size}})
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a8d771c652a97f4ed99017789da271d73}{common\+\_\+step}} (self, batch, batch\+\_\+idx)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a43f98c5b4f21ac0c5e969c18c2af3100}{configure\+\_\+optimizers}} (self)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_ad826e78f4b8a466230de19f4e60b4f7d}{forward}} (self, pixel\+\_\+values)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a631d56822d8772fd542294007effc9ff}{train\+\_\+dataloader}} (self)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_af94046c3d85d97bc2bbbd26e0f4a2156}{training\+\_\+step}} (self, batch, batch\+\_\+idx)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_aadaab50621b0c1d7dbdafb4e11b8019c}{val\+\_\+dataloader}} (self)
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a2da820562b5c1b7c959d124ff22d8c75}{validation\+\_\+step}} (self, batch, batch\+\_\+idx)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_ab7a18b2ff11484217c4b8c7779120bf9}{batch\+\_\+size}}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a5d193a58dc4764896ad3eb46db3fb20b}{lr}}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a508cc3106d2c29fe07dc87cbe3ea6927}{model}}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_aa1ec3d08a0e422ad1e5df103bf195806}{train\+\_\+dataloaderr}}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a640681549fc5211187b3849fd019ed0b}{val\+\_\+dataloaderr}}
+\item 
+\mbox{\hyperlink{classtrain__yolos_1_1YoloS_a0d534bf7e313a06d6c4d4ca84ca530d5}{weight\+\_\+decay}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classtrain__yolos_1_1YoloS_a4dab6ab9e2d34c8704ebf8e5b673ed9f}\label{classtrain__yolos_1_1YoloS_a4dab6ab9e2d34c8704ebf8e5b673ed9f} 
+\index{YoloS@{YoloS}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{model,  }\item[{}]{train\+\_\+dataloader,  }\item[{}]{val\+\_\+dataloader,  }\item[{}]{lr,  }\item[{}]{weight\+\_\+decay,  }\item[{}]{batch\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classtrain__yolos_1_1YoloS_a8d771c652a97f4ed99017789da271d73}\label{classtrain__yolos_1_1YoloS_a8d771c652a97f4ed99017789da271d73} 
+\index{YoloS@{YoloS}!common\_step@{common\_step}}
+\index{common\_step@{common\_step}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{common\_step()}{common\_step()}}
+{\footnotesize\ttfamily common\+\_\+step (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch,  }\item[{}]{batch\+\_\+idx }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a43f98c5b4f21ac0c5e969c18c2af3100}\label{classtrain__yolos_1_1YoloS_a43f98c5b4f21ac0c5e969c18c2af3100} 
+\index{YoloS@{YoloS}!configure\_optimizers@{configure\_optimizers}}
+\index{configure\_optimizers@{configure\_optimizers}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{configure\_optimizers()}{configure\_optimizers()}}
+{\footnotesize\ttfamily configure\+\_\+optimizers (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_ad826e78f4b8a466230de19f4e60b4f7d}\label{classtrain__yolos_1_1YoloS_ad826e78f4b8a466230de19f4e60b4f7d} 
+\index{YoloS@{YoloS}!forward@{forward}}
+\index{forward@{forward}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily forward (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pixel\+\_\+values }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a631d56822d8772fd542294007effc9ff}\label{classtrain__yolos_1_1YoloS_a631d56822d8772fd542294007effc9ff} 
+\index{YoloS@{YoloS}!train\_dataloader@{train\_dataloader}}
+\index{train\_dataloader@{train\_dataloader}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{train\_dataloader()}{train\_dataloader()}}
+{\footnotesize\ttfamily train\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_af94046c3d85d97bc2bbbd26e0f4a2156}\label{classtrain__yolos_1_1YoloS_af94046c3d85d97bc2bbbd26e0f4a2156} 
+\index{YoloS@{YoloS}!training\_step@{training\_step}}
+\index{training\_step@{training\_step}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{training\_step()}{training\_step()}}
+{\footnotesize\ttfamily training\+\_\+step (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch,  }\item[{}]{batch\+\_\+idx }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_aadaab50621b0c1d7dbdafb4e11b8019c}\label{classtrain__yolos_1_1YoloS_aadaab50621b0c1d7dbdafb4e11b8019c} 
+\index{YoloS@{YoloS}!val\_dataloader@{val\_dataloader}}
+\index{val\_dataloader@{val\_dataloader}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{val\_dataloader()}{val\_dataloader()}}
+{\footnotesize\ttfamily val\+\_\+dataloader (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a2da820562b5c1b7c959d124ff22d8c75}\label{classtrain__yolos_1_1YoloS_a2da820562b5c1b7c959d124ff22d8c75} 
+\index{YoloS@{YoloS}!validation\_step@{validation\_step}}
+\index{validation\_step@{validation\_step}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{validation\_step()}{validation\_step()}}
+{\footnotesize\ttfamily validation\+\_\+step (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch,  }\item[{}]{batch\+\_\+idx }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classtrain__yolos_1_1YoloS_ab7a18b2ff11484217c4b8c7779120bf9}\label{classtrain__yolos_1_1YoloS_ab7a18b2ff11484217c4b8c7779120bf9} 
+\index{YoloS@{YoloS}!batch\_size@{batch\_size}}
+\index{batch\_size@{batch\_size}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{batch\_size}{batch\_size}}
+{\footnotesize\ttfamily batch\+\_\+size}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a5d193a58dc4764896ad3eb46db3fb20b}\label{classtrain__yolos_1_1YoloS_a5d193a58dc4764896ad3eb46db3fb20b} 
+\index{YoloS@{YoloS}!lr@{lr}}
+\index{lr@{lr}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{lr}{lr}}
+{\footnotesize\ttfamily lr}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a508cc3106d2c29fe07dc87cbe3ea6927}\label{classtrain__yolos_1_1YoloS_a508cc3106d2c29fe07dc87cbe3ea6927} 
+\index{YoloS@{YoloS}!model@{model}}
+\index{model@{model}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily model}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_aa1ec3d08a0e422ad1e5df103bf195806}\label{classtrain__yolos_1_1YoloS_aa1ec3d08a0e422ad1e5df103bf195806} 
+\index{YoloS@{YoloS}!train\_dataloaderr@{train\_dataloaderr}}
+\index{train\_dataloaderr@{train\_dataloaderr}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{train\_dataloaderr}{train\_dataloaderr}}
+{\footnotesize\ttfamily train\+\_\+dataloaderr}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a640681549fc5211187b3849fd019ed0b}\label{classtrain__yolos_1_1YoloS_a640681549fc5211187b3849fd019ed0b} 
+\index{YoloS@{YoloS}!val\_dataloaderr@{val\_dataloaderr}}
+\index{val\_dataloaderr@{val\_dataloaderr}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{val\_dataloaderr}{val\_dataloaderr}}
+{\footnotesize\ttfamily val\+\_\+dataloaderr}
+
+\Hypertarget{classtrain__yolos_1_1YoloS_a0d534bf7e313a06d6c4d4ca84ca530d5}\label{classtrain__yolos_1_1YoloS_a0d534bf7e313a06d6c4d4ca84ca530d5} 
+\index{YoloS@{YoloS}!weight\_decay@{weight\_decay}}
+\index{weight\_decay@{weight\_decay}!YoloS@{YoloS}}
+\doxysubsubsection{\texorpdfstring{weight\_decay}{weight\_decay}}
+{\footnotesize\ttfamily weight\+\_\+decay}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+vision\+\_\+training/\mbox{\hyperlink{train__yolos_8py}{train\+\_\+yolos.\+py}}\end{DoxyCompactItemize}

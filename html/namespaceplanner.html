@@ -257,6 +257,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:aab4666b153ef1ba1c944d3f5941d3e38" id="r_aab4666b153ef1ba1c944d3f5941d3e38"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceplanner.html#ae91cb3afd79e6de887cf19fcca7a8c4a">Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplanner.html#aab4666b153ef1ba1c944d3f5941d3e38">all_blocks</a> []</td></tr>
+<tr class="memdesc:aab4666b153ef1ba1c944d3f5941d3e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">All of the blocks, to be iterated upon.  <br /></td></tr>
 <tr class="separator:aab4666b153ef1ba1c944d3f5941d3e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac7acd01566d7023a8d325b2390838f6" id="r_aac7acd01566d7023a8d325b2390838f6"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="types_8hpp.html#a8c2981f3f834be9448a6ab06c28748eb">Scalar</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceplanner.html#aac7acd01566d7023a8d325b2390838f6">back_obstacle_distance</a> = 0.35</td></tr>
 <tr class="memdesc:aac7acd01566d7023a8d325b2390838f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distance of the back control panel (minimum distance in the xy plane).  <br /></td></tr>
@@ -361,6 +362,12 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Enum representing the types of blocks. </p>
+<p>The letter mapping is:</p><ul>
+<li><code>H</code>: all top squares have a circle, the base is high</li>
+<li><code>L</code>: all top squares have a circle, the base is low</li>
+<li><code>T</code>: only half of the top squares have a circle, the other part a half-triangle</li>
+<li><code>U</code>: only half of the top squares have a circle, the other part is U-shaped </li>
+</ul>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982" name="ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982"></a>B_1x1_H&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e" name="ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e"></a>B_2x1_T&#160;</td><td class="fielddoc"></td></tr>
@@ -1716,6 +1723,8 @@ template&lt;<a class="el" href="namespacecoord.html#a93f87e8f0bffc25c7aa3c7c7a55
 <div class="line">    Block::B_4x1_L,</div>
 <div class="line">}</div>
 </div><!-- fragment -->
+<p>All of the blocks, to be iterated upon. </p>
+
 </div>
 </div>
 <a id="aac7acd01566d7023a8d325b2390838f6" name="aac7acd01566d7023a8d325b2390838f6"></a>

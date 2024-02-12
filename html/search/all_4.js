@@ -26,7 +26,7 @@ var searchData=
   ['dof_23',['dof',['../structmodel_1_1UR5.html#ad584ac47e7cdd50c1ac3da05edbd211b',1,'model::UR5']]],
   ['double_5fto_5fuint8_24',['double_to_uint8',['../namespacecontroller_1_1util.html#af30cacd8d2d6deccb6a560965ad9660c',1,'controller::util']]],
   ['dpa_5finverse_5fdiff_25',['dpa_inverse_diff',['../namespacekinematics.html#a8b27df3cb3bb50dc22c090b81fffb5aa',1,'kinematics::dpa_inverse_diff(const Robot &amp;robot, const Velocity&lt; coord::Lie, coord::Cartesian &gt; &amp;velocity, const Pose&lt; coord::Lie, coord::Cartesian &gt; &amp;desired_pose, const Time &amp;dt)'],['../namespacekinematics.html#a57c2b9b2110633ee8ef2c38659f6681c',1,'kinematics::dpa_inverse_diff(const Robot &amp;robot, const DefaultPose::Derivative &amp;movement, const DefaultPose &amp;desired_pose, const Time &amp;dt)']]],
-  ['draw_5fbbox_26',['draw_bbox',['../namespaceinspect__detected__blocks.html#ac6e9d96689ee595ee0a9fda7456b92dd',1,'inspect_detected_blocks']]],
+  ['draw_5fbbox_26',['draw_bbox',['../namespaceinspect__detected__blocks.html#ac6e9d96689ee595ee0a9fda7456b92dd',1,'inspect_detected_blocks.draw_bbox()'],['../namespacecommon.html#ac6e9d96689ee595ee0a9fda7456b92dd',1,'common.draw_bbox()']]],
   ['dt_27',['dt',['../namespacecontroller_1_1util.html#a8e01c9514cc6869c5d09c09a2c78823a',1,'controller::util']]],
   ['dummy_5fprecision_28',['dummy_precision',['../constants_8hpp.html#a3f94be92fb4585716d5e50a9bf57d887',1,'constants.hpp']]]
 ];

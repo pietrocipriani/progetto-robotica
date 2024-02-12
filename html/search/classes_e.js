@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visualizer_0',['Visualizer',['../classprecise__placement_1_1Visualizer.html',1,'precise_placement']]]
+  ['ur5_0',['UR5',['../structmodel_1_1UR5.html',1,'model']]]
 ];

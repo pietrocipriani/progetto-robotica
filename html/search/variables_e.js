@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['service_5fname_0',['SERVICE_NAME',['../namespaceblock__detector__server.html#a0dd595c7d89699a9b60f4af29c1f3c06',1,'block_detector_server']]],
-  ['shoulder_1',['shoulder',['../structmodel_1_1UR5.html#ab4bc426ce27c315c4c4309dd7c6d8f6c',1,'model::UR5']]],
-  ['skip_5fperiod_2',['skip_period',['../classinspect__detected__blocks_1_1BlockInspector.html#a0722a8e26f40133237a724104da33d71',1,'inspect_detected_blocks::BlockInspector']]],
-  ['so_3',['so',['../helpers_8hpp.html#aa173a7b2fccb574b8b22c3aa5a576d97',1,'helpers.hpp']]],
-  ['space_5fsize_4',['space_size',['../classOperationalSpace.html#a9327a02ad65a726d97ed8fa403dcd66a',1,'OperationalSpace']]],
-  ['start_5',['start',['../structplanner_1_1BlockMovement.html#ac2f696f70872902b214257466df1a034',1,'planner::BlockMovement::start'],['../structplanner_1_1internal_1_1QuadraticTimestamps.html#adfdcbaf78892a0d45a6eb99bf478cab4',1,'planner::internal::QuadraticTimestamps::start'],['../structplanner_1_1internal_1_1Timestamps.html#adfdcbaf78892a0d45a6eb99bf478cab4',1,'planner::internal::Timestamps::start']]],
-  ['start_5flinear_6',['start_linear',['../structplanner_1_1internal_1_1QuadraticTimestamps.html#a6395dcc37b097aa39004184b005870d4',1,'planner::internal::QuadraticTimestamps::start_linear'],['../structplanner_1_1internal_1_1Timestamps.html#a6395dcc37b097aa39004184b005870d4',1,'planner::internal::Timestamps::start_linear']]]
+  ['raw_5fpoint_5fcloud_0',['raw_point_cloud',['../classprecise__placement_1_1PrecisePlacement.html#a023e7e21dd035f185e7d034aa3b49f6f',1,'precise_placement::PrecisePlacement']]],
+  ['recovered_5fdata_1',['recovered_data',['../classplanner_1_1MovementGenerationRecoveringException.html#a7e9e98edcc7ad6f5270be3a2753acefa',1,'planner::MovementGenerationRecoveringException']]],
+  ['results_2',['results',['../namespacetrain__yolov8.html#a339bb5524b06e496a6aaa0a97a4a8d21',1,'train_yolov8']]],
+  ['rgba_5fhex_3',['rgba_hex',['../unioncontroller_1_1util_1_1Color.html#afcb90a5b98f8f1a0f4c88ce410e97fe6',1,'controller::util::Color']]],
+  ['root_4',['ROOT',['../namespacevisualize__annotations.html#affc01cf4f6cfc18f080b73a14af2827f',1,'visualize_annotations']]]
 ];

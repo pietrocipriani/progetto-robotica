@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['jacobian_0',['jacobian',['../namespacekinematics.html#afed377526d819b62afa30c719ec46877',1,'kinematics::Jacobian'],['../namespaceeuler.html#a61d3ae6e43eb9d62f4dc91e9158cce56',1,'euler::jacobian()']]],
+  ['jacobian_0',['jacobian',['../namespaceeuler.html#a61d3ae6e43eb9d62f4dc91e9158cce56',1,'euler::jacobian()'],['../namespacekinematics.html#afed377526d819b62afa30c719ec46877',1,'kinematics::Jacobian']]],
   ['joint_5fspace_2ehpp_1',['joint_space.hpp',['../joint__space_8hpp.html',1,'']]],
   ['joint_5fstate_5fto_5fconfig_2',['joint_state_to_config',['../namespacecontroller_1_1control.html#a79c3f72cac619a66dccb8080c877a233',1,'controller::control']]],
   ['joint_5ftransformation_5fmatrix_3',['joint_transformation_matrix',['../namespacekinematics.html#a27b8790b1dec42f275cf855f9bef76e9',1,'kinematics::joint_transformation_matrix(const model::RevoluteJoint &amp;joint)'],['../namespacekinematics.html#a8c9fef8db0b23496f1849c395d68bf54',1,'kinematics::joint_transformation_matrix(const model::RevoluteJoint &amp;joint, Scalar theta)']]],
