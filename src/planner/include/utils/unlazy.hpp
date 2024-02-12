@@ -4,6 +4,7 @@
 #include "../types.hpp"
 
 /// Takes a lazy expression and evaluates it.
+/// Allows usage of `auto` specifiers without "strange" behaviours in Eigen.
 template<class T>
 constexpr auto unlazy(T&& lazy_expression) {
   return lazy_expression.eval();

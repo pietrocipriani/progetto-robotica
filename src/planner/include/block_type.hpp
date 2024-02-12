@@ -160,6 +160,6 @@ constexpr std::tuple<double, double, double> get_pad_position(const Block& block
     assert(false);
 }
 
-} // namespace controller::world
+} // namespace planner
 
 #endif // _BLOCK_TYPE_HPP_

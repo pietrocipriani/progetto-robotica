@@ -15,7 +15,6 @@ namespace planner {
 namespace internal {
 
 
-// TODO: I don't like blacklists.
 template<class T>
 constexpr bool uses_quaternions = false;
 
@@ -51,6 +50,13 @@ TimeFunction<Point> _quadratic_interpolation(
 
 }
 
+/// Accelerates from a given @p initial_position up to a given @p final_velocity
+/// in the given @p duration time.
+/// @param initial_position The position at time @p start_time.
+/// @param final_velocity The velocity at time @p start_time + @p duration.
+/// @param start_time The start time of validity of the interpolation.
+/// @param duration The duration of the interpolation.
+/// @return A function of time generating @p Points.
 template<class Point, class Velocity>
 TimeFunction<Point> quadratic_acceleration(
   const Point& initial_position,
@@ -60,7 +66,6 @@ TimeFunction<Point> quadratic_acceleration(
 ) {
   using namespace uniformed_rotation_algebra;
 
-
   auto acc2 = unlazy(final_velocity / (2 * duration));
 
   return [=, acc = std::move(acc2)](const Time& time) {
@@ -69,6 +74,13 @@ TimeFunction<Point> quadratic_acceleration(
   };
 }
 
+/// Decelerates to a given @p final_position from a given @p initial_velocity
+/// in the given @p duration time.
+/// @param final_position The position at time @p final_time.
+/// @param initial_velocity The velocity at time @p final_time - @p duration.
+/// @param final_time The end time of validity of the interpolation.
+/// @param duration The duration of the interpolation.
+/// @return A function of time generating @p Points.
 template<class Point, class Velocity>
 TimeFunction<Point> quadratic_deceleration(
   const Point& final_position,
@@ -86,6 +98,14 @@ TimeFunction<Point> quadratic_deceleration(
   };
 }
 
+/// Accelerates from a given @p initial_position from a given @p initial_velocity
+/// to a given @p final_velocity in the given @p duration time.
+/// @param initial_position The position at time @p start_time.
+/// @param initial_velocity The velocity at time @p start_time.
+/// @param final_velocity The velocity at time @p start_time + duration.
+/// @param start_time The start time of validity of the interpolation.
+/// @param duration The duration of the interpolation.
+/// @return A function of time generating @p Points.
 template<class Point, class Velocity>
 TimeFunction<Point> quadratic_interpolation(
   const Point& initial_position,

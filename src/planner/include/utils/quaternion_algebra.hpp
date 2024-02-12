@@ -4,10 +4,11 @@
 #include "../types.hpp"
 #include "math.hpp"
 
-// Namespace to avoid the unwanted usage of these functions.
+/// Namespace containing some (dangerous) functions to uniform the algebra for rotations.
+/// @note Supports only quaternions.
+/// @note Namespace to avoid the unwanted usage of these functions.
 namespace uniformed_rotation_algebra {
 
-// Quaternion algebra for rotations.
 inline Quaternion operator-(const Quaternion& q) {
   return q.conjugate();
 }
@@ -20,17 +21,15 @@ inline Quaternion& operator+=(Quaternion& q1, const Quaternion& q2) {
 inline Quaternion operator-(const Quaternion& q1, const Quaternion& q2) {
   return -q2 + q1;
 }
-/**
- * @p this - @p other = @p result | @p other + @p result = @p this.
- * desired - effective = error | effective + error = result.
- *
- * Returns the distance between @p other and @p this.
- * @param other The starting pose.
- * @return The distance as movement.
- */
+
+/// @p this - @p other = @p result | @p other + @p result = @p this.
+/// desired - effective = error | effective + error = result.
+/// @param other The starting pose.
+/// @return The distance between @p other and @p this.
 inline Quaternion& operator-=(Quaternion& q1, const Quaternion& q2) {
   return q1 = q1 - q2;
 }
+
 inline Quaternion operator*(const Quaternion& q1, const Scalar& c) {
   return pow(q1, c).normalized();
 }
@@ -47,7 +46,7 @@ inline Quaternion& operator/=(Quaternion& q1, const Scalar& c) {
   return q1 *= (1 / c);
 }
 
-}
+} // namespace uniformed_rotation_algebra
 
 
 

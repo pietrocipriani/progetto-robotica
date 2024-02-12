@@ -5,6 +5,7 @@
 #include "utils.hpp"
 #include "euler.hpp"
 #include "utils/coordinates.hpp"
+#include "utils/unlazy.hpp"
 #include <cassert>
 #include <cmath>
 #include <sstream>
@@ -19,7 +20,7 @@ using DefaultPose = Pose<coord::Lie, coord::Cartesian>;
 /// Determinant of J·J^T to be considered near to a singularity.
 ///
 // TODO: calibrate threshold.
-constexpr Scalar min_safe_determinant = 1e-8;
+constexpr Scalar min_safe_determinant = 1e-11;
 
 /// Type representing the geometric or analytical jacobian.
 /// @note Specific for UR5.
@@ -56,16 +57,18 @@ Matrix<n, n> sq_invert(const Matrix<n, n>& matrix) {
 /// @return The right pseudo-inverse.
 /// @throw std::domain_error If the system is overdetermined or if in singular configuration.
 /// @note This function performs the traditional inverse in case of square jacobian.
-template<class Robot, bool damped = true>
+template<class Robot, bool damped = false>
 InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
   constexpr size_t rows = Jacobian<Robot>::RowsAtCompileTime;
   constexpr size_t cols = Jacobian<Robot>::ColsAtCompileTime;
 
   if constexpr (damped) {
     // DLS inverse.
+    
+    const auto transpose = unlazy(matrix.transpose());
 
     // matrix * matrix^T
-    const auto mmt = matrix * matrix.transpose();
+    const auto mmt = matrix * transpose;
 
     // TODO: calibrate damping factor.
     // With positive semidefinite matrixes this relation stands:
@@ -93,7 +96,7 @@ InvJacobian<Robot> invert(const Jacobian<Robot>& matrix) {
     auto damping = damping_factor * Matrix<rows>::Identity();
 
     auto matrix_to_invert = mmt + damping;
-    return matrix.transpose() * sq_invert<rows, true>(matrix_to_invert);
+    return transpose * sq_invert<rows, true>(matrix_to_invert);
   } else if constexpr (rows == cols) {
     // Square matrix, normal inversion.
     return sq_invert<rows>(matrix);
@@ -177,12 +180,14 @@ typename Robot::Velocity dpa_inverse_diff(
   const auto effective_position = direct<Robot, coord::Lie, coord::Cartesian>(robot);
 
   // Compute the error, movement is required.
-  // TODO: introduce a weight coefficient.
-  // TODO: the error has to be limited in magnitude: cannot imply enormous movements when high.
+  // FIXME: with quaternions there is the possibility that `/dt` produces an "identity error".
+  //        This implementation is actually buggy.
+  //        The "official" implementation should be used.
+  //        However this implementation is easily readable.
+  //        A solution requires the caller to perform the crop, passing @p dt = 1.
   auto error = (desired_pose - effective_position) / dt;
 
   // Compose the error with the desired movement.
-  // TODO: prove the error converges to 0.
   error += movement;
 
   return inverse_diff(robot, error, effective_position);

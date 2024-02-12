@@ -10,13 +10,11 @@ namespace kinematics {
 using namespace model;
 
 
-/**
- * Utility function to return a translation + rotation transformation around the same axis.
- * @param axis The axis for the translation and the rotation.
- * @param translation The magnitude of the translation.
- * @param rotation The magnitude of the rotation.
- * @return The corresponding transformation.
- */
+/// Utility function to return a translation + rotation transformation around the same axis.
+/// @param axis The axis for the translation and the rotation.
+/// @param translation The magnitude of the translation.
+/// @param rotation The magnitude of the rotation.
+/// @return The corresponding transformation.
 JointTransformation translation_rotation(const Axis& axis, Scalar translation, Scalar rotation) {
   return Translation(axis * translation) * Rotation(rotation, axis);
 }

@@ -4,26 +4,16 @@
 #include <cmath>
 #include "../types.hpp"
 
-/**
- * Exponentiates the given quaternion @p base.
- * @param base The base of the exponentiation.
- * @param exp The exponent.
- * @return The exponentiated quaternion.
- * @note The current implementation by eigen is able to generalize
- *       the exponential to @p exp > 1.
- * @note The @p base should be an unit quaternion.
- */
-// NOTE: cannot specialize std::pow.
+/// Exponentiates the given quaternion @p base.
+/// @param base The base of the exponentiation.
+/// @param exp The exponent.
+/// @return The exponentiated quaternion.
+/// @note The current implementation by eigen is able to generalize
+///       the exponential to @p exp > 1.
+/// @note The @p base should be an unit quaternion.
 inline Quaternion pow(const Quaternion& base, const Scalar& exp) {
   // Computes `slerp(exp, 1, base) = 1^(1 - exp) + base^exp = base^exp`.
   return Quaternion::Identity().slerp(exp, base);
-}
-
-template<class Scalar>
-Scalar sigmoid(Scalar&& x) {
-  if (x > 40) return 1;
-  if (x < -40) return -1;
-  return (std::exp(2 * x) - 1) / (std::exp(2 * x) + 1);
 }
 
 constexpr double _constexpr_sqrt_newton_raphson(double x, double curr, double prev) {
@@ -32,13 +22,11 @@ constexpr double _constexpr_sqrt_newton_raphson(double x, double curr, double pr
     : _constexpr_sqrt_newton_raphson(x, 0.5 * (curr + x / curr), curr);
 }
 
-/*
-* Constexpr version of the square root
-* Return value:
-*   - For a finite and non-negative value of "x", returns an approximation for the square root of "x"
-*   - Otherwise, returns NaN
-* Taken from https://stackoverflow.com/a/34134071
-*/
+/// Constexpr version of the square root
+/// @return
+///   - For a finite and non-negative value of "x", returns an approximation for the square root of "x"
+///   - Otherwise, returns NaN
+/// Taken from https://stackoverflow.com/a/34134071
 constexpr double constexpr_sqrt(double x) {
   return x >= 0 && x < std::numeric_limits<double>::infinity()
     ? _constexpr_sqrt_newton_raphson(x, x, 0)

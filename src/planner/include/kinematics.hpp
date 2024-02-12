@@ -13,19 +13,7 @@ namespace kinematics {
   
 
 /// The pose of the end effector (position + orientation).
-/// Position in cartesian coordinates.
-/// Orientation as quaternions.
-/// @note About the usage of quaternions:
-/// - Euler angles have representational singularities and need the analytical jacobian.
-/// - Angular velocities are much more intuitive that euler angles variations.
-///   - Interpolation of euler angles can lead to "unexpected" movements.
-///   - Quaternions consent numeric integration of the result (a problem of angular velocities).
-/// However:
-/// - Quaternions cannot be analytically integrated unless the rotation axis remains constant. // TODO: verify statement.
-///   - Actually the project require rotations only around the Z axis. (loss of generality).
-///   - Also in case of multiple rotations it is possible to segment the movement: cannot grant continuity in orientation variation.
-/// - The project require rotations only around the Z axis (this is not a good point, loss of generality).
-/// - The planner has full control on the orientation interpolation
+///
 template<
   coord::AngularSystem angular_system = coord::Lie,
   coord::LinearSystem linear_system = coord::Cartesian
@@ -77,17 +65,18 @@ model::UR5::Configuration inverse(
 /// @param velocity The desired velocity in the operational space.
 /// @return The configuration variation.
 /// @throws @p std::domain_error when in singularity.
-/// @note Damped least-squares. This choice could be subject to change.
+/// @note Damped least-squares implementation.
 template<class Robot>
 typename Robot::Velocity inverse_diff(
   const Robot& robot,
-  const Velocity<coord::Lie, coord::Cartesian>& movement
+  const Velocity<coord::Lie, coord::Cartesian>& velocity
 );
 
 /// Desired-pose-aware inverse differential kinematics implementation.
 /// @param robot The robot configuration.
 /// @param velocity The desired velocity in the operational space.
 /// @param desired_pose The desired current pose.
+/// @param dt The time granularity.
 /// @return The configuration variation.
 /// @throws @p std::domain_error when in singularity.
 /// @see kinematics::inverse_diff
@@ -96,7 +85,7 @@ typename Robot::Velocity inverse_diff(
 template<class Robot>
 typename Robot::Velocity dpa_inverse_diff(
   const Robot& robot,
-  const Velocity<coord::Lie, coord::Cartesian>& movement,
+  const Velocity<coord::Lie, coord::Cartesian>& velocity,
   const Pose<coord::Lie, coord::Cartesian>& desired_pose,
   const Time& dt
 );
