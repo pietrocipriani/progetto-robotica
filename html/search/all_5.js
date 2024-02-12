@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['elbow_0',['elbow',['../structmodel_1_1UR5.html#ad164d37be8a704a47e129bef6ad7ec6b',1,'model::UR5']]],
   ['encoded_5fimage_1',['encoded_image',['../classinspect__detected__blocks_1_1BlockInspector.html#a55220768788d8c08564ca1b667349f3e',1,'inspect_detected_blocks::BlockInspector']]],
   ['end_2',['end',['../structplanner_1_1internal_1_1QuadraticTimestamps.html#ae22a8bbd631ba35d5e07d97f1453dc59',1,'planner::internal::QuadraticTimestamps::end'],['../structplanner_1_1internal_1_1Timestamps.html#ae22a8bbd631ba35d5e07d97f1453dc59',1,'planner::internal::Timestamps::end'],['../structplanner_1_1MovementSequence_1_1ConfigGenerator.html#acbdcd475c9467e4a0e3e1f0e98128353',1,'planner::MovementSequence::ConfigGenerator::end()']]],
@@ -15,4 +16,9 @@ var searchData=
   ['experimentfunc_12',['ExperimentFunc',['../namespacecontroller_1_1experiment.html#aa3917ab842f6a912f51598c89c6765f7',1,'controller::experiment']]],
   ['experiments_2ecpp_13',['experiments.cpp',['../experiments_8cpp.html',1,'']]],
   ['experiments_2ehpp_14',['experiments.hpp',['../experiments_8hpp.html',1,'']]]
+||||||| d37a779
+  ['first_5fvisualization_9',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]]
+=======
+  ['first_5fvisualization_8',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

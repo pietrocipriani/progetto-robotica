@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['gazebo_5fto_5fos_5fx_0',['gazebo_to_os_x',['../namespaceplanner.html#af37c1198cab6c858f6ff1a3259cbc99b',1,'planner']]],
   ['gazebo_5fto_5fos_5fy_1',['gazebo_to_os_y',['../namespaceplanner.html#a36e1f53bcb1f522c0b2a578d7eec18b7',1,'planner']]],
   ['gen_5fbright_5fcolor_2',['gen_bright_color',['../namespacecontroller_1_1util.html#a14c8c7de83a72b87e9f43d07b732937c',1,'controller::util']]],
@@ -22,4 +23,11 @@ var searchData=
   ['graph_19',['Graph',['../namespaceplanner.html#a81e18ebd8906b7c3b2c9cf6e55786082',1,'planner']]],
   ['gripper_5fjoint_5fcount_20',['gripper_joint_count',['../namespacecontroller_1_1util.html#a939074183fb3e1abd17bee8385884a07',1,'controller::util']]],
   ['gripper_5fspeed_21',['gripper_speed',['../namespacecontroller_1_1util.html#a2b97d3bda283b0c2357b8315a106e115',1,'controller::util']]]
+||||||| d37a779
+  ['image_5fcallback_12',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#a7e069f51e4f899c99ee9d8cc23d8532f',1,'precise_placement::PrecisePlacement']]],
+  ['inv_5fcamera_5ftransform_13',['inv_camera_transform',['../namespaceprecise__placement.html#a02b0663018d876e57b2fee71c6c8a6eb',1,'precise_placement']]]
+=======
+  ['image_5fcallback_11',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#a7e069f51e4f899c99ee9d8cc23d8532f',1,'precise_placement::PrecisePlacement']]],
+  ['inv_5fcamera_5ftransform_12',['inv_camera_transform',['../namespaceprecise__placement.html#a02b0663018d876e57b2fee71c6c8a6eb',1,'precise_placement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

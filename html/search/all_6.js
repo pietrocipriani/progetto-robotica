@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['f_0',['f',['../structRestrictedFunction.html#aa9efb18e6f7918fe278f6a0fbb7473b1',1,'RestrictedFunction']]],
   ['filter_5fmap_5fmovements_5fto_5fpads_1',['filter_map_movements_to_pads',['../namespacecontroller_1_1control.html#a83770ea9314eb6e342a39b97c9d2b257',1,'controller::control']]],
   ['first_5fvisualization_2',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]],
@@ -7,4 +8,11 @@ var searchData=
   ['from_4',['from',['../namespaceeuler.html#a58774f36927fc45a137dbc20b546712e',1,'euler::from(const RotationMatrix &amp;rot_matrix)'],['../namespaceeuler.html#a666b175b1ebafa6242613f5536c6c36e',1,'euler::from(const Rotation &amp;aa)'],['../namespaceeuler.html#af50b64e2958fc8c69811111d683f6905',1,'euler::from(const Quaternion &amp;q)']]],
   ['from_3c_203_20_3e_5',['from&lt; 3 &gt;',['../namespaceeuler.html#af2512b2754f63a79868d9caafafb3bad',1,'euler']]],
   ['full_6',['full',['../namespacecontroller_1_1experiment.html#a9850dd68fe664734f6d310d744368f0c',1,'controller::experiment']]]
+||||||| d37a779
+  ['generate_5fintersection_5fmesh_10',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
+  ['generate_5fpoints_11',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
+=======
+  ['generate_5fintersection_5fmesh_9',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
+  ['generate_5fpoints_10',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

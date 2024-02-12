@@ -4,8 +4,7 @@
 {\ttfamily \#include "{}controller/util/const.\+hpp"{}}\newline
 {\ttfamily \#include "{}controller/control/position\+\_\+receiver.\+hpp"{}}\newline
 {\ttfamily \#include "{}controller/control/composite\+\_\+movements.\+hpp"{}}\newline
-Include dependency graph for experiments.\+cpp\+:
-\nopagebreak
+Include dependency graph for experiments.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,10 +22,10 @@ namespace \mbox{\hyperlink{namespacecontroller_1_1experiment}{controller\+::expe
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacecontroller_1_1experiment_a00f9ff30f795608a3c595cd840ca0549}{all\+\_\+blocks}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em This experiment spawns one block of every type at a time at the center of the workspace, and then moves it to the corresponding target block pad. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1experiment_a9850dd68fe664734f6d310d744368f0c}{full}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em This is the final experiment, that sets up a workspace, then waits for blocks to be detected, then picks the blocks up until it has finished moving all blocks to their target pads. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1experiment_ae3755edb5241a3149e027b7308261c4e}{selected\+\_\+fixed\+\_\+positions}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Spawns a few blocks in a few places and moves them to a few other places, one at a time. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1experiment_a339295ae551fe3d7f939013529fd3f97}{workspace}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sets up the workspace with blocks placed randomly in unknown positions. \end{DoxyCompactList}\end{DoxyCompactItemize}

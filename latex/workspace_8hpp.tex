@@ -2,16 +2,14 @@
 \hypertarget{workspace_8hpp}{}\label{workspace_8hpp}\index{src/controller/include/controller/world/workspace.hpp@{src/controller/include/controller/world/workspace.hpp}}
 {\ttfamily \#include "{}spawner.\+hpp"{}}\newline
 {\ttfamily \#include "{}deleter.\+hpp"{}}\newline
-Include dependency graph for workspace.\+hpp\+:
-\nopagebreak
+Include dependency graph for workspace.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{workspace_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -34,13 +32,13 @@ namespace \mbox{\hyperlink{namespacecontroller_1_1world}{controller\+::world}}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b}{clear\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&deleter)
-\item 
+\begin{DoxyCompactList}\small\item\em Clears the workspace by removing all blocks and pads. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}{setup\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
-\item 
+\begin{DoxyCompactList}\small\item\em Sets the up workspace by spawning missing pads and by randomly spawning missing blocks. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}{spawn\+\_\+blocks}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
-\item 
+\begin{DoxyCompactList}\small\item\em Spawns missing blocks in a random distribution, while avoiding to spawn them below the robotic arm, where there is the internal cylinder with a singularity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}{spawn\+\_\+missing\+\_\+pads}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Spawns missing pads in the positions defined by \doxylink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{planner\+::get\+\_\+pad\+\_\+position()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}

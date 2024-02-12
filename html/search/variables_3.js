@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['d_0',['d',['../structmodel_1_1RevoluteJoint.html#aeed1bed590bcd0de8c34b63e3bf3415f',1,'model::RevoluteJoint']]],
   ['delta_1',['delta',['../structplanner_1_1internal_1_1QuadraticTimestamps.html#a94ea76065c124cb9dbd679bf2a4d11c3',1,'planner::internal::QuadraticTimestamps::delta'],['../structplanner_1_1internal_1_1Timestamps.html#a94ea76065c124cb9dbd679bf2a4d11c3',1,'planner::internal::Timestamps::delta']]],
   ['detect_5fblocks_5fsrv_2',['detect_blocks_srv',['../classprecise__placement_1_1PrecisePlacement.html#a51e63380eb56d13ab76fb02674171e7f',1,'precise_placement::PrecisePlacement']]],
@@ -10,4 +11,9 @@ var searchData=
   ['dof_7',['dof',['../structmodel_1_1UR5.html#ad584ac47e7cdd50c1ac3da05edbd211b',1,'model::UR5']]],
   ['dt_8',['dt',['../namespacecontroller_1_1util.html#a8e01c9514cc6869c5d09c09a2c78823a',1,'controller::util']]],
   ['dummy_5fprecision_9',['dummy_precision',['../constants_8hpp.html#a3f94be92fb4585716d5e50a9bf57d887',1,'constants.hpp']]]
+||||||| d37a779
+  ['first_5fvisualization_54',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]]
+=======
+  ['first_5fvisualization_53',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

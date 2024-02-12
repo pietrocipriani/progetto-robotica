@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['main_0',['main',['../test__kinematics_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_kinematics.cpp'],['../namespaceprecise__placement.html#a51af30a60f9f02777c6396b8247e356f',1,'precise_placement.main()'],['../test__planner_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;test_planner.cpp'],['../namespaceblock__detector__server.html#a51af30a60f9f02777c6396b8247e356f',1,'block_detector_server.main()'],['../namespaceinspect__detected__blocks.html#a51af30a60f9f02777c6396b8247e356f',1,'inspect_detected_blocks.main()'],['../controller__node_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;controller_node.cpp'],['../json__tester_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;json_tester.cpp']]],
   ['margin_1',['margin',['../namespaceplanner.html#ae8046607e792f2b71c603fff6661f393',1,'planner']]],
   ['math_2ehpp_2',['math.hpp',['../planner_2include_2utils_2math_8hpp.html',1,'(Global Namespace)'],['../controller_2include_2controller_2util_2math_8hpp.html',1,'(Global Namespace)']]],
@@ -30,4 +31,11 @@ var searchData=
   ['movementgenerationrecoveringexception_27',['movementgenerationrecoveringexception',['../classplanner_1_1MovementGenerationRecoveringException.html#a637daf5b203ee63a0d48d69ce8bbe2a9',1,'planner::MovementGenerationRecoveringException::MovementGenerationRecoveringException(const char *what, std::queue&lt; BlockMovement &gt; &amp;&amp;movement)'],['../classplanner_1_1MovementGenerationRecoveringException.html#aae3bb70e6e18dd15ab386f0518124c2f',1,'planner::MovementGenerationRecoveringException::MovementGenerationRecoveringException(const std::string &amp;what, std::queue&lt; BlockMovement &gt; &amp;&amp;movement)'],['../classplanner_1_1MovementGenerationRecoveringException.html',1,'MovementGenerationRecoveringException']]],
   ['movementsequence_28',['MovementSequence',['../structplanner_1_1MovementSequence.html',1,'planner']]],
   ['msg_5fseq_29',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
+||||||| d37a779
+  ['update_5fvisualizer_29',['update_visualizer',['../classprecise__placement_1_1Visualizer.html#a4b8a3f3b30bee6ac8219e669c55cdac6',1,'precise_placement::Visualizer']]],
+  ['use_5fvisualizer_30',['use_visualizer',['../classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718',1,'precise_placement::PrecisePlacement']]]
+=======
+  ['update_5fvisualizer_28',['update_visualizer',['../classprecise__placement_1_1Visualizer.html#a4b8a3f3b30bee6ac8219e669c55cdac6',1,'precise_placement::Visualizer']]],
+  ['use_5fvisualizer_29',['use_visualizer',['../classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718',1,'precise_placement::PrecisePlacement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

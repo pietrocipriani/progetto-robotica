@@ -11,13 +11,13 @@ class \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b}{clear\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&deleter)
-\item 
+\begin{DoxyCompactList}\small\item\em Clears the workspace by removing all blocks and pads. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}{setup\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
-\item 
+\begin{DoxyCompactList}\small\item\em Sets the up workspace by spawning missing pads and by randomly spawning missing blocks. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}{spawn\+\_\+blocks}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
-\item 
+\begin{DoxyCompactList}\small\item\em Spawns missing blocks in a random distribution, while avoiding to spawn them below the robotic arm, where there is the internal cylinder with a singularity. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}{spawn\+\_\+missing\+\_\+pads}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Spawns missing pads in the positions defined by \doxylink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{planner\+::get\+\_\+pad\+\_\+position()}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,24 +48,68 @@ constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_ab2896550d8f4b6c3
 \doxysubsubsection{\texorpdfstring{clear\_workspace()}{clear\_workspace()}}
 {\footnotesize\ttfamily void clear\+\_\+workspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&}]{deleter }\end{DoxyParamCaption})}
 
+
+
+Clears the workspace by removing all blocks and pads. 
+
+Note that models spawned with {\ttfamily random\+\_\+name = true} will not be deleted, because their name is not fixed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em deleter} & used to delete models in Gazebo \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}\label{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b} 
 \index{controller::world@{controller::world}!setup\_workspace@{setup\_workspace}}
 \index{setup\_workspace@{setup\_workspace}!controller::world@{controller::world}}
 \doxysubsubsection{\texorpdfstring{setup\_workspace()}{setup\_workspace()}}
 {\footnotesize\ttfamily void setup\+\_\+workspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner,  }\item[{bool}]{avoid\+\_\+pads }\end{DoxyParamCaption})}
 
+
+
+Sets the up workspace by spawning missing pads and by randomly spawning missing blocks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spawner} & used to spawn models in Gazebo \\
+\hline
+{\em avoid\+\_\+pads} & whether to avoid spawning blocks on top of pads \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}\label{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167} 
 \index{controller::world@{controller::world}!spawn\_blocks@{spawn\_blocks}}
 \index{spawn\_blocks@{spawn\_blocks}!controller::world@{controller::world}}
 \doxysubsubsection{\texorpdfstring{spawn\_blocks()}{spawn\_blocks()}}
 {\footnotesize\ttfamily void spawn\+\_\+blocks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner,  }\item[{bool}]{avoid\+\_\+pads }\end{DoxyParamCaption})}
 
+
+
+Spawns missing blocks in a random distribution, while avoiding to spawn them below the robotic arm, where there is the internal cylinder with a singularity. 
+
+If a block already exist in the simulation, it will not be respawned.
+
+
+\begin{DoxyParams}{Parameters}
+{\em spawner} & used to spawn models in Gazebo \\
+\hline
+{\em avoid\+\_\+pads} & whether to avoid spawning blocks on top of pads \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}\label{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6} 
 \index{controller::world@{controller::world}!spawn\_missing\_pads@{spawn\_missing\_pads}}
 \index{spawn\_missing\_pads@{spawn\_missing\_pads}!controller::world@{controller::world}}
 \doxysubsubsection{\texorpdfstring{spawn\_missing\_pads()}{spawn\_missing\_pads()}}
 {\footnotesize\ttfamily void spawn\+\_\+missing\+\_\+pads (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner }\end{DoxyParamCaption})}
 
+
+
+Spawns missing pads in the positions defined by \doxylink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{planner\+::get\+\_\+pad\+\_\+position()}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spawner} & used to spawn models in Gazebo \\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Variable Documentation}

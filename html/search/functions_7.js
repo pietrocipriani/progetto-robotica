@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['gen_5fbright_5fcolor_0',['gen_bright_color',['../namespacecontroller_1_1util.html#a14c8c7de83a72b87e9f43d07b732937c',1,'controller::util']]],
   ['generate_5fblock_5fpositioning_5forder_1',['generate_block_positioning_order',['../namespaceplanner.html#a2b2ed7d387269c1a1e19f7ca9a13bb6c',1,'planner']]],
   ['generate_5fdependency_5fgraph_2',['generate_dependency_graph',['../namespaceplanner.html#a4bbf78174f967fe66d9c642b5dc5eb8c',1,'planner']]],
@@ -17,4 +18,9 @@ var searchData=
   ['get_5fopen_5fgripper_5fpos_14',['get_open_gripper_pos',['../namespaceplanner.html#a7f1ad2ba59a393f944be933308e9822d',1,'planner']]],
   ['get_5fpad_5fposition_15',['get_pad_position',['../namespaceplanner.html#a7719df040f84e7ce8d8e28a481bcd8fe',1,'planner']]],
   ['go_5fin_5fhoming_5fconfig_16',['go_in_homing_config',['../namespacecontroller_1_1control.html#a8cd4c5307d0c40db49fa2ad1a52ed555',1,'controller::control']]]
+||||||| d37a779
+  ['remove_5fxy_5frotation_49',['remove_xy_rotation',['../namespaceprecise__placement.html#a3f458fd3c2b61eb3c47dffd1094a49cb',1,'precise_placement']]]
+=======
+  ['remove_5fxy_5frotation_48',['remove_xy_rotation',['../namespaceprecise__placement.html#a3f458fd3c2b61eb3c47dffd1094a49cb',1,'precise_placement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

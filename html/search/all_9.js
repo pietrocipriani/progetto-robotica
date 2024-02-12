@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['identity_0',['Identity',['../classComplex.html#a8c796d3f868210d718c3aea3fc25cd5a',1,'Complex']]],
   ['image_5fcallback_1',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#ae490aca119b50747b0e88a500a2a0cd1',1,'precise_placement.PrecisePlacement.image_callback'],['../classprecise__placement_1_1PrecisePlacement.html#aa9100289158df6712801f677996827da',1,'precise_placement.PrecisePlacement.image_callback(self, Image data)']]],
   ['image_5fsub_2',['image_sub',['../classinspect__detected__blocks_1_1BlockInspector.html#ad8b0a1964f6e8289c858108ae891718e',1,'inspect_detected_blocks::BlockInspector']]],
@@ -24,4 +25,13 @@ var searchData=
   ['invjacobian_21',['InvJacobian',['../namespacekinematics.html#ac83b77bec392d18f8782e9484ab83477',1,'kinematics']]],
   ['is_5fquasi_22',['is_quasi',['../helpers_8hpp.html#ac79ecbbc554b224ac837bc1707e9e9fd',1,'helpers.hpp']]],
   ['iterator_5fcategory_23',['iterator_category',['../classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator.html#ac30d83b0d8b71234a7c33ba93c63482c',1,'planner::MovementSequence::ConfigGenerator::const_iterator']]]
+||||||| d37a779
+  ['main_15',['main',['../namespaceprecise__placement.html#abd2f92caab6d65d366a1c0bc24dddc41',1,'precise_placement']]],
+  ['meshes_16',['meshes',['../classprecise__placement_1_1PrecisePlacement.html#a5428deecfa188d28deb2a96fe29066e8',1,'precise_placement::PrecisePlacement']]],
+  ['msg_5fseq_17',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
+=======
+  ['main_14',['main',['../namespaceprecise__placement.html#abd2f92caab6d65d366a1c0bc24dddc41',1,'precise_placement']]],
+  ['meshes_15',['meshes',['../classprecise__placement_1_1PrecisePlacement.html#a5428deecfa188d28deb2a96fe29066e8',1,'precise_placement::PrecisePlacement']]],
+  ['msg_5fseq_16',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

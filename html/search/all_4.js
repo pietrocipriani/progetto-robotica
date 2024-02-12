@@ -1,5 +1,6 @@
 var searchData=
 [
+<<<<<<< HEAD
   ['d_0',['d',['../structmodel_1_1RevoluteJoint.html#aeed1bed590bcd0de8c34b63e3bf3415f',1,'model::RevoluteJoint']]],
   ['deadlockexception_1',['deadlockexception',['../classplanner_1_1DeadlockException.html',1,'DeadlockException'],['../classplanner_1_1DeadlockException.html#aa50e4b7a990c885cb141926135233cd5',1,'planner::DeadlockException::DeadlockException(const std::string &amp;what, std::queue&lt; BlockMovement &gt; &amp;&amp;movement)'],['../classplanner_1_1DeadlockException.html#a765e14c9cf3c50e8b2eae0112a006df2',1,'planner::DeadlockException::DeadlockException(const char *what, std::queue&lt; BlockMovement &gt; &amp;&amp;movement)']]],
   ['defaultpose_2',['DefaultPose',['../namespacekinematics.html#a3ac1ed6e443facca001cc79ab7326378',1,'kinematics']]],
@@ -30,4 +31,10 @@ var searchData=
   ['draw_5fbbox_27',['draw_bbox',['../namespaceinspect__detected__blocks.html#ac6e9d96689ee595ee0a9fda7456b92dd',1,'inspect_detected_blocks']]],
   ['dt_28',['dt',['../namespacecontroller_1_1util.html#a8e01c9514cc6869c5d09c09a2c78823a',1,'controller::util']]],
   ['dummy_5fprecision_29',['dummy_precision',['../constants_8hpp.html#a3f94be92fb4585716d5e50a9bf57d887',1,'constants.hpp']]]
+||||||| d37a779
+  ['detect_5fblocks_5fsrv_7',['detect_blocks_srv',['../classprecise__placement_1_1PrecisePlacement.html#a51e63380eb56d13ab76fb02674171e7f',1,'precise_placement::PrecisePlacement']]],
+  ['doxygen_20example_20project_8',['Doxygen Example Project',['../index.html',1,'']]]
+=======
+  ['detect_5fblocks_5fsrv_7',['detect_blocks_srv',['../classprecise__placement_1_1PrecisePlacement.html#a51e63380eb56d13ab76fb02674171e7f',1,'precise_placement::PrecisePlacement']]]
+>>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];
