@@ -32,4 +32,46 @@ std::vector<position_detection::BlockPosition> wait_for_new_block_positions(ros:
     }
 }
 
+planner::Block block_pos_to_type(const position_detection::BlockPosition& block_pos) {
+    for (const planner::Block block : planner::all_blocks) {
+        if (planner::get_name(block) == block_pos.block_type) {
+            return block;
+        }
+    }
+    ROS_ERROR("Unknown block name found in position_detection/BlockPosition message: %s",
+        block_pos.block_type.c_str());
+    return planner::Block::B_1x1_H;
+}
+
+std::vector<planner::BlockMovement> filter_map_movements_to_pads(
+    const std::vector<position_detection::BlockPosition>& blocks,
+    double min_confidence,
+    size_t max_count
+) {
+    std::vector<planner::BlockMovement> res;
+    for (const auto& block_pos : blocks) {
+        if (block_pos.confidence < min_confidence || res.size() >= max_count) {
+            // blocks is an array sorted by confidence, see wait_for_new_block_positions
+            return res;
+        }
+
+        planner::Block block = block_pos_to_type(block_pos);
+		auto [x, y, z] = block_pos.point;
+		double angle = block_pos.angle;
+
+        planner::BlockPose start_pose(block, x, y, angle);
+        planner::BlockPose end_pose = planner::BlockPose::pad_pose(block);
+
+        if (start_pose.collides(end_pose)) {
+            // the block is already where it should be, so no need to move it
+            continue;
+        }
+
+        ROS_INFO("Block %s passed filter: x=%.2f y=%.2f z=%.2f angle=%.2f conf=%.4f",
+            block_pos.block_type.c_str(), x, y, z, angle, block_pos.confidence);
+        res.push_back(planner::BlockMovement(start_pose, end_pose));
+    }
+    return res;
+}
+
 } // namespace controller::pos

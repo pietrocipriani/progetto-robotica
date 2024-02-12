@@ -29,27 +29,13 @@ void full(
 	world::setup_workspace(spawner, true);
 	ROS_INFO("Workspace ready");
 
-	auto blocks = control::wait_for_new_block_positions(node_handle);
-
-	for (const position_detection::BlockPosition block_pos : blocks) {
-		planner::Block block = planner::Block::B_1x1_H;
-		for (const planner::Block block_hypothesis : planner::all_blocks) {
-			if (planner::get_name(block_hypothesis) == block_pos.block_type) {
-				block = block_hypothesis;
-				break;
-			}
+	for (auto [min_confidence, max_count] : std::initializer_list<std::pair<double, size_t>>{
+			{0.8, 5}, {0.7, 4}, {0.6, 2}, {0.2, 3}, {0.0, 11}}) {
+		auto blocks = control::wait_for_new_block_positions(node_handle);
+		auto movements = control::filter_map_movements_to_pads(blocks, min_confidence, max_count);
+		for (auto&& movement : movements) {
+			control::move_block(config_publisher, robot, prev_gripper_pos, movement);
 		}
-		auto [x, y, z] = block_pos.point;
-		double angle = block_pos.angle;
-
-		const planner::BlockMovement movement{
-			planner::BlockPose(block, x, y, angle),
-			planner::BlockPose::pad_pose(block)
-		};
-
-		ROS_INFO("Picking up block %s x=%.2f y=%.2f z=%.2f angle=%.2f conf=%.4f",
-			block_pos.block_type.c_str(), x, y, z, angle, block_pos.confidence);
-		control::move_block(config_publisher, robot, prev_gripper_pos, movement);
 	}
 }
 
