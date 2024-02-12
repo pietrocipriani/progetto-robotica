@@ -4,9 +4,8 @@ import rospkg
 import sensor_msgs.point_cloud2 as pc2
 from sensor_msgs.msg import PointCloud2, Image
 from geometry_msgs.msg import Point
+
 from std_msgs.msg import Header
-#from sensor_msgs.msg import 
-import cv2
 from cv_bridge import CvBridge
 import numpy as np
 from ctypes import *
@@ -99,7 +98,7 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
 def remove_xy_rotation(transform):
     """! helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy
     @param transform input matrix
-    @result ruotated matrix
+    @result rotated matrix
     """
     def zeroed(vec):
         vec[2]=0
@@ -276,10 +275,14 @@ class PrecisePlacement:
         self.pub.publish(to_send)
 
     def callback_cloud(self, data: PointCloud2):
+        """! called every time a Point Cloud callback is received, it parses it and compute
+            @param data the incoming Point Cloud"""
         self.raw_point_cloud=data
         self.last_point_cloud_time=data.header.stamp
 
     def process_latest_point_cloud(self):
+        """! Method used to compute the latest Point Cloud from a ros message to a cropped point cloud in the work space 
+        """
         converted = convertCloudFromRosToOpen3d(self.raw_point_cloud)
         bbox = open3d.geometry.AxisAlignedBoundingBox(min_bound=(0, 0.16, 0.87), max_bound=(1., 0.8, 0.97))
 
