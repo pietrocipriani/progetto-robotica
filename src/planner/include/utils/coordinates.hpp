@@ -12,19 +12,40 @@
 
 namespace coord {
 
+/// The possible linear coordinate systems.
+///
 enum LinearSystem {
-  Cartesian, Cylindrical
+  /// @see https://en.wikipedia.org/wiki/Cartesian_coordinate_system.
+  ///
+  Cartesian,
+
+  /// @see https://en.wikipedia.org/wiki/Cylindrical_coordinate_system.
+  ///
+  Cylindrical
 };
+
+/// The possible angular coordinate systems.
 enum AngularSystem {
-  Euler, Lie
+  /// @see https://en.wikipedia.org/wiki/Euler_angles.
+  ///
+  Euler,
+
+  /// This is the coordinate system of quaternions.
+  /// @note The 'Lie group' term is improperly used.
+  ///       However is a term that groups rotation quaternions, rotation complexes etc.
+  Lie
 };
 
-
+/// The representing type for the given coordinate system.
+///
 template<LinearSystem linear_system, size_t size>
 struct linear_type {
   using type = Vector<size>;
 };
 
+/// The representing type for the given coordinate system.
+/// @note Only 3D Lie spaces or arbitrary sized Euler spaces can be represented,
+///       due to lack of an uniformed interface between quaternions and complexes in Eigen.
 template<AngularSystem angular_system, size_t size>
 struct angular_type {
   using type = EulerAngles<so<size>>;
@@ -37,13 +58,16 @@ struct angular_type<Lie, 3> {
 };
 
 
-
+/// Converts the linear point between the given linear systems.
+///
 template<LinearSystem from, LinearSystem to, size_t size>
 typename linear_type<to, size>::type convert(const typename linear_type<from, size>::type& p) {
   static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
   return p;
 }
 
+/// Converts the angular point between the given linear systems.
+///
 template<AngularSystem from, AngularSystem to, size_t size>
 typename angular_type<to, size>::type convert(const typename angular_type<from, size>::type& p) {
   static_assert(from == to, "Default implementation is the identity function. Use a specialization.");
@@ -91,7 +115,7 @@ inline typename linear_type<Cartesian, 3>::type convert<Cylindrical, Cartesian, 
 /// Converts a @p quaternion into an euler angle.
 /// @param cartesian The point in cartesian coordinates.
 /// @return The point in cylindrical coordinates.
-/// @note Euler representation can be subject to changes, only coherence is asserted.
+/// @note Euler representation can be subject to changes, coherence is asserted.
 template<>
 inline typename angular_type<Euler, 3>::type convert<Lie, Euler, 3>(
   const typename angular_type<Lie, 3>::type& lie
@@ -150,18 +174,31 @@ inline Scalar measure<Cylindrical, Cartesian, 3>(
   const auto delta = unlazy(end - start);
 
   const auto& delta_rho = delta.x();
+
+  // A movement of theta produces a movement of rho·theta in cartesian coordinates.
   const auto& delta_theta = delta.y() * end.x();
+
   const auto& delta_h = delta.z();
 
-
+  // Norm without considering the rotation.
   Scalar pseudo_norm_sq = std::pow(delta_rho, 2) + std::pow(delta_h, 2);
 
   if (std::abs(delta_theta) < dummy_precision) return delta.norm();
   if (pseudo_norm_sq < dummy_precision) return delta_theta;
 
+  // NOTE: the correctness of the integral should be checked.
   return delta.norm() / 2 + std::asinh(delta_theta / std::sqrt(pseudo_norm_sq)) * pseudo_norm_sq / delta_theta;
 }
 
+template<>
+inline Scalar measure<Euler, Lie, 3>(
+  const typename angular_type<Euler, 3>::type& start,
+  const typename angular_type<Euler, 3>::type& end
+) {
+  // TODO: dummy implementation.
+  return (end - start).norm();
 }
+
+} // namespace coord
 
 #endif /* UTILS_COORDINATES_HPP_INCLUDED */

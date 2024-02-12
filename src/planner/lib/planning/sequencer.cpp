@@ -21,12 +21,15 @@ using namespace coord;
 using LinearParams = Params<os::Position::Linear>;
 using AngularParams = Params<os::Position::Angular>;
 
-// TODO: avoid conversions.
-template<class Point>
-Scalar max_acceleration(Point&& pose) {
-  // TODO: radius awareness.
-  return model::UR5::max_joint_accel;
+/// Returns the maximum linear acceleration to avoid to stress the joints.
+///
+Scalar max_acceleration(const os::Position& pose) {
+  // NOTE: dummy implementation for radius awareness.
+  return model::UR5::max_joint_accel * pose.linear().norm();
 }
+
+/// Returns the maximum angular acceleration to avoid to stress the joints.
+///
 Scalar max_angular_acceleration() {
   return model::UR5::max_joint_accel;
 }
@@ -54,9 +57,6 @@ void get_maximum_speed(
   SpeedLimits& limits,
   Scalar acc_1, Scalar acc_2
 ) {
-  // TODO: In some cases we can obtain a better result by just checking if we can
-  //       accomodate the request as it is.
-  
   const Scalar a = acc_1 + acc_2;
   const Scalar b = limits.next * acc_1 + limits.prev * acc_2;
   const Scalar c = -2 * distance * acc_1 * acc_2;
@@ -66,6 +66,11 @@ void get_maximum_speed(
   limits.current = std::min(limits.current, maximum_speed);
 }
 
+/// Updates the desired speed and returns the time parameters.
+/// @param limits The actual speed limits to be changed.
+/// @param distance The distance to travel.
+/// @param acc_1 The maximum acceleration for the first velocity change.
+/// @param acc_2 The maximum acceleration for the second velocity change.
 template<class Point>
 typename Params<Point>::Times get_desired_speed(
   SpeedLimits& limits, const Scalar& distance,
@@ -75,8 +80,6 @@ typename Params<Point>::Times get_desired_speed(
   assert(distance >= 0);
   assert(acc_1 > 0 && acc_2 > 0);
 
-  
-  
   // Worst case approximation.
   // We are assuming that the two velocities have opposite verse in order to accomodate
   //  the acceleration rating in the worst case.
@@ -95,8 +98,15 @@ typename Params<Point>::Times get_desired_speed(
   return {time, delta_t_1};
 }
 
-// TODO: consider orientation.
-// TODO: problems with low accelerations / high velocities.
+/// Generate the timestamps for the via point interpolation.
+/// @param point The current point.
+/// @param next_point The successive point.
+/// @param linear_speed Linear speed limits.
+/// @param angular_speed Angular speed limits.
+/// @param time The actual time (to be changed).
+/// @return The set of time parameters for @p point.
+/// @note Local optimization only.
+/// @note Do not considers the angular distance.
 template<LinearSystem ls, AngularSystem as>
 auto generate_parameters(
   const kinematics::Pose<as, ls>& point,
@@ -126,49 +136,65 @@ auto generate_parameters(
   const Scalar max_ang_acc_2 = max_angular_acceleration();
 
   auto t_lin = get_desired_speed<TargetPoint>(linear_speed, linear_distance, max_lin_acc_1, max_lin_acc_2);
+
+  [[maybe_unused]]
   auto t_ang = get_desired_speed<TargetPoint>(angular_speed, angular_distance, max_ang_acc_1, max_ang_acc_2);
 
   const Time current_time = time;
 
   time += std::max(t_lin.time, 0.0/*t_ang.time*/);
 
-  // TODO: once time is choosen, delta_t can be choosen more accurately.
   Scalar delta_t = std::max(t_lin.accel_delta, 0.0/*t_ang.accel_delta*/);
 
   #ifdef JOINT_SPACE_PLANNING
-  return Params<model::UR5::Configuration>(kinematics::inverse(model::UR5(), point), current_time, delta_t);
+  model::UR5 robot(model::UR5::Configuration(model::UR5::Configuration::Base::Zero()));
+  return Params<model::UR5::Configuration>(kinematics::inverse(robot, point), current_time, delta_t);
   #else
   return Params<TargetPoint>(point, current_time, delta_t);
   #endif
 }
 
+/// Generate the timestamps for the last point in via point interpolation.
+/// @param point The current point.
+/// @param linear_speed Linear speed limits.
+/// @param angular_speed Angular speed limits.
+/// @param time The actual time (to be changed).
+/// @return The set of time parameters for @p point.
+/// @note Local optimization only.
+/// @note Do not consider the angular distance.
 template<LinearSystem linear_system, AngularSystem angular_system>
 auto generate_parameters(
   const kinematics::Pose<angular_system, linear_system>& point,
   const SpeedLimits& linear_speed,
+  [[maybe_unused]]
   const SpeedLimits& angular_speed,
   Time& time
 ) {
   using TargetPoint = kinematics::Pose<angular_system, linear_system>;
 
-  // Approximation:
-  // The max acceleration limit is on the single joint and is determined by the inertia of the robot.
-  // We are imposing the max acceleration on the end effector movement.
   const Scalar max_lin_acc = max_acceleration(point);
 
+  [[maybe_unused]]
   const Scalar max_ang_acc = max_angular_acceleration();
 
+  // The current required speed is null, as this is the last point.
   const Scalar delta_t = std::max(linear_speed.prev / max_lin_acc, 0.0/*angular_speed.prev / max_ang_acc*/);
 
   time += delta_t / 2;
 
   #ifdef JOINT_SPACE_PLANNING
-  return Params<model::UR5::Configuration>(kinematics::inverse(model::UR5(), point), time, delta_t);
+  model::UR5 robot(model::UR5::Configuration(model::UR5::Configuration::Base::Zero()));
+  return Params<model::UR5::Configuration>(kinematics::inverse(robot, point), time, delta_t);
   #else
   return Params<TargetPoint>(point, time, delta_t);
   #endif
 }
 
+/// Utility function to manage the interpolation of different @p Point types.
+/// @param start The starting point time parameters.
+/// @param via_points The via point time parameters.
+/// @param end The ending point time parameters.
+/// @return The interpolating time function.
 template<class Point, template <class T> class Container>
 TimeFunction<Point> via_point_interpolation(
   const Params<Point>& start,
@@ -179,11 +205,16 @@ TimeFunction<Point> via_point_interpolation(
                                 is_quasi<Point, kinematics::Pose<coord::Lie, coord::Cartesian>>;
 
   if constexpr (is_quasi<Point, Quaternion>) {
+    // Quaternion: stop&play interpolation.
+
     for (auto& p : via_points) p.times.accel_delta /= 2;
     via_points.push_back(std::move(end));
     return stop_and_play_interpolation(start, via_points);
   } else if constexpr (is_quat_pose) {
-    // TODO: ugly.
+    // Operational space position using quaternions:
+    // - Linear part with parabolic interpolation.
+    // - Angular part with stop&play interpolation.
+    
     const Params<typename Point::Linear> start_lin(start.point.linear(), start.times.time, start.times.accel_delta);
     const Params<typename Point::Angular> start_ang(start.point.angular(), start.times.time, start.times.accel_delta);
     const Params<typename Point::Linear> end_lin(end.point.linear(), end.times.time, end.times.accel_delta);
@@ -209,9 +240,6 @@ TimeFunction<Point> via_point_interpolation(
     return parabolic_interpolation(start, via_points, end);
   }
 }
-
-
-
 
 
 template<LinearSystem linear_system, AngularSystem angular_system>
@@ -293,9 +321,9 @@ via_point_sequencer(
 #define SPECIALIZATION(ls, as)  template decltype(via_point_sequencer<ls, as>) via_point_sequencer<ls, as>;
 
 SPECIALIZATION(coord::Cylindrical, coord::Lie)
-//SPECIALIZATION(coord::Cylindrical, coord::Euler)
+SPECIALIZATION(coord::Cylindrical, coord::Euler)
 SPECIALIZATION(coord::Cartesian, coord::Lie)
-//SPECIALIZATION(coord::Cartesian, coord::Euler)
+SPECIALIZATION(coord::Cartesian, coord::Euler)
 
 #undef SPECIALIZATION
 

@@ -22,9 +22,6 @@ os::Position safe_pose(const os::Position& pose);
 bool unsafe(const os::Position& pose);
 
 
-os::Position block_pose_to_pose(const BlockPose::Pose& pose);
-
-
 }
 
 #endif /* PLANNING_INTERNAL_HPP_INCLUDED */

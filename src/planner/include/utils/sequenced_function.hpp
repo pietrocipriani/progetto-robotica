@@ -110,15 +110,23 @@ public:
   /// @param fs The list of functions.
   SequencedFunction(Container&& fs) : functions(std::move(fs)), it(functions.cbegin()) {
     assert(!functions.empty());
-    //assert(std::is_sorted(functions.cbegin(), functions.cend())); TODO why?
+    assert(std::is_sorted(functions.cbegin(), functions.cend()));
   }
 
-  SequencedFunction(const SequencedFunction& other) : functions(other.functions), it(functions.cbegin()) {}
+  // NOTE: The iterator CANNOT be copied.
+  SequencedFunction(const SequencedFunction& other)
+    : functions(other.functions)
+    , it(functions.cbegin() + std::distance(other.functions.cbegin(), other.it)) {}
+
+  // NOTE: The iterator can be copied when the container is moved.
+  // TODO: Check if the statement is valid with arbitrary containers.
   SequencedFunction(SequencedFunction&& other) = default;
 
+  // NOTE: The iterator CANNOT be copied.
   SequencedFunction& operator=(const SequencedFunction& other) {
     functions = other.functions;
-    it = functions.cbegin();
+    // NOTE: Forces the usage of random access containers.
+    it = functions.cbegin() + std::distance(other.functions.cbegin(), other.it);
     return *this;
   }
   SequencedFunction& operator=(SequencedFunction&& other) = default;

@@ -80,7 +80,7 @@ constexpr double get_gripping_height(const Block& block_type) {
     assert(false);
 }
 
-constexpr double get_open_gripper_pos(const Block& block_type) {
+constexpr double get_open_gripper_pos([[maybe_unused]] const Block& block_type) {
     return 0.9; // better to always open the gripper as much as possible
 }
 
@@ -160,6 +160,6 @@ constexpr std::tuple<double, double, double> get_pad_position(const Block& block
     assert(false);
 }
 
-} // namespace controller::world
+} // namespace planner
 
 #endif // _BLOCK_TYPE_HPP_
