@@ -1,29 +1,33 @@
-\hypertarget{classprecise__placement_1_1PrecisePlacement}{}\doxysection{Precise\+Placement Class Reference}
-\label{classprecise__placement_1_1PrecisePlacement}\index{PrecisePlacement@{PrecisePlacement}}
+\doxysection{Precise\+Placement Class Reference}
+\hypertarget{classprecise__placement_1_1PrecisePlacement}{}\label{classprecise__placement_1_1PrecisePlacement}\index{PrecisePlacement@{PrecisePlacement}}
 
 
-\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration.  
+Precise\+Placement class, it manages all it\textquotesingle{}s needed to compute the IC registration.  
 
 
-\doxysubsection*{Public Member Functions}
+\doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, image\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_addad9f958aae92887408ea8ff70f7470}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, image\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}{callback\+\_\+cloud}} (self, Point\+Cloud2 data)
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a402f00eb157498d5e69921db39f39d66}{callback\+\_\+cloud}} (self, Point\+Cloud2 data)
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a7e069f51e4f899c99ee9d8cc23d8532f}{image\+\_\+callback}} (self, Image data)
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da}{image\+\_\+callback}} (self, Image data)
 \begin{DoxyCompactList}\small\item\em called every time an image callback is received, it parses it and compute \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}{point\+\_\+cloud\+\_\+processer}} (self)
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a9395bb61b6179ef183edd3cf454f74f4}{point\+\_\+cloud\+\_\+processer}} (self)
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1db1b1ccc33a8baade6e}{process\+\_\+latest\+\_\+point\+\_\+cloud}} (self)
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae44317d94b3415f512982e3eaf974e05}{process\+\_\+latest\+\_\+point\+\_\+cloud}} (self)
 \end{DoxyCompactItemize}
-\doxysubsection*{Public Attributes}
+\doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_afaeaf0eae0e58cfdcfaba37d6008d6d4}{bridge}}
 \item 
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a0ce3350aae4545170305f9a6a08cac92}{callback\+\_\+cloud}}
+\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a51e63380eb56d13ab76fb02674171e7f}{detect\+\_\+blocks\+\_\+srv}}
+\item 
+\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae490aca119b50747b0e88a500a2a0cd1}{image\+\_\+callback}}
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a44c90a7a00847f8a4764c12f884862c3}{last\+\_\+point\+\_\+cloud\+\_\+time}}
 \item 
@@ -32,11 +36,11 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1d
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_af3ede8c094a5c427fd1f7669132df68b}{msg\+\_\+seq}}
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a1765f6266735d40001f685864bb3cf8f}{point\+\_\+cloud}}
-\begin{DoxyCompactList}\small\item\em print(self.\+point\+\_\+cloud.\+get\+\_\+axis\+\_\+aligned\+\_\+bounding\+\_\+box()) is\+\_\+none = self.\+point\+\_\+cloud is None \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}{pub}}
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a023e7e21dd035f185e7d034aa3b49f6f}{raw\+\_\+point\+\_\+cloud}}
-\begin{DoxyCompactList}\small\item\em print(\char`\"{}point\+\_\+cloud\char`\"{}) \end{DoxyCompactList}\item 
+\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}{thread\+\_\+point\+\_\+cloud\+\_\+processer}}
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}
@@ -46,14 +50,14 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1d
 
 
 \doxysubsection{Detailed Description}
-\mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration. 
+Precise\+Placement class, it manages all it\textquotesingle{}s needed to compute the IC registration. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}\label{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_addad9f958aae92887408ea8ff70f7470}\label{classprecise__placement_1_1PrecisePlacement_addad9f958aae92887408ea8ff70f7470} 
 \index{PrecisePlacement@{PrecisePlacement}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{image\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{image\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
 
 \begin{DoxyVerb} Contructor
 @param point_cloud_srv_name the name of the zed camera point cloud
@@ -62,17 +66,17 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1d
  
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}\label{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a402f00eb157498d5e69921db39f39d66}\label{classprecise__placement_1_1PrecisePlacement_a402f00eb157498d5e69921db39f39d66} 
 \index{PrecisePlacement@{PrecisePlacement}!callback\_cloud@{callback\_cloud}}
 \index{callback\_cloud@{callback\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{callback\_cloud()}{callback\_cloud()}}
-{\footnotesize\ttfamily def callback\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Point\+Cloud2}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily callback\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Point\+Cloud2}]{data }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a7e069f51e4f899c99ee9d8cc23d8532f}\label{classprecise__placement_1_1PrecisePlacement_a7e069f51e4f899c99ee9d8cc23d8532f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da}\label{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da} 
 \index{PrecisePlacement@{PrecisePlacement}!image\_callback@{image\_callback}}
 \index{image\_callback@{image\_callback}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{image\_callback()}{image\_callback()}}
-{\footnotesize\ttfamily def image\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily image\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{data }\end{DoxyParamCaption})}
 
 
 
@@ -83,90 +87,94 @@ called every time an image callback is received, it parses it and compute
 {\em data} & the incoming image \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}\label{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a9395bb61b6179ef183edd3cf454f74f4}\label{classprecise__placement_1_1PrecisePlacement_a9395bb61b6179ef183edd3cf454f74f4} 
 \index{PrecisePlacement@{PrecisePlacement}!point\_cloud\_processer@{point\_cloud\_processer}}
 \index{point\_cloud\_processer@{point\_cloud\_processer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{point\_cloud\_processer()}{point\_cloud\_processer()}}
-{\footnotesize\ttfamily def point\+\_\+cloud\+\_\+processer (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily point\+\_\+cloud\+\_\+processer (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1db1b1ccc33a8baade6e}\label{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1db1b1ccc33a8baade6e}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_ae44317d94b3415f512982e3eaf974e05}\label{classprecise__placement_1_1PrecisePlacement_ae44317d94b3415f512982e3eaf974e05} 
 \index{PrecisePlacement@{PrecisePlacement}!process\_latest\_point\_cloud@{process\_latest\_point\_cloud}}
 \index{process\_latest\_point\_cloud@{process\_latest\_point\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{process\_latest\_point\_cloud()}{process\_latest\_point\_cloud()}}
-{\footnotesize\ttfamily def process\+\_\+latest\+\_\+point\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily process\+\_\+latest\+\_\+point\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
 
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_afaeaf0eae0e58cfdcfaba37d6008d6d4}\label{classprecise__placement_1_1PrecisePlacement_afaeaf0eae0e58cfdcfaba37d6008d6d4}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_afaeaf0eae0e58cfdcfaba37d6008d6d4}\label{classprecise__placement_1_1PrecisePlacement_afaeaf0eae0e58cfdcfaba37d6008d6d4} 
 \index{PrecisePlacement@{PrecisePlacement}!bridge@{bridge}}
 \index{bridge@{bridge}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{bridge}{bridge}}
 {\footnotesize\ttfamily bridge}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a51e63380eb56d13ab76fb02674171e7f}\label{classprecise__placement_1_1PrecisePlacement_a51e63380eb56d13ab76fb02674171e7f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a0ce3350aae4545170305f9a6a08cac92}\label{classprecise__placement_1_1PrecisePlacement_a0ce3350aae4545170305f9a6a08cac92} 
+\index{PrecisePlacement@{PrecisePlacement}!callback\_cloud@{callback\_cloud}}
+\index{callback\_cloud@{callback\_cloud}!PrecisePlacement@{PrecisePlacement}}
+\doxysubsubsection{\texorpdfstring{callback\_cloud}{callback\_cloud}}
+{\footnotesize\ttfamily callback\+\_\+cloud}
+
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a51e63380eb56d13ab76fb02674171e7f}\label{classprecise__placement_1_1PrecisePlacement_a51e63380eb56d13ab76fb02674171e7f} 
 \index{PrecisePlacement@{PrecisePlacement}!detect\_blocks\_srv@{detect\_blocks\_srv}}
 \index{detect\_blocks\_srv@{detect\_blocks\_srv}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{detect\_blocks\_srv}{detect\_blocks\_srv}}
 {\footnotesize\ttfamily detect\+\_\+blocks\+\_\+srv}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a44c90a7a00847f8a4764c12f884862c3}\label{classprecise__placement_1_1PrecisePlacement_a44c90a7a00847f8a4764c12f884862c3}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_ae490aca119b50747b0e88a500a2a0cd1}\label{classprecise__placement_1_1PrecisePlacement_ae490aca119b50747b0e88a500a2a0cd1} 
+\index{PrecisePlacement@{PrecisePlacement}!image\_callback@{image\_callback}}
+\index{image\_callback@{image\_callback}!PrecisePlacement@{PrecisePlacement}}
+\doxysubsubsection{\texorpdfstring{image\_callback}{image\_callback}}
+{\footnotesize\ttfamily image\+\_\+callback}
+
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a44c90a7a00847f8a4764c12f884862c3}\label{classprecise__placement_1_1PrecisePlacement_a44c90a7a00847f8a4764c12f884862c3} 
 \index{PrecisePlacement@{PrecisePlacement}!last\_point\_cloud\_time@{last\_point\_cloud\_time}}
 \index{last\_point\_cloud\_time@{last\_point\_cloud\_time}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{last\_point\_cloud\_time}{last\_point\_cloud\_time}}
 {\footnotesize\ttfamily last\+\_\+point\+\_\+cloud\+\_\+time}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a5428deecfa188d28deb2a96fe29066e8}\label{classprecise__placement_1_1PrecisePlacement_a5428deecfa188d28deb2a96fe29066e8}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a5428deecfa188d28deb2a96fe29066e8}\label{classprecise__placement_1_1PrecisePlacement_a5428deecfa188d28deb2a96fe29066e8} 
 \index{PrecisePlacement@{PrecisePlacement}!meshes@{meshes}}
 \index{meshes@{meshes}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{meshes}{meshes}}
 {\footnotesize\ttfamily meshes}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_af3ede8c094a5c427fd1f7669132df68b}\label{classprecise__placement_1_1PrecisePlacement_af3ede8c094a5c427fd1f7669132df68b}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_af3ede8c094a5c427fd1f7669132df68b}\label{classprecise__placement_1_1PrecisePlacement_af3ede8c094a5c427fd1f7669132df68b} 
 \index{PrecisePlacement@{PrecisePlacement}!msg\_seq@{msg\_seq}}
 \index{msg\_seq@{msg\_seq}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{msg\_seq}{msg\_seq}}
 {\footnotesize\ttfamily msg\+\_\+seq}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a1765f6266735d40001f685864bb3cf8f}\label{classprecise__placement_1_1PrecisePlacement_a1765f6266735d40001f685864bb3cf8f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a1765f6266735d40001f685864bb3cf8f}\label{classprecise__placement_1_1PrecisePlacement_a1765f6266735d40001f685864bb3cf8f} 
 \index{PrecisePlacement@{PrecisePlacement}!point\_cloud@{point\_cloud}}
 \index{point\_cloud@{point\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{point\_cloud}{point\_cloud}}
 {\footnotesize\ttfamily point\+\_\+cloud}
 
-
-
-print(self.\+point\+\_\+cloud.\+get\+\_\+axis\+\_\+aligned\+\_\+bounding\+\_\+box()) is\+\_\+none = self.\+point\+\_\+cloud is None 
-
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}\label{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}\label{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f} 
 \index{PrecisePlacement@{PrecisePlacement}!pub@{pub}}
 \index{pub@{pub}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{pub}{pub}}
 {\footnotesize\ttfamily pub}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a023e7e21dd035f185e7d034aa3b49f6f}\label{classprecise__placement_1_1PrecisePlacement_a023e7e21dd035f185e7d034aa3b49f6f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_a023e7e21dd035f185e7d034aa3b49f6f}\label{classprecise__placement_1_1PrecisePlacement_a023e7e21dd035f185e7d034aa3b49f6f} 
 \index{PrecisePlacement@{PrecisePlacement}!raw\_point\_cloud@{raw\_point\_cloud}}
 \index{raw\_point\_cloud@{raw\_point\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{raw\_point\_cloud}{raw\_point\_cloud}}
 {\footnotesize\ttfamily raw\+\_\+point\+\_\+cloud}
 
-
-
-print(\char`\"{}point\+\_\+cloud\char`\"{}) 
-
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}\label{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}\label{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f} 
 \index{PrecisePlacement@{PrecisePlacement}!thread\_point\_cloud\_processer@{thread\_point\_cloud\_processer}}
 \index{thread\_point\_cloud\_processer@{thread\_point\_cloud\_processer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{thread\_point\_cloud\_processer}{thread\_point\_cloud\_processer}}
 {\footnotesize\ttfamily thread\+\_\+point\+\_\+cloud\+\_\+processer}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}\label{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}\label{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718} 
 \index{PrecisePlacement@{PrecisePlacement}!use\_visualizer@{use\_visualizer}}
 \index{use\_visualizer@{use\_visualizer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{use\_visualizer}{use\_visualizer}}
 {\footnotesize\ttfamily use\+\_\+visualizer}
 
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}\label{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}} 
+\Hypertarget{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062}\label{classprecise__placement_1_1PrecisePlacement_adb95368c48467e7ecc8311cf5da4c062} 
 \index{PrecisePlacement@{PrecisePlacement}!visualizer@{visualizer}}
 \index{visualizer@{visualizer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{visualizer}{visualizer}}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""@package block_detector_server
+"""
 Starts a ROS service that takes an `sensor_msgs/Image` as input, detects boxes in the image, and
 returns `block_detector/DetectBlocks`, i.e. the boxes detected by YOLOv8, as output. A service was
 preferred, instead of a publisher reading directly from the camera and publishing boxes from time

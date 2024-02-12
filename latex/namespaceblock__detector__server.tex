@@ -1,0 +1,68 @@
+\doxysection{block\+\_\+detector\+\_\+server Namespace Reference}
+\hypertarget{namespaceblock__detector__server}{}\label{namespaceblock__detector__server}\index{block\_detector\_server@{block\_detector\_server}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classblock__detector__server_1_1BlockDetector}{Block\+Detector}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{namespaceblock__detector__server_ad9496cf13a2faec5bbcf4d7746397716}{CONFIDENCE\+\_\+\+THRESHOLD}} = 0.\+5
+\item 
+float \mbox{\hyperlink{namespaceblock__detector__server_aa692faeafdce6ffcde5ee89e2c4a9c2a}{INTERSECTION\+\_\+\+OVER\+\_\+\+UNION\+\_\+\+THRESHOLD}} = 0.\+5
+\item 
+str \mbox{\hyperlink{namespaceblock__detector__server_a0dd595c7d89699a9b60f4af29c1f3c06}{SERVICE\+\_\+\+NAME}} = "{}detect\+\_\+blocks"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Starts a ROS service that takes an `sensor_msgs/Image` as input, detects boxes in the image, and
+returns `block_detector/DetectBlocks`, i.e. the boxes detected by YOLOv8, as output. A service was
+preferred, instead of a publisher reading directly from the camera and publishing boxes from time
+to time, for the following reasons:
+- to allow making this component more standalone
+- to allow the input image to be chosen by the caller, e.g. by cropping it or passing a custom image
+- to avoid wasting CPU on calculating boxes that would never be used because the subscriber (if any)
+    does not need them
+
+This file also contains the configuration to pass to the YOLOv8 model for detecting boxes, such as
+CONFIDENCE_THRESHOLD and INTERSECTION_OVER_UNION_THRESHOLD.
+
+You can visualize results from this service using `inspect_detected_blocks.py`.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f}\label{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f} 
+\index{block\_detector\_server@{block\_detector\_server}!main@{main}}
+\index{main@{main}!block\_detector\_server@{block\_detector\_server}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceblock__detector__server_ad9496cf13a2faec5bbcf4d7746397716}\label{namespaceblock__detector__server_ad9496cf13a2faec5bbcf4d7746397716} 
+\index{block\_detector\_server@{block\_detector\_server}!CONFIDENCE\_THRESHOLD@{CONFIDENCE\_THRESHOLD}}
+\index{CONFIDENCE\_THRESHOLD@{CONFIDENCE\_THRESHOLD}!block\_detector\_server@{block\_detector\_server}}
+\doxysubsubsection{\texorpdfstring{CONFIDENCE\_THRESHOLD}{CONFIDENCE\_THRESHOLD}}
+{\footnotesize\ttfamily float CONFIDENCE\+\_\+\+THRESHOLD = 0.\+5}
+
+\Hypertarget{namespaceblock__detector__server_aa692faeafdce6ffcde5ee89e2c4a9c2a}\label{namespaceblock__detector__server_aa692faeafdce6ffcde5ee89e2c4a9c2a} 
+\index{block\_detector\_server@{block\_detector\_server}!INTERSECTION\_OVER\_UNION\_THRESHOLD@{INTERSECTION\_OVER\_UNION\_THRESHOLD}}
+\index{INTERSECTION\_OVER\_UNION\_THRESHOLD@{INTERSECTION\_OVER\_UNION\_THRESHOLD}!block\_detector\_server@{block\_detector\_server}}
+\doxysubsubsection{\texorpdfstring{INTERSECTION\_OVER\_UNION\_THRESHOLD}{INTERSECTION\_OVER\_UNION\_THRESHOLD}}
+{\footnotesize\ttfamily float INTERSECTION\+\_\+\+OVER\+\_\+\+UNION\+\_\+\+THRESHOLD = 0.\+5}
+
+\Hypertarget{namespaceblock__detector__server_a0dd595c7d89699a9b60f4af29c1f3c06}\label{namespaceblock__detector__server_a0dd595c7d89699a9b60f4af29c1f3c06} 
+\index{block\_detector\_server@{block\_detector\_server}!SERVICE\_NAME@{SERVICE\_NAME}}
+\index{SERVICE\_NAME@{SERVICE\_NAME}!block\_detector\_server@{block\_detector\_server}}
+\doxysubsubsection{\texorpdfstring{SERVICE\_NAME}{SERVICE\_NAME}}
+{\footnotesize\ttfamily str SERVICE\+\_\+\+NAME = "{}detect\+\_\+blocks"{}}
+

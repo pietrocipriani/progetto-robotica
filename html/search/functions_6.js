@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['point_5fcloud_5fprocesser_47',['point_cloud_processer',['../classprecise__placement_1_1PrecisePlacement.html#a79c5ddc04b8b9b18402b756d4b2f94f0',1,'precise_placement::PrecisePlacement']]],
-  ['process_5flatest_5fpoint_5fcloud_48',['process_latest_point_cloud',['../classprecise__placement_1_1PrecisePlacement.html#a82585557ea7a1db1b1ccc33a8baade6e',1,'precise_placement::PrecisePlacement']]]
+  ['main_0',['main',['../namespaceprecise__placement.html#a51af30a60f9f02777c6396b8247e356f',1,'precise_placement.main()'],['../namespaceblock__detector__server.html#a51af30a60f9f02777c6396b8247e356f',1,'block_detector_server.main()'],['../namespaceinspect__detected__blocks.html#a51af30a60f9f02777c6396b8247e356f',1,'inspect_detected_blocks.main()']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['precise_5fplacement_2epy_37',['precise_placement.py',['../precise__placement_8py.html',1,'']]]
+  ['block_5fdetector_5fserver_2epy_0',['block_detector_server.py',['../block__detector__server_8py.html',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['generate_5fintersection_5fmesh_43',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
-  ['generate_5fpoints_44',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
+  ['draw_5fbbox_0',['draw_bbox',['../namespaceinspect__detected__blocks.html#ac6e9d96689ee595ee0a9fda7456b92dd',1,'inspect_detected_blocks']]]
 ];

@@ -1,0 +1,62 @@
+\doxysection{Block\+Detector Class Reference}
+\hypertarget{classblock__detector__server_1_1BlockDetector}{}\label{classblock__detector__server_1_1BlockDetector}\index{BlockDetector@{BlockDetector}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classblock__detector__server_1_1BlockDetector_abdd362d5f799ad16b5d6700efe590290}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classblock__detector__server_1_1BlockDetector_a28c1182234e0766fd0112f684fbdfb8b}{callback}} (self, Image request)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classblock__detector__server_1_1BlockDetector_afaeaf0eae0e58cfdcfaba37d6008d6d4}{bridge}}
+\item 
+\mbox{\hyperlink{classblock__detector__server_1_1BlockDetector_a508cc3106d2c29fe07dc87cbe3ea6927}{model}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classblock__detector__server_1_1BlockDetector_abdd362d5f799ad16b5d6700efe590290}\label{classblock__detector__server_1_1BlockDetector_abdd362d5f799ad16b5d6700efe590290} 
+\index{BlockDetector@{BlockDetector}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!BlockDetector@{BlockDetector}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Creates an instance of BlockDetector and loads the YOLO model from
+`block_detector_model/model.pt` by resolving the path with `RosPack`.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classblock__detector__server_1_1BlockDetector_a28c1182234e0766fd0112f684fbdfb8b}\label{classblock__detector__server_1_1BlockDetector_a28c1182234e0766fd0112f684fbdfb8b} 
+\index{BlockDetector@{BlockDetector}!callback@{callback}}
+\index{callback@{callback}!BlockDetector@{BlockDetector}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{request }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The ROS service callback; scripts can call it upon request using `rospy.ServiceProxy`.
+@param request an `sensor_msgs/Image` with bgr8 encoding that will be decoded using the
+               cv2 bridge
+@return `block_detector/DetectBlocks`, i.e. the boxes detected by YOLO
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classblock__detector__server_1_1BlockDetector_afaeaf0eae0e58cfdcfaba37d6008d6d4}\label{classblock__detector__server_1_1BlockDetector_afaeaf0eae0e58cfdcfaba37d6008d6d4} 
+\index{BlockDetector@{BlockDetector}!bridge@{bridge}}
+\index{bridge@{bridge}!BlockDetector@{BlockDetector}}
+\doxysubsubsection{\texorpdfstring{bridge}{bridge}}
+{\footnotesize\ttfamily bridge}
+
+\Hypertarget{classblock__detector__server_1_1BlockDetector_a508cc3106d2c29fe07dc87cbe3ea6927}\label{classblock__detector__server_1_1BlockDetector_a508cc3106d2c29fe07dc87cbe3ea6927} 
+\index{BlockDetector@{BlockDetector}!model@{model}}
+\index{model@{model}!BlockDetector@{BlockDetector}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily model}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/block\+\_\+detector/scripts/\mbox{\hyperlink{block__detector__server_8py}{block\+\_\+detector\+\_\+server.\+py}}\end{DoxyCompactItemize}

@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['point_5fcloud_18',['point_cloud',['../classprecise__placement_1_1PrecisePlacement.html#a1765f6266735d40001f685864bb3cf8f',1,'precise_placement::PrecisePlacement']]],
-  ['point_5fcloud_5fprocesser_19',['point_cloud_processer',['../classprecise__placement_1_1PrecisePlacement.html#a79c5ddc04b8b9b18402b756d4b2f94f0',1,'precise_placement::PrecisePlacement']]],
-  ['precise_5fplacement_20',['precise_placement',['../namespaceprecise__placement.html',1,'']]],
-  ['precise_5fplacement_2epy_21',['precise_placement.py',['../precise__placement_8py.html',1,'']]],
-  ['preciseplacement_22',['PrecisePlacement',['../classprecise__placement_1_1PrecisePlacement.html',1,'precise_placement']]],
-  ['process_5flatest_5fpoint_5fcloud_23',['process_latest_point_cloud',['../classprecise__placement_1_1PrecisePlacement.html#a82585557ea7a1db1b1ccc33a8baade6e',1,'precise_placement::PrecisePlacement']]],
-  ['pub_24',['pub',['../classprecise__placement_1_1PrecisePlacement.html#aa4474258363d2d40129f9b7699c5ac7f',1,'precise_placement::PrecisePlacement']]]
+  ['main_0',['main',['../namespaceprecise__placement.html#a51af30a60f9f02777c6396b8247e356f',1,'precise_placement.main()'],['../namespaceblock__detector__server.html#a51af30a60f9f02777c6396b8247e356f',1,'block_detector_server.main()'],['../namespaceinspect__detected__blocks.html#a51af30a60f9f02777c6396b8247e356f',1,'inspect_detected_blocks.main()']]],
+  ['meshes_1',['meshes',['../classprecise__placement_1_1PrecisePlacement.html#a5428deecfa188d28deb2a96fe29066e8',1,'precise_placement::PrecisePlacement']]],
+  ['model_2',['model',['../classblock__detector__server_1_1BlockDetector.html#a508cc3106d2c29fe07dc87cbe3ea6927',1,'block_detector_server::BlockDetector']]],
+  ['msg_5fseq_3',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
 ];

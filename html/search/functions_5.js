@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_46',['main',['../namespaceprecise__placement.html#abd2f92caab6d65d366a1c0bc24dddc41',1,'precise_placement']]]
+  ['image_5fcallback_0',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#aa9100289158df6712801f677996827da',1,'precise_placement::PrecisePlacement']]]
 ];

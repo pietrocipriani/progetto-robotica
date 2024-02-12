@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['first_5fvisualization_9',['first_visualization',['../classprecise__placement_1_1Visualizer.html#a20c895fc6c51cbd1fdba1472e8a1c339',1,'precise_placement::Visualizer']]]
+  ['encoded_5fimage_0',['encoded_image',['../classinspect__detected__blocks_1_1BlockInspector.html#a55220768788d8c08564ca1b667349f3e',1,'inspect_detected_blocks::BlockInspector']]],
+  ['example_20project_1',['Doxygen Example Project',['../index.html',1,'']]]
 ];

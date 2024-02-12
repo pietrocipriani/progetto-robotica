@@ -1,0 +1,78 @@
+\doxysection{Block\+Inspector Class Reference}
+\hypertarget{classinspect__detected__blocks_1_1BlockInspector}{}\label{classinspect__detected__blocks_1_1BlockInspector}\index{BlockInspector@{BlockInspector}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_ae6e4454e499782239df3510d36873365}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, int \mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_a0722a8e26f40133237a724104da33d71}{skip\+\_\+period}})
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_afd6593e992d5afbed7936c4ff0b12ed8}{callback}} (self, Image \mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_a55220768788d8c08564ca1b667349f3e}{encoded\+\_\+image}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_a61f7b3cbcedea4bae0c663c892d5d07f}{counter}}
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_a55220768788d8c08564ca1b667349f3e}{encoded\+\_\+image}}
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_ad8b0a1964f6e8289c858108ae891718e}{image\+\_\+sub}}
+\item 
+\mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector_a0722a8e26f40133237a724104da33d71}{skip\+\_\+period}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_ae6e4454e499782239df3510d36873365}\label{classinspect__detected__blocks_1_1BlockInspector_ae6e4454e499782239df3510d36873365} 
+\index{BlockInspector@{BlockInspector}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{int}]{skip\+\_\+period }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes `BlockInspector` and subscribes to the `IMAGE_TOPIC` topic to listen for images.
+
+@param skip_period only one of this many images will be sent to the block detection service,
+                   to save CPU. Setting this to 1 will send all images to the service. 
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_afd6593e992d5afbed7936c4ff0b12ed8}\label{classinspect__detected__blocks_1_1BlockInspector_afd6593e992d5afbed7936c4ff0b12ed8} 
+\index{BlockInspector@{BlockInspector}!callback@{callback}}
+\index{callback@{callback}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{encoded\+\_\+image }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}The callback from the image topic subscription. Saves passes the encoded image to the main
+thread one every `self.skip_period` times, to save CPU.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_a61f7b3cbcedea4bae0c663c892d5d07f}\label{classinspect__detected__blocks_1_1BlockInspector_a61f7b3cbcedea4bae0c663c892d5d07f} 
+\index{BlockInspector@{BlockInspector}!counter@{counter}}
+\index{counter@{counter}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{counter}{counter}}
+{\footnotesize\ttfamily counter}
+
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_a55220768788d8c08564ca1b667349f3e}\label{classinspect__detected__blocks_1_1BlockInspector_a55220768788d8c08564ca1b667349f3e} 
+\index{BlockInspector@{BlockInspector}!encoded\_image@{encoded\_image}}
+\index{encoded\_image@{encoded\_image}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{encoded\_image}{encoded\_image}}
+{\footnotesize\ttfamily encoded\+\_\+image}
+
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_ad8b0a1964f6e8289c858108ae891718e}\label{classinspect__detected__blocks_1_1BlockInspector_ad8b0a1964f6e8289c858108ae891718e} 
+\index{BlockInspector@{BlockInspector}!image\_sub@{image\_sub}}
+\index{image\_sub@{image\_sub}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{image\_sub}{image\_sub}}
+{\footnotesize\ttfamily image\+\_\+sub}
+
+\Hypertarget{classinspect__detected__blocks_1_1BlockInspector_a0722a8e26f40133237a724104da33d71}\label{classinspect__detected__blocks_1_1BlockInspector_a0722a8e26f40133237a724104da33d71} 
+\index{BlockInspector@{BlockInspector}!skip\_period@{skip\_period}}
+\index{skip\_period@{skip\_period}!BlockInspector@{BlockInspector}}
+\doxysubsubsection{\texorpdfstring{skip\_period}{skip\_period}}
+{\footnotesize\ttfamily skip\+\_\+period}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/block\+\_\+detector/scripts/\mbox{\hyperlink{inspect__detected__blocks_8py}{inspect\+\_\+detected\+\_\+blocks.\+py}}\end{DoxyCompactItemize}

@@ -1,26 +1,26 @@
-\hypertarget{namespaceprecise__placement}{}\doxysection{precise\+\_\+placement Namespace Reference}
-\label{namespaceprecise__placement}\index{precise\_placement@{precise\_placement}}
-\doxysubsection*{Classes}
+\doxysection{precise\+\_\+placement Namespace Reference}
+\hypertarget{namespaceprecise__placement}{}\label{namespaceprecise__placement}\index{precise\_placement@{precise\_placement}}
+\doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}}
-\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Precise\+Placement class, it manages all it\textquotesingle{}s needed to compute the IC registration. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classprecise__placement_1_1Visualizer}{Visualizer}}
 \begin{DoxyCompactList}\small\item\em Helper struct in charge of the point cloud visualization. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Functions}
+\doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}{convert\+Cloud\+From\+Ros\+To\+Open3d}} (Point\+Cloud2 ros\+\_\+cloud)
+\mbox{\hyperlink{namespaceprecise__placement_a57fe7bec8911fd0c427273e3b4504921}{convert\+Cloud\+From\+Ros\+To\+Open3d}} (Point\+Cloud2 ros\+\_\+cloud)
 \begin{DoxyCompactList}\small\item\em Function used to map from ros Point\+Cloud 2 to Open3d Point\+Cloud. \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}{generate\+\_\+intersection\+\_\+mesh}} (x\+\_\+min, x\+\_\+max, y\+\_\+min, y\+\_\+max)
+\mbox{\hyperlink{namespaceprecise__placement_ab085aa903aa5b599ce81b7580cda97c8}{generate\+\_\+intersection\+\_\+mesh}} (x\+\_\+min, x\+\_\+max, y\+\_\+min, y\+\_\+max)
 \item 
-def \mbox{\hyperlink{namespaceprecise__placement_abc10cc9fb803f1dbb279af2b65a9835f}{generate\+\_\+points}} (x, y, y\+\_\+min)
-\begin{DoxyCompactList}\small\item\em Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a \char`\"{}ray\char`\"{} from x, y of the camera (camera\+\_\+space) \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}{main}} ()
+\mbox{\hyperlink{namespaceprecise__placement_afbad813da0bc76c3c8f8f8406776fea8}{generate\+\_\+points}} (x, y, y\+\_\+min)
+\begin{DoxyCompactList}\small\item\em Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "{}ray"{} from x, y of the camera (camera\+\_\+space) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceprecise__placement_a51af30a60f9f02777c6396b8247e356f}{main}} ()
 \item 
-def \mbox{\hyperlink{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}{remove\+\_\+xy\+\_\+rotation}} (transform)
+\mbox{\hyperlink{namespaceprecise__placement_a894966255418bc6c53b60274fb3b0122}{remove\+\_\+xy\+\_\+rotation}} (transform)
 \begin{DoxyCompactList}\small\item\em helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsection*{Variables}
+\doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceprecise__placement_ac555c5f385f1fc37ef81af8c0238f17b}{camera\+\_\+transform}}
@@ -30,11 +30,11 @@ def \mbox{\hyperlink{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49
 
 
 \doxysubsection{Function Documentation}
-\mbox{\Hypertarget{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}\label{namespaceprecise__placement_aba759807761b48adaa09f702646d3afc}} 
+\Hypertarget{namespaceprecise__placement_a57fe7bec8911fd0c427273e3b4504921}\label{namespaceprecise__placement_a57fe7bec8911fd0c427273e3b4504921} 
 \index{precise\_placement@{precise\_placement}!convertCloudFromRosToOpen3d@{convertCloudFromRosToOpen3d}}
 \index{convertCloudFromRosToOpen3d@{convertCloudFromRosToOpen3d}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{convertCloudFromRosToOpen3d()}{convertCloudFromRosToOpen3d()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+convert\+Cloud\+From\+Ros\+To\+Open3d (\begin{DoxyParamCaption}\item[{Point\+Cloud2}]{ros\+\_\+cloud }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily convert\+Cloud\+From\+Ros\+To\+Open3d (\begin{DoxyParamCaption}\item[{Point\+Cloud2}]{ros\+\_\+cloud }\end{DoxyParamCaption})}
 
 
 
@@ -48,33 +48,33 @@ Function used to map from ros Point\+Cloud 2 to Open3d Point\+Cloud.
 \begin{DoxyReturn}{Returns}
 Open3d Point\+Cloud 
 \end{DoxyReturn}
-\mbox{\Hypertarget{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}\label{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1b2}} 
+\Hypertarget{namespaceprecise__placement_ab085aa903aa5b599ce81b7580cda97c8}\label{namespaceprecise__placement_ab085aa903aa5b599ce81b7580cda97c8} 
 \index{precise\_placement@{precise\_placement}!generate\_intersection\_mesh@{generate\_intersection\_mesh}}
 \index{generate\_intersection\_mesh@{generate\_intersection\_mesh}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{generate\_intersection\_mesh()}{generate\_intersection\_mesh()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+generate\+\_\+intersection\+\_\+mesh (\begin{DoxyParamCaption}\item[{}]{x\+\_\+min,  }\item[{}]{x\+\_\+max,  }\item[{}]{y\+\_\+min,  }\item[{}]{y\+\_\+max }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily generate\+\_\+intersection\+\_\+mesh (\begin{DoxyParamCaption}\item[{}]{x\+\_\+min,  }\item[{}]{x\+\_\+max,  }\item[{}]{y\+\_\+min,  }\item[{}]{y\+\_\+max }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{namespaceprecise__placement_abc10cc9fb803f1dbb279af2b65a9835f}\label{namespaceprecise__placement_abc10cc9fb803f1dbb279af2b65a9835f}} 
+\Hypertarget{namespaceprecise__placement_afbad813da0bc76c3c8f8f8406776fea8}\label{namespaceprecise__placement_afbad813da0bc76c3c8f8f8406776fea8} 
 \index{precise\_placement@{precise\_placement}!generate\_points@{generate\_points}}
 \index{generate\_points@{generate\_points}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{generate\_points()}{generate\_points()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+generate\+\_\+points (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{y\+\_\+min }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily generate\+\_\+points (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y,  }\item[{}]{y\+\_\+min }\end{DoxyParamCaption})}
 
 
 
-Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a \char`\"{}ray\char`\"{} from x, y of the camera (camera\+\_\+space) 
+Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "{}ray"{} from x, y of the camera (camera\+\_\+space) 
 
-\mbox{\Hypertarget{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}\label{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}} 
+\Hypertarget{namespaceprecise__placement_a51af30a60f9f02777c6396b8247e356f}\label{namespaceprecise__placement_a51af30a60f9f02777c6396b8247e356f} 
 \index{precise\_placement@{precise\_placement}!main@{main}}
 \index{main@{main}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}\label{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}} 
+\Hypertarget{namespaceprecise__placement_a894966255418bc6c53b60274fb3b0122}\label{namespaceprecise__placement_a894966255418bc6c53b60274fb3b0122} 
 \index{precise\_placement@{precise\_placement}!remove\_xy\_rotation@{remove\_xy\_rotation}}
 \index{remove\_xy\_rotation@{remove\_xy\_rotation}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{remove\_xy\_rotation()}{remove\_xy\_rotation()}}
-{\footnotesize\ttfamily def precise\+\_\+placement.\+remove\+\_\+xy\+\_\+rotation (\begin{DoxyParamCaption}\item[{}]{transform }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily remove\+\_\+xy\+\_\+rotation (\begin{DoxyParamCaption}\item[{}]{transform }\end{DoxyParamCaption})}
 
 
 
@@ -91,7 +91,7 @@ ruotated matrix
 
 
 \doxysubsection{Variable Documentation}
-\mbox{\Hypertarget{namespaceprecise__placement_ac555c5f385f1fc37ef81af8c0238f17b}\label{namespaceprecise__placement_ac555c5f385f1fc37ef81af8c0238f17b}} 
+\Hypertarget{namespaceprecise__placement_ac555c5f385f1fc37ef81af8c0238f17b}\label{namespaceprecise__placement_ac555c5f385f1fc37ef81af8c0238f17b} 
 \index{precise\_placement@{precise\_placement}!camera\_transform@{camera\_transform}}
 \index{camera\_transform@{camera\_transform}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{camera\_transform}{camera\_transform}}
@@ -99,13 +99,13 @@ ruotated matrix
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{1 =  np.array([[ 0, -\/0.5,  0.866,  -\/0.4],}
-\DoxyCodeLine{2                             [ -\/1,  0,  0,  0.59],}
-\DoxyCodeLine{3                             [ 0, -\/0.866, -\/0.5, 1.4],}
-\DoxyCodeLine{4                             [0, 0, 0, 1]])}
+\DoxyCodeLine{00001\ =\ \ np.array([[\ 0,\ -\/0.5,\ \ 0.866,\ \ -\/0.4],}
+\DoxyCodeLine{00002\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\ -\/1,\ \ 0,\ \ 0,\ \ 0.59],}
+\DoxyCodeLine{00003\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\ 0,\ -\/0.866,\ -\/0.5,\ 1.4],}
+\DoxyCodeLine{00004\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [0,\ 0,\ 0,\ 1]])}
 
 \end{DoxyCode}
-\mbox{\Hypertarget{namespaceprecise__placement_a02b0663018d876e57b2fee71c6c8a6eb}\label{namespaceprecise__placement_a02b0663018d876e57b2fee71c6c8a6eb}} 
+\Hypertarget{namespaceprecise__placement_a02b0663018d876e57b2fee71c6c8a6eb}\label{namespaceprecise__placement_a02b0663018d876e57b2fee71c6c8a6eb} 
 \index{precise\_placement@{precise\_placement}!inv\_camera\_transform@{inv\_camera\_transform}}
 \index{inv\_camera\_transform@{inv\_camera\_transform}!precise\_placement@{precise\_placement}}
 \doxysubsubsection{\texorpdfstring{inv\_camera\_transform}{inv\_camera\_transform}}
