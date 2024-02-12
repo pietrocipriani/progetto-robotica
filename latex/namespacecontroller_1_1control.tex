@@ -4,22 +4,22 @@
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{Config\+Publisher}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Publishes messages of type {\ttfamily std\+\_\+msgs\+::\+Float64\+Multi\+Array} to the "{}/ur5/joint\+\_\+group\+\_\+pos\+\_\+controller/command"{} topic, to make the robot perform movements. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} \mbox{\hyperlink{namespacecontroller_1_1control_a239eb11a4d80a60d7793cc47fe32bee6}{block\+\_\+pos\+\_\+to\+\_\+type}} (const position\+\_\+detection\+::\+Block\+Position \&block\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Obtains the block type stored in a {\ttfamily position\+\_\+detection\+::\+Block\+Position} message. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} $>$ \mbox{\hyperlink{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}{filter\+\_\+map\+\_\+movements\+\_\+to\+\_\+pads}} (const std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \&blocks, double min\+\_\+confidence, size\+\_\+t max\+\_\+count)
-\item 
+\begin{DoxyCompactList}\small\item\em Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555}{go\+\_\+in\+\_\+homing\+\_\+config}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Moves the robot in homing config, which is a safe area where the robot does not interfere with the camera, allowing for better image capturing for block detection. \end{DoxyCompactList}\item 
 std\+::pair$<$ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}}, double $>$ \mbox{\hyperlink{namespacecontroller_1_1control_a79c3f72cac619a66dccb8080c877a233}{joint\+\_\+state\+\_\+to\+\_\+config}} (sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr joint\+\_\+state)
-\item 
+\begin{DoxyCompactList}\small\item\em converts a joint state message obtained from sensors on the robot to the robot configuration format used internally. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1control_afe847ffb9f73c6121344fa763c0e8123}{move\+\_\+block}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos, const \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} \&movement)
-\item 
+\begin{DoxyCompactList}\small\item\em Performs the steps needed to move a block according to the provided movement, and therefore handles\+: \end{DoxyCompactList}\item 
 std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \mbox{\hyperlink{namespacecontroller_1_1control_af85952ee2c21b113eb830d29ea127f5e}{wait\+\_\+for\+\_\+new\+\_\+block\+\_\+positions}} (ros\+::\+Node\+Handle \&node\+\_\+handle)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Waits for new {\ttfamily position\+\_\+detection\+::\+Block\+Positions} messages on topic "{}/block\+\_\+positions"{}, making sure they are not older than when this function started listening, otherwise they\textquotesingle{}d be outdated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -29,33 +29,123 @@ std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \mbox{\hyperli
 \doxysubsubsection{\texorpdfstring{block\_pos\_to\_type()}{block\_pos\_to\_type()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} block\+\_\+pos\+\_\+to\+\_\+type (\begin{DoxyParamCaption}\item[{const position\+\_\+detection\+::\+Block\+Position \&}]{block\+\_\+pos }\end{DoxyParamCaption})}
 
+
+
+Obtains the block type stored in a {\ttfamily position\+\_\+detection\+::\+Block\+Position} message. 
+
 \Hypertarget{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}\label{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257} 
 \index{controller::control@{controller::control}!filter\_map\_movements\_to\_pads@{filter\_map\_movements\_to\_pads}}
 \index{filter\_map\_movements\_to\_pads@{filter\_map\_movements\_to\_pads}!controller::control@{controller::control}}
 \doxysubsubsection{\texorpdfstring{filter\_map\_movements\_to\_pads()}{filter\_map\_movements\_to\_pads()}}
 {\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} $>$ filter\+\_\+map\+\_\+movements\+\_\+to\+\_\+pads (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \&}]{blocks,  }\item[{double}]{min\+\_\+confidence,  }\item[{size\+\_\+t}]{max\+\_\+count }\end{DoxyParamCaption})}
 
+
+
+Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads. 
+
+The following filters are applied\+:
+\begin{DoxyItemize}
+\item blocks with a confidence lower than {\ttfamily min\+\_\+confidence} are removed
+\item at most {\ttfamily max\+\_\+count} objects are returned
+\item blocks which are already on their corresponding target pad are removed (e.\+g. the {\ttfamily 1x1\+\_\+H} block would be removed if it were already on the {\ttfamily 1x1\+\_\+H} pad)
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em blocks} & a list of block position messages, sorted by confidence (higher confidence at the beginning) \\
+\hline
+{\em min\+\_\+confidence} & all returned blocks will have at least this confidence \\
+\hline
+{\em max\+\_\+count} & at most this amount of blocks will be returned, preferring higher confidence ones \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$planner\+::\+Block\+Movement$>$ the block movements to move blocks on the workspace to their corresponding pad 
+\end{DoxyReturn}
 \Hypertarget{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555}\label{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555} 
 \index{controller::control@{controller::control}!go\_in\_homing\_config@{go\_in\_homing\_config}}
 \index{go\_in\_homing\_config@{go\_in\_homing\_config}!controller::control@{controller::control}}
 \doxysubsubsection{\texorpdfstring{go\_in\_homing\_config()}{go\_in\_homing\_config()}}
 {\footnotesize\ttfamily void go\+\_\+in\+\_\+homing\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&}]{config\+\_\+publisher,  }\item[{\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{double \&}]{prev\+\_\+gripper\+\_\+pos }\end{DoxyParamCaption})}
 
+
+
+Moves the robot in homing config, which is a safe area where the robot does not interfere with the camera, allowing for better image capturing for block detection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+\_\+publisher} & where to publish robot joint configurations so that they are performed in the simulation \\
+\hline
+{\em robot} & the robot with the current joints config stored inside \\
+\hline
+{\em prev\+\_\+gripper\+\_\+pos} & the current gripper position \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1control_a79c3f72cac619a66dccb8080c877a233}\label{namespacecontroller_1_1control_a79c3f72cac619a66dccb8080c877a233} 
 \index{controller::control@{controller::control}!joint\_state\_to\_config@{joint\_state\_to\_config}}
 \index{joint\_state\_to\_config@{joint\_state\_to\_config}!controller::control@{controller::control}}
 \doxysubsubsection{\texorpdfstring{joint\_state\_to\_config()}{joint\_state\_to\_config()}}
 {\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}}, double $>$ joint\+\_\+state\+\_\+to\+\_\+config (\begin{DoxyParamCaption}\item[{sensor\+\_\+msgs\+::\+Joint\+State\+::\+Const\+Ptr}]{joint\+\_\+state }\end{DoxyParamCaption})}
 
+
+
+converts a joint state message obtained from sensors on the robot to the robot configuration format used internally. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint\+\_\+state} & the {\ttfamily sensor\+\_\+msgs/\+Joint\+State} message to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::pair$<$model\+::\+UR5\+::\+Configuration,double$>$ the converted robot configuration, and the position of the gripper 
+\end{DoxyReturn}
 \Hypertarget{namespacecontroller_1_1control_afe847ffb9f73c6121344fa763c0e8123}\label{namespacecontroller_1_1control_afe847ffb9f73c6121344fa763c0e8123} 
 \index{controller::control@{controller::control}!move\_block@{move\_block}}
 \index{move\_block@{move\_block}!controller::control@{controller::control}}
 \doxysubsubsection{\texorpdfstring{move\_block()}{move\_block()}}
 {\footnotesize\ttfamily void move\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&}]{config\+\_\+publisher,  }\item[{\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{double \&}]{prev\+\_\+gripper\+\_\+pos,  }\item[{const \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} \&}]{movement }\end{DoxyParamCaption})}
 
+
+
+Performs the steps needed to move a block according to the provided movement, and therefore handles\+: 
+
+
+\begin{DoxyItemize}
+\item going above the block
+\item closing the gripper to get hold of the block
+\item picking up the block
+\item moving over to the target pad
+\item droping the block by reopening the gripper
+\end{DoxyItemize}
+
+The movements are planned using the planner and sent to the simulation config publisher.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+\_\+publisher} & where to publish robot joint configurations so that they are performed in the simulation \\
+\hline
+{\em robot} & the robot with the current joints config stored inside \\
+\hline
+{\em prev\+\_\+gripper\+\_\+pos} & the current gripper position \\
+\hline
+{\em movement} & the movement to perform (assumes the {\ttfamily start} and {\ttfamily target} poses both refer to the same block) \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1control_af85952ee2c21b113eb830d29ea127f5e}\label{namespacecontroller_1_1control_af85952ee2c21b113eb830d29ea127f5e} 
 \index{controller::control@{controller::control}!wait\_for\_new\_block\_positions@{wait\_for\_new\_block\_positions}}
 \index{wait\_for\_new\_block\_positions@{wait\_for\_new\_block\_positions}!controller::control@{controller::control}}
 \doxysubsubsection{\texorpdfstring{wait\_for\_new\_block\_positions()}{wait\_for\_new\_block\_positions()}}
 {\footnotesize\ttfamily std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ wait\+\_\+for\+\_\+new\+\_\+block\+\_\+positions (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{node\+\_\+handle }\end{DoxyParamCaption})}
 
+
+
+Waits for new {\ttfamily position\+\_\+detection\+::\+Block\+Positions} messages on topic "{}/block\+\_\+positions"{}, making sure they are not older than when this function started listening, otherwise they\textquotesingle{}d be outdated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+handle} & the ROS node handle on which to call wait\+For\+Message() \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$position\+\_\+detection\+::\+Block\+Position$>$ a list of block position messages, sorted by confidence (higher confidence at the beginning) 
+\end{DoxyReturn}

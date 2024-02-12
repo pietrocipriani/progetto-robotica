@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var searchData=
 [
   ['identity_0',['Identity',['../classComplex.html#a8c796d3f868210d718c3aea3fc25cd5a',1,'Complex']]],
@@ -13,10 +12,3 @@ var searchData=
   ['inverse_5ftrans_9',['inverse_trans',['../namespacekinematics.html#a0520d4b1317042b00eb166c9da99548b',1,'kinematics']]],
   ['invert_10',['invert',['../namespacekinematics.html#ae96d6b2a84ecf4b4a5f2bff823c5001d',1,'kinematics']]]
 ];
-||||||| d37a779
-=======
-var searchData=
-[
-  ['update_5fvisualizer_49',['update_visualizer',['../classprecise__placement_1_1Visualizer.html#a4b8a3f3b30bee6ac8219e669c55cdac6',1,'precise_placement::Visualizer']]]
-];
->>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2

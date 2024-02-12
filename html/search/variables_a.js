@@ -1,6 +1,5 @@
 var searchData=
 [
-<<<<<<< HEAD
   ['margin_0',['margin',['../namespaceplanner.html#ae8046607e792f2b71c603fff6661f393',1,'planner']]],
   ['max_5fangular_5fspeed_1',['max_angular_speed',['../namespaceplanner.html#ab5731c360242c45ed3cf79d99e38b63b',1,'planner']]],
   ['max_5fconfig_2',['max_config',['../structmodel_1_1RevoluteJoint.html#a728cde376d337a79d167fd19c68f820f',1,'model::RevoluteJoint']]],
@@ -14,9 +13,4 @@ var searchData=
   ['model_10',['model',['../classblock__detector__server_1_1BlockDetector.html#a508cc3106d2c29fe07dc87cbe3ea6927',1,'block_detector_server::BlockDetector']]],
   ['model_5fconfig_11',['MODEL_CONFIG',['../namespacemodel__handler.html#a04d73b6612c48f03fd831ca3c080e812',1,'model_handler']]],
   ['msg_5fseq_12',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
-||||||| d37a779
-  ['use_5fvisualizer_64',['use_visualizer',['../classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718',1,'precise_placement::PrecisePlacement']]]
-=======
-  ['use_5fvisualizer_63',['use_visualizer',['../classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718',1,'precise_placement::PrecisePlacement']]]
->>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];

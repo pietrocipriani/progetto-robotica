@@ -33,11 +33,11 @@ namespace \mbox{\hyperlink{namespacecontroller_1_1control}{controller\+::control
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} \mbox{\hyperlink{namespacecontroller_1_1control_a239eb11a4d80a60d7793cc47fe32bee6}{block\+\_\+pos\+\_\+to\+\_\+type}} (const position\+\_\+detection\+::\+Block\+Position \&block\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Obtains the block type stored in a {\ttfamily position\+\_\+detection\+::\+Block\+Position} message. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} $>$ \mbox{\hyperlink{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}{filter\+\_\+map\+\_\+movements\+\_\+to\+\_\+pads}} (const std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \&blocks, double min\+\_\+confidence, size\+\_\+t max\+\_\+count)
-\item 
+\begin{DoxyCompactList}\small\item\em Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads. \end{DoxyCompactList}\item 
 std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \mbox{\hyperlink{namespacecontroller_1_1control_af85952ee2c21b113eb830d29ea127f5e}{wait\+\_\+for\+\_\+new\+\_\+block\+\_\+positions}} (ros\+::\+Node\+Handle \&node\+\_\+handle)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Waits for new {\ttfamily position\+\_\+detection\+::\+Block\+Positions} messages on topic "{}/block\+\_\+positions"{}, making sure they are not older than when this function started listening, otherwise they\textquotesingle{}d be outdated. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Macro Definition Documentation}
