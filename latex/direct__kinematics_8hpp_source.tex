@@ -1,0 +1,27 @@
+\doxysection{direct\+\_\+kinematics.\+hpp}
+\hypertarget{direct__kinematics_8hpp_source}{}\label{direct__kinematics_8hpp_source}\index{src/planner/lib/kinematics/direct\_kinematics.hpp@{src/planner/lib/kinematics/direct\_kinematics.hpp}}
+\mbox{\hyperlink{direct__kinematics_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DIRECT\_KINEMATICS\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DIRECT\_KINEMATICS\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kinematics_8hpp}{kinematics.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8hpp}{constants.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8hpp}{types.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacekinematics}{kinematics}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}}\ =\ \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation<os\_size>}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{JointTransformation}}\ =\ Eigen::Transform<Scalar,\ os\_size,\ Eigen::TransformTraits::Isometry>;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{JointTransformation}}\ \mbox{\hyperlink{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}{joint\_transformation\_matrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model::RevoluteJoint}}\&\ joint);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{JointTransformation}}\ \mbox{\hyperlink{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}{joint\_transformation\_matrix}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model::RevoluteJoint}}\&\ joint,\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ theta);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ DIRECT\_KINEMATICS\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

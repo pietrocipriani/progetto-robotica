@@ -77,17 +77,23 @@ $(function() {
   <div class="headertitle"><div class="title">inspect_detected_blocks Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>This is a testing script that reads images from <code>/ur5/zed_node/left/image_rect_color</code> and passes them to the <code>detect_blocks</code> service (see <code><a class="el" href="block__detector__server_8py.html">block_detector_server.py</a></code>) to recognize blocks.  
+<a href="namespaceinspect__detected__blocks.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html">BlockInspector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives images from the zed camera and stores them in a member variable to be used externally.  <a href="classinspect__detected__blocks_1_1BlockInspector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ac6e9d96689ee595ee0a9fda7456b92dd" id="r_ac6e9d96689ee595ee0a9fda7456b92dd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinspect__detected__blocks.html#ac6e9d96689ee595ee0a9fda7456b92dd">draw_bbox</a> (image, bbox, txt_labels=None)</td></tr>
+<tr class="memdesc:ac6e9d96689ee595ee0a9fda7456b92dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws a bounding box on the image using <code>torchvision.utils.draw_bounding_boxes</code>.  <br /></td></tr>
 <tr class="separator:ac6e9d96689ee595ee0a9fda7456b92dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51af30a60f9f02777c6396b8247e356f" id="r_a51af30a60f9f02777c6396b8247e356f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceinspect__detected__blocks.html#a51af30a60f9f02777c6396b8247e356f">main</a> ()</td></tr>
+<tr class="memdesc:a51af30a60f9f02777c6396b8247e356f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visualizes blocks detected using the <code>detect_blocks</code> service.  <br /></td></tr>
 <tr class="separator:a51af30a60f9f02777c6396b8247e356f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -98,15 +104,10 @@ Variables</h2></td></tr>
 <tr class="separator:adf4606513e0d79702838e72254d67df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">This is a testing script that reads images from `/ur5/zed_node/left/image_rect_color` and passes
-them to the `detect_blocks` service (see `block_detector_server.py`) to recognize blocks.
-The image is cropped to `[396:912, 676:1544, :]` so that only the workspace is shown.
-Finally, a `cv2` window is opened and updated regularly with the results of detection.
-
-Since the detection is quite fast but uses a lot of CPU, if you want to reduce CPU usage when
-running this script, you can pass in a number &gt;= 1 to specify one every how many images received
-from the zed camera to actually pass to the detection service.
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+<div class="textblock"><p>This is a testing script that reads images from <code>/ur5/zed_node/left/image_rect_color</code> and passes them to the <code>detect_blocks</code> service (see <code><a class="el" href="block__detector__server_8py.html">block_detector_server.py</a></code>) to recognize blocks. </p>
+<p>The image is cropped to <code>[396:912, 676:1544, :]</code> so that only the workspace is shown. Finally, a <code>cv2</code> window is opened and updated regularly with the results of detection.</p>
+<p>Since the detection is quite fast but uses a lot of CPU, if you want to reduce CPU usage when running this script, you can pass in a number &gt;= 1 to specify one every how many images received from the zed camera to actually pass to the detection service. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac6e9d96689ee595ee0a9fda7456b92dd" name="ac6e9d96689ee595ee0a9fda7456b92dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6e9d96689ee595ee0a9fda7456b92dd">&#9670;&#160;</a></span>draw_bbox()</h2>
 
@@ -138,14 +139,17 @@ from the zed camera to actually pass to the detection service.
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Draws a bounding box on the image using `torchvision.utils.draw_bounding_boxes`.
 
-@param image the image to copy and then draw on
-@param bbox an array with the bounding boxes to draw, in xyxy format
-            (e.g. [(0,1,2,3), (0,2,6,7)])
-@param txt_labels (optional) an array of the same length as `bbox`, with the labels to draw
-            alongside the boxes
-</pre> 
+<p>Draws a bounding box on the image using <code>torchvision.utils.draw_bounding_boxes</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">image</td><td>the image to copy and then draw on </td></tr>
+    <tr><td class="paramname">bbox</td><td>an array with the bounding boxes to draw, in xyxy format (e.g. [(0,1,2,3), (0,2,6,7)]) </td></tr>
+    <tr><td class="paramname">txt_labels</td><td>(optional) an array of the same length as <code>bbox</code>, with the labels to draw alongside the boxes </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a51af30a60f9f02777c6396b8247e356f" name="a51af30a60f9f02777c6396b8247e356f"></a>
@@ -162,6 +166,9 @@ from the zed camera to actually pass to the detection service.
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Visualizes blocks detected using the <code>detect_blocks</code> service. </p>
+<p>The command line may take one argument, i.e. every how many images to actually perform detection, to save CPU. See file docs for more info. </p>
 
 </div>
 </div>

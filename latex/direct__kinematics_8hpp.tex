@@ -1,0 +1,41 @@
+\doxysection{src/planner/lib/kinematics/direct\+\_\+kinematics.hpp File Reference}
+\hypertarget{direct__kinematics_8hpp}{}\label{direct__kinematics_8hpp}\index{src/planner/lib/kinematics/direct\_kinematics.hpp@{src/planner/lib/kinematics/direct\_kinematics.hpp}}
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+Include dependency graph for direct\+\_\+kinematics.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{direct__kinematics_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{direct__kinematics_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacekinematics}{kinematics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} = Eigen\+::\+Transform$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, os\+\_\+size, Eigen\+::\+Transform\+Traits\+::\+Isometry $>$
+\begin{DoxyCompactList}\small\item\em Type representing a transformation for direct kinematics. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}} = \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}}$<$ os\+\_\+size $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a8c9fef8db0b23496f1849c395d68bf54}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} theta)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\end{DoxyCompactItemize}

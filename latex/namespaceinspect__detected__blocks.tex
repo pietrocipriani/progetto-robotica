@@ -1,17 +1,22 @@
 \doxysection{inspect\+\_\+detected\+\_\+blocks Namespace Reference}
 \hypertarget{namespaceinspect__detected__blocks}{}\label{namespaceinspect__detected__blocks}\index{inspect\_detected\_blocks@{inspect\_detected\_blocks}}
+
+
+This is a testing script that reads images from {\ttfamily /ur5/zed\+\_\+node/left/image\+\_\+rect\+\_\+color} and passes them to the {\ttfamily detect\+\_\+blocks} service (see {\ttfamily \doxylink{block__detector__server_8py}{block\+\_\+detector\+\_\+server.\+py}}) to recognize blocks.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classinspect__detected__blocks_1_1BlockInspector}{Block\+Inspector}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Receives images from the zed camera and stores them in a member variable to be used externally. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceinspect__detected__blocks_ac6e9d96689ee595ee0a9fda7456b92dd}{draw\+\_\+bbox}} (image, bbox, txt\+\_\+labels=None)
-\item 
+\begin{DoxyCompactList}\small\item\em Draws a bounding box on the image using {\ttfamily torchvision.\+utils.\+draw\+\_\+bounding\+\_\+boxes}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{namespaceinspect__detected__blocks_a51af30a60f9f02777c6396b8247e356f}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Visualizes blocks detected using the {\ttfamily detect\+\_\+blocks} service. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,16 +27,11 @@ str \mbox{\hyperlink{namespaceinspect__detected__blocks_adf4606513e0d79702838e72
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyVerb}This is a testing script that reads images from `/ur5/zed_node/left/image_rect_color` and passes
-them to the `detect_blocks` service (see `block_detector_server.py`) to recognize blocks.
-The image is cropped to `[396:912, 676:1544, :]` so that only the workspace is shown.
-Finally, a `cv2` window is opened and updated regularly with the results of detection.
+This is a testing script that reads images from {\ttfamily /ur5/zed\+\_\+node/left/image\+\_\+rect\+\_\+color} and passes them to the {\ttfamily detect\+\_\+blocks} service (see {\ttfamily \doxylink{block__detector__server_8py}{block\+\_\+detector\+\_\+server.\+py}}) to recognize blocks. 
 
-Since the detection is quite fast but uses a lot of CPU, if you want to reduce CPU usage when
-running this script, you can pass in a number >= 1 to specify one every how many images received
-from the zed camera to actually pass to the detection service.
-\end{DoxyVerb}
- 
+The image is cropped to {\ttfamily \mbox{[}396\+:912, 676\+:1544, \+:\mbox{]}} so that only the workspace is shown. Finally, a {\ttfamily cv2} window is opened and updated regularly with the results of detection.
+
+Since the detection is quite fast but uses a lot of CPU, if you want to reduce CPU usage when running this script, you can pass in a number \texorpdfstring{$>$}{>}= 1 to specify one every how many images received from the zed camera to actually pass to the detection service. 
 
 \doxysubsection{Function Documentation}
 \Hypertarget{namespaceinspect__detected__blocks_ac6e9d96689ee595ee0a9fda7456b92dd}\label{namespaceinspect__detected__blocks_ac6e9d96689ee595ee0a9fda7456b92dd} 
@@ -40,21 +40,30 @@ from the zed camera to actually pass to the detection service.
 \doxysubsubsection{\texorpdfstring{draw\_bbox()}{draw\_bbox()}}
 {\footnotesize\ttfamily draw\+\_\+bbox (\begin{DoxyParamCaption}\item[{}]{image,  }\item[{}]{bbox,  }\item[{}]{txt\+\_\+labels = {\ttfamily None} }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}Draws a bounding box on the image using `torchvision.utils.draw_bounding_boxes`.
 
-@param image the image to copy and then draw on
-@param bbox an array with the bounding boxes to draw, in xyxy format
-            (e.g. [(0,1,2,3), (0,2,6,7)])
-@param txt_labels (optional) an array of the same length as `bbox`, with the labels to draw
-            alongside the boxes
-\end{DoxyVerb}
- \Hypertarget{namespaceinspect__detected__blocks_a51af30a60f9f02777c6396b8247e356f}\label{namespaceinspect__detected__blocks_a51af30a60f9f02777c6396b8247e356f} 
+
+Draws a bounding box on the image using {\ttfamily torchvision.\+utils.\+draw\+\_\+bounding\+\_\+boxes}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em image} & the image to copy and then draw on \\
+\hline
+{\em bbox} & an array with the bounding boxes to draw, in xyxy format (e.\+g. \mbox{[}(0,1,2,3), (0,2,6,7)\mbox{]}) \\
+\hline
+{\em txt\+\_\+labels} & (optional) an array of the same length as {\ttfamily bbox}, with the labels to draw alongside the boxes \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespaceinspect__detected__blocks_a51af30a60f9f02777c6396b8247e356f}\label{namespaceinspect__detected__blocks_a51af30a60f9f02777c6396b8247e356f} 
 \index{inspect\_detected\_blocks@{inspect\_detected\_blocks}!main@{main}}
 \index{main@{main}!inspect\_detected\_blocks@{inspect\_detected\_blocks}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
+
+Visualizes blocks detected using the {\ttfamily detect\+\_\+blocks} service. 
+
+The command line may take one argument, i.\+e. every how many images to actually perform detection, to save CPU. See file docs for more info. 
 
 \doxysubsection{Variable Documentation}
 \Hypertarget{namespaceinspect__detected__blocks_ae09cb5a6183e8be4e4f2086cb1702733}\label{namespaceinspect__detected__blocks_ae09cb5a6183e8be4e4f2086cb1702733} 

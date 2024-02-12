@@ -1,0 +1,95 @@
+\doxysection{joint\+\_\+space.\+hpp}
+\hypertarget{joint__space_8hpp_source}{}\label{joint__space_8hpp_source}\index{src/planner/include/spaces/joint\_space.hpp@{src/planner/include/spaces/joint\_space.hpp}}
+\mbox{\hyperlink{joint__space_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ JOINT\_SPACE\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ JOINT\_SPACE\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../types.hpp"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}<\textcolor{keywordtype}{size\_t}\ size,\ s\textcolor{keywordtype}{size\_t}\ order\ =\ 0>}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classJointSpace}{JointSpace}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}\ =\ \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector<size>}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Derivative}}\ =\ \mbox{\hyperlink{classJointSpace}{JointSpace<size,\ order\ +\ 1>}};}
+\DoxyCodeLine{00018\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Primitive}}\ =\ \mbox{\hyperlink{classJointSpace}{JointSpace}}<\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}},\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}}\ -\/\ 1>;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}\ \_vector;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}{JointSpace}}()\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{noexcept}}\ :\ \_vector(\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}::\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{Zero}}())\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classJointSpace_aac553b36e3418e8e173e070da5b96a0b}{JointSpace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}\&\ base)}
+\DoxyCodeLine{00029\ \ \ \ \ :\ \_vector(base)\ \{\}}
+\DoxyCodeLine{00030\ \ \ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classJointSpace_a6660924bb83036796eda9d2fae8bac5f}{JointSpace}}(\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}\&\&\ base)}
+\DoxyCodeLine{00032\ \ \ \ \ :\ \_vector(std::\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{move}}(base))\ \{\}}
+\DoxyCodeLine{00033\ \ \ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\ \mbox{\hyperlink{classJointSpace_ab9968a634089dada177ddb22fcbf17ee}{operator-\/}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}{JointSpace}}(-\/\_vector);}
+\DoxyCodeLine{00037\ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\ \mbox{\hyperlink{classJointSpace_ae0964915543f0608feea0565bcfacac1}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{other}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}{JointSpace}}(*\textcolor{keyword}{this})\ -\/=\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{other}};}
+\DoxyCodeLine{00044\ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_a869176ea8dd4cca52c69d111621e6f69}{operator-\/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}})\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_a0fc943e7263242c818c79caea8b55ad9}{operator+=}}(-\/\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}});}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\ \mbox{\hyperlink{classJointSpace_abf919a53f95129c45649613f94d2a29e}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}{JointSpace}}(*\textcolor{keyword}{this})\ +=\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}};}
+\DoxyCodeLine{00052\ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_a0fc943e7263242c818c79caea8b55ad9}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}})\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \_vector\ +=\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}}.\_vector;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{classJointSpace}{Primitive}}\ \mbox{\hyperlink{classJointSpace_a93a97f5144ba5b11bb4960a6a3e537dc}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}{Primitive}}(\_vector\ *\ dt);}
+\DoxyCodeLine{00061\ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classJointSpace}{Derivative}}\ \mbox{\hyperlink{classJointSpace_ace15501aaded12e667ae4dc14dc33f8b}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Derivative}}(\_vector\ /\ dt);}
+\DoxyCodeLine{00065\ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{classJointSpace_ad840f5d7d824ab9d442511c61c8f6b77}{norm}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ \_vector.norm();}
+\DoxyCodeLine{00069\ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}}\&\ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{vector}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \_vector;}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classJointSpace_a44e0813818e43ed8e95626c1704070f1}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ assert\ check.}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \_vector[index];}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classJointSpace_a5cc5ec351b310503a49d74dd3aff2e07}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ assert\ check.}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{return}\ \_vector[index];}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{comment}{//\ For\ uniformity\ with\ Eigen\ only.}}
+\DoxyCodeLine{00086\ \ \ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_acafbe27386d43699566099b6bd520fc8}{eval}}()\ \{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{//\ For\ uniformity\ with\ Eigen\ only.}}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{JointSpace}}\&\ \mbox{\hyperlink{classJointSpace_ade868dda24e0c1eea8b39f05997a642d}{eval}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ JOINT\_SPACE\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

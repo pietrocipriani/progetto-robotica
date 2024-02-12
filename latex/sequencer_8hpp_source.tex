@@ -1,0 +1,35 @@
+\doxysection{sequencer.\+hpp}
+\hypertarget{sequencer_8hpp_source}{}\label{sequencer_8hpp_source}\index{src/planner/lib/planning/sequencer.hpp@{src/planner/lib/planning/sequencer.hpp}}
+\mbox{\hyperlink{sequencer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAN\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAN\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8hpp}{types.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{ViaPoints}}\ =\ std::list<os::Position>;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}<coord::LinearSystem\ linear\_system,\ coord::AngularSystem\ angular\_system>}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifdef\ JOINT\_SPACE\_PLANNING}}
+\DoxyCodeLine{00023\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<model::UR5::Configuration>}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00025\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<kinematics::Pose<angular\_system,\ linear\_system>}}>}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00027\ \mbox{\hyperlink{namespaceplanner_af113643d0711694c87c67168d0fe2f1d}{via\_point\_sequencer}}(}
+\DoxyCodeLine{00028\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{os::Position}}\&\ current\_pose,}
+\DoxyCodeLine{00029\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{ViaPoints}}\&\ viapoints,}
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{os::Position}}\&\ target\_pose,}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ finish\_time}
+\DoxyCodeLine{00032\ );}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PLAN\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

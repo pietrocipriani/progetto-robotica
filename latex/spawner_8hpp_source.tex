@@ -1,0 +1,45 @@
+\doxysection{spawner.\+hpp}
+\hypertarget{spawner_8hpp_source}{}\label{spawner_8hpp_source}\index{src/controller/include/controller/world/spawner.hpp@{src/controller/include/controller/world/spawner.hpp}}
+\mbox{\hyperlink{spawner_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_WORLD\_BLOCK\_SPAWNER\_HPP\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_WORLD\_BLOCK\_SPAWNER\_HPP\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ros/ros.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{block__type_8hpp}{block\_type.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{color_8hpp}{controller/util/color.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1world}{controller::world}}\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}}\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ ros::ServiceClient\ client;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}}(ros::ServiceClient\&\&\ client);}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_aaf8929442fbdd601737778288d02ec5c}{spawn\_block}}(}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner::Block}}\ block\_type,}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ angle,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ upside\_down,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{util::Color}}\&\ color,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ random\_name}
+\DoxyCodeLine{00027\ \ \ \ \ );}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_abcd041f188b1ce4430ac237b9a3549aa}{spawn\_pad}}(}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner::Block}}\ pad\_for\_block\_type,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ angle}
+\DoxyCodeLine{00034\ \ \ \ \ );}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \}\ \textcolor{comment}{//\ namespace\ controller::world}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_WORLD\_BLOCK\_SPAWNER\_HPP\_}}
+
+\end{DoxyCode}

@@ -1,0 +1,52 @@
+\doxysection{src/planner/include/kinematics.hpp File Reference}
+\hypertarget{kinematics_8hpp}{}\label{kinematics_8hpp}\index{src/planner/include/kinematics.hpp@{src/planner/include/kinematics.hpp}}
+{\ttfamily \#include "{}euler.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include "{}spaces.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+Include dependency graph for kinematics.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{kinematics_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{kinematics_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacekinematics}{kinematics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{Acceleration}} = typename \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ angular\+\_\+system, linear\+\_\+system $>$\+::\+Derivative
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}} = \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ linear\+\_\+system, angular\+\_\+system, os\+\_\+size $>$
+\begin{DoxyCompactList}\small\item\em The pose of the end effector (position + orientation). \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}} = typename \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$\+::\+Derivative
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}{direct}} (const Robot \&robot) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a9dcf0a64752d287bac18846d31af4de0}{direct}} (const Robot \&robot, const typename Robot\+::\+Configuration \&config) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a8b27df3cb3bb50dc22c090b81fffb5aa}{dpa\+\_\+inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&velocity, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&desired\+\_\+pose, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Desired-\/pose-\/aware inverse differential kinematics implementation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a616e0da97c95a521b88a51dfe3c04d79}{inverse}} (const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&pose)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a0c61ae8b734960da89121f0a97480647}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&velocity)
+\begin{DoxyCompactList}\small\item\em Finds the configuration variation in order to obtain the desired velocity in the operational space. \end{DoxyCompactList}\end{DoxyCompactItemize}

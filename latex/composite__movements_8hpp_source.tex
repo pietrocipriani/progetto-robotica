@@ -1,0 +1,32 @@
+\doxysection{composite\+\_\+movements.\+hpp}
+\hypertarget{composite__movements_8hpp_source}{}\label{composite__movements_8hpp_source}\index{src/controller/include/controller/control/composite\_movements.hpp@{src/controller/include/controller/control/composite\_movements.hpp}}
+\mbox{\hyperlink{composite__movements_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_CONTROL\_COMPOSITE\_MOVEMENTS\_HPP\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_CONTROL\_COMPOSITE\_MOVEMENTS\_HPP\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config__publisher_8hpp}{config\_publisher.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1control}{controller::control}}\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1control_afe847ffb9f73c6121344fa763c0e8123}{move\_block}}(}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos,}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner::BlockMovement}}\&\ movement}
+\DoxyCodeLine{00016\ );}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555}{go\_in\_homing\_config}}(}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos}
+\DoxyCodeLine{00022\ );}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \}\ \textcolor{comment}{//\ namespace\ controller::control}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_CONTROL\_COMPOSITE\_MOVEMENTS\_HPP\_}}
+
+\end{DoxyCode}

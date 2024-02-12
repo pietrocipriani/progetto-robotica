@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""
+"""!
 This is a testing script that reads images from `/ur5/zed_node/left/image_rect_color` and passes
 them to the `detect_blocks` service (see `block_detector_server.py`) to recognize blocks.
 The image is cropped to `[396:912, 676:1544, :]` so that only the workspace is shown.
@@ -28,7 +28,7 @@ IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
 
 
 def draw_bbox(image, bbox, txt_labels=None):
-    """
+    """!
     Draws a bounding box on the image using `torchvision.utils.draw_bounding_boxes`.
 
     @param image the image to copy and then draw on
@@ -45,8 +45,13 @@ def draw_bbox(image, bbox, txt_labels=None):
 
 
 class BlockInspector:
+    """!
+    Receives images from the zed camera and stores them in a member variable to be used externally.
+    See file docs for more info.
+    """
+
     def __init__(self, skip_period: int):
-        """
+        """!
         Initializes `BlockInspector` and subscribes to the `IMAGE_TOPIC` topic to listen for images.
 
         @param skip_period only one of this many images will be sent to the block detection service,
@@ -58,7 +63,7 @@ class BlockInspector:
         self.counter = skip_period - 1
 
     def callback(self, encoded_image: Image):
-        """
+        """!
         The callback from the image topic subscription. Saves passes the encoded image to the main
         thread one every `self.skip_period` times, to save CPU.
         """
@@ -70,6 +75,12 @@ class BlockInspector:
 
 
 def main():
+    """!
+    Visualizes blocks detected using the `detect_blocks` service. The command line may take one
+    argument, i.e. every how many images to actually perform detection, to save CPU. See file docs
+    for more info.
+    """
+
     rospy.init_node("inspect_detected_blocks", anonymous=True)
     rospy.loginfo("inspect_detected_blocks init")
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
@@ -79,7 +90,7 @@ def main():
     thread = None
 
     def process_image(encoded_image):
-        """
+        """!
         A non-standalone function to run in a thread, that decodes the image passed as argument,
         sends it to the block detection service, waits for a response, and saves it back
         in a local variable.

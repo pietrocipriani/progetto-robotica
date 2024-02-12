@@ -1,0 +1,58 @@
+\doxysection{src/planner/lib/kinematics/inverse\+\_\+diff\+\_\+kinematics.cpp File Reference}
+\hypertarget{inverse__diff__kinematics_8cpp}{}\label{inverse__diff__kinematics_8cpp}\index{src/planner/lib/kinematics/inverse\_diff\_kinematics.cpp@{src/planner/lib/kinematics/inverse\_diff\_kinematics.cpp}}
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include "{}direct\+\_\+kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}euler.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/unlazy.\+hpp"{}}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+Include dependency graph for inverse\+\_\+diff\+\_\+kinematics.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inverse__diff__kinematics_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacekinematics}{kinematics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} = \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$
+\item 
+{\footnotesize template$<$class Robot $>$ }\\using \mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}} = \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$\+::\+Cols\+At\+Compile\+Time, \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$\+::\+Rows\+At\+Compile\+Time $>$
+\begin{DoxyCompactList}\small\item\em Type representing the inverse of the geometric or analytical jacobian. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot $>$ }\\using \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}} = \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ os\+\_\+size+\mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ os\+\_\+size $>$, Robot\+::dof $>$
+\begin{DoxyCompactList}\small\item\em Type representing the geometric or analytical jacobian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a57c2b9b2110633ee8ef2c38659f6681c}{dpa\+\_\+inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&desired\+\_\+pose, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a95643c0b5ce0f9939ab67215ba67e467}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a605802381b668b4a51034b1a6d62c360}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&current\+\_\+pose)
+\item 
+template \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{model\+::\+UR5\+::\+Velocity}} \mbox{\hyperlink{namespacekinematics_ab0a59ca747e6d7d05af3a66bfd9e2c49}{inverse\+\_\+diff$<$ model\+::\+UR5 $>$}} (const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ \mbox{\hyperlink{namespacekinematics_ade154ebef3e06ab81c8d6a16aac554c4}{inverse\+\_\+geometrical\+\_\+jacobian}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&current\+\_\+pose)
+\begin{DoxyCompactList}\small\item\em Generate the inverse analytical jacobian for the current configuration of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , bool damped = false$>$ }\\\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ \mbox{\hyperlink{namespacekinematics_ae96d6b2a84ecf4b4a5f2bff823c5001d}{invert}} (const \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Function performing the right pseudo-\/inverse of the jacobian. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t n, bool safe = false$>$ }\\\mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ \mbox{\hyperlink{namespacekinematics_adb2fd55fafff53f6c73da162e748ceb0}{sq\+\_\+invert}} (const \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Function performing the inverse of a square matrix with (optional\+: default) determinant check. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacekinematics_a44c1b946c8b4886e1856c8004c6abbf7}{min\+\_\+safe\+\_\+determinant}} = 1e-\/11
+\begin{DoxyCompactList}\small\item\em Determinant of J·\+J\texorpdfstring{$^\wedge$}{\string^}T to be considered near to a singularity. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['names_0',['NAMES',['../namespacemodel__handler.html#abbec8af97d8f9bb114602c8498add4af',1,'model_handler']]]
+  ['joints_0',['joints',['../structmodel_1_1UR5.html#ae44a0622d476764a2234a6f45b65d9e3',1,'model::UR5']]]
 ];

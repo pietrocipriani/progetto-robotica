@@ -1,0 +1,78 @@
+\doxysection{src/planner/include/block\+\_\+type.hpp File Reference}
+\hypertarget{block__type_8hpp}{}\label{block__type_8hpp}\index{src/planner/include/block\_type.hpp@{src/planner/include/block\_type.hpp}}
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include "{}utils/math.\+hpp"{}}\newline
+Include dependency graph for block\+\_\+type.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block__type_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{block__type_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{block__type_8hpp_ad78b5e8d0a995c3a9b96cfafe8d77032}{\+\_\+\+BLOCK\+\_\+\+TYPE\+\_\+\+HPP\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \{ \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982}{B\+\_\+1x1\+\_\+H}} = 0
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e}{B\+\_\+2x1\+\_\+T}} = 1
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa37ffaa8ea84748b69cd56e0123cd7bbc}{B\+\_\+2x1\+\_\+L}} = 2
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa9f138a106d447bea065a18a4bc1265c9}{B\+\_\+2x1\+\_\+H}} = 3
+, \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aab23334b8c65c2f2f7a176428e7e963c5}{B\+\_\+2x1\+\_\+U}} = 4
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaa13e52380f482113ee644b470c886b06}{B\+\_\+2x2\+\_\+H}} = 5
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa8ff04cf4b245a7de860e822fa0671309}{B\+\_\+2x2\+\_\+U}} = 6
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaebb69c02886f6e1f68d7cecfacffce9a}{B\+\_\+3x1\+\_\+H}} = 7
+, \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa59edfd8fc6dcd0a50f8dd44a08fc1594}{B\+\_\+3x1\+\_\+U}} = 8
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa1d86034d00fa76a4dbcaea9bd001fd8d}{B\+\_\+4x1\+\_\+H}} = 9
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aad224eddf393230a190bfd4f263829326}{B\+\_\+4x1\+\_\+L}} = 10
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing the types of blocks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a1c03ccc886bab14b46d7e64b338daf82}{get\+\_\+closed\+\_\+gripper\+\_\+pos}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a1c2ba8bad27925cffa53998ced70fa6a}{get\+\_\+gripping\+\_\+height}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a5200d41217a2a439a6801a4282b84557}{get\+\_\+hit\+\_\+box\+\_\+radius}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\begin{DoxyCompactList}\small\item\em The bounding box in order to perform safe movements. \end{DoxyCompactList}\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceplanner_ac0270ef575d764d3af28e0d038602ab6}{get\+\_\+name}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a7f1ad2ba59a393f944be933308e9822d}{get\+\_\+open\+\_\+gripper\+\_\+pos}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr std\+::tuple$<$ double, double, double $>$ \mbox{\hyperlink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{get\+\_\+pad\+\_\+position}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\begin{DoxyCompactList}\small\item\em (x, y, angle) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{namespaceplanner_aab4666b153ef1ba1c944d3f5941d3e38}{all\+\_\+blocks}} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{block__type_8hpp_ad78b5e8d0a995c3a9b96cfafe8d77032}\label{block__type_8hpp_ad78b5e8d0a995c3a9b96cfafe8d77032} 
+\index{block\_type.hpp@{block\_type.hpp}!\_BLOCK\_TYPE\_HPP\_@{\_BLOCK\_TYPE\_HPP\_}}
+\index{\_BLOCK\_TYPE\_HPP\_@{\_BLOCK\_TYPE\_HPP\_}!block\_type.hpp@{block\_type.hpp}}
+\doxysubsubsection{\texorpdfstring{\_BLOCK\_TYPE\_HPP\_}{\_BLOCK\_TYPE\_HPP\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+BLOCK\+\_\+\+TYPE\+\_\+\+HPP\+\_\+}
+

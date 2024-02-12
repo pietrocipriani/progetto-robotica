@@ -1,0 +1,49 @@
+\doxysection{src/planner/tests/tester.hpp File Reference}
+\hypertarget{tester_8hpp}{}\label{tester_8hpp}\index{src/planner/tests/tester.hpp@{src/planner/tests/tester.hpp}}
+{\ttfamily \#include $<$concepts$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for tester.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tester_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{tester_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Tester $>$ }\\void \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}} (const std\+::string \&name, const Tester \&tester) noexcept
+\begin{DoxyCompactList}\small\item\em Invoke {\ttfamily tester} and prints the result ("{}\+PASSED"{} or "{}\+FAILED"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}\label{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80} 
+\index{tester.hpp@{tester.hpp}!test@{test}}
+\index{test@{test}!tester.hpp@{tester.hpp}}
+\doxysubsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily template$<$class Tester $>$ \\
+void test (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const Tester \&}]{tester }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Invoke {\ttfamily tester} and prints the result ("{}\+PASSED"{} or "{}\+FAILED"{}). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & An identifier for the test. \\
+\hline
+{\em tester} & The test to be performed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If {\ttfamily tester} throws, the test is "{}\+FAILED"{}. 
+\end{DoxyNote}

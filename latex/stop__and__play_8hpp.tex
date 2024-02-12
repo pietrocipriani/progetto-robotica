@@ -1,0 +1,48 @@
+\doxysection{src/planner/lib/planning/interpolation/stop\+\_\+and\+\_\+play.hpp File Reference}
+\hypertarget{stop__and__play_8hpp}{}\label{stop__and__play_8hpp}\index{src/planner/lib/planning/interpolation/stop\_and\_play.hpp@{src/planner/lib/planning/interpolation/stop\_and\_play.hpp}}
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include "{}linear.\+hpp"{}}\newline
+{\ttfamily \#include "{}quadratic.\+hpp"{}}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}common.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$initializer\+\_\+list$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for stop\+\_\+and\+\_\+play.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stop__and__play_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{stop__and__play_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps}{Timestamps}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1internal}{planner\+::internal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ }\\void \mbox{\hyperlink{namespaceplanner_1_1internal_a21ed4f360842d52952a5fffc4ef2f46b}{interpolation2}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&end, typename \mbox{\hyperlink{classSequencedFunction}{Sequenced\+Function}}$<$ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} $>$\+::\+Container \&chain)
+\begin{DoxyCompactList}\small\item\em Performs the stop\&play interpolation between two points. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a38449017270e77826b9b2e6298be936b}{stop\+\_\+and\+\_\+play\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&points)
+\begin{DoxyCompactList}\small\item\em Creates a stop\&play interpolation between the {\ttfamily points}. \end{DoxyCompactList}\end{DoxyCompactItemize}

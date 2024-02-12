@@ -1,0 +1,966 @@
+\doxysection{planner Namespace Reference}
+\hypertarget{namespaceplanner}{}\label{namespaceplanner}\index{planner@{planner}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1internal}{internal}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1js}{js}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1os}{os}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}}
+\begin{DoxyCompactList}\small\item\em Class representing a planned movement of a block from a starting pose to a target pose. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}}
+\begin{DoxyCompactList}\small\item\em The class representing the pose of a block on the table. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1ConflictingPositionsException}{Conflicting\+Positions\+Exception}}
+\begin{DoxyCompactList}\small\item\em Custom exception. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1DeadlockException}{Deadlock\+Exception}}
+\begin{DoxyCompactList}\small\item\em Custom exception. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{Movement\+Generation\+Recovering\+Exception}}
+\begin{DoxyCompactList}\small\item\em Base exception class for {\ttfamily generate\+\_\+block\+\_\+positioning\+\_\+order}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1MovementSequence}{Movement\+Sequence}}
+\begin{DoxyCompactList}\small\item\em Sequence of configurations to perform the movement of a certain block. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1Params}{Params}}
+\begin{DoxyCompactList}\small\item\em Structure representing the position, passage time and acceleration time for a point in the space. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceplanner_ac549066c45a38ce3fb4b9e7186de87bf}{Angular\+Params}} = \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{os\+::\+Position\+::\+Angular}} $>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} = std\+::vector$<$ std\+::vector$<$ size\+\_\+t $>$ $>$
+\begin{DoxyCompactList}\small\item\em Graph as adjlist. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespaceplanner_a45b56029f52a9d0e648dc2a25ac55656}{Linear\+Params}} = \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{os\+::\+Position\+::\+Linear}} $>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} = std\+::list$<$ \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \{ \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982}{B\+\_\+1x1\+\_\+H}} = 0
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e}{B\+\_\+2x1\+\_\+T}} = 1
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa37ffaa8ea84748b69cd56e0123cd7bbc}{B\+\_\+2x1\+\_\+L}} = 2
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa9f138a106d447bea065a18a4bc1265c9}{B\+\_\+2x1\+\_\+H}} = 3
+, \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aab23334b8c65c2f2f7a176428e7e963c5}{B\+\_\+2x1\+\_\+U}} = 4
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaa13e52380f482113ee644b470c886b06}{B\+\_\+2x2\+\_\+H}} = 5
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa8ff04cf4b245a7de860e822fa0671309}{B\+\_\+2x2\+\_\+U}} = 6
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaebb69c02886f6e1f68d7cecfacffce9a}{B\+\_\+3x1\+\_\+H}} = 7
+, \newline
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa59edfd8fc6dcd0a50f8dd44a08fc1594}{B\+\_\+3x1\+\_\+U}} = 8
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa1d86034d00fa76a4dbcaea9bd001fd8d}{B\+\_\+4x1\+\_\+H}} = 9
+, \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aad224eddf393230a190bfd4f263829326}{B\+\_\+4x1\+\_\+L}} = 10
+ \}
+\begin{DoxyCompactList}\small\item\em Enum representing the types of blocks. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}} \{ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}
+, \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911aa8f066ebe8235ba25132c7e46f6053fd}{Via\+Point}}
+ \}
+\begin{DoxyCompactList}\small\item\em Possible modes of points\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceplanner_ab33f384f70ef1d97034fe3a782df3284}{dfs}} (const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&graph, std\+::vector$<$ bool $>$ \&visited, std\+::queue$<$ size\+\_\+t $>$ \&stack, size\+\_\+t current)
+\begin{DoxyCompactList}\small\item\em Post order DFS. \end{DoxyCompactList}\item 
+std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \mbox{\hyperlink{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c}{generate\+\_\+block\+\_\+positioning\+\_\+order}} (const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&blocks, const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}, \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&targets)
+\begin{DoxyCompactList}\small\item\em Generates dependencies between the positioning of the blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \mbox{\hyperlink{namespaceplanner_a4bbf78174f967fe66d9c642b5dc5eb8c}{generate\+\_\+dependency\+\_\+graph}} (const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&blocks)
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a1dcb4f1837b4e751236d3cb0dc74afa7}{generate\+\_\+parameters}} (const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \&point, const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&linear\+\_\+speed, const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&angular\+\_\+speed, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&time)
+\begin{DoxyCompactList}\small\item\em Generate the timestamps for the last point in via point interpolation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} as$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a5bc7b483a8b8be14de19cb0cdd9acc83}{generate\+\_\+parameters}} (const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&point, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&next\+\_\+point, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&linear\+\_\+speed, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&angular\+\_\+speed, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&time)
+\begin{DoxyCompactList}\small\item\em Generate the timestamps for the via point interpolation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} as$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a09f36b46a491e2f92c96a066b35b8809}{generate\+\_\+positions}} (const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&current\+\_\+config, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&current\+\_\+pose, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&pose)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a1c03ccc886bab14b46d7e64b338daf82}{get\+\_\+closed\+\_\+gripper\+\_\+pos}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ }\\\mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$\+::\+Times \mbox{\hyperlink{namespaceplanner_a120a7a72636bd66eecdad19540b8eaaf}{get\+\_\+desired\+\_\+speed}} (\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&limits, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&distance, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&acc\+\_\+1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&acc\+\_\+2)
+\begin{DoxyCompactList}\small\item\em Updates the desired speed and returns the time parameters. \end{DoxyCompactList}\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a1c2ba8bad27925cffa53998ced70fa6a}{get\+\_\+gripping\+\_\+height}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a5200d41217a2a439a6801a4282b84557}{get\+\_\+hit\+\_\+box\+\_\+radius}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\begin{DoxyCompactList}\small\item\em The bounding box in order to perform safe movements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceplanner_a6f0cbcfcad7d5c5eb38df91d5cf5e5c3}{get\+\_\+maximum\+\_\+speed}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} distance, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&limits, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} acc\+\_\+1, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} acc\+\_\+2)
+\begin{DoxyCompactList}\small\item\em Generates the maximum speed reachable in the given space and the given accelerations. \end{DoxyCompactList}\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespaceplanner_ac0270ef575d764d3af28e0d038602ab6}{get\+\_\+name}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr double \mbox{\hyperlink{namespaceplanner_a7f1ad2ba59a393f944be933308e9822d}{get\+\_\+open\+\_\+gripper\+\_\+pos}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\item 
+constexpr std\+::tuple$<$ double, double, double $>$ \mbox{\hyperlink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{get\+\_\+pad\+\_\+position}} (const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&block\+\_\+type)
+\begin{DoxyCompactList}\small\item\em (x, y, angle) \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_ad63228565ee5abe7bb79e6506de8752d}{linear\+\_\+interpolation}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&final\+\_\+position, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Linearly interpolates between {\ttfamily initial\+\_\+position} and {\ttfamily final\+\_\+position} int the given {\ttfamily duration}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a4457a2d9ad873534b4fc0e9c89369c18}{max\+\_\+acceleration}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&pose)
+\begin{DoxyCompactList}\small\item\em Returns the maximum linear acceleration to avoid to stress the joints. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a6cb99949bd650f3909740676364de143}{max\+\_\+angular\+\_\+acceleration}} ()
+\begin{DoxyCompactList}\small\item\em Returns the maximum angular acceleration to avoid to stress the joints. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a280236aaa5360e4ed815cd989df6405b}{parabolic\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&via\+\_\+points, const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&end)
+\begin{DoxyCompactList}\small\item\em Creates a parabolic interpolation between the {\ttfamily points}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1MovementSequence}{Movement\+Sequence}} \mbox{\hyperlink{namespaceplanner_a7404826e99f71b7b8d66e5ccd72fb141}{plan\+\_\+movement}} (\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} \&movement, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Generates the sequence of movements from the initial {\ttfamily robot} configuration, throught the picking of one block from its starting position, to the relase of the block into its target position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{Movement\+Sequence\+::\+Config\+Generator}} \mbox{\hyperlink{namespaceplanner_a05156c18c16821a1b51376f716a188ed}{plan\+\_\+movement}} (\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&end, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Generates the sequence of movements from the initial {\ttfamily robot} configuration to the given {\ttfamily end} position. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20}{quadratic\+\_\+acceleration}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const Velocity \&final\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Accelerates from a given {\ttfamily initial\+\_\+position} up to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3}{quadratic\+\_\+deceleration}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&final\+\_\+position, const Velocity \&initial\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&final\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Decelerates to a given {\ttfamily final\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_afd48a07dc2c92f73c34f88887788a1c8}{quadratic\+\_\+interpolation}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const Velocity \&initial\+\_\+velocity, const Velocity \&final\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Accelerates from a given {\ttfamily initial\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \mbox{\hyperlink{namespaceplanner_a907b26ea71749ccd5a866ab7a4714d2c}{safe\+\_\+pose}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&pose)
+\begin{DoxyCompactList}\small\item\em Gets the nearest safe pose relative to {\ttfamily pose}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a38449017270e77826b9b2e6298be936b}{stop\+\_\+and\+\_\+play\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&points)
+\begin{DoxyCompactList}\small\item\em Creates a stop\&play interpolation between the {\ttfamily points}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , class Function $>$ }\\std\+::function$<$ std\+::tuple$<$ typename Robot\+::\+Configuration, bool $>$()$>$ \mbox{\hyperlink{namespaceplanner_ac6b2e09819c9bac220e3b14d00ef0abe}{to\+\_\+js\+\_\+trajectory}} (Robot \&robot, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&current, Function \&\&f, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Converts the os positions generated by {\ttfamily f} to js positions. \end{DoxyCompactList}\item 
+std\+::queue$<$ size\+\_\+t $>$ \mbox{\hyperlink{namespaceplanner_ab996d64a14f3911e0cd80939ed52ba93}{top\+\_\+sort}} (const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&graph)
+\begin{DoxyCompactList}\small\item\em Topological (reversed) order of a graph. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceplanner_a4f29e032ebee22fb668de32d51155fa0}{unsafe}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&pose)
+\begin{DoxyCompactList}\small\item\em Checks the position of the end effector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container$>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_a4fdfb41abf3b44bce4d6bc5d142b47a6}{via\+\_\+point\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&\&via\+\_\+points, \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&\&end)
+\begin{DoxyCompactList}\small\item\em Utility function to manage the interpolation of different {\ttfamily Point} types. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ $>$ \mbox{\hyperlink{namespaceplanner_af113643d0711694c87c67168d0fe2f1d}{via\+\_\+point\+\_\+sequencer}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&current\+\_\+pose, const \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} \&viapoints, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&target\+\_\+pose, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&finish\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Creates the config sequence from a set of viapoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{namespaceplanner_aab4666b153ef1ba1c944d3f5941d3e38}{all\+\_\+blocks}} \mbox{[}$\,$\mbox{]}
+\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_aac7acd01566d7023a8d325b2390838f6}{back\+\_\+obstacle\+\_\+distance}} = 0.\+35
+\begin{DoxyCompactList}\small\item\em The distance of the back control panel (minimum distance in the xy plane). \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_af37c1198cab6c858f6ff1a3259cbc99b}{gazebo\+\_\+to\+\_\+os\+\_\+x}} = 0.\+5
+\begin{DoxyCompactList}\small\item\em The offset along the x axis of the arm operational space with respect to the gazebo frame. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a36e1f53bcb1f522c0b2a578d7eec18b7}{gazebo\+\_\+to\+\_\+os\+\_\+y}} = 0.\+35
+\begin{DoxyCompactList}\small\item\em The offset along the y axis of the arm operational space with respect to the gazebo frame. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_ae8046607e792f2b71c603fff6661f393}{margin}} = 0.\+1
+\begin{DoxyCompactList}\small\item\em The low zone. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_ab5731c360242c45ed3cf79d99e38b63b}{max\+\_\+angular\+\_\+speed}} = M\+\_\+\+PI\+\_\+4
+\begin{DoxyCompactList}\small\item\em The maximum angular speed for the end effector. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a6dadcd6939674fe202c22d7a90bf0e27}{max\+\_\+linear\+\_\+speed}} = 0.\+3
+\begin{DoxyCompactList}\small\item\em The maximum linear speed in the operational space for the end effector. \end{DoxyCompactList}\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a5b3b8f4758c3dabc3141c80a187b7130}{table\+\_\+distance}} = 0.\+73
+\begin{DoxyCompactList}\small\item\em The distance of the table from the base of the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceplanner_ac549066c45a38ce3fb4b9e7186de87bf}\label{namespaceplanner_ac549066c45a38ce3fb4b9e7186de87bf} 
+\index{planner@{planner}!AngularParams@{AngularParams}}
+\index{AngularParams@{AngularParams}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{AngularParams}{AngularParams}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceplanner_ac549066c45a38ce3fb4b9e7186de87bf}{Angular\+Params}} =  \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$\mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{os\+::\+Position\+::\+Angular}}$>$}
+
+\Hypertarget{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}\label{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082} 
+\index{planner@{planner}!Graph@{Graph}}
+\index{Graph@{Graph}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{Graph}{Graph}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} =  std\+::vector$<$std\+::vector$<$size\+\_\+t$>$ $>$}
+
+
+
+Graph as adjlist. 
+
+\Hypertarget{namespaceplanner_a45b56029f52a9d0e648dc2a25ac55656}\label{namespaceplanner_a45b56029f52a9d0e648dc2a25ac55656} 
+\index{planner@{planner}!LinearParams@{LinearParams}}
+\index{LinearParams@{LinearParams}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{LinearParams}{LinearParams}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceplanner_a45b56029f52a9d0e648dc2a25ac55656}{Linear\+Params}} =  \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{os\+::\+Position\+::\+Linear}}$>$}
+
+\Hypertarget{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}\label{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00} 
+\index{planner@{planner}!ViaPoints@{ViaPoints}}
+\index{ViaPoints@{ViaPoints}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{ViaPoints}{ViaPoints}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} =  std\+::list$<$\mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}}$>$}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a} 
+\index{planner@{planner}!Block@{Block}}
+\index{Block@{Block}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{Block}{Block}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum representing the types of blocks. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_1x1\_H@{B\_1x1\_H}!planner@{planner}}\index{planner@{planner}!B\_1x1\_H@{B\_1x1\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aacf3124f890dc948f82b3a82d2ed5e982} 
+B\+\_\+1x1\+\_\+H&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x1\_T@{B\_2x1\_T}!planner@{planner}}\index{planner@{planner}!B\_2x1\_T@{B\_2x1\_T}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa833e9e6acfe188e236e3381e5602884e} 
+B\+\_\+2x1\+\_\+T&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x1\_L@{B\_2x1\_L}!planner@{planner}}\index{planner@{planner}!B\_2x1\_L@{B\_2x1\_L}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa37ffaa8ea84748b69cd56e0123cd7bbc}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa37ffaa8ea84748b69cd56e0123cd7bbc} 
+B\+\_\+2x1\+\_\+L&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x1\_H@{B\_2x1\_H}!planner@{planner}}\index{planner@{planner}!B\_2x1\_H@{B\_2x1\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa9f138a106d447bea065a18a4bc1265c9}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa9f138a106d447bea065a18a4bc1265c9} 
+B\+\_\+2x1\+\_\+H&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x1\_U@{B\_2x1\_U}!planner@{planner}}\index{planner@{planner}!B\_2x1\_U@{B\_2x1\_U}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aab23334b8c65c2f2f7a176428e7e963c5}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aab23334b8c65c2f2f7a176428e7e963c5} 
+B\+\_\+2x1\+\_\+U&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x2\_H@{B\_2x2\_H}!planner@{planner}}\index{planner@{planner}!B\_2x2\_H@{B\_2x2\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaa13e52380f482113ee644b470c886b06}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaa13e52380f482113ee644b470c886b06} 
+B\+\_\+2x2\+\_\+H&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_2x2\_U@{B\_2x2\_U}!planner@{planner}}\index{planner@{planner}!B\_2x2\_U@{B\_2x2\_U}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa8ff04cf4b245a7de860e822fa0671309}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa8ff04cf4b245a7de860e822fa0671309} 
+B\+\_\+2x2\+\_\+U&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_3x1\_H@{B\_3x1\_H}!planner@{planner}}\index{planner@{planner}!B\_3x1\_H@{B\_3x1\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaebb69c02886f6e1f68d7cecfacffce9a}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aaebb69c02886f6e1f68d7cecfacffce9a} 
+B\+\_\+3x1\+\_\+H&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_3x1\_U@{B\_3x1\_U}!planner@{planner}}\index{planner@{planner}!B\_3x1\_U@{B\_3x1\_U}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa59edfd8fc6dcd0a50f8dd44a08fc1594}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa59edfd8fc6dcd0a50f8dd44a08fc1594} 
+B\+\_\+3x1\+\_\+U&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_4x1\_H@{B\_4x1\_H}!planner@{planner}}\index{planner@{planner}!B\_4x1\_H@{B\_4x1\_H}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa1d86034d00fa76a4dbcaea9bd001fd8d}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aa1d86034d00fa76a4dbcaea9bd001fd8d} 
+B\+\_\+4x1\+\_\+H&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B\_4x1\_L@{B\_4x1\_L}!planner@{planner}}\index{planner@{planner}!B\_4x1\_L@{B\_4x1\_L}}}\Hypertarget{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aad224eddf393230a190bfd4f263829326}\label{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4aad224eddf393230a190bfd4f263829326} 
+B\+\_\+4x1\+\_\+L&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}\label{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911} 
+\index{planner@{planner}!Mode@{Mode}}
+\index{Mode@{Mode}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{Mode}{Mode}}
+{\footnotesize\ttfamily enum class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Possible modes of points\+: 
+
+
+\begin{DoxyItemize}
+\item Point\+: an extremal point.
+\item Via\+Point\+: an (unreached) via point. 
+\end{DoxyItemize}\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Point@{Point}!planner@{planner}}\index{planner@{planner}!Point@{Point}}}\Hypertarget{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}\label{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c} 
+Point&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ViaPoint@{ViaPoint}!planner@{planner}}\index{planner@{planner}!ViaPoint@{ViaPoint}}}\Hypertarget{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911aa8f066ebe8235ba25132c7e46f6053fd}\label{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911aa8f066ebe8235ba25132c7e46f6053fd} 
+Via\+Point&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceplanner_ab33f384f70ef1d97034fe3a782df3284}\label{namespaceplanner_ab33f384f70ef1d97034fe3a782df3284} 
+\index{planner@{planner}!dfs@{dfs}}
+\index{dfs@{dfs}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{dfs()}{dfs()}}
+{\footnotesize\ttfamily void dfs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&}]{graph,  }\item[{std\+::vector$<$ bool $>$ \&}]{visited,  }\item[{std\+::queue$<$ size\+\_\+t $>$ \&}]{stack,  }\item[{size\+\_\+t}]{current }\end{DoxyParamCaption})}
+
+
+
+Post order DFS. 
+
+\Hypertarget{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c}\label{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c} 
+\index{planner@{planner}!generate\_block\_positioning\_order@{generate\_block\_positioning\_order}}
+\index{generate\_block\_positioning\_order@{generate\_block\_positioning\_order}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{generate\_block\_positioning\_order()}{generate\_block\_positioning\_order()}}
+{\footnotesize\ttfamily std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ generate\+\_\+block\+\_\+positioning\+\_\+order (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&}]{blocks,  }\item[{const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}, \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&}]{targets }\end{DoxyParamCaption})}
+
+
+
+Generates dependencies between the positioning of the blocks. 
+
+Some blocks could be into the target position of another block. 
+\begin{DoxyParams}{Parameters}
+{\em blocks} & The initial positions of the recognized blocks. \\
+\hline
+{\em targets} & The desired block target positions. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A queue of {\ttfamily \doxylink{structplanner_1_1BlockMovement}{Block\+Movement}} with the order of movements in order to avoid conflicts. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & If {\ttfamily blocks} contains more than one block of each type. \\
+\hline
+{\em \doxylink{classplanner_1_1ConflictingPositionsException}{planner\+::\+Conflicting\+Positions\+Exception}} & If two blocks are initially too near to perform safely the picking of any. \\
+\hline
+{\em \doxylink{classplanner_1_1DeadlockException}{planner\+::\+Deadlock\+Exception}} & If it is impossible to perform movements due to circular dependencies. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespaceplanner_a4bbf78174f967fe66d9c642b5dc5eb8c}\label{namespaceplanner_a4bbf78174f967fe66d9c642b5dc5eb8c} 
+\index{planner@{planner}!generate\_dependency\_graph@{generate\_dependency\_graph}}
+\index{generate\_dependency\_graph@{generate\_dependency\_graph}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{generate\_dependency\_graph()}{generate\_dependency\_graph()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} generate\+\_\+dependency\+\_\+graph (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&}]{blocks }\end{DoxyParamCaption})}
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{classplanner_1_1ConflictingPositionsException}{planner\+::\+Conflicting\+Positions\+Exception}} & If two blocks are initially too near to perform safely the picking of any. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespaceplanner_a1dcb4f1837b4e751236d3cb0dc74afa7}\label{namespaceplanner_a1dcb4f1837b4e751236d3cb0dc74afa7} 
+\index{planner@{planner}!generate\_parameters@{generate\_parameters}}
+\index{generate\_parameters@{generate\_parameters}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{generate\_parameters()}{generate\_parameters()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ \\
+auto generate\+\_\+parameters (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \&}]{point,  }\item[{const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{linear\+\_\+speed,  }\item[{const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{angular\+\_\+speed,  }\item[{\mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{time }\end{DoxyParamCaption})}
+
+
+
+Generate the timestamps for the last point in via point interpolation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The current point. \\
+\hline
+{\em linear\+\_\+speed} & Linear speed limits. \\
+\hline
+{\em angular\+\_\+speed} & Angular speed limits. \\
+\hline
+{\em time} & The actual time (to be changed). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The set of time parameters for {\ttfamily point}. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Local optimization only. 
+
+Do not consider the angular distance. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a5bc7b483a8b8be14de19cb0cdd9acc83}\label{namespaceplanner_a5bc7b483a8b8be14de19cb0cdd9acc83} 
+\index{planner@{planner}!generate\_parameters@{generate\_parameters}}
+\index{generate\_parameters@{generate\_parameters}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{generate\_parameters()}{generate\_parameters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} as$>$ \\
+auto generate\+\_\+parameters (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&}]{point,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&}]{next\+\_\+point,  }\item[{\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{linear\+\_\+speed,  }\item[{\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{angular\+\_\+speed,  }\item[{\mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{time }\end{DoxyParamCaption})}
+
+
+
+Generate the timestamps for the via point interpolation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The current point. \\
+\hline
+{\em next\+\_\+point} & The successive point. \\
+\hline
+{\em linear\+\_\+speed} & Linear speed limits. \\
+\hline
+{\em angular\+\_\+speed} & Angular speed limits. \\
+\hline
+{\em time} & The actual time (to be changed). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The set of time parameters for {\ttfamily point}. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Local optimization only. 
+
+Do not considers the angular distance. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a09f36b46a491e2f92c96a066b35b8809}\label{namespaceplanner_a09f36b46a491e2f92c96a066b35b8809} 
+\index{planner@{planner}!generate\_positions@{generate\_positions}}
+\index{generate\_positions@{generate\_positions}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{generate\_positions()}{generate\_positions()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} as$>$ \\
+auto generate\+\_\+positions (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{current\+\_\+config,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&}]{current\+\_\+pose,  }\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{pose }\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceplanner_a1c03ccc886bab14b46d7e64b338daf82}\label{namespaceplanner_a1c03ccc886bab14b46d7e64b338daf82} 
+\index{planner@{planner}!get\_closed\_gripper\_pos@{get\_closed\_gripper\_pos}}
+\index{get\_closed\_gripper\_pos@{get\_closed\_gripper\_pos}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_closed\_gripper\_pos()}{get\_closed\_gripper\_pos()}}
+{\footnotesize\ttfamily constexpr double get\+\_\+closed\+\_\+gripper\+\_\+pos (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceplanner_a120a7a72636bd66eecdad19540b8eaaf}\label{namespaceplanner_a120a7a72636bd66eecdad19540b8eaaf} 
+\index{planner@{planner}!get\_desired\_speed@{get\_desired\_speed}}
+\index{get\_desired\_speed@{get\_desired\_speed}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_desired\_speed()}{get\_desired\_speed()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \\
+\mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$\+::\+Times get\+\_\+desired\+\_\+speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{limits,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{distance,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{acc\+\_\+1,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{acc\+\_\+2 }\end{DoxyParamCaption})}
+
+
+
+Updates the desired speed and returns the time parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em limits} & The actual speed limits to be changed. \\
+\hline
+{\em distance} & The distance to travel. \\
+\hline
+{\em acc\+\_\+1} & The maximum acceleration for the first velocity change. \\
+\hline
+{\em acc\+\_\+2} & The maximum acceleration for the second velocity change. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespaceplanner_a1c2ba8bad27925cffa53998ced70fa6a}\label{namespaceplanner_a1c2ba8bad27925cffa53998ced70fa6a} 
+\index{planner@{planner}!get\_gripping\_height@{get\_gripping\_height}}
+\index{get\_gripping\_height@{get\_gripping\_height}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_gripping\_height()}{get\_gripping\_height()}}
+{\footnotesize\ttfamily constexpr double get\+\_\+gripping\+\_\+height (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceplanner_a5200d41217a2a439a6801a4282b84557}\label{namespaceplanner_a5200d41217a2a439a6801a4282b84557} 
+\index{planner@{planner}!get\_hit\_box\_radius@{get\_hit\_box\_radius}}
+\index{get\_hit\_box\_radius@{get\_hit\_box\_radius}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_hit\_box\_radius()}{get\_hit\_box\_radius()}}
+{\footnotesize\ttfamily constexpr double get\+\_\+hit\+\_\+box\+\_\+radius (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The bounding box in order to perform safe movements. 
+
+Circular in order to simplify the checking. \Hypertarget{namespaceplanner_a6f0cbcfcad7d5c5eb38df91d5cf5e5c3}\label{namespaceplanner_a6f0cbcfcad7d5c5eb38df91d5cf5e5c3} 
+\index{planner@{planner}!get\_maximum\_speed@{get\_maximum\_speed}}
+\index{get\_maximum\_speed@{get\_maximum\_speed}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_maximum\_speed()}{get\_maximum\_speed()}}
+{\footnotesize\ttfamily void get\+\_\+maximum\+\_\+speed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{distance,  }\item[{\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&}]{limits,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{acc\+\_\+1,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{acc\+\_\+2 }\end{DoxyParamCaption})}
+
+
+
+Generates the maximum speed reachable in the given space and the given accelerations. 
+
+Also the previous and next velocities are considered in order to valutate if it is feasible to accelerate to the given speed. 
+\begin{DoxyParams}{Parameters}
+{\em distance} & The distance to travel. \\
+\hline
+{\em prev\+\_\+speed} & The maximum speed of the previous segment. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespaceplanner_ac0270ef575d764d3af28e0d038602ab6}\label{namespaceplanner_ac0270ef575d764d3af28e0d038602ab6} 
+\index{planner@{planner}!get\_name@{get\_name}}
+\index{get\_name@{get\_name}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_name()}{get\_name()}}
+{\footnotesize\ttfamily constexpr const char \texorpdfstring{$\ast$}{*} get\+\_\+name (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceplanner_a7f1ad2ba59a393f944be933308e9822d}\label{namespaceplanner_a7f1ad2ba59a393f944be933308e9822d} 
+\index{planner@{planner}!get\_open\_gripper\_pos@{get\_open\_gripper\_pos}}
+\index{get\_open\_gripper\_pos@{get\_open\_gripper\_pos}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_open\_gripper\_pos()}{get\_open\_gripper\_pos()}}
+{\footnotesize\ttfamily constexpr double get\+\_\+open\+\_\+gripper\+\_\+pos (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}\label{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe} 
+\index{planner@{planner}!get\_pad\_position@{get\_pad\_position}}
+\index{get\_pad\_position@{get\_pad\_position}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{get\_pad\_position()}{get\_pad\_position()}}
+{\footnotesize\ttfamily constexpr std\+::tuple$<$ double, double, double $>$ get\+\_\+pad\+\_\+position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \&}]{block\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+(x, y, angle) 
+
+\Hypertarget{namespaceplanner_ad63228565ee5abe7bb79e6506de8752d}\label{namespaceplanner_ad63228565ee5abe7bb79e6506de8752d} 
+\index{planner@{planner}!linear\_interpolation@{linear\_interpolation}}
+\index{linear\_interpolation@{linear\_interpolation}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{linear\_interpolation()}{linear\_interpolation()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ linear\+\_\+interpolation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&}]{initial\+\_\+position,  }\item[{const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&}]{final\+\_\+position,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{start\+\_\+time,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+Linearly interpolates between {\ttfamily initial\+\_\+position} and {\ttfamily final\+\_\+position} int the given {\ttfamily duration}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+position} & The initial position. \\
+\hline
+{\em final\+\_\+position} & The final position. \\
+\hline
+{\em start\+\_\+time} & The time at which the position is {\ttfamily initial\+\_\+position}. \\
+\hline
+{\em duration} & The time to move from {\ttfamily initial\+\_\+position} to {\ttfamily final\+\_\+position}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An interpolating function of time between the two positions. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_a4457a2d9ad873534b4fc0e9c89369c18}\label{namespaceplanner_a4457a2d9ad873534b4fc0e9c89369c18} 
+\index{planner@{planner}!max\_acceleration@{max\_acceleration}}
+\index{max\_acceleration@{max\_acceleration}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{max\_acceleration()}{max\_acceleration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+acceleration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Returns the maximum linear acceleration to avoid to stress the joints. 
+
+\Hypertarget{namespaceplanner_a6cb99949bd650f3909740676364de143}\label{namespaceplanner_a6cb99949bd650f3909740676364de143} 
+\index{planner@{planner}!max\_angular\_acceleration@{max\_angular\_acceleration}}
+\index{max\_angular\_acceleration@{max\_angular\_acceleration}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{max\_angular\_acceleration()}{max\_angular\_acceleration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+angular\+\_\+acceleration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the maximum angular acceleration to avoid to stress the joints. 
+
+\Hypertarget{namespaceplanner_a280236aaa5360e4ed815cd989df6405b}\label{namespaceplanner_a280236aaa5360e4ed815cd989df6405b} 
+\index{planner@{planner}!parabolic\_interpolation@{parabolic\_interpolation}}
+\index{parabolic\_interpolation@{parabolic\_interpolation}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{parabolic\_interpolation()}{parabolic\_interpolation()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ \\
+auto parabolic\+\_\+interpolation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&}]{start,  }\item[{const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&}]{via\+\_\+points,  }\item[{const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&}]{end }\end{DoxyParamCaption})}
+
+
+
+Creates a parabolic interpolation between the {\ttfamily points}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting point. \\
+\hline
+{\em via\+\_\+points} & The intermediate via points. \\
+\hline
+{\em end} & The ending point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The interpolating function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Degenerates in a stop\&play interpolation in case in case of only 2 points. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a7404826e99f71b7b8d66e5ccd72fb141}\label{namespaceplanner_a7404826e99f71b7b8d66e5ccd72fb141} 
+\index{planner@{planner}!plan\_movement@{plan\_movement}}
+\index{plan\_movement@{plan\_movement}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{plan\_movement()}{plan\_movement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1MovementSequence}{Movement\+Sequence}} plan\+\_\+movement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} \&}]{movement,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Generates the sequence of movements from the initial {\ttfamily robot} configuration, throught the picking of one block from its starting position, to the relase of the block into its target position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The current robot configuration. \\
+\hline
+{\em movement} & The requested block movement. \\
+\hline
+{\em dt} & The time granularity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sequence of configurations in order to perform the given movement. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & If one of the positions is not in the operational space.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The current robot configuration. \\
+\hline
+{\em movement} & The requested block movement. \\
+\hline
+{\em dt} & The time granularity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sequence of configuration variations in order to perform the given movement. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & If one of the positions is not in the operational space. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Evaluate if its worth to run this into a thread in order to perform the next calculations during the physical driving of the robot for the previous movement. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a05156c18c16821a1b51376f716a188ed}\label{namespaceplanner_a05156c18c16821a1b51376f716a188ed} 
+\index{planner@{planner}!plan\_movement@{plan\_movement}}
+\index{plan\_movement@{plan\_movement}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{plan\_movement()}{plan\_movement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{Movement\+Sequence\+::\+Config\+Generator}} plan\+\_\+movement (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{end,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Generates the sequence of movements from the initial {\ttfamily robot} configuration to the given {\ttfamily end} position. 
+
+Generates the sequence of movements from the initial {\ttfamily robot} configuration, throught the picking of one block from its starting position, to the relase of the block into its target position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The current robot configuration. \\
+\hline
+{\em end} & The destination. \\
+\hline
+{\em dt} & The time granularity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sequence of configurations in order to perform the given movement. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & If {\ttfamily end} is not in the operational space.\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The current robot configuration. \\
+\hline
+{\em end} & The destination position. \\
+\hline
+{\em dt} & The time granularity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A sequence of configurations in order to perform the given movement. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & If one of the positions is not in the operational space. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20}\label{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20} 
+\index{planner@{planner}!quadratic\_acceleration@{quadratic\_acceleration}}
+\index{quadratic\_acceleration@{quadratic\_acceleration}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{quadratic\_acceleration()}{quadratic\_acceleration()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ quadratic\+\_\+acceleration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&}]{initial\+\_\+position,  }\item[{const Velocity \&}]{final\+\_\+velocity,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{start\+\_\+time,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+Accelerates from a given {\ttfamily initial\+\_\+position} up to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+position} & The position at time {\ttfamily start\+\_\+time}. \\
+\hline
+{\em final\+\_\+velocity} & The velocity at time {\ttfamily start\+\_\+time} + {\ttfamily duration}. \\
+\hline
+{\em start\+\_\+time} & The start time of validity of the interpolation. \\
+\hline
+{\em duration} & The duration of the interpolation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A function of time generating {\ttfamily Points}. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3}\label{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3} 
+\index{planner@{planner}!quadratic\_deceleration@{quadratic\_deceleration}}
+\index{quadratic\_deceleration@{quadratic\_deceleration}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{quadratic\_deceleration()}{quadratic\_deceleration()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ quadratic\+\_\+deceleration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&}]{final\+\_\+position,  }\item[{const Velocity \&}]{initial\+\_\+velocity,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{final\+\_\+time,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+Decelerates to a given {\ttfamily final\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} in the given {\ttfamily duration} time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em final\+\_\+position} & The position at time {\ttfamily final\+\_\+time}. \\
+\hline
+{\em initial\+\_\+velocity} & The velocity at time {\ttfamily final\+\_\+time} -\/ {\ttfamily duration}. \\
+\hline
+{\em final\+\_\+time} & The end time of validity of the interpolation. \\
+\hline
+{\em duration} & The duration of the interpolation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A function of time generating {\ttfamily Points}. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_afd48a07dc2c92f73c34f88887788a1c8}\label{namespaceplanner_afd48a07dc2c92f73c34f88887788a1c8} 
+\index{planner@{planner}!quadratic\_interpolation@{quadratic\_interpolation}}
+\index{quadratic\_interpolation@{quadratic\_interpolation}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{quadratic\_interpolation()}{quadratic\_interpolation()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ quadratic\+\_\+interpolation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&}]{initial\+\_\+position,  }\item[{const Velocity \&}]{initial\+\_\+velocity,  }\item[{const Velocity \&}]{final\+\_\+velocity,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{start\+\_\+time,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{duration }\end{DoxyParamCaption})}
+
+
+
+Accelerates from a given {\ttfamily initial\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+position} & The position at time {\ttfamily start\+\_\+time}. \\
+\hline
+{\em initial\+\_\+velocity} & The velocity at time {\ttfamily start\+\_\+time}. \\
+\hline
+{\em final\+\_\+velocity} & The velocity at time {\ttfamily start\+\_\+time} + duration. \\
+\hline
+{\em start\+\_\+time} & The start time of validity of the interpolation. \\
+\hline
+{\em duration} & The duration of the interpolation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A function of time generating {\ttfamily Points}. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_a907b26ea71749ccd5a866ab7a4714d2c}\label{namespaceplanner_a907b26ea71749ccd5a866ab7a4714d2c} 
+\index{planner@{planner}!safe\_pose@{safe\_pose}}
+\index{safe\_pose@{safe\_pose}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{safe\_pose()}{safe\_pose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} safe\+\_\+pose (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Gets the nearest safe pose relative to {\ttfamily pose}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & The pose of the end effector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Only lifting movements are considered safe when in the low-\/zone. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a38449017270e77826b9b2e6298be936b}\label{namespaceplanner_a38449017270e77826b9b2e6298be936b} 
+\index{planner@{planner}!stop\_and\_play\_interpolation@{stop\_and\_play\_interpolation}}
+\index{stop\_and\_play\_interpolation@{stop\_and\_play\_interpolation}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{stop\_and\_play\_interpolation()}{stop\_and\_play\_interpolation()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ \\
+auto stop\+\_\+and\+\_\+play\+\_\+interpolation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&}]{start,  }\item[{const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&}]{points }\end{DoxyParamCaption})}
+
+
+
+Creates a stop\&play interpolation between the {\ttfamily points}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting point. \\
+\hline
+{\em points} & The intermediate points + ending. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The interpolating function. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+{\ttfamily start} as special point to avoid empty lists. This can be non-\/optimal for certain use cases. 
+
+Degenerates in a constant function in case of only one parameter. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_ac6b2e09819c9bac220e3b14d00ef0abe}\label{namespaceplanner_ac6b2e09819c9bac220e3b14d00ef0abe} 
+\index{planner@{planner}!to\_js\_trajectory@{to\_js\_trajectory}}
+\index{to\_js\_trajectory@{to\_js\_trajectory}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{to\_js\_trajectory()}{to\_js\_trajectory()}}
+{\footnotesize\ttfamily template$<$class Robot , class Function $>$ \\
+std\+::function$<$ std\+::tuple$<$ typename Robot\+::\+Configuration, bool $>$()$>$ to\+\_\+js\+\_\+trajectory (\begin{DoxyParamCaption}\item[{Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{current,  }\item[{Function \&\&}]{f,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{duration,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Converts the os positions generated by {\ttfamily f} to js positions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot. \\
+\hline
+{\em current\+\_\+pose} & The current pose of the robot. \\
+\hline
+{\em result} & The sequence where to store the results. \\
+\hline
+{\em f} & The function generating the os positions. \\
+\hline
+{\em duration} & The duration of the movement. \\
+\hline
+{\em dt} & The time simulation unit. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{namespaceplanner_ab996d64a14f3911e0cd80939ed52ba93}\label{namespaceplanner_ab996d64a14f3911e0cd80939ed52ba93} 
+\index{planner@{planner}!top\_sort@{top\_sort}}
+\index{top\_sort@{top\_sort}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{top\_sort()}{top\_sort()}}
+{\footnotesize\ttfamily std\+::queue$<$ size\+\_\+t $>$ top\+\_\+sort (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&}]{graph }\end{DoxyParamCaption})}
+
+
+
+Topological (reversed) order of a graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The directed graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of ordered indexes in order of dependencies. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The resulting list is reversed. The first one is the independent one. 
+
+The graph should be acyclic. With cyclic graphs the result is undefined. However non cyclic dependencies are respected. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_a4f29e032ebee22fb668de32d51155fa0}\label{namespaceplanner_a4f29e032ebee22fb668de32d51155fa0} 
+\index{planner@{planner}!unsafe@{unsafe}}
+\index{unsafe@{unsafe}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{unsafe()}{unsafe()}}
+{\footnotesize\ttfamily bool unsafe (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Checks the position of the end effector. 
+
+If it is too low (near the table) movement should be carefully planned. 
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+pose} & The pose to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the robot is too low, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_a4fdfb41abf3b44bce4d6bc5d142b47a6}\label{namespaceplanner_a4fdfb41abf3b44bce4d6bc5d142b47a6} 
+\index{planner@{planner}!via\_point\_interpolation@{via\_point\_interpolation}}
+\index{via\_point\_interpolation@{via\_point\_interpolation}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{via\_point\_interpolation()}{via\_point\_interpolation()}}
+{\footnotesize\ttfamily template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container$>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ via\+\_\+point\+\_\+interpolation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&}]{start,  }\item[{Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&\&}]{via\+\_\+points,  }\item[{\mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&\&}]{end }\end{DoxyParamCaption})}
+
+
+
+Utility function to manage the interpolation of different {\ttfamily Point} types. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The starting point time parameters. \\
+\hline
+{\em via\+\_\+points} & The via point time parameters. \\
+\hline
+{\em end} & The ending point time parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The interpolating time function. 
+\end{DoxyReturn}
+\Hypertarget{namespaceplanner_af113643d0711694c87c67168d0fe2f1d}\label{namespaceplanner_af113643d0711694c87c67168d0fe2f1d} 
+\index{planner@{planner}!via\_point\_sequencer@{via\_point\_sequencer}}
+\index{via\_point\_sequencer@{via\_point\_sequencer}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{via\_point\_sequencer()}{via\_point\_sequencer()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ \\
+\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ $>$ via\+\_\+point\+\_\+sequencer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{current\+\_\+pose,  }\item[{const \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} \&}]{viapoints,  }\item[{const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&}]{target\+\_\+pose,  }\item[{\mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{finish\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+Creates the config sequence from a set of viapoints. 
+
+No time constraints are given, the function will try to minimize the total time. 
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+pose} & The precalculated current pose. \\
+\hline
+{\em dt} & The simulation time quantization. \\
+\hline
+{\em viapoints} & The set of via points. \\
+\hline
+{\em target\+\_\+pose} & The final position. \\
+\hline
+{\em finish\+\_\+time} & The variable where to store the finish time. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The effective position at the end of the movement. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceplanner_aab4666b153ef1ba1c944d3f5941d3e38}\label{namespaceplanner_aab4666b153ef1ba1c944d3f5941d3e38} 
+\index{planner@{planner}!all\_blocks@{all\_blocks}}
+\index{all\_blocks@{all\_blocks}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{all\_blocks}{all\_blocks}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} all\+\_\+blocks\mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ Block::B\_1x1\_H,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x1\_T,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x1\_L,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x1\_H,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x1\_U,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x2\_H,}
+\DoxyCodeLine{\ \ \ \ Block::B\_2x2\_U,}
+\DoxyCodeLine{\ \ \ \ Block::B\_3x1\_H,}
+\DoxyCodeLine{\ \ \ \ Block::B\_3x1\_U,}
+\DoxyCodeLine{\ \ \ \ Block::B\_4x1\_H,}
+\DoxyCodeLine{\ \ \ \ Block::B\_4x1\_L,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{namespaceplanner_aac7acd01566d7023a8d325b2390838f6}\label{namespaceplanner_aac7acd01566d7023a8d325b2390838f6} 
+\index{planner@{planner}!back\_obstacle\_distance@{back\_obstacle\_distance}}
+\index{back\_obstacle\_distance@{back\_obstacle\_distance}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{back\_obstacle\_distance}{back\_obstacle\_distance}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} back\+\_\+obstacle\+\_\+distance = 0.\+35\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The distance of the back control panel (minimum distance in the xy plane). 
+
+\Hypertarget{namespaceplanner_af37c1198cab6c858f6ff1a3259cbc99b}\label{namespaceplanner_af37c1198cab6c858f6ff1a3259cbc99b} 
+\index{planner@{planner}!gazebo\_to\_os\_x@{gazebo\_to\_os\_x}}
+\index{gazebo\_to\_os\_x@{gazebo\_to\_os\_x}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{gazebo\_to\_os\_x}{gazebo\_to\_os\_x}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} gazebo\+\_\+to\+\_\+os\+\_\+x = 0.\+5\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The offset along the x axis of the arm operational space with respect to the gazebo frame. 
+
+\Hypertarget{namespaceplanner_a36e1f53bcb1f522c0b2a578d7eec18b7}\label{namespaceplanner_a36e1f53bcb1f522c0b2a578d7eec18b7} 
+\index{planner@{planner}!gazebo\_to\_os\_y@{gazebo\_to\_os\_y}}
+\index{gazebo\_to\_os\_y@{gazebo\_to\_os\_y}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{gazebo\_to\_os\_y}{gazebo\_to\_os\_y}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} gazebo\+\_\+to\+\_\+os\+\_\+y = 0.\+35\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The offset along the y axis of the arm operational space with respect to the gazebo frame. 
+
+\begin{DoxyNote}{Note}
+After subtracting the offset, the y axis also needs to be inverted. 
+\end{DoxyNote}
+\Hypertarget{namespaceplanner_ae8046607e792f2b71c603fff6661f393}\label{namespaceplanner_ae8046607e792f2b71c603fff6661f393} 
+\index{planner@{planner}!margin@{margin}}
+\index{margin@{margin}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{margin}{margin}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} margin = 0.\+1\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The low zone. 
+
+Risk of bouncing into blocks. \Hypertarget{namespaceplanner_ab5731c360242c45ed3cf79d99e38b63b}\label{namespaceplanner_ab5731c360242c45ed3cf79d99e38b63b} 
+\index{planner@{planner}!max\_angular\_speed@{max\_angular\_speed}}
+\index{max\_angular\_speed@{max\_angular\_speed}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{max\_angular\_speed}{max\_angular\_speed}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+angular\+\_\+speed = M\+\_\+\+PI\+\_\+4\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The maximum angular speed for the end effector. 
+
+\mbox{[}rad/s\mbox{]}. \Hypertarget{namespaceplanner_a6dadcd6939674fe202c22d7a90bf0e27}\label{namespaceplanner_a6dadcd6939674fe202c22d7a90bf0e27} 
+\index{planner@{planner}!max\_linear\_speed@{max\_linear\_speed}}
+\index{max\_linear\_speed@{max\_linear\_speed}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{max\_linear\_speed}{max\_linear\_speed}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+linear\+\_\+speed = 0.\+3\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The maximum linear speed in the operational space for the end effector. 
+
+\mbox{[}m/s\mbox{]} \Hypertarget{namespaceplanner_a5b3b8f4758c3dabc3141c80a187b7130}\label{namespaceplanner_a5b3b8f4758c3dabc3141c80a187b7130} 
+\index{planner@{planner}!table\_distance@{table\_distance}}
+\index{table\_distance@{table\_distance}!planner@{planner}}
+\doxysubsubsection{\texorpdfstring{table\_distance}{table\_distance}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} table\+\_\+distance = 0.\+73\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The distance of the table from the base of the robot. 
+

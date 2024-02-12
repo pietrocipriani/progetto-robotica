@@ -1,0 +1,7 @@
+<map id="Params&lt; Point &gt;" name="Params&lt; Point &gt;">
+<area shape="rect" id="Node000001" title="Structure representing the position, passage time and acceleration time for a point in the space." alt="" coords="6,98,139,126"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,60,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,47,50,73,64,96,60,99,45,75,36,49"/>
+<area shape="rect" id="Node000003" href="$structplanner_1_1Params_1_1Times.html" title=" " alt="" coords="83,5,145,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="104,48,81,99,76,97,99,46"/>
+</map>

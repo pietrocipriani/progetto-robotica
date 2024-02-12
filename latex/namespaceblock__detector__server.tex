@@ -1,15 +1,20 @@
 \doxysection{block\+\_\+detector\+\_\+server Namespace Reference}
 \hypertarget{namespaceblock__detector__server}{}\label{namespaceblock__detector__server}\index{block\_detector\_server@{block\_detector\_server}}
+
+
+Starts a ROS service that takes an {\ttfamily sensor\+\_\+msgs/\+Image} as input, detects boxes in the image, and returns {\ttfamily block\+\_\+detector/\+Detect\+Blocks}, i.\+e.  
+
+
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classblock__detector__server_1_1BlockDetector}{Block\+Detector}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A ROS service that detects blocks in the images passed as input using a YOLOv8 model, and returns the detected labeled bounding boxes as output. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Starts a ROS service that detects boxes in images, see file docs for more info. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -22,21 +27,18 @@ str \mbox{\hyperlink{namespaceblock__detector__server_a0dd595c7d89699a9b60f4af29
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyVerb}Starts a ROS service that takes an `sensor_msgs/Image` as input, detects boxes in the image, and
-returns `block_detector/DetectBlocks`, i.e. the boxes detected by YOLOv8, as output. A service was
-preferred, instead of a publisher reading directly from the camera and publishing boxes from time
-to time, for the following reasons:
-- to allow making this component more standalone
-- to allow the input image to be chosen by the caller, e.g. by cropping it or passing a custom image
-- to avoid wasting CPU on calculating boxes that would never be used because the subscriber (if any)
-    does not need them
+Starts a ROS service that takes an {\ttfamily sensor\+\_\+msgs/\+Image} as input, detects boxes in the image, and returns {\ttfamily block\+\_\+detector/\+Detect\+Blocks}, i.\+e. 
 
-This file also contains the configuration to pass to the YOLOv8 model for detecting boxes, such as
-CONFIDENCE_THRESHOLD and INTERSECTION_OVER_UNION_THRESHOLD.
+the boxes detected by YOLOv8, as output. A service was preferred, instead of a publisher reading directly from the camera and publishing boxes from time to time, for the following reasons\+:
+\begin{DoxyItemize}
+\item to allow making this component more standalone
+\item to allow the input image to be chosen by the caller, e.\+g. by cropping it or passing a custom image
+\item to avoid wasting CPU on calculating boxes that would never be used because the subscriber (if any) does not need them
+\end{DoxyItemize}
 
-You can visualize results from this service using `inspect_detected_blocks.py`.
-\end{DoxyVerb}
- 
+This file also contains the configuration to pass to the YOLOv8 model for detecting boxes, such as CONFIDENCE\+\_\+\+THRESHOLD and INTERSECTION\+\_\+\+OVER\+\_\+\+UNION\+\_\+\+THRESHOLD.
+
+You can visualize results from this service using {\ttfamily \doxylink{inspect__detected__blocks_8py}{inspect\+\_\+detected\+\_\+blocks.\+py}}. 
 
 \doxysubsection{Function Documentation}
 \Hypertarget{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f}\label{namespaceblock__detector__server_a51af30a60f9f02777c6396b8247e356f} 
@@ -44,6 +46,10 @@ You can visualize results from this service using `inspect_detected_blocks.py`.
 \index{main@{main}!block\_detector\_server@{block\_detector\_server}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Starts a ROS service that detects boxes in images, see file docs for more info. 
 
 
 

@@ -1,0 +1,48 @@
+\doxysection{src/planner/include/utils/quaternion\+\_\+algebra.hpp File Reference}
+\hypertarget{quaternion__algebra_8hpp}{}\label{quaternion__algebra_8hpp}\index{src/planner/include/utils/quaternion\_algebra.hpp@{src/planner/include/utils/quaternion\_algebra.hpp}}
+{\ttfamily \#include "{}../types.\+hpp"{}}\newline
+{\ttfamily \#include "{}math.\+hpp"{}}\newline
+Include dependency graph for quaternion\+\_\+algebra.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quaternion__algebra_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quaternion__algebra_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\+\_\+rotation\+\_\+algebra}}
+\begin{DoxyCompactList}\small\item\em Namespace containing some (dangerous) functions to uniform the algebra for rotations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_ad072f985c5179162181b64d2bf2a33fc}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&c)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a3bc8d54cfe8b44274fc7eda7030c9349}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&c, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a13822287d42efd7a7db28c86bb9d43a6}{operator\texorpdfstring{$\ast$}{*}=}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&c)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a55c89dc55cca66b19679705c566a165a}{operator+}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q2)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& \mbox{\hyperlink{namespaceuniformed__rotation__algebra_ad24730ba869ed4064ebef3215283d073}{operator+=}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q2)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_ab56149846f020ae50dc7e9dd47f41074}{operator-\/}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a3a5605ba3f0bb654c528d2f7beb34147}{operator-\/}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q2)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a386dcab2eea7d09e805234850697dfdd}{operator-\/=}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q2)
+\begin{DoxyCompactList}\small\item\em {\ttfamily this} -\/ {\ttfamily other} = {\ttfamily result} \texorpdfstring{$\vert$}{|} {\ttfamily other} + {\ttfamily result} = {\ttfamily this}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{namespaceuniformed__rotation__algebra_acc669d47477096a77b759c4b717e1670}{operator/}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&c)
+\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& \mbox{\hyperlink{namespaceuniformed__rotation__algebra_a209bfa5e8b77de381200b7112e275165}{operator/=}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&c)
+\end{DoxyCompactItemize}

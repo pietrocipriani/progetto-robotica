@@ -1,0 +1,119 @@
+\doxysection{sequenced\+\_\+function.\+hpp}
+\hypertarget{sequenced__function_8hpp_source}{}\label{sequenced__function_8hpp_source}\index{src/planner/include/utils/sequenced\_function.hpp@{src/planner/include/utils/sequenced\_function.hpp}}
+\mbox{\hyperlink{sequenced__function_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTILS\_SEQUENCED\_FUNCTION\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTILS\_SEQUENCED\_FUNCTION\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Function,\ \textcolor{keyword}{class}\ Domain>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRestrictedFunction}{RestrictedFunction}}\ \{}
+\DoxyCodeLine{00018\ \ \ Function\ \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00022\ \ \ Domain\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{structRestrictedFunction_aa65f426cafa6a9a40cfd1450b57f9b75}{RestrictedFunction}}()\ noexcept\ =\ default;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \mbox{\hyperlink{structRestrictedFunction}{RestrictedFunction}}(const\ Function\&\ \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}},\ const\ Domain\&\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})}
+\DoxyCodeLine{00027\ \ \ \ \ :\ \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}(\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}),\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}}(\mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})\ \{\}}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{structRestrictedFunction_a7554840b7763ac9f5bccf69e103b09c2}{RestrictedFunction}}(Function\&\&\ \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}},\ \textcolor{keyword}{const}\ Domain\&\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})}
+\DoxyCodeLine{00029\ \ \ \ \ :\ \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}(std::move(\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}})),\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}}(\mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})\ \{\}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ F>}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structRestrictedFunction_aca5f6d247f2948954896956bfd00c659}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structRestrictedFunction}{RestrictedFunction<F,\ Domain>}}\&\ other)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}}\ <\ other.\mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}};}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structRestrictedFunction_a40a0a3e24409a4907b16892534d7180d}{operator<}}(\textcolor{keyword}{const}\ Domain\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}}\ <\ arg;}
+\DoxyCodeLine{00045\ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{typename}\ std::invoke\_result\_t<Function,\ Domain>\ \mbox{\hyperlink{structRestrictedFunction_ad2730f7181d6f3fdbfadd8a5ddd41ecb}{operator()}}(\textcolor{keyword}{const}\ Domain\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ std::invoke(\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}},\ arg);}
+\DoxyCodeLine{00051\ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{typename}\ std::invoke\_result\_t<Function,\ Domain>\ \mbox{\hyperlink{structRestrictedFunction_a4d96fd7a468b31210a2890da2de086a8}{operator()}}(Domain\&\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{return}\ std::invoke(\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}},\ std::move(arg));}
+\DoxyCodeLine{00057\ \ \ \}}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Function,\ \textcolor{keyword}{class}\ Domain>}
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\ \{}
+\DoxyCodeLine{00064\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classSequencedFunction_ab6fb7721f57a8750b378b709e809dfbf}{Container}}\ =\ std::vector<RestrictedFunction<Function,\ Domain>>;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{using\ }It\ =\ \textcolor{keyword}{typename}\ Container::const\_iterator;}
+\DoxyCodeLine{00072\ \ \ \mbox{\hyperlink{classSequencedFunction_ab6fb7721f57a8750b378b709e809dfbf}{Container}}\ functions;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{mutable}\ It\ it;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{bool}\ can\_use(It\ it,\ \textcolor{keyword}{const}\ Domain\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ functions.cend())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Function\ only\ lower-\/bounded.\ The\ next\ function\ could\ take\ over\ after\ a\ while.}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{auto}\ next\ =\ std::next(it);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ it-\/>begin\ <=\ arg\ \&\&\ (next\ ==\ functions.cend()\ ||\ next-\/>begin\ >=\ arg);}
+\DoxyCodeLine{00088\ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{typename}\ It::reference\ current(\textcolor{keyword}{const}\ Domain\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (can\_use(it,\ arg))\ \textcolor{keywordflow}{return}\ *it;}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ functions.cend()\ \&\&\ can\_use(std::next(it),\ arg))\ \textcolor{keywordflow}{return}\ *++it;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Binary\ search\ of\ the\ first\ function\ that\ can\ accept\ @p\ arg.}}
+\DoxyCodeLine{00099\ \ \ \ \ it\ =\ std::lower\_bound(functions.cbegin(),\ functions.cend(),\ arg);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ If\ there\ is\ no\ function\ for\ the\ given\ argument,\ the\ first\ function\ is\ extended.}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ functions.cbegin())\ it\ =\ std::prev(it);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{return}\ *it;}
+\DoxyCodeLine{00105\ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00111\ \ \ \mbox{\hyperlink{classSequencedFunction_a3716d4021b19f8e33313b6d4adab3ea3}{SequencedFunction}}(\mbox{\hyperlink{classSequencedFunction_ab6fb7721f57a8750b378b709e809dfbf}{Container}}\&\&\ fs)\ :\ functions(std::move(fs)),\ it(functions.cbegin())\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ assert(!functions.empty());}
+\DoxyCodeLine{00113\ \ \ \ \ assert(std::is\_sorted(functions.cbegin(),\ functions.cend()));}
+\DoxyCodeLine{00114\ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{comment}{//\ NOTE:\ The\ iterator\ CANNOT\ be\ copied.}}
+\DoxyCodeLine{00117\ \ \ \mbox{\hyperlink{classSequencedFunction_a1aadd93ef3cdffdc076a00745ec34a12}{SequencedFunction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\ other)}
+\DoxyCodeLine{00118\ \ \ \ \ :\ functions(other.functions)}
+\DoxyCodeLine{00119\ \ \ \ \ ,\ it(functions.cbegin()\ +\ std::distance(other.functions.cbegin(),\ other.it))\ \{\}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{//\ NOTE:\ The\ iterator\ can\ be\ copied\ when\ the\ container\ is\ moved.}}
+\DoxyCodeLine{00122\ \ \ \textcolor{comment}{//\ TODO:\ Check\ if\ the\ statement\ is\ valid\ with\ arbitrary\ containers.}}
+\DoxyCodeLine{00123\ \ \ \mbox{\hyperlink{classSequencedFunction_a725e613b653b8a28c510e864f086c5a2}{SequencedFunction}}(\mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{comment}{//\ NOTE:\ The\ iterator\ CANNOT\ be\ copied.}}
+\DoxyCodeLine{00126\ \ \ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\ \mbox{\hyperlink{classSequencedFunction_a0179b9252937c792e0fb8a71aee207af}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\ other)\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ functions\ =\ other.functions;}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ Forces\ the\ usage\ of\ random\ access\ containers.}}
+\DoxyCodeLine{00129\ \ \ \ \ it\ =\ functions.cbegin()\ +\ std::distance(other.functions.cbegin(),\ other.it);}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00131\ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\ \mbox{\hyperlink{classSequencedFunction_af69a369118428b22053f7fa999dd0a3d}{operator=}}(\mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}\&\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00136\ \ \ \textcolor{keyword}{typename}\ std::invoke\_result\_t<Function,\ Domain>\ \mbox{\hyperlink{classSequencedFunction_ad2730f7181d6f3fdbfadd8a5ddd41ecb}{operator()}}(\textcolor{keyword}{const}\ Domain\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordflow}{return}\ current(arg)(arg);}
+\DoxyCodeLine{00138\ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{typename}\ std::invoke\_result\_t<Function,\ Domain>\ \mbox{\hyperlink{classSequencedFunction_a4d96fd7a468b31210a2890da2de086a8}{operator()}}(Domain\&\&\ arg)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{return}\ current(arg)(std::move(arg));}
+\DoxyCodeLine{00144\ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ UTILS\_SEQUENCED\_FUNCTION\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

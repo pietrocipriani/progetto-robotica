@@ -1,0 +1,68 @@
+\doxysection{model.\+hpp}
+\hypertarget{model_8hpp_source}{}\label{model_8hpp_source}\index{src/planner/include/model.hpp@{src/planner/include/model.hpp}}
+\mbox{\hyperlink{model_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MODEL\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MODEL\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <eigen3/Eigen/Dense>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <eigen3/Eigen/Geometry>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8hpp}{types.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spaces_8hpp}{spaces.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacemodel}{model}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f}{d}}\ =\ 0,\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a}{a}}\ =\ 0,\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2}{alpha}}\ =\ 0;}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\&\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86}{theta}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8}{min\_config}}\ =\ -\/std::numeric\_limits<Scalar>::infinity();}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f}{max\_config}}\ =\ std::numeric\_limits<Scalar>::infinity();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}(}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f}{d}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\&\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86}{theta}},\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a}{a}},\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2}{alpha}},}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8}{min\_config}}\ =\ -\/std::numeric\_limits<Scalar>::infinity(),}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f}{max\_config}}\ =\ std::numeric\_limits<Scalar>::infinity()}
+\DoxyCodeLine{00031\ \ \ )\ noexcept;}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00036\ struct\ \mbox{\hyperlink{structmodel_1_1UR5}{UR5}}\ \{}
+\DoxyCodeLine{00039\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ dof\ =\ 6;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ max\_joint\_speed\ =\ M\_PI;}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ max\_joint\_accel\ =\ 40\ *\ 0.5\ *\ 0.1;}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Configuration}}\ =\ \mbox{\hyperlink{classJointSpace}{JointSpace<dof>}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Velocity}}\ =\ \mbox{\hyperlink{classJointSpace}{Configuration::Derivative}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Acceleration}}\ =\ \mbox{\hyperlink{classJointSpace}{Velocity::Derivative}};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}}\ =\ std::array<RevoluteJoint,\ dof>;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{classJointSpace}{Configuration}}\ \mbox{\hyperlink{structmodel_1_1UR5_a0910717551963df697d192900a7f4f59}{config}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}}\ \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ base\ \ \ \ \ \ =\ joints[0];}
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ shoulder\ \ =\ joints[1];}
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ elbow\ \ \ \ \ =\ joints[2];}
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ wrist1\ \ \ \ =\ joints[3];}
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ wrist2\ \ \ \ =\ joints[4];}
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{RevoluteJoint}}\&\ wrist3\ \ \ \ =\ joints[5];}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00077\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structmodel_1_1UR5}{UR5}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{Configuration}}\&\ homing\_config)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structmodel_1_1UR5}{UR5}}(\mbox{\hyperlink{classJointSpace}{Configuration}}\&\&\ homing\_config)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ MODEL\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

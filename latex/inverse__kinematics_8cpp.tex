@@ -1,0 +1,123 @@
+\doxysection{src/planner/lib/kinematics/inverse\+\_\+kinematics.cpp File Reference}
+\hypertarget{inverse__kinematics_8cpp}{}\label{inverse__kinematics_8cpp}\index{src/planner/lib/kinematics/inverse\_kinematics.cpp@{src/planner/lib/kinematics/inverse\_kinematics.cpp}}
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}direct\+\_\+kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}euler.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+{\ttfamily \#include $<$cerrno$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for inverse\+\_\+kinematics.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{inverse__kinematics_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacekinematics}{kinematics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_af4e86b5ba846c7894217f909d6ddc724}{theta\+\_\+1}}~config\mbox{[}t1\mbox{]}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_a08b5beb598ca2862c4220cfa9a572a80}{theta\+\_\+2}}~config\mbox{[}t2\mbox{]}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_a41f73a9e626c1069a39ee86524e857ff}{theta\+\_\+3}}~config\mbox{[}t3\mbox{]}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_a899f6cd7b6531ef6767b7f5d3b4be015}{theta\+\_\+4}}~config\mbox{[}t4\mbox{]}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_aa3b9dbea1d16889965287e4c550cda4f}{theta\+\_\+5}}~config\mbox{[}t5\mbox{]}
+\item 
+\#define \mbox{\hyperlink{inverse__kinematics_8cpp_aadca67689b24ff7f97e84b9a060ff92f}{theta\+\_\+6}}~config\mbox{[}t6\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} = std\+::vector$<$ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} $>$
+\begin{DoxyCompactList}\small\item\em List of possible configurations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} \+: size\+\_\+t \{ \newline
+\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a299d826d9ef8b8e142823890a04b74c2}{t1}} = 0
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a50ae3b7ce65099236da64656c33ec64f}{t2}} = 1
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a43eaba56197e4d0a744823dfed1a0fd1}{t3}} = 2
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a25e2696476f1ec1837844053e75bb5cb}{t4}} = 3
+, \newline
+\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7ab7d43dc6573f558ef6bcd49b0b6f783a}{t5}} = 4
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a1f7b8b641470adf04b599da16c737596}{t6}} = 5
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ \mbox{\hyperlink{namespacekinematics_a07c35907efb364d03897d0392a74b8a6}{acos}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} cos)
+\begin{DoxyCompactList}\small\item\em Computes the two solutions of cos(theta) = {\ttfamily cos}. \end{DoxyCompactList}\item 
+std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ \mbox{\hyperlink{namespacekinematics_a19caecbeba2689906461a53132ef63a4}{asin}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} sin)
+\begin{DoxyCompactList}\small\item\em Computes the two solutions of sin(theta) = {\ttfamily sin}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_ab2ae35428549909f073edba91b0f0f8b}{configs\+\_\+given\+\_\+theta\+\_\+1}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a1733d09f966c8d6824f48e459e880e8f}{configs\+\_\+given\+\_\+theta\+\_\+3}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin, const \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Default\+Pose\+::\+Linear}} \&origin\+\_\+3)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+3. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_aaf257a65b5cf6347efaa9e70997e469e}{configs\+\_\+given\+\_\+theta\+\_\+5}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+5. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_a415d8b736804f369524f60f2c197c3fa}{configurations}} (const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&pose)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} theta, bool fail\+\_\+silently, typename Function , typename Arg\+List , class... Args$>$ }\\\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_adf1759b3a7f6678a8c62080ff7a5266e}{expand}} (const Arg\+List \&variable\+\_\+argument, Function \&\&function, \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Calls {\ttfamily function} {\ttfamily n} times with the various parameters in {\ttfamily variable\+\_\+argument} and condensate the configs into a single Configurations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a22f2ab07c9bc2f374f161bd9e44cd091}{inverse}} (const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&pose)
+\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a0520d4b1317042b00eb166c9da99548b}{inverse\+\_\+trans}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \&joint, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} theta)
+\begin{DoxyCompactList}\small\item\em Calculates the inverse transformation matrix for {\ttfamily joint} with the given {\ttfamily theta}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \mbox{\hyperlink{namespacekinematics_a919a091a08c8cf349dea27bcf7391a43}{rotate}} (const \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \&trans, const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&axis)
+\begin{DoxyCompactList}\small\item\em Calculates the rotated {\ttfamily axis} after the transformation @trans. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacekinematics_a1ff4be03e6f7cdcff6754e7acfefd34b}{vector\+\_\+angle\+\_\+xy}} (const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&vector)
+\begin{DoxyCompactList}\small\item\em Calculates the angle in the xy plane of the vector {\ttfamily vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{inverse__kinematics_8cpp_af4e86b5ba846c7894217f909d6ddc724}\label{inverse__kinematics_8cpp_af4e86b5ba846c7894217f909d6ddc724} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_1@{theta\_1}}
+\index{theta\_1@{theta\_1}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_1}{theta\_1}}
+{\footnotesize\ttfamily \#define theta\+\_\+1~config\mbox{[}t1\mbox{]}}
+
+\Hypertarget{inverse__kinematics_8cpp_a08b5beb598ca2862c4220cfa9a572a80}\label{inverse__kinematics_8cpp_a08b5beb598ca2862c4220cfa9a572a80} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_2@{theta\_2}}
+\index{theta\_2@{theta\_2}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_2}{theta\_2}}
+{\footnotesize\ttfamily \#define theta\+\_\+2~config\mbox{[}t2\mbox{]}}
+
+\Hypertarget{inverse__kinematics_8cpp_a41f73a9e626c1069a39ee86524e857ff}\label{inverse__kinematics_8cpp_a41f73a9e626c1069a39ee86524e857ff} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_3@{theta\_3}}
+\index{theta\_3@{theta\_3}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_3}{theta\_3}}
+{\footnotesize\ttfamily \#define theta\+\_\+3~config\mbox{[}t3\mbox{]}}
+
+\Hypertarget{inverse__kinematics_8cpp_a899f6cd7b6531ef6767b7f5d3b4be015}\label{inverse__kinematics_8cpp_a899f6cd7b6531ef6767b7f5d3b4be015} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_4@{theta\_4}}
+\index{theta\_4@{theta\_4}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_4}{theta\_4}}
+{\footnotesize\ttfamily \#define theta\+\_\+4~config\mbox{[}t4\mbox{]}}
+
+\Hypertarget{inverse__kinematics_8cpp_aa3b9dbea1d16889965287e4c550cda4f}\label{inverse__kinematics_8cpp_aa3b9dbea1d16889965287e4c550cda4f} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_5@{theta\_5}}
+\index{theta\_5@{theta\_5}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_5}{theta\_5}}
+{\footnotesize\ttfamily \#define theta\+\_\+5~config\mbox{[}t5\mbox{]}}
+
+\Hypertarget{inverse__kinematics_8cpp_aadca67689b24ff7f97e84b9a060ff92f}\label{inverse__kinematics_8cpp_aadca67689b24ff7f97e84b9a060ff92f} 
+\index{inverse\_kinematics.cpp@{inverse\_kinematics.cpp}!theta\_6@{theta\_6}}
+\index{theta\_6@{theta\_6}!inverse\_kinematics.cpp@{inverse\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{theta\_6}{theta\_6}}
+{\footnotesize\ttfamily \#define theta\+\_\+6~config\mbox{[}t6\mbox{]}}
+

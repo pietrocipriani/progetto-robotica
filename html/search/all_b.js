@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['names_0',['NAMES',['../namespacemodel__handler.html#abbec8af97d8f9bb114602c8498add4af',1,'model_handler']]],
-  ['notes_1',['Notes',['../index.html#notes_main',1,'']]]
+  ['kinematics_0',['kinematics',['../namespacekinematics.html',1,'']]],
+  ['kinematics_2ehpp_1',['kinematics.hpp',['../kinematics_8hpp.html',1,'']]]
 ];

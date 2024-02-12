@@ -1,0 +1,334 @@
+\doxysection{Operational\+Space\texorpdfstring{$<$}{<} linear\+\_\+system, angular\+\_\+system, size, order \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classOperationalSpace}{}\label{classOperationalSpace}\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+
+
+The differentiable operational space.  
+
+
+
+
+{\ttfamily \#include $<$operational\+\_\+space.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} = \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{typename}} \mbox{\hyperlink{structcoord_1_1angular__type}{coord\+::angular\+\_\+type}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}} $>$\+::type
+\begin{DoxyCompactList}\small\item\em The linear part type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}} = \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}+\mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}} $>$ $>$
+\begin{DoxyCompactList}\small\item\em The jacobian friendly vector type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Derivative}} = \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}}+1 $>$
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} = \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{typename}} \mbox{\hyperlink{structcoord_1_1linear__type}{coord\+::linear\+\_\+type}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}} $>$\+::type
+\begin{DoxyCompactList}\small\item\em The linear part type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}{Primitive}} = \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} -\/ 1 $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}} ()
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& \mbox{\hyperlink{classOperationalSpace_a235019049939e6117bdf835d803acb17}{angular}} () \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_a88accfd556be16dd4c55ea0c0e6e68c0}{eval}} ()
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_a96f1d85a181b6a37c72223bd3ab09461}{eval}} () \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}} ()
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& \mbox{\hyperlink{classOperationalSpace_aacd347307e98533288e838271ad185b7}{linear}} () \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{classOperationalSpace_ad840f5d7d824ab9d442511c61c8f6b77}{norm}} () \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}{Operational\+Space}} ()
+\item 
+\mbox{\hyperlink{classOperationalSpace_a404fe3e07d72687e86bd49cd0ec75057}{Operational\+Space}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}, \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\&\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})
+\item 
+\mbox{\hyperlink{classOperationalSpace_abdce980217ca1f98e7ec1f14c3ccf6f4}{Operational\+Space}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} as$>$ }\\\mbox{\hyperlink{classOperationalSpace_a259cf26d14857771763c2fd968e19298}{Operational\+Space}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ls}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{as}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}})
+\begin{DoxyCompactList}\small\item\em Constructor for implicit functional-\/style conversions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classOperationalSpace_ac61b7d01fd063d17e3bbe72d1c70dd9f}{Operational\+Space}} (\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\&\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}, \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\&\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})
+\item 
+\mbox{\hyperlink{classOperationalSpace_a682421cacd403d2eecc805ead4cb2d28}{Operational\+Space}} (\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\&\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})
+\item 
+\mbox{\hyperlink{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}{Primitive}} \mbox{\hyperlink{classOperationalSpace_a93a97f5144ba5b11bb4960a6a3e537dc}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt) \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_a61379da39aa165482cc99802b6db6ad1}{operator+}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \&\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}}) \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_a7fa37cda5880ab473fa6802775690841}{operator+=}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \&\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}})
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_ae938c44d6e41b7e11aee7b8434a93b3d}{operator-\/}} () \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_a4d45b382e4a797a3b74a7d524d587e2c}{operator-\/}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \&\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}}) \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_a01f098189ede882b9352730af9c9621e}{operator-\/=}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \&\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}})
+\item 
+\mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Derivative}} \mbox{\hyperlink{classOperationalSpace_ace15501aaded12e667ae4dc14dc33f8b}{operator/}} (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt) \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}}
+\item 
+const \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{vector}} () const
+\begin{DoxyCompactList}\small\item\em Represents this point as a linear + angular vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{static}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{constexpr}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} \mbox{\hyperlink{classOperationalSpace_a9327a02ad65a726d97ed8fa403dcd66a}{space\+\_\+size}} = \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}
+\begin{DoxyCompactList}\small\item\em Publicyc accessible size of this {\ttfamily \doxylink{classOperationalSpace}{Operational\+Space}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$\newline
+class Operational\+Space$<$ linear\+\_\+system, angular\+\_\+system, size, order $>$}
+The differentiable operational space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em linear\+\_\+system} & The linear system of coordinates. \\
+\hline
+{\em angular\+\_\+system} & The angula system of coordinates. \\
+\hline
+{\em size} & The dimension of the space. \\
+\hline
+{\em order} & The time derivative order. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}\label{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!Angular@{Angular}}
+\index{Angular@{Angular}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Angular}{Angular}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} =  \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{typename}} \mbox{\hyperlink{structcoord_1_1angular__type}{coord\+::angular\+\_\+type}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}$>$\+::type}
+
+
+
+The linear part type. 
+
+\Hypertarget{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}\label{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!Base@{Base}}
+\index{Base@{Base}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Base}{Base}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}} =  \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}} + \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}$>$ $>$}
+
+
+
+The jacobian friendly vector type. 
+
+Given by the size of the space + the size of the rotational space. \Hypertarget{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}\label{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!Derivative@{Derivative}}
+\index{Derivative@{Derivative}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Derivative}{Derivative}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Derivative}} =  \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} + 1$>$}
+
+\Hypertarget{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}\label{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!Linear@{Linear}}
+\index{Linear@{Linear}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Linear}{Linear}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} =  \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{typename}} \mbox{\hyperlink{structcoord_1_1linear__type}{coord\+::linear\+\_\+type}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}$>$\+::type}
+
+
+
+The linear part type. 
+
+\Hypertarget{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}\label{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!Primitive@{Primitive}}
+\index{Primitive@{Primitive}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Primitive}{Primitive}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{using}} \mbox{\hyperlink{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}{Primitive}} =  \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} -\/ 1$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}\label{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_a259cf26d14857771763c2fd968e19298}\label{classOperationalSpace_a259cf26d14857771763c2fd968e19298} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} as$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ls}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{as}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&}]{other }\end{DoxyParamCaption})}
+
+
+
+Constructor for implicit functional-\/style conversions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & A operational space point in arbitrary coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily other} in the given coordinates. 
+\end{DoxyReturn}
+\Hypertarget{classOperationalSpace_abdce980217ca1f98e7ec1f14c3ccf6f4}\label{classOperationalSpace_abdce980217ca1f98e7ec1f14c3ccf6f4} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&}]{linear,  }\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&}]{angular }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_a404fe3e07d72687e86bd49cd0ec75057}\label{classOperationalSpace_a404fe3e07d72687e86bd49cd0ec75057} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&}]{linear,  }\item[{\mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\&}]{angular }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_a682421cacd403d2eecc805ead4cb2d28}\label{classOperationalSpace_a682421cacd403d2eecc805ead4cb2d28} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\&}]{linear,  }\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&}]{angular }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_ac61b7d01fd063d17e3bbe72d1c70dd9f}\label{classOperationalSpace_ac61b7d01fd063d17e3bbe72d1c70dd9f} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!OperationalSpace@{OperationalSpace}}
+\index{OperationalSpace@{OperationalSpace}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{OperationalSpace()}{OperationalSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}} \&\&}]{linear,  }\item[{\mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}} \&\&}]{angular }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}\label{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!angular@{angular}}
+\index{angular@{angular}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{angular()}{angular()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& angular (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_a235019049939e6117bdf835d803acb17}\label{classOperationalSpace_a235019049939e6117bdf835d803acb17} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!angular@{angular}}
+\index{angular@{angular}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{angular()}{angular()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& angular (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a88accfd556be16dd4c55ea0c0e6e68c0}\label{classOperationalSpace_a88accfd556be16dd4c55ea0c0e6e68c0} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!eval@{eval}}
+\index{eval@{eval}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_a96f1d85a181b6a37c72223bd3ab09461}\label{classOperationalSpace_a96f1d85a181b6a37c72223bd3ab09461} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!eval@{eval}}
+\index{eval@{eval}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}\label{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!linear@{linear}}
+\index{linear@{linear}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{linear()}{linear()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& linear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_aacd347307e98533288e838271ad185b7}\label{classOperationalSpace_aacd347307e98533288e838271ad185b7} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!linear@{linear}}
+\index{linear@{linear}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{linear()}{linear()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{auto}} \& linear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_ad840f5d7d824ab9d442511c61c8f6b77}\label{classOperationalSpace_ad840f5d7d824ab9d442511c61c8f6b77} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!norm@{norm}}
+\index{norm@{norm}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a93a97f5144ba5b11bb4960a6a3e537dc}\label{classOperationalSpace_a93a97f5144ba5b11bb4960a6a3e537dc} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}{Primitive}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a61379da39aa165482cc99802b6db6ad1}\label{classOperationalSpace_a61379da39aa165482cc99802b6db6ad1} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&}]{variation }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a7fa37cda5880ab473fa6802775690841}\label{classOperationalSpace_a7fa37cda5880ab473fa6802775690841} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&}]{variation }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_ae938c44d6e41b7e11aee7b8434a93b3d}\label{classOperationalSpace_ae938c44d6e41b7e11aee7b8434a93b3d} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a4d45b382e4a797a3b74a7d524d587e2c}\label{classOperationalSpace_a4d45b382e4a797a3b74a7d524d587e2c} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_a01f098189ede882b9352730af9c9621e}\label{classOperationalSpace_a01f098189ede882b9352730af9c9621e} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace}{Operational\+Space}} \& \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}-\/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\+\_\+system}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}} $>$ \&}]{variation }\end{DoxyParamCaption})}
+
+\Hypertarget{classOperationalSpace_ace15501aaded12e667ae4dc14dc33f8b}\label{classOperationalSpace_ace15501aaded12e667ae4dc14dc33f8b} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Derivative}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{operator}}/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}\label{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!vector@{vector}}
+\index{vector@{vector}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{vector()}{vector()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, size\+\_\+t size = 3, ssize\+\_\+t order = 0$>$ \\
+const \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}} vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Represents this point as a linear + angular vector. 
+
+\begin{DoxyNote}{Note}
+In Lie algebra only use with quaternions. 
+\end{DoxyNote}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classOperationalSpace_a9327a02ad65a726d97ed8fa403dcd66a}\label{classOperationalSpace_a9327a02ad65a726d97ed8fa403dcd66a} 
+\index{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}!space\_size@{space\_size}}
+\index{space\_size@{space\_size}!OperationalSpace$<$ linear\_system, angular\_system, size, order $>$@{OperationalSpace$<$ linear\_system, angular\_system, size, order $>$}}
+\doxysubsubsection{\texorpdfstring{space\_size}{space\_size}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} size = 3, \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{constexpr}} \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size\+\_\+t}} space\+\_\+size = \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Publicyc accessible size of this {\ttfamily \doxylink{classOperationalSpace}{Operational\+Space}}. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/spaces/\mbox{\hyperlink{operational__space_8hpp}{operational\+\_\+space.\+hpp}}\end{DoxyCompactItemize}

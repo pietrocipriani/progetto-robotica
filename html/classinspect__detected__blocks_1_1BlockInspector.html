@@ -81,12 +81,17 @@ $(function() {
   <div class="headertitle"><div class="title">BlockInspector Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Receives images from the zed camera and stores them in a member variable to be used externally.  
+ <a href="classinspect__detected__blocks_1_1BlockInspector.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6e4454e499782239df3510d36873365" id="r_ae6e4454e499782239df3510d36873365"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html#ae6e4454e499782239df3510d36873365">__init__</a> (self, int <a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html#a0722a8e26f40133237a724104da33d71">skip_period</a>)</td></tr>
+<tr class="memdesc:ae6e4454e499782239df3510d36873365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes <code>BlockInspector</code> and subscribes to the <code>IMAGE_TOPIC</code> topic to listen for images.  <br /></td></tr>
 <tr class="separator:ae6e4454e499782239df3510d36873365"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd6593e992d5afbed7936c4ff0b12ed8" id="r_afd6593e992d5afbed7936c4ff0b12ed8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html#afd6593e992d5afbed7936c4ff0b12ed8">callback</a> (self, Image <a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html#a55220768788d8c08564ca1b667349f3e">encoded_image</a>)</td></tr>
+<tr class="memdesc:afd6593e992d5afbed7936c4ff0b12ed8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback from the image topic subscription.  <br /></td></tr>
 <tr class="separator:afd6593e992d5afbed7936c4ff0b12ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -100,7 +105,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0722a8e26f40133237a724104da33d71" id="r_a0722a8e26f40133237a724104da33d71"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classinspect__detected__blocks_1_1BlockInspector.html#a0722a8e26f40133237a724104da33d71">skip_period</a></td></tr>
 <tr class="separator:a0722a8e26f40133237a724104da33d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Receives images from the zed camera and stores them in a member variable to be used externally. </p>
+<p>See file docs for more info. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae6e4454e499782239df3510d36873365" name="ae6e4454e499782239df3510d36873365"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae6e4454e499782239df3510d36873365">&#9670;&#160;</a></span>__init__()</h2>
 
@@ -126,11 +134,15 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Initializes `BlockInspector` and subscribes to the `IMAGE_TOPIC` topic to listen for images.
 
-@param skip_period only one of this many images will be sent to the block detection service,
-                   to save CPU. Setting this to 1 will send all images to the service. 
-</pre> 
+<p>Initializes <code>BlockInspector</code> and subscribes to the <code>IMAGE_TOPIC</code> topic to listen for images. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">skip_period</td><td>only one of this many images will be sent to the block detection service, to save CPU. Setting this to 1 will send all images to the service. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -159,9 +171,10 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">The callback from the image topic subscription. Saves passes the encoded image to the main
-thread one every `self.skip_period` times, to save CPU.
-</pre> 
+
+<p>The callback from the image topic subscription. </p>
+<p>Saves passes the encoded image to the main thread one every <code>self.skip_period</code> times, to save CPU. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

@@ -1,0 +1,76 @@
+\doxysection{Movement\+Generation\+Recovering\+Exception Class Reference}
+\hypertarget{classplanner_1_1MovementGenerationRecoveringException}{}\label{classplanner_1_1MovementGenerationRecoveringException}\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+
+
+Base exception class for {\ttfamily generate\+\_\+block\+\_\+positioning\+\_\+order}.  
+
+
+
+
+{\ttfamily \#include $<$planner.\+hpp$>$}
+
+
+
+Inheritance diagram for Movement\+Generation\+Recovering\+Exception\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classplanner_1_1MovementGenerationRecoveringException__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Movement\+Generation\+Recovering\+Exception\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{classplanner_1_1MovementGenerationRecoveringException__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException_a637daf5b203ee63a0d48d69ce8bbe2a9}{Movement\+Generation\+Recovering\+Exception}} (const char \texorpdfstring{$\ast$}{*}what, std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&\&movement)
+\item 
+\mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException_aae3bb70e6e18dd15ab386f0518124c2f}{Movement\+Generation\+Recovering\+Exception}} (const std\+::string \&what, std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&\&movement)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException_a7e9e98edcc7ad6f5270be3a2753acefa}{recovered\+\_\+data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base exception class for {\ttfamily generate\+\_\+block\+\_\+positioning\+\_\+order}. 
+
+Permits to recover partial data after an error. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classplanner_1_1MovementGenerationRecoveringException_aae3bb70e6e18dd15ab386f0518124c2f}\label{classplanner_1_1MovementGenerationRecoveringException_aae3bb70e6e18dd15ab386f0518124c2f} 
+\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}!MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}!MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+\doxysubsubsection{\texorpdfstring{MovementGenerationRecoveringException()}{MovementGenerationRecoveringException()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{Movement\+Generation\+Recovering\+Exception}} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{what,  }\item[{std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&\&}]{movement }\end{DoxyParamCaption})}
+
+\Hypertarget{classplanner_1_1MovementGenerationRecoveringException_a637daf5b203ee63a0d48d69ce8bbe2a9}\label{classplanner_1_1MovementGenerationRecoveringException_a637daf5b203ee63a0d48d69ce8bbe2a9} 
+\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}!MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}!MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+\doxysubsubsection{\texorpdfstring{MovementGenerationRecoveringException()}{MovementGenerationRecoveringException()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{Movement\+Generation\+Recovering\+Exception}} (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{what,  }\item[{std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&\&}]{movement }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classplanner_1_1MovementGenerationRecoveringException_a7e9e98edcc7ad6f5270be3a2753acefa}\label{classplanner_1_1MovementGenerationRecoveringException_a7e9e98edcc7ad6f5270be3a2753acefa} 
+\index{MovementGenerationRecoveringException@{MovementGenerationRecoveringException}!recovered\_data@{recovered\_data}}
+\index{recovered\_data@{recovered\_data}!MovementGenerationRecoveringException@{MovementGenerationRecoveringException}}
+\doxysubsubsection{\texorpdfstring{recovered\_data}{recovered\_data}}
+{\footnotesize\ttfamily std\+::queue$<$\mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}}$>$ recovered\+\_\+data}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/\mbox{\hyperlink{planner_8hpp}{planner.\+hpp}}\item 
+src/planner/lib/planning/\mbox{\hyperlink{exceptions_8cpp}{exceptions.\+cpp}}\end{DoxyCompactItemize}

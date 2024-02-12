@@ -1,0 +1,51 @@
+\doxysection{tester.\+hpp}
+\hypertarget{tester_8hpp_source}{}\label{tester_8hpp_source}\index{src/planner/tests/tester.hpp@{src/planner/tests/tester.hpp}}
+\mbox{\hyperlink{tester_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TESTER\_HPP\_INCLUDE}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TESTER\_HPP\_INCLUDE}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <concepts>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <ostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#if\ \_\_cplusplus\ >=\ 202002L}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<std::predicate\ Tester>}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Tester>}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{tester_8hpp_a78fb74429bced5eaf4e4ecbcc61a0d80}{test}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ Tester\&\ tester)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{comment}{//\ ANSI\ escape\ codes\ for\ colored\ +\ bold\ output.}}
+\DoxyCodeLine{00023\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ RED\_ANSI[]\ =\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[1;31m"{}};}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ GREEN\_ANSI[]\ =\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[1;32m"{}};}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{char}\ DEFAULT\_ANSI[]\ =\ \textcolor{stringliteral}{"{}\(\backslash\)x1b[m"{}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}test\ "{}}\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{//\ defaults\ to\ failed\ test\ in\ case\ of\ exceptions.}}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{bool}\ success\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ success\ =\ tester();}
+\DoxyCodeLine{00033\ \ \ \}\ \textcolor{keywordflow}{catch}\ (std::exception\&\ e)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ std::cerr\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{00035\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}test\ "{}}\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}};}
+\DoxyCodeLine{00036\ \ \ \}\ \textcolor{keywordflow}{catch}\ (...)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Unknown\ error."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00038\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}test\ "{}}\ <<\ name\ <<\ \textcolor{stringliteral}{"{}:\ "{}};}
+\DoxyCodeLine{00039\ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keywordflow}{if}\ (success)\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ std::cout\ <<\ GREEN\_ANSI\ <<\ \textcolor{stringliteral}{"{}PASSED"{}};}
+\DoxyCodeLine{00043\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ std::cout\ <<\ RED\_ANSI\ <<\ \textcolor{stringliteral}{"{}FAILED"{}};}
+\DoxyCodeLine{00045\ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ std::cout\ <<\ DEFAULT\_ANSI\ <<\ std::endl;}
+\DoxyCodeLine{00048\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ TESTER\_HPP\_INCLUDE\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

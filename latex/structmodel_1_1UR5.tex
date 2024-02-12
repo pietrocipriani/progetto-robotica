@@ -1,0 +1,232 @@
+\doxysection{UR5 Struct Reference}
+\hypertarget{structmodel_1_1UR5}{}\label{structmodel_1_1UR5}\index{UR5@{UR5}}
+
+
+The \doxylink{structmodel_1_1UR5}{UR5} manipolator model.  
+
+
+
+
+{\ttfamily \#include $<$model.\+hpp$>$}
+
+
+
+Collaboration diagram for UR5\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{structmodel_1_1UR5__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb}{Acceleration}} = \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Velocity\+::\+Derivative}}
+\item 
+using \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} = \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{dof}} $>$
+\begin{DoxyCompactList}\small\item\em The type representing a configuration for a {\ttfamily dof} manipulator. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}} = std\+::array$<$ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}, \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{dof}} $>$
+\item 
+using \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{Velocity}} = \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Configuration\+::\+Derivative}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a7b41719fa5aa6ec450d32691900b42b0}{UR5}} (\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} \&\&homing\+\_\+config) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{structmodel_1_1UR5}{UR5} with the given initial configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a2fdf515b922ac564de6c67b16fb1642e}{UR5}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} \&homing\+\_\+config) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{structmodel_1_1UR5}{UR5} with the given initial configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_a9688c49b84651be694b6740c186e373e}{base}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}0\mbox{]}
+\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} \mbox{\hyperlink{structmodel_1_1UR5_a0910717551963df697d192900a7f4f59}{config}}
+\begin{DoxyCompactList}\small\item\em The current configuration of the robot. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_ad164d37be8a704a47e129bef6ad7ec6b}{elbow}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}2\mbox{]}
+\item 
+const \mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}} \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}
+\begin{DoxyCompactList}\small\item\em The parameters for the joints. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_ab4bc426ce27c315c4c4309dd7c6d8f6c}{shoulder}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}1\mbox{]}
+\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_a1209a90ec4df02805446a1128844cb19}{wrist1}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}3\mbox{]}
+\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_a1a0e08f71e8b31820716b15274523d6b}{wrist2}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}4\mbox{]}
+\item 
+const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \& \mbox{\hyperlink{structmodel_1_1UR5_ae4833ddf149ebc922c2266f998902fac}{wrist3}} = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}5\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{dof}} = 6
+\begin{DoxyCompactList}\small\item\em The degrees of freedom of the \doxylink{structmodel_1_1UR5}{UR5}. \end{DoxyCompactList}\item 
+static constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1UR5_a354501629109a65b65ab64736c528ea0}{max\+\_\+joint\+\_\+accel}} = 40 \texorpdfstring{$\ast$}{*} 0.\+5 \texorpdfstring{$\ast$}{*} 0.\+1
+\begin{DoxyCompactList}\small\item\em Very rough estimation of the max acceleration for the base joint with a fully extended arm. \end{DoxyCompactList}\item 
+static constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1UR5_afddf0881630cd07072f15267471756b1}{max\+\_\+joint\+\_\+speed}} = M\+\_\+\+PI
+\begin{DoxyCompactList}\small\item\em The maximum rotational speed a joint can have. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{structmodel_1_1UR5}{UR5} manipolator model. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb}\label{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb} 
+\index{UR5@{UR5}!Acceleration@{Acceleration}}
+\index{Acceleration@{Acceleration}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{Acceleration}{Acceleration}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb}{Acceleration}} =  \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Velocity\+::\+Derivative}}}
+
+\Hypertarget{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}\label{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6} 
+\index{UR5@{UR5}!Configuration@{Configuration}}
+\index{Configuration@{Configuration}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{Configuration}{Configuration}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} =  \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$\mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{dof}}$>$}
+
+
+
+The type representing a configuration for a {\ttfamily dof} manipulator. 
+
+\Hypertarget{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}\label{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae} 
+\index{UR5@{UR5}!Parameters@{Parameters}}
+\index{Parameters@{Parameters}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{Parameters}{Parameters}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}} =  std\+::array$<$\mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}, \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{dof}}$>$}
+
+\Hypertarget{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}\label{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e} 
+\index{UR5@{UR5}!Velocity@{Velocity}}
+\index{Velocity@{Velocity}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{Velocity}{Velocity}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{Velocity}} =  \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Configuration\+::\+Derivative}}}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structmodel_1_1UR5_a2fdf515b922ac564de6c67b16fb1642e}\label{structmodel_1_1UR5_a2fdf515b922ac564de6c67b16fb1642e} 
+\index{UR5@{UR5}!UR5@{UR5}}
+\index{UR5@{UR5}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{UR5()}{UR5()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} \&}]{homing\+\_\+config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs an \doxylink{structmodel_1_1UR5}{UR5} with the given initial configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homing\+\_\+config} & The initial configuration. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{structmodel_1_1UR5_a7b41719fa5aa6ec450d32691900b42b0}\label{structmodel_1_1UR5_a7b41719fa5aa6ec450d32691900b42b0} 
+\index{UR5@{UR5}!UR5@{UR5}}
+\index{UR5@{UR5}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{UR5()}{UR5()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} \&\&}]{homing\+\_\+config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs an \doxylink{structmodel_1_1UR5}{UR5} with the given initial configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em homing\+\_\+config} & The initial configuration. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmodel_1_1UR5_a9688c49b84651be694b6740c186e373e}\label{structmodel_1_1UR5_a9688c49b84651be694b6740c186e373e} 
+\index{UR5@{UR5}!base@{base}}
+\index{base@{base}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{base}{base}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& base = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}0\mbox{]}}
+
+\Hypertarget{structmodel_1_1UR5_a0910717551963df697d192900a7f4f59}\label{structmodel_1_1UR5_a0910717551963df697d192900a7f4f59} 
+\index{UR5@{UR5}!config@{config}}
+\index{config@{config}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{Configuration}} config}
+
+
+
+The current configuration of the robot. 
+
+\Hypertarget{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}\label{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b} 
+\index{UR5@{UR5}!dof@{dof}}
+\index{dof@{dof}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{dof}{dof}}
+{\footnotesize\ttfamily constexpr size\+\_\+t dof = 6\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The degrees of freedom of the \doxylink{structmodel_1_1UR5}{UR5}. 
+
+\Hypertarget{structmodel_1_1UR5_ad164d37be8a704a47e129bef6ad7ec6b}\label{structmodel_1_1UR5_ad164d37be8a704a47e129bef6ad7ec6b} 
+\index{UR5@{UR5}!elbow@{elbow}}
+\index{elbow@{elbow}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{elbow}{elbow}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& elbow = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}2\mbox{]}}
+
+\Hypertarget{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}\label{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3} 
+\index{UR5@{UR5}!joints@{joints}}
+\index{joints@{joints}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{joints}{joints}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1UR5_a8eea9eb8b7cb794575d993bbe86c5eae}{Parameters}} joints}
+
+
+
+The parameters for the joints. 
+
+\begin{DoxyNote}{Note}
+The configuration have to be modified via {\ttfamily config}. 
+\end{DoxyNote}
+\Hypertarget{structmodel_1_1UR5_a354501629109a65b65ab64736c528ea0}\label{structmodel_1_1UR5_a354501629109a65b65ab64736c528ea0} 
+\index{UR5@{UR5}!max\_joint\_accel@{max\_joint\_accel}}
+\index{max\_joint\_accel@{max\_joint\_accel}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{max\_joint\_accel}{max\_joint\_accel}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+joint\+\_\+accel = 40 \texorpdfstring{$\ast$}{*} 0.\+5 \texorpdfstring{$\ast$}{*} 0.\+1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Very rough estimation of the max acceleration for the base joint with a fully extended arm. 
+
+\mbox{[}rad/s²\mbox{]} Only a fraction of the available torque is used. \Hypertarget{structmodel_1_1UR5_afddf0881630cd07072f15267471756b1}\label{structmodel_1_1UR5_afddf0881630cd07072f15267471756b1} 
+\index{UR5@{UR5}!max\_joint\_speed@{max\_joint\_speed}}
+\index{max\_joint\_speed@{max\_joint\_speed}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{max\_joint\_speed}{max\_joint\_speed}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+joint\+\_\+speed = M\+\_\+\+PI\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum rotational speed a joint can have. 
+
+\mbox{[}rad/s\mbox{]} \Hypertarget{structmodel_1_1UR5_ab4bc426ce27c315c4c4309dd7c6d8f6c}\label{structmodel_1_1UR5_ab4bc426ce27c315c4c4309dd7c6d8f6c} 
+\index{UR5@{UR5}!shoulder@{shoulder}}
+\index{shoulder@{shoulder}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{shoulder}{shoulder}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& shoulder = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}1\mbox{]}}
+
+\Hypertarget{structmodel_1_1UR5_a1209a90ec4df02805446a1128844cb19}\label{structmodel_1_1UR5_a1209a90ec4df02805446a1128844cb19} 
+\index{UR5@{UR5}!wrist1@{wrist1}}
+\index{wrist1@{wrist1}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{wrist1}{wrist1}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& wrist1 = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}3\mbox{]}}
+
+\Hypertarget{structmodel_1_1UR5_a1a0e08f71e8b31820716b15274523d6b}\label{structmodel_1_1UR5_a1a0e08f71e8b31820716b15274523d6b} 
+\index{UR5@{UR5}!wrist2@{wrist2}}
+\index{wrist2@{wrist2}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{wrist2}{wrist2}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& wrist2 = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}4\mbox{]}}
+
+\Hypertarget{structmodel_1_1UR5_ae4833ddf149ebc922c2266f998902fac}\label{structmodel_1_1UR5_ae4833ddf149ebc922c2266f998902fac} 
+\index{UR5@{UR5}!wrist3@{wrist3}}
+\index{wrist3@{wrist3}!UR5@{UR5}}
+\doxysubsubsection{\texorpdfstring{wrist3}{wrist3}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}\& wrist3 = \mbox{\hyperlink{structmodel_1_1UR5_ae44a0622d476764a2234a6f45b65d9e3}{joints}}\mbox{[}5\mbox{]}}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/\mbox{\hyperlink{model_8hpp}{model.\+hpp}}\item 
+src/planner/lib/model/\mbox{\hyperlink{model_8cpp}{model.\+cpp}}\end{DoxyCompactItemize}

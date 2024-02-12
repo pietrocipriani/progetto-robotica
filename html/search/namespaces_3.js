@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['precise_5fplacement_0',['precise_placement',['../namespaceprecise__placement.html',1,'']]]
+  ['inspect_5fdetected_5fblocks_0',['inspect_detected_blocks',['../namespaceinspect__detected__blocks.html',1,'']]]
 ];

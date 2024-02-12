@@ -1,0 +1,262 @@
+\doxysection{coord Namespace Reference}
+\hypertarget{namespacecoord}{}\label{namespacecoord}\index{coord@{coord}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em The representing type for the given coordinate system. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcoord_1_1angular__type_3_01Lie_00_013_01_4}{angular\+\_\+type$<$ Lie, 3 $>$}}
+\item 
+struct \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em The representing type for the given coordinate system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} \{ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}
+, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}
+ \}
+\begin{DoxyCompactList}\small\item\em The possible angular coordinate systems. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} \{ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}
+, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}
+ \}
+\begin{DoxyCompactList}\small\item\em The possible linear coordinate systems. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} from, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} to, size\+\_\+t size$>$ }\\\mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ to, size $>$\+::type \mbox{\hyperlink{namespacecoord_aefc0cd62b5ee71688077a63385a2d170}{convert}} (const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&p)
+\begin{DoxyCompactList}\small\item\em Converts the angular point between the given linear systems. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} from, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} to, size\+\_\+t size$>$ }\\\mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ to, size $>$\+::type \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}} (const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&p)
+\begin{DoxyCompactList}\small\item\em Converts the linear point between the given linear systems. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_a533c9576bdf09c4e2a2445fc50df024b}{convert$<$ Cartesian, Cylindrical, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$\+::type \&cartesian)
+\begin{DoxyCompactList}\small\item\em Converts a {\ttfamily cartesian} coordinate into cylindrical coordinates. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_a331aa108ffe163fe8c3bb583c7c73e19}{convert$<$ Cylindrical, Cartesian, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&cylindrical)
+\begin{DoxyCompactList}\small\item\em Converts a {\ttfamily cylindrical} coordinate into cartesian coordinates. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_a5957272d0f63195400458956038769a1}{convert$<$ Euler, Lie, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&euler)
+\begin{DoxyCompactList}\small\item\em Converts a {\ttfamily quaternion} into an euler angle. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_a48d424bed51109389f4cfcf373c97116}{convert$<$ Lie, Euler, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$\+::type \&lie)
+\begin{DoxyCompactList}\small\item\em Converts a {\ttfamily quaternion} into an euler angle. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} from, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} to = Lie, size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_a4cd1957f8f7f96bcd5428cb4513eff11}{measure}} (const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&start, const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&end)
+\begin{DoxyCompactList}\small\item\em Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} from, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} to = Cartesian, size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}} (const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&start, const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&end)
+\begin{DoxyCompactList}\small\item\em Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ac9654a0bd1855d46b4864188f795e365}{measure$<$ Cylindrical, Cartesian, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&start, const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&end)
+\item 
+template$<$$>$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_a789a6c8ff29119c3131a35b5b784fa30}{measure$<$ Euler, Lie, 3 $>$}} (const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&start, const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&end)
+\item 
+template$<$$>$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ab10c87867e4292619db3b217ff87124d}{measure$<$ Lie, Lie, 3 $>$}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&start, const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&end)
+\begin{DoxyCompactList}\small\item\em Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}\label{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3} 
+\index{coord@{coord}!AngularSystem@{AngularSystem}}
+\index{AngularSystem@{AngularSystem}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{AngularSystem}{AngularSystem}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}}}
+
+
+
+The possible angular coordinate systems. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Euler@{Euler}!coord@{coord}}\index{coord@{coord}!Euler@{Euler}}}\Hypertarget{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}\label{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e} 
+Euler&\begin{DoxySeeAlso}{See also}
+\href{https://en.wikipedia.org/wiki/Euler_angles}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Euler\+\_\+angles}}. 
+\end{DoxySeeAlso}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Lie@{Lie}!coord@{coord}}\index{coord@{coord}!Lie@{Lie}}}\Hypertarget{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}\label{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522} 
+Lie&This is the coordinate system of quaternions. \begin{DoxyNote}{Note}
+The \textquotesingle{}Lie group\textquotesingle{} term is improperly used. However is a term that groups rotation quaternions, rotation complexes etc. 
+\end{DoxyNote}
+\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}\label{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6} 
+\index{coord@{coord}!LinearSystem@{LinearSystem}}
+\index{LinearSystem@{LinearSystem}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{LinearSystem}{LinearSystem}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}}}
+
+
+
+The possible linear coordinate systems. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Cartesian@{Cartesian}!coord@{coord}}\index{coord@{coord}!Cartesian@{Cartesian}}}\Hypertarget{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}\label{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc} 
+Cartesian&\begin{DoxySeeAlso}{See also}
+\href{https://en.wikipedia.org/wiki/Cartesian_coordinate_system}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Cartesian\+\_\+coordinate\+\_\+system}}. 
+\end{DoxySeeAlso}
+\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Cylindrical@{Cylindrical}!coord@{coord}}\index{coord@{coord}!Cylindrical@{Cylindrical}}}\Hypertarget{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}\label{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36} 
+Cylindrical&\begin{DoxySeeAlso}{See also}
+\href{https://en.wikipedia.org/wiki/Cylindrical_coordinate_system}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Cylindrical\+\_\+coordinate\+\_\+system}}. 
+\end{DoxySeeAlso}
+\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacecoord_aefc0cd62b5ee71688077a63385a2d170}\label{namespacecoord_aefc0cd62b5ee71688077a63385a2d170} 
+\index{coord@{coord}!convert@{convert}}
+\index{convert@{convert}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} from, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} to, size\+\_\+t size$>$ \\
+\mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ to, size $>$\+::type convert (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Converts the angular point between the given linear systems. 
+
+\Hypertarget{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}\label{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e} 
+\index{coord@{coord}!convert@{convert}}
+\index{convert@{convert}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert()}{convert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} from, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} to, size\+\_\+t size$>$ \\
+\mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ to, size $>$\+::type convert (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Converts the linear point between the given linear systems. 
+
+\Hypertarget{namespacecoord_a533c9576bdf09c4e2a2445fc50df024b}\label{namespacecoord_a533c9576bdf09c4e2a2445fc50df024b} 
+\index{coord@{coord}!convert$<$ Cartesian, Cylindrical, 3 $>$@{convert$<$ Cartesian, Cylindrical, 3 $>$}}
+\index{convert$<$ Cartesian, Cylindrical, 3 $>$@{convert$<$ Cartesian, Cylindrical, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert$<$ Cartesian, Cylindrical, 3 $>$()}{convert< Cartesian, Cylindrical, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$\+::type \&}]{cartesian }\end{DoxyParamCaption})}
+
+
+
+Converts a {\ttfamily cartesian} coordinate into cylindrical coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cartesian} & The point in cartesian coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The point in cylindrical coordinates. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Cylindrical coordinates\+: \mbox{[}rho; theta; h\mbox{]}. 
+\end{DoxyNote}
+\Hypertarget{namespacecoord_a331aa108ffe163fe8c3bb583c7c73e19}\label{namespacecoord_a331aa108ffe163fe8c3bb583c7c73e19} 
+\index{coord@{coord}!convert$<$ Cylindrical, Cartesian, 3 $>$@{convert$<$ Cylindrical, Cartesian, 3 $>$}}
+\index{convert$<$ Cylindrical, Cartesian, 3 $>$@{convert$<$ Cylindrical, Cartesian, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert$<$ Cylindrical, Cartesian, 3 $>$()}{convert< Cylindrical, Cartesian, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&}]{cylindrical }\end{DoxyParamCaption})}
+
+
+
+Converts a {\ttfamily cylindrical} coordinate into cartesian coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cylindrical} & The point in cartesian coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The point {\ttfamily cylindrical} in cartesian coordinates. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Cylindrical coordinates\+: \mbox{[}rho; theta; h\mbox{]}. 
+\end{DoxyNote}
+\Hypertarget{namespacecoord_a5957272d0f63195400458956038769a1}\label{namespacecoord_a5957272d0f63195400458956038769a1} 
+\index{coord@{coord}!convert$<$ Euler, Lie, 3 $>$@{convert$<$ Euler, Lie, 3 $>$}}
+\index{convert$<$ Euler, Lie, 3 $>$@{convert$<$ Euler, Lie, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert$<$ Euler, Lie, 3 $>$()}{convert< Euler, Lie, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&}]{euler }\end{DoxyParamCaption})}
+
+
+
+Converts a {\ttfamily quaternion} into an euler angle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cartesian} & The point in cartesian coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The point in cylindrical coordinates. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Euler representation can be subject to changes, only coherence is asserted. 
+\end{DoxyNote}
+\Hypertarget{namespacecoord_a48d424bed51109389f4cfcf373c97116}\label{namespacecoord_a48d424bed51109389f4cfcf373c97116} 
+\index{coord@{coord}!convert$<$ Lie, Euler, 3 $>$@{convert$<$ Lie, Euler, 3 $>$}}
+\index{convert$<$ Lie, Euler, 3 $>$@{convert$<$ Lie, Euler, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{convert$<$ Lie, Euler, 3 $>$()}{convert< Lie, Euler, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$\+::type \&}]{lie }\end{DoxyParamCaption})}
+
+
+
+Converts a {\ttfamily quaternion} into an euler angle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cartesian} & The point in cartesian coordinates. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The point in cylindrical coordinates. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Euler representation can be subject to changes, coherence is asserted. 
+\end{DoxyNote}
+\Hypertarget{namespacecoord_a4cd1957f8f7f96bcd5428cb4513eff11}\label{namespacecoord_a4cd1957f8f7f96bcd5428cb4513eff11} 
+\index{coord@{coord}!measure@{measure}}
+\index{measure@{measure}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{measure()}{measure()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} from, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} to = Lie, size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} measure (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&}]{start,  }\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ from, size $>$\+::type \&}]{end }\end{DoxyParamCaption})}
+
+
+
+Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. 
+
+\Hypertarget{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}\label{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a} 
+\index{coord@{coord}!measure@{measure}}
+\index{measure@{measure}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{measure()}{measure()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} from, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} to = Cartesian, size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} measure (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&}]{start,  }\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ from, size $>$\+::type \&}]{end }\end{DoxyParamCaption})}
+
+
+
+Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. 
+
+\Hypertarget{namespacecoord_ac9654a0bd1855d46b4864188f795e365}\label{namespacecoord_ac9654a0bd1855d46b4864188f795e365} 
+\index{coord@{coord}!measure$<$ Cylindrical, Cartesian, 3 $>$@{measure$<$ Cylindrical, Cartesian, 3 $>$}}
+\index{measure$<$ Cylindrical, Cartesian, 3 $>$@{measure$<$ Cylindrical, Cartesian, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{measure$<$ Cylindrical, Cartesian, 3 $>$()}{measure< Cylindrical, Cartesian, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&}]{start,  }\item[{const typename \mbox{\hyperlink{structcoord_1_1linear__type}{linear\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}, 3 $>$\+::type \&}]{end }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacecoord_a789a6c8ff29119c3131a35b5b784fa30}\label{namespacecoord_a789a6c8ff29119c3131a35b5b784fa30} 
+\index{coord@{coord}!measure$<$ Euler, Lie, 3 $>$@{measure$<$ Euler, Lie, 3 $>$}}
+\index{measure$<$ Euler, Lie, 3 $>$@{measure$<$ Euler, Lie, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{measure$<$ Euler, Lie, 3 $>$()}{measure< Euler, Lie, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&}]{start,  }\item[{const typename \mbox{\hyperlink{structcoord_1_1angular__type}{angular\+\_\+type}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}}, 3 $>$\+::type \&}]{end }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacecoord_ab10c87867e4292619db3b217ff87124d}\label{namespacecoord_ab10c87867e4292619db3b217ff87124d} 
+\index{coord@{coord}!measure$<$ Lie, Lie, 3 $>$@{measure$<$ Lie, Lie, 3 $>$}}
+\index{measure$<$ Lie, Lie, 3 $>$@{measure$<$ Lie, Lie, 3 $>$}!coord@{coord}}
+\doxysubsubsection{\texorpdfstring{measure$<$ Lie, Lie, 3 $>$()}{measure< Lie, Lie, 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}, 3 $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{start,  }\item[{const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{end }\end{DoxyParamCaption})}
+
+
+
+Measures the length of a linearly interpolated trajectory between {\ttfamily start} and {\ttfamily end} in the @from system with the @to metric. 
+

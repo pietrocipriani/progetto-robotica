@@ -81,12 +81,17 @@ $(function() {
   <div class="headertitle"><div class="title">BlockDetector Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A ROS service that detects blocks in the images passed as input using a YOLOv8 model, and returns the detected labeled bounding boxes as output.  
+ <a href="classblock__detector__server_1_1BlockDetector.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abdd362d5f799ad16b5d6700efe590290" id="r_abdd362d5f799ad16b5d6700efe590290"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classblock__detector__server_1_1BlockDetector.html#abdd362d5f799ad16b5d6700efe590290">__init__</a> (self)</td></tr>
+<tr class="memdesc:abdd362d5f799ad16b5d6700efe590290"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of BlockDetector and loads the YOLO model from <code>block_detector_model/model.pt</code> by resolving the path with <code>RosPack</code>.  <br /></td></tr>
 <tr class="separator:abdd362d5f799ad16b5d6700efe590290"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28c1182234e0766fd0112f684fbdfb8b" id="r_a28c1182234e0766fd0112f684fbdfb8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classblock__detector__server_1_1BlockDetector.html#a28c1182234e0766fd0112f684fbdfb8b">callback</a> (self, Image request)</td></tr>
+<tr class="memdesc:a28c1182234e0766fd0112f684fbdfb8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ROS service callback; scripts can call it upon request using <code>rospy.ServiceProxy</code>.  <br /></td></tr>
 <tr class="separator:a28c1182234e0766fd0112f684fbdfb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -96,7 +101,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a508cc3106d2c29fe07dc87cbe3ea6927" id="r_a508cc3106d2c29fe07dc87cbe3ea6927"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classblock__detector__server_1_1BlockDetector.html#a508cc3106d2c29fe07dc87cbe3ea6927">model</a></td></tr>
 <tr class="separator:a508cc3106d2c29fe07dc87cbe3ea6927"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A ROS service that detects blocks in the images passed as input using a YOLOv8 model, and returns the detected labeled bounding boxes as output. </p>
+<p>See file docs for more info. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abdd362d5f799ad16b5d6700efe590290" name="abdd362d5f799ad16b5d6700efe590290"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abdd362d5f799ad16b5d6700efe590290">&#9670;&#160;</a></span>__init__()</h2>
 
@@ -112,9 +120,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">Creates an instance of BlockDetector and loads the YOLO model from
-`block_detector_model/model.pt` by resolving the path with `RosPack`.
-</pre> 
+
+<p>Creates an instance of BlockDetector and loads the YOLO model from <code>block_detector_model/model.pt</code> by resolving the path with <code>RosPack</code>. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -143,11 +151,16 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<pre class="fragment">The ROS service callback; scripts can call it upon request using `rospy.ServiceProxy`.
-@param request an `sensor_msgs/Image` with bgr8 encoding that will be decoded using the
-               cv2 bridge
-@return `block_detector/DetectBlocks`, i.e. the boxes detected by YOLO
-</pre> 
+
+<p>The ROS service callback; scripts can call it upon request using <code>rospy.ServiceProxy</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>an <code>sensor_msgs/Image</code> with bgr8 encoding that will be decoded using the cv2 bridge </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>block_detector/DetectBlocks</code>, i.e. the boxes detected by YOLO </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>

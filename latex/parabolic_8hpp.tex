@@ -1,0 +1,56 @@
+\doxysection{src/planner/lib/planning/interpolation/parabolic.hpp File Reference}
+\hypertarget{parabolic_8hpp}{}\label{parabolic_8hpp}\index{src/planner/lib/planning/interpolation/parabolic.hpp@{src/planner/lib/planning/interpolation/parabolic.hpp}}
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include "{}linear.\+hpp"{}}\newline
+{\ttfamily \#include "{}quadratic.\+hpp"{}}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}stop\+\_\+and\+\_\+play.\+hpp"{}}\newline
+{\ttfamily \#include "{}common.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$initializer\+\_\+list$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for parabolic.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{parabolic_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{parabolic_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structplanner_1_1internal_1_1QuadraticTimestamps}{Quadratic\+Timestamps}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1internal}{planner\+::internal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}} \{ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}
+, \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911aa8f066ebe8235ba25132c7e46f6053fd}{Via\+Point}}
+ \}
+\begin{DoxyCompactList}\small\item\em Possible modes of points\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}} start\+\_\+mode, \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911}{Mode}} end\+\_\+mode, class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ }\\void \mbox{\hyperlink{namespaceplanner_1_1internal_ab3a5777f39d82182ce9b10ed323c1ccd}{interpolation3}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&via, const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&end, typename \mbox{\hyperlink{classSequencedFunction}{Sequenced\+Function}}$<$ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} $>$\+::\+Container \&chain)
+\begin{DoxyCompactList}\small\item\em Performs the parabolic interpolation between three points. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container = std\+::initializer\+\_\+list$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a280236aaa5360e4ed815cd989df6405b}{parabolic\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, const Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&via\+\_\+points, const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&end)
+\begin{DoxyCompactList}\small\item\em Creates a parabolic interpolation between the {\ttfamily points}. \end{DoxyCompactList}\end{DoxyCompactItemize}

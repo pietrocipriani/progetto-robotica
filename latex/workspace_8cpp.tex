@@ -1,0 +1,46 @@
+\doxysection{src/controller/src/world/workspace.cpp File Reference}
+\hypertarget{workspace_8cpp}{}\label{workspace_8cpp}\index{src/controller/src/world/workspace.cpp@{src/controller/src/world/workspace.cpp}}
+{\ttfamily \#include "{}controller/world/workspace.\+hpp"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}controller/util/color.\+hpp"{}}\newline
+Include dependency graph for workspace.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{workspace_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller}{controller}}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller_1_1world}{controller\+::world}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b}{clear\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&deleter)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}{setup\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}{spawn\+\_\+blocks}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}{spawn\+\_\+missing\+\_\+pads}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr int \mbox{\hyperlink{namespacecontroller_1_1world_a6133ad85eabe3f3982cc17b08b3a3f18}{MAX\+\_\+\+TRIES\+\_\+\+TO\+\_\+\+PLACE\+\_\+\+BLOCK}} = 1000
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_a8c213e4bc8d1849b613088013399e424}{WORKSPACE\+\_\+\+MAX\+\_\+X}} = 0.\+92
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_aa38efa64bcd989e0e5c8be390ed1de05}{WORKSPACE\+\_\+\+MAX\+\_\+Y}} = 0.\+75
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_a4a742b8dd87ebf1917ccac4a6111b085}{WORKSPACE\+\_\+\+MIN\+\_\+X}} = 0.\+05
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_ab2896550d8f4b6c346382e5cb8b6835d}{WORKSPACE\+\_\+\+MIN\+\_\+Y}} = 0.\+30
+\end{DoxyCompactItemize}

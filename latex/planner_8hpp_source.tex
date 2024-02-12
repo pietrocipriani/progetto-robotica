@@ -1,0 +1,147 @@
+\doxysection{planner.\+hpp}
+\hypertarget{planner_8hpp_source}{}\label{planner_8hpp_source}\index{src/planner/include/planner.hpp@{src/planner/include/planner.hpp}}
+\mbox{\hyperlink{planner_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLANNER\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLANNER\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spaces_8hpp}{spaces.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8hpp}{utils.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kinematics_8hpp}{kinematics.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{block__type_8hpp}{block\_type.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <variant>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }os\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace}{Position}}\ =\ \mbox{\hyperlink{classOperationalSpace}{kinematics::Pose<>}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceplanner_1_1os_a72860f91a564503d0627e184311c7647}{Velocity}}\ =\ \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{kinematics::Velocity<>}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceplanner_1_1os_a6c97c8eb39742a4104f7f27fa12e40ae}{Acceleration}}\ =\ \mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{kinematics::Acceleration<>}};}
+\DoxyCodeLine{00020\ \}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }js\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Position}}\ =\ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model::UR5::Configuration}};}
+\DoxyCodeLine{00023\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Velocity}}\ =\ \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{model::UR5::Velocity}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Acceleration}}\ =\ \mbox{\hyperlink{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb}{model::UR5::Acceleration}};}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace}{Pose}}\ =\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace<coord::Cartesian,\ coord::Euler,\ 2>}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{classOperationalSpace}{Pose}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a6cef9464eeb5ace63256ef8c05a2e373}{pose}};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}(\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}},\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ x,\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ y,\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ angle)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a643a9201d30a39f1222358adedf2fb98}{pad\_pose}}(\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a8480441d7a5c3b0a76837a3f4e7a0de2}{collides}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{classOperationalSpace}{os::Position}}\ \mbox{\hyperlink{structplanner_1_1BlockPose_a61bf3d4d8e72df2ec4b2e595b4f87230}{to\_os\_position}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ \};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1BlockMovement}{BlockMovement}}\ \{}
+\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\ \mbox{\hyperlink{structplanner_1_1BlockMovement_ac2f696f70872902b214257466df1a034}{start}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00062\ \ \ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\ \mbox{\hyperlink{structplanner_1_1BlockMovement_a26508f4f02761959df29ea75b1745f3a}{target}};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \mbox{\hyperlink{structplanner_1_1BlockMovement}{BlockMovement}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_ac2f696f70872902b214257466df1a034}{start}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_a26508f4f02761959df29ea75b1745f3a}{target}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{structplanner_1_1BlockMovement}{BlockMovement}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_ac2f696f70872902b214257466df1a034}{start}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{structplanner_1_1BlockMovement_ab857dcd28fd745fc2e2ea562833bcfd9}{BlockMovement}}(\mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_ac2f696f70872902b214257466df1a034}{start}},\ \mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_a26508f4f02761959df29ea75b1745f3a}{target}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00067\ \ \ \mbox{\hyperlink{structplanner_1_1BlockMovement}{BlockMovement}}(\mbox{\hyperlink{structplanner_1_1BlockPose}{BlockPose}}\&\&\ \mbox{\hyperlink{structplanner_1_1BlockMovement_ac2f696f70872902b214257466df1a034}{start}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{MovementGenerationRecoveringException}}\ :\ \textcolor{keyword}{public}\ std::logic\_error\ \{}
+\DoxyCodeLine{00073\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00074\ \ \ std::queue<BlockMovement>\ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException_a7e9e98edcc7ad6f5270be3a2753acefa}{recovered\_data}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{MovementGenerationRecoveringException}}(\textcolor{keyword}{const}\ std::string\&\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{MovementGenerationRecoveringException}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classplanner_1_1ConflictingPositionsException}{ConflictingPositionsException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{MovementGenerationRecoveringException}}\ \{}
+\DoxyCodeLine{00083\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ \ \ \mbox{\hyperlink{classplanner_1_1ConflictingPositionsException}{ConflictingPositionsException}}(\textcolor{keyword}{const}\ std::string\&\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00085\ \ \ \mbox{\hyperlink{classplanner_1_1ConflictingPositionsException}{ConflictingPositionsException}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00086\ \};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00090\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classplanner_1_1DeadlockException}{DeadlockException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{MovementGenerationRecoveringException}}\ \{}
+\DoxyCodeLine{00091\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00092\ \ \ \mbox{\hyperlink{classplanner_1_1DeadlockException}{DeadlockException}}(\textcolor{keyword}{const}\ std::string\&\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{classplanner_1_1DeadlockException}{DeadlockException}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ what,\ std::queue<BlockMovement>\&\&\ movement);}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1MovementSequence}{MovementSequence}}\ \{}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{ConfigGenerator}}\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{Point}}\ =\ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model::UR5::Configuration}};}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}\ =\ std::tuple<Point,\ bool>;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ std::function<\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()>\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2}{next}};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{ConfigGenerator}}(std::function<\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()>\&\&\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2}{next}});}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ std::function<\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()>\ next;}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}\ current;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{ConfigGenerator}}\&\ parent);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{ConfigGenerator}};}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_ac30d83b0d8b71234a7c33ba93c63482c}{iterator\_category}}\ =\ std::input\_iterator\_tag;}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{value\_type}}\ =\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}{Point}};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_a575a1eb730bdfbea0c71f83940777561}{difference\_type}}\ =\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}};}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_a1c8ba3b7a92a01249bfab95d9c274c59}{pointer}}\ =\ void;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{reference}}\ =\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_ac3788d452610a2c642d291f2607ac27a}{value\_type}};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classJointSpace}{const\_reference}}\ =\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_ac3788d452610a2c642d291f2607ac27a}{value\_type}};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_a160d6f02409d9d3eb6ee14d8b3f7d2e1}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_aa0d0e755b4e77d2fd9dbb17d4f72255c}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \mbox{\hyperlink{classJointSpace}{const\_reference}}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_aaf0993a54963b26cb11caefbc59bb5e5}{operator*}}();}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \mbox{\hyperlink{classJointSpace}{const\_reference}}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_aaf0993a54963b26cb11caefbc59bb5e5}{operator*}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_a80b561e953673622ba2aa860c12bcb50}{operator++}}();}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator_a80b561e953673622ba2aa860c12bcb50}{operator++}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00136\ \ \ \ \ \};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a9e88a3e9442e87811460193106f00783}{begin}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\_iterator}}\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_acbdcd475c9467e4a0e3e1f0e98128353}{end}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00140\ \ \ \};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{ConfigGenerator}}\ \mbox{\hyperlink{structplanner_1_1MovementSequence_af9e44efce4c0de842caec730b6dbad33}{lazy\_picking}},\ \mbox{\hyperlink{structplanner_1_1MovementSequence_ad9f11883a73c7833275b336284bb81f7}{lazy\_dropping}};}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00154\ std::queue<BlockMovement>\ \mbox{\hyperlink{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c}{generate\_block\_positioning\_order}}(}
+\DoxyCodeLine{00155\ \ \ \textcolor{keyword}{const}\ std::vector<BlockPose>\&\ blocks,}
+\DoxyCodeLine{00156\ \ \ \textcolor{keyword}{const}\ std::unordered\_map<Block,\ BlockPose>\&\ targets}
+\DoxyCodeLine{00157\ );}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00166\ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{MovementSequence::ConfigGenerator}}\ \mbox{\hyperlink{namespaceplanner_a05156c18c16821a1b51376f716a188ed}{plan\_movement}}(}
+\DoxyCodeLine{00167\ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00168\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{os::Position}}\&\ end,}
+\DoxyCodeLine{00169\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt}
+\DoxyCodeLine{00170\ );}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00179\ \mbox{\hyperlink{structplanner_1_1MovementSequence}{MovementSequence}}\ \mbox{\hyperlink{namespaceplanner_a05156c18c16821a1b51376f716a188ed}{plan\_movement}}(}
+\DoxyCodeLine{00180\ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00181\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1BlockMovement}{BlockMovement}}\&\ movement,}
+\DoxyCodeLine{00182\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt}
+\DoxyCodeLine{00183\ );}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PLANNER\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

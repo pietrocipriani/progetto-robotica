@@ -1,0 +1,90 @@
+\doxysection{src/planner/include/utils/helpers.hpp File Reference}
+\hypertarget{helpers_8hpp}{}\label{helpers_8hpp}\index{src/planner/include/utils/helpers.hpp@{src/planner/include/utils/helpers.hpp}}
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include "{}../types.\+hpp"{}}\newline
+Include dependency graph for helpers.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{helpers_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{helpers_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_a3d44b0be295ea10858457949055d4d61}{dimension}} = T\+::\+Rows\+At\+Compile\+Time
+\begin{DoxyCompactList}\small\item\em The dimension of a certain type representing a space. \end{DoxyCompactList}\item 
+template$<$$>$ constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_a84e6b62bf258aef85e2bb8a521831e35}{dimension$<$ Complex $>$}} = 1
+\item 
+template$<$$>$ constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_ab794f5300a11940681831871246a5ca1}{dimension$<$ Quaternion $>$}} = Quaternion\+::\+Dim
+\item 
+{\footnotesize template$<$class T , class Target $>$ }\\constexpr bool \mbox{\hyperlink{helpers_8hpp_ac79ecbbc554b224ac837bc1707e9e9fd}{is\+\_\+quasi}} = std\+::is\+\_\+same\+\_\+v$<$std\+::remove\+\_\+cv\+\_\+t$<$std\+::remove\+\_\+reference\+\_\+t$<$T$>$$>$, Target$>$
+\begin{DoxyCompactList}\small\item\em Checs if a template type {\ttfamily T} is the same as {\ttfamily Target}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}} = size \texorpdfstring{$\ast$}{*} (size -\/ 1) / 2
+\begin{DoxyCompactList}\small\item\em The number of sizes of the SO rotational group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{helpers_8hpp_a3d44b0be295ea10858457949055d4d61}\label{helpers_8hpp_a3d44b0be295ea10858457949055d4d61} 
+\index{helpers.hpp@{helpers.hpp}!dimension@{dimension}}
+\index{dimension@{dimension}!helpers.hpp@{helpers.hpp}}
+\doxysubsubsection{\texorpdfstring{dimension}{dimension}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+constexpr size\+\_\+t dimension = T\+::\+Rows\+At\+Compile\+Time\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The dimension of a certain type representing a space. 
+
+\begin{DoxyNote}{Note}
+Used to uniform the interface. 
+\end{DoxyNote}
+\Hypertarget{helpers_8hpp_a84e6b62bf258aef85e2bb8a521831e35}\label{helpers_8hpp_a84e6b62bf258aef85e2bb8a521831e35} 
+\index{helpers.hpp@{helpers.hpp}!dimension$<$ Complex $>$@{dimension$<$ Complex $>$}}
+\index{dimension$<$ Complex $>$@{dimension$<$ Complex $>$}!helpers.hpp@{helpers.hpp}}
+\doxysubsubsection{\texorpdfstring{dimension$<$ Complex $>$}{dimension< Complex >}}
+{\footnotesize\ttfamily template$<$$>$ \\
+constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_a3d44b0be295ea10858457949055d4d61}{dimension}}$<$ \mbox{\hyperlink{classComplex}{Complex}} $>$ = 1\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{helpers_8hpp_ab794f5300a11940681831871246a5ca1}\label{helpers_8hpp_ab794f5300a11940681831871246a5ca1} 
+\index{helpers.hpp@{helpers.hpp}!dimension$<$ Quaternion $>$@{dimension$<$ Quaternion $>$}}
+\index{dimension$<$ Quaternion $>$@{dimension$<$ Quaternion $>$}!helpers.hpp@{helpers.hpp}}
+\doxysubsubsection{\texorpdfstring{dimension$<$ Quaternion $>$}{dimension< Quaternion >}}
+{\footnotesize\ttfamily template$<$$>$ \\
+constexpr size\+\_\+t \mbox{\hyperlink{helpers_8hpp_a3d44b0be295ea10858457949055d4d61}{dimension}}$<$ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} $>$ = Quaternion\+::\+Dim\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{helpers_8hpp_ac79ecbbc554b224ac837bc1707e9e9fd}\label{helpers_8hpp_ac79ecbbc554b224ac837bc1707e9e9fd} 
+\index{helpers.hpp@{helpers.hpp}!is\_quasi@{is\_quasi}}
+\index{is\_quasi@{is\_quasi}!helpers.hpp@{helpers.hpp}}
+\doxysubsubsection{\texorpdfstring{is\_quasi}{is\_quasi}}
+{\footnotesize\ttfamily template$<$class T , class Target $>$ \\
+constexpr bool is\+\_\+quasi = std\+::is\+\_\+same\+\_\+v$<$std\+::remove\+\_\+cv\+\_\+t$<$std\+::remove\+\_\+reference\+\_\+t$<$T$>$$>$, Target$>$\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Checs if a template type {\ttfamily T} is the same as {\ttfamily Target}. 
+
+Removes references and const from {\ttfamily T}. \Hypertarget{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}\label{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97} 
+\index{helpers.hpp@{helpers.hpp}!so@{so}}
+\index{so@{so}!helpers.hpp@{helpers.hpp}}
+\doxysubsubsection{\texorpdfstring{so}{so}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+constexpr size\+\_\+t so = size \texorpdfstring{$\ast$}{*} (size -\/ 1) / 2\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The number of sizes of the SO rotational group. 
+
+\begin{DoxyNote}{Note}
+This is Binomial(size, 2). 
+\end{DoxyNote}

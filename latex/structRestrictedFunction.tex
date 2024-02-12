@@ -1,0 +1,169 @@
+\doxysection{Restricted\+Function\texorpdfstring{$<$}{<} Function, Domain \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structRestrictedFunction}{}\label{structRestrictedFunction}\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+
+
+Function restricted in domain by a lower bound.  
+
+
+
+
+{\ttfamily \#include $<$sequenced\+\_\+function.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::invoke\+\_\+result\+\_\+t$<$ Function, Domain $>$ \mbox{\hyperlink{structRestrictedFunction_ad2730f7181d6f3fdbfadd8a5ddd41ecb}{operator()}} (const Domain \&arg) const
+\begin{DoxyCompactList}\small\item\em Invokes the underlying function, no checks are performed. \end{DoxyCompactList}\item 
+std\+::invoke\+\_\+result\+\_\+t$<$ Function, Domain $>$ \mbox{\hyperlink{structRestrictedFunction_a4d96fd7a468b31210a2890da2de086a8}{operator()}} (Domain \&\&arg) const
+\begin{DoxyCompactList}\small\item\em Invokes the underlying function, no checks are performed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structRestrictedFunction_a40a0a3e24409a4907b16892534d7180d}{operator$<$}} (const Domain \&arg) const
+\begin{DoxyCompactList}\small\item\em Checks if {\ttfamily arg} is valid for this \doxylink{structRestrictedFunction}{Restricted\+Function}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class F $>$ }\\bool \mbox{\hyperlink{structRestrictedFunction_aca5f6d247f2948954896956bfd00c659}{operator$<$}} (const \mbox{\hyperlink{structRestrictedFunction}{Restricted\+Function}}$<$ F, Domain $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Compares this \doxylink{structRestrictedFunction}{Restricted\+Function} with another by domain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structRestrictedFunction_aa65f426cafa6a9a40cfd1450b57f9b75}{Restricted\+Function}} () noexcept=default
+\item 
+\mbox{\hyperlink{structRestrictedFunction_ae834d31e479487b48708aae9104fa013}{Restricted\+Function}} (const Function \&\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}, const Domain \&\mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})
+\item 
+\mbox{\hyperlink{structRestrictedFunction_a7554840b7763ac9f5bccf69e103b09c2}{Restricted\+Function}} (Function \&\&\mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}, const Domain \&\mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Domain \mbox{\hyperlink{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}{begin}}
+\begin{DoxyCompactList}\small\item\em The lower bound for the domain. \end{DoxyCompactList}\item 
+Function \mbox{\hyperlink{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}{f}}
+\begin{DoxyCompactList}\small\item\em The current function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Function, class Domain$>$\newline
+struct Restricted\+Function$<$ Function, Domain $>$}
+Function restricted in domain by a lower bound. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Function} & The function type. \\
+\hline
+{\em Domain} & The domain space type. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structRestrictedFunction_aa65f426cafa6a9a40cfd1450b57f9b75}\label{structRestrictedFunction_aa65f426cafa6a9a40cfd1450b57f9b75} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!RestrictedFunction@{RestrictedFunction}}
+\index{RestrictedFunction@{RestrictedFunction}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{RestrictedFunction()}{RestrictedFunction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+\mbox{\hyperlink{structRestrictedFunction}{Restricted\+Function}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structRestrictedFunction_ae834d31e479487b48708aae9104fa013}\label{structRestrictedFunction_ae834d31e479487b48708aae9104fa013} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!RestrictedFunction@{RestrictedFunction}}
+\index{RestrictedFunction@{RestrictedFunction}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{RestrictedFunction()}{RestrictedFunction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+\mbox{\hyperlink{structRestrictedFunction}{Restricted\+Function}} (\begin{DoxyParamCaption}\item[{const Function \&}]{f,  }\item[{const Domain \&}]{begin }\end{DoxyParamCaption})}
+
+\Hypertarget{structRestrictedFunction_a7554840b7763ac9f5bccf69e103b09c2}\label{structRestrictedFunction_a7554840b7763ac9f5bccf69e103b09c2} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!RestrictedFunction@{RestrictedFunction}}
+\index{RestrictedFunction@{RestrictedFunction}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{RestrictedFunction()}{RestrictedFunction()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+\mbox{\hyperlink{structRestrictedFunction}{Restricted\+Function}} (\begin{DoxyParamCaption}\item[{Function \&\&}]{f,  }\item[{const Domain \&}]{begin }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structRestrictedFunction_ad2730f7181d6f3fdbfadd8a5ddd41ecb}\label{structRestrictedFunction_ad2730f7181d6f3fdbfadd8a5ddd41ecb} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+std\+::invoke\+\_\+result\+\_\+t$<$ Function, Domain $>$ operator() (\begin{DoxyParamCaption}\item[{const Domain \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Invokes the underlying function, no checks are performed. 
+
+\Hypertarget{structRestrictedFunction_a4d96fd7a468b31210a2890da2de086a8}\label{structRestrictedFunction_a4d96fd7a468b31210a2890da2de086a8} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!operator()@{operator()}}
+\index{operator()@{operator()}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+std\+::invoke\+\_\+result\+\_\+t$<$ Function, Domain $>$ operator() (\begin{DoxyParamCaption}\item[{Domain \&\&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Invokes the underlying function, no checks are performed. 
+
+\Hypertarget{structRestrictedFunction_a40a0a3e24409a4907b16892534d7180d}\label{structRestrictedFunction_a40a0a3e24409a4907b16892534d7180d} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+bool operator$<$ (\begin{DoxyParamCaption}\item[{const Domain \&}]{arg }\end{DoxyParamCaption}) const}
+
+
+
+Checks if {\ttfamily arg} is valid for this \doxylink{structRestrictedFunction}{Restricted\+Function}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arg} & The argument to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if \begin{DoxyItemize}
+\item is into the domain. \end{DoxyItemize}
+
+\end{DoxyReturn}
+\Hypertarget{structRestrictedFunction_aca5f6d247f2948954896956bfd00c659}\label{structRestrictedFunction_aca5f6d247f2948954896956bfd00c659} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+template$<$class F $>$ \\
+bool operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structRestrictedFunction}{Restricted\+Function}}$<$ F, Domain $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Compares this \doxylink{structRestrictedFunction}{Restricted\+Function} with another by domain. 
+
+The two functions do not need to map the same spaces, only domain coherence is required. 
+\begin{DoxyParams}{Parameters}
+{\em F} & The other function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} If {\ttfamily begin} is lower than {\ttfamily other.\+begin}, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663}\label{structRestrictedFunction_a5a8ced3481cd3eedf2710781cda2b663} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!begin@{begin}}
+\index{begin@{begin}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{begin}{begin}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+Domain begin}
+
+
+
+The lower bound for the domain. 
+
+\Hypertarget{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1}\label{structRestrictedFunction_aa9efb18e6f7918fe278f6a0fbb7473b1} 
+\index{RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}!f@{f}}
+\index{f@{f}!RestrictedFunction$<$ Function, Domain $>$@{RestrictedFunction$<$ Function, Domain $>$}}
+\doxysubsubsection{\texorpdfstring{f}{f}}
+{\footnotesize\ttfamily template$<$class Function , class Domain $>$ \\
+Function f}
+
+
+
+The current function. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/utils/\mbox{\hyperlink{sequenced__function_8hpp}{sequenced\+\_\+function.\+hpp}}\end{DoxyCompactItemize}

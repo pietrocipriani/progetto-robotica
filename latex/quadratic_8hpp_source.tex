@@ -1,0 +1,113 @@
+\doxysection{quadratic.\+hpp}
+\hypertarget{quadratic_8hpp_source}{}\label{quadratic_8hpp_source}\index{src/planner/lib/planning/interpolation/quadratic.hpp@{src/planner/lib/planning/interpolation/quadratic.hpp}}
+\mbox{\hyperlink{quadratic_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ QUADRATIC\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ QUADRATIC\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{kinematics_8hpp}{kinematics.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{operational__space_8hpp}{spaces/operational\_space.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8hpp}{types.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8hpp}{utils.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{coordinates_8hpp}{utils/coordinates.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <eigen3/Eigen/Core>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00019\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceplanner_1_1internal_a834eaab4dc12b48bf4eafb6742236a81}{uses\_quaternions}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00022\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceplanner_1_1internal_a7d098feec7cc0a67b96eb54f53110f61}{uses\_quaternions<Quaternion>}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00025\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ uses\_quaternions<kinematics::Pose<coord::Lie,\ coord::Cylindrical>>}
+\DoxyCodeLine{00026\ \ \ \ \ =\ is\_quasi<kinematics::Pose<coord::Lie,\ coord::Cylindrical>::Angular,\ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}}>;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00029\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{bool}\ uses\_quaternions<kinematics::Pose<coord::Lie,\ coord::Cartesian>>}
+\DoxyCodeLine{00030\ \ \ \ \ =\ is\_quasi<kinematics::Pose<coord::Lie,\ coord::Cylindrical>::Angular,\ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}}>;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int},\ \textcolor{keyword}{class}\ Velocity>}
+\DoxyCodeLine{00033\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}}\ \mbox{\hyperlink{namespaceplanner_1_1internal_a560b155b4cfdcb360333c5e327391c3f}{\_quadratic\_interpolation}}(}
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ initial\_position,}
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{const}\ Velocity\&\ initial\_velocity,}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{const}\ Velocity\&\ final\_velocity,}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ start\_time,}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ duration}
+\DoxyCodeLine{00039\ )\ \{}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \textcolor{comment}{//\ 1/2\ a.\ Due\ to\ strict\ policies\ in\ the\ manipulability\ of\ js/os::Position.}}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{auto}\ acceleration2\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}((final\_velocity\ -\/\ initial\_velocity)\ /\ (2\ *\ duration));}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordflow}{return}\ [=,\ acc\ =\ std::move(acceleration2)](\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time)\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{auto}\ t\ =\ time\ -\/\ start\_time;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ initial\_position\ +\ initial\_velocity\ *\ t\ +\ acc\ *\ t\ *\ t;}
+\DoxyCodeLine{00048\ \ \ \};}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int},\ \textcolor{keyword}{class}\ Velocity>}
+\DoxyCodeLine{00061\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}}\ \mbox{\hyperlink{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20}{quadratic\_acceleration}}(}
+\DoxyCodeLine{00062\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ initial\_position,}
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{const}\ Velocity\&\ final\_velocity,}
+\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ start\_time,}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ duration}
+\DoxyCodeLine{00066\ )\ \{}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{auto}\ acc2\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}(final\_velocity\ /\ (2\ *\ duration));}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordflow}{return}\ [=,\ acc\ =\ std::move(acc2)](\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time)\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{auto}\ t\ =\ time\ -\/\ start\_time;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{return}\ initial\_position\ +\ final\_velocity\ *\ (t\ *\ t\ /\ (2\ *\ duration));}
+\DoxyCodeLine{00074\ \ \ \};}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int},\ \textcolor{keyword}{class}\ Velocity>}
+\DoxyCodeLine{00085\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}}\ \mbox{\hyperlink{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3}{quadratic\_deceleration}}(}
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ final\_position,}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{const}\ Velocity\&\ initial\_velocity,}
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ final\_time,}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ duration}
+\DoxyCodeLine{00090\ )\ \{}
+\DoxyCodeLine{00091\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{auto}\ acc2\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}(-\/initial\_velocity\ /\ (2\ *\ duration));}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordflow}{return}\ [=,\ acc\ =\ std::move(acc2)](\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time)\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{auto}\ t\ =\ final\_time\ -\/\ time;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordflow}{return}\ final\_position\ +\ -\/initial\_velocity\ *\ (t\ *\ t\ /\ (2\ *\ duration));}
+\DoxyCodeLine{00098\ \ \ \};}
+\DoxyCodeLine{00099\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int},\ \textcolor{keyword}{class}\ Velocity>}
+\DoxyCodeLine{00110\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}}\ \mbox{\hyperlink{namespaceplanner_afd48a07dc2c92f73c34f88887788a1c8}{quadratic\_interpolation}}(}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ initial\_position,}
+\DoxyCodeLine{00112\ \ \ \textcolor{keyword}{const}\ Velocity\&\ initial\_velocity,}
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{const}\ Velocity\&\ final\_velocity,}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ start\_time,}
+\DoxyCodeLine{00115\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ duration}
+\DoxyCodeLine{00116\ )\ \{}
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{static\_assert}(!internal::uses\_quaternions<Point>,\ \textcolor{stringliteral}{"{}Cannot\ quadratically\ interpolate\ quaternions."{}});}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceplanner_1_1internal_a560b155b4cfdcb360333c5e327391c3f}{internal::\_quadratic\_interpolation}}(}
+\DoxyCodeLine{00120\ \ \ \ \ initial\_position,}
+\DoxyCodeLine{00121\ \ \ \ \ initial\_velocity,\ final\_velocity,}
+\DoxyCodeLine{00122\ \ \ \ \ start\_time,\ duration}
+\DoxyCodeLine{00123\ \ \ );}
+\DoxyCodeLine{00124\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ QUADRATIC\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

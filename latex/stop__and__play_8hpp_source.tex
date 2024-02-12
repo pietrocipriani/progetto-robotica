@@ -1,0 +1,114 @@
+\doxysection{stop\+\_\+and\+\_\+play.\+hpp}
+\hypertarget{stop__and__play_8hpp_source}{}\label{stop__and__play_8hpp_source}\index{src/planner/lib/planning/interpolation/stop\_and\_play.hpp@{src/planner/lib/planning/interpolation/stop\_and\_play.hpp}}
+\mbox{\hyperlink{stop__and__play_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STOP\_AND\_PLAY\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STOP\_AND\_PLAY\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8hpp}{constants.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{linear_8hpp}{linear.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{quadratic_8hpp}{quadratic.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8hpp}{utils.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{common_8hpp}{common.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }internal\ \{}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps}{Timestamps}}\ \{}
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}},\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}},\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}},\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}},\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a94ea76065c124cb9dbd679bf2a4d11c3}{delta}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int}>}
+\DoxyCodeLine{00025\ \ \ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a311561b01c691c648841a3df6abf710d}{Timestamps}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}\&\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}\&\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}})\ }
+\DoxyCodeLine{00026\ \ \ \ \ :\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}(\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}.times.time),\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}(\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}.times.time)}
+\DoxyCodeLine{00027\ \ \ \ \ ,\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}}(\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}.times.time\ +\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}.times.accel\_delta)}
+\DoxyCodeLine{00028\ \ \ \ \ ,\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}}(\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}.times.time\ -\/\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}.times.accel\_delta)}
+\DoxyCodeLine{00029\ \ \ \ \ ,\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a94ea76065c124cb9dbd679bf2a4d11c3}{delta}}(\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}.times.time\ -\/\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}.times.time\ -\/\ (\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}.times.accel\_delta\ +\ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}}.times.accel\_delta)\ /\ 2)\ \{\}}
+\DoxyCodeLine{00030\ \ \ }
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int}>}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceplanner_1_1internal_a21ed4f360842d52952a5fffc4ef2f46b}{interpolation2}}(}
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}\&\ start,}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}\&\ end,}
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction}}<\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}},\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}>::Container\&\ chain}
+\DoxyCodeLine{00043\ )\ \{}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{using\ namespace\ }internal;}
+\DoxyCodeLine{00045\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \textcolor{comment}{//\ Timestamp.}}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps}{Timestamps}}\ t(start,\ end);}
+\DoxyCodeLine{00049\ \ \ }
+\DoxyCodeLine{00050\ \ \ \textcolor{comment}{//\ Velocity.}}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{auto}\ v\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}((end.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}\ -\/\ start.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}})\ /\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a94ea76065c124cb9dbd679bf2a4d11c3}{delta}});}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{auto}\ q1\ =\ \mbox{\hyperlink{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20}{quadratic\_acceleration}}(start.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ v,\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}},\ start.\mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}.\mbox{\hyperlink{structplanner_1_1Params_1_1Times_a05ec4283e270826f28435bc4a83f7fd8}{accel\_delta}});}
+\DoxyCodeLine{00054\ \ \ assert((start.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}\ -\/\ q1(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}})).norm()\ -\/\ 1\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}});}
+\DoxyCodeLine{00055\ \ \ chain.emplace\_back(std::move(q1),\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}});}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{if}\ (t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}}\ <\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}})\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{auto}\ l\ =\ \mbox{\hyperlink{namespaceplanner_ad63228565ee5abe7bb79e6506de8752d}{linear\_interpolation}}(start.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ end.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_adfdcbaf78892a0d45a6eb99bf478cab4}{start}}\ +\ start.\mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}.\mbox{\hyperlink{structplanner_1_1Params_1_1Times_a05ec4283e270826f28435bc4a83f7fd8}{accel\_delta}}\ /\ 2,\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a94ea76065c124cb9dbd679bf2a4d11c3}{delta}});}
+\DoxyCodeLine{00059\ \ \ \ \ assert((chain.back()(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}})\ -\/\ l(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}})).norm()\ -\/\ 1\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}});}
+\DoxyCodeLine{00060\ \ \ \ \ chain.emplace\_back(std::move(l),\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}});}
+\DoxyCodeLine{00061\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00062\ \ \ \ \ assert(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a6395dcc37b097aa39004184b005870d4}{start\_linear}}\ -\/\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}}\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}});}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{auto}\ q2\ =\ \mbox{\hyperlink{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3}{quadratic\_deceleration}}(end.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ v,\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_ae22a8bbd631ba35d5e07d97f1453dc59}{end}},\ end.\mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}.\mbox{\hyperlink{structplanner_1_1Params_1_1Times_a05ec4283e270826f28435bc4a83f7fd8}{accel\_delta}});}
+\DoxyCodeLine{00066\ \ \ assert((q2(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}})\ -\/\ chain.back()(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}})).norm()\ -\/\ 1\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}});}
+\DoxyCodeLine{00067\ \ \ assert((q2(t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}})\ -\/\ end.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}).norm()\ -\/\ 1\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}});}
+\DoxyCodeLine{00068\ \ \ chain.emplace\_back(std::move(q2),\ t.\mbox{\hyperlink{structplanner_1_1internal_1_1Timestamps_a7294a3236374086519a982f176c3ff21}{end\_linear}});}
+\DoxyCodeLine{00069\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int},\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ T>\ \textcolor{keyword}{class\ }Container\ =\ std::initializer\_list>}
+\DoxyCodeLine{00081\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{namespaceplanner_a38449017270e77826b9b2e6298be936b}{stop\_and\_play\_interpolation}}(}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}\&\ start,}
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{const}\ Container<\mbox{\hyperlink{structplanner_1_1Params}{Params<Point>}}>\&\ points}
+\DoxyCodeLine{00084\ )\ \{}
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{using\ namespace\ }internal;}
+\DoxyCodeLine{00086\ \ \ \textcolor{keyword}{using\ }Sequence\ =\ \mbox{\hyperlink{classSequencedFunction}{SequencedFunction<TimeFunction<Point>}},\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}>;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{//\ The\ resulting\ function\ is\ a\ chain\ of\ interpolations.}}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{typename}\ Sequence::Container\ chain;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{comment}{//\ points.size()\ -\/\ 1\ segments.}}
+\DoxyCodeLine{00093\ \ \ \textcolor{comment}{//\ For\ each\ segment\ 3\ functions\ are\ needed\ (acc\ +\ lin\ +\ dec).}}
+\DoxyCodeLine{00094\ \ \ chain.reserve(3\ *\ (points.size()\ -\/\ 1));}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordflow}{if}\ (points.size()\ ==\ 0)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ Constant\ function\ in\ case\ of\ only\ one\ point.}}
+\DoxyCodeLine{00099\ \ \ \ \ chain.emplace\_back([p\ =\ start.\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}]([[maybe\_unused]]\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ \_)\ \{return\ p;\},\ start.\mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}.\mbox{\hyperlink{structplanner_1_1Params_1_1Times_ada213df0f23833509981179817b7beab}{time}});}
+\DoxyCodeLine{00100\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ This\ is\ a\ valid\ iterator\ as\ points.size()\ >=\ 1.}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{auto}\ i1\ =\ points.begin();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ interpolation2(start,\ *i1,\ chain);}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ std::next(i1)\ !=\ points.end();\ i1\ =\ std::next(i1))\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ interpolation2(*i1,\ *std::next(i1),\ chain);}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{auto}\ s\ =\ Sequence(std::move(chain));}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{return}\ s;}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STOP\_AND\_PLAY\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

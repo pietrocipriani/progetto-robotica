@@ -1,0 +1,119 @@
+\doxysection{src/planner/tests/test\+\_\+kinematics.cpp File Reference}
+\hypertarget{test__kinematics_8cpp}{}\label{test__kinematics_8cpp}\index{src/planner/tests/test\_kinematics.cpp@{src/planner/tests/test\_kinematics.cpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$eigen3/\+Eigen/\+Core$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iterator$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}euler.\+hpp"{}}\newline
+{\ttfamily \#include "{}tester.\+hpp"{}}\newline
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+{\ttfamily \#include "{}spaces.\+hpp"{}}\newline
+Include dependency graph for test\+\_\+kinematics.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__kinematics_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}} \mbox{\hyperlink{test__kinematics_8cpp_acbfc957581a317457f4cca4a077cda6e}{interpolate}} (const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&from, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&to, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} time)
+\item 
+int \mbox{\hyperlink{test__kinematics_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+std\+::ostream \& \mbox{\hyperlink{test__kinematics_8cpp_a512b247e0f74f0e42fde692343f58920}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&pose)
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_aa357a5ecd1acaf524e5d264995fa093b}{test\+\_\+direct\+\_\+kinematics}} ()
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_ab938e17f2ad05b9324748dc46fcee03e}{test\+\_\+euler}} ()
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_a9902ad11b94ef8127a395a37ce85c1f6}{test\+\_\+inverse\+\_\+diff\+\_\+kinematics}} ()
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_a06010501e3d7d680c08dc45718e401a2}{test\+\_\+inverse\+\_\+kinematics}} ()
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_aecbfeb222fd908236da4d48194654dce}{test\+\_\+movement}} ()
+\item 
+bool \mbox{\hyperlink{test__kinematics_8cpp_ac9174d19754689b563b96e2d06313637}{test\+\_\+path}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{test__kinematics_8cpp_accd66d2b8be27c31e12ce8ab03abdaed}{ur5\+\_\+default\+\_\+homing\+\_\+config\+\_\+init}} \mbox{[}$\,$\mbox{]} = \{-\/0.\+32, -\/0.\+78, -\/2.\+56, -\/1.\+63, -\/1.\+57, 3.\+49\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__kinematics_8cpp_acbfc957581a317457f4cca4a077cda6e}\label{test__kinematics_8cpp_acbfc957581a317457f4cca4a077cda6e} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!interpolate@{interpolate}}
+\index{interpolate@{interpolate}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{interpolate()}{interpolate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}} interpolate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&}]{from,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&}]{to,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{time }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__kinematics_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!main@{main}}
+\index{main@{main}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_a512b247e0f74f0e42fde692343f58920}\label{test__kinematics_8cpp_a512b247e0f74f0e42fde692343f58920} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&}]{pose }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_aa357a5ecd1acaf524e5d264995fa093b}\label{test__kinematics_8cpp_aa357a5ecd1acaf524e5d264995fa093b} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_direct\_kinematics@{test\_direct\_kinematics}}
+\index{test\_direct\_kinematics@{test\_direct\_kinematics}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_direct\_kinematics()}{test\_direct\_kinematics()}}
+{\footnotesize\ttfamily bool test\+\_\+direct\+\_\+kinematics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_ab938e17f2ad05b9324748dc46fcee03e}\label{test__kinematics_8cpp_ab938e17f2ad05b9324748dc46fcee03e} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_euler@{test\_euler}}
+\index{test\_euler@{test\_euler}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_euler()}{test\_euler()}}
+{\footnotesize\ttfamily bool test\+\_\+euler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_a9902ad11b94ef8127a395a37ce85c1f6}\label{test__kinematics_8cpp_a9902ad11b94ef8127a395a37ce85c1f6} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_inverse\_diff\_kinematics@{test\_inverse\_diff\_kinematics}}
+\index{test\_inverse\_diff\_kinematics@{test\_inverse\_diff\_kinematics}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_inverse\_diff\_kinematics()}{test\_inverse\_diff\_kinematics()}}
+{\footnotesize\ttfamily bool test\+\_\+inverse\+\_\+diff\+\_\+kinematics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_a06010501e3d7d680c08dc45718e401a2}\label{test__kinematics_8cpp_a06010501e3d7d680c08dc45718e401a2} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_inverse\_kinematics@{test\_inverse\_kinematics}}
+\index{test\_inverse\_kinematics@{test\_inverse\_kinematics}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_inverse\_kinematics()}{test\_inverse\_kinematics()}}
+{\footnotesize\ttfamily bool test\+\_\+inverse\+\_\+kinematics (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_aecbfeb222fd908236da4d48194654dce}\label{test__kinematics_8cpp_aecbfeb222fd908236da4d48194654dce} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_movement@{test\_movement}}
+\index{test\_movement@{test\_movement}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_movement()}{test\_movement()}}
+{\footnotesize\ttfamily bool test\+\_\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__kinematics_8cpp_ac9174d19754689b563b96e2d06313637}\label{test__kinematics_8cpp_ac9174d19754689b563b96e2d06313637} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!test\_path@{test\_path}}
+\index{test\_path@{test\_path}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_path()}{test\_path()}}
+{\footnotesize\ttfamily bool test\+\_\+path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__kinematics_8cpp_accd66d2b8be27c31e12ce8ab03abdaed}\label{test__kinematics_8cpp_accd66d2b8be27c31e12ce8ab03abdaed} 
+\index{test\_kinematics.cpp@{test\_kinematics.cpp}!ur5\_default\_homing\_config\_init@{ur5\_default\_homing\_config\_init}}
+\index{ur5\_default\_homing\_config\_init@{ur5\_default\_homing\_config\_init}!test\_kinematics.cpp@{test\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{ur5\_default\_homing\_config\_init}{ur5\_default\_homing\_config\_init}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} ur5\+\_\+default\+\_\+homing\+\_\+config\+\_\+init\mbox{[}$\,$\mbox{]} = \{-\/0.\+32, -\/0.\+78, -\/2.\+56, -\/1.\+63, -\/1.\+57, 3.\+49\}\hspace{0.3cm}{\ttfamily [constexpr]}}
+

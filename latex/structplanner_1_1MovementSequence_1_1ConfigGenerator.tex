@@ -1,0 +1,96 @@
+\doxysection{Movement\+Sequence\+::Config\+Generator Struct Reference}
+\hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator}{}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator}\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+
+
+A generator capable of constructing configs on-\/the-\/fly.  
+
+
+
+
+{\ttfamily \#include $<$planner.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\+\_\+iterator}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}{Point}} = \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}}
+\item 
+using \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}} = std\+::tuple$<$ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}{Point}}, bool $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a9e88a3e9442e87811460193106f00783}{begin}} () const
+\item 
+\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_ab7d8b8f7dbee06488903f810d83ac94f}{Config\+Generator}} (std\+::function$<$ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()$>$ \&\&\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2}{next}})
+\item 
+\mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{const\+\_\+iterator}} \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_acbdcd475c9467e4a0e3e1f0e98128353}{end}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::function$<$ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()$>$ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2}{next}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A generator capable of constructing configs on-\/the-\/fly. 
+
+Latency is negligible. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!Point@{Point}}
+\index{Point@{Point}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{Point}{Point}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}{Point}} =  \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}}}
+
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!Ret@{Ret}}
+\index{Ret@{Ret}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{Ret}{Ret}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}} =  std\+::tuple$<$\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a8b503f8f6f93d95ab8f9acfca43033d4}{Point}}, bool$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_ab7d8b8f7dbee06488903f810d83ac94f}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_ab7d8b8f7dbee06488903f810d83ac94f} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!ConfigGenerator@{ConfigGenerator}}
+\index{ConfigGenerator@{ConfigGenerator}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{ConfigGenerator()}{ConfigGenerator()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{Config\+Generator}} (\begin{DoxyParamCaption}\item[{std\+::function$<$ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()$>$ \&\&}]{next }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_a9e88a3e9442e87811460193106f00783}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_a9e88a3e9442e87811460193106f00783} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!begin@{begin}}
+\index{begin@{begin}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{Movement\+Sequence\+::\+Config\+Generator\+::const\+\_\+iterator}} begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_acbdcd475c9467e4a0e3e1f0e98128353}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_acbdcd475c9467e4a0e3e1f0e98128353} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!end@{end}}
+\index{end@{end}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{Movement\+Sequence\+::\+Config\+Generator\+::const\+\_\+iterator}} end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2}\label{structplanner_1_1MovementSequence_1_1ConfigGenerator_a6f172f319ecf84ee1e5bdad68bf6f5d2} 
+\index{MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}!next@{next}}
+\index{next@{next}!MovementSequence::ConfigGenerator@{MovementSequence::ConfigGenerator}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily std\+::function$<$\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator_a85736a373d03c0967e8233f11f009a12}{Ret}}()$>$ next}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/\mbox{\hyperlink{planner_8hpp}{planner.\+hpp}}\item 
+src/planner/lib/planning/\mbox{\hyperlink{planner_8cpp}{planner.\+cpp}}\end{DoxyCompactItemize}

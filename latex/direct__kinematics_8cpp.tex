@@ -1,0 +1,54 @@
+\doxysection{src/planner/lib/kinematics/direct\+\_\+kinematics.cpp File Reference}
+\hypertarget{direct__kinematics_8cpp}{}\label{direct__kinematics_8cpp}\index{src/planner/lib/kinematics/direct\_kinematics.cpp@{src/planner/lib/kinematics/direct\_kinematics.cpp}}
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}direct\+\_\+kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}euler.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+Include dependency graph for direct\+\_\+kinematics.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{direct__kinematics_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacekinematics}{kinematics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{direct__kinematics_8cpp_adb8b35a223be9133838b91b20ffb5e63}{SPECIALIZE}}(m,  a,  l)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}{direct}} (const Robot \&robot) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a9dcf0a64752d287bac18846d31af4de0}{direct}} (const Robot \&robot, const typename Robot\+::\+Configuration \&config) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a8c9fef8db0b23496f1849c395d68bf54}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} theta)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a925a56f148162734113080ddc4ec622d}{translation\+\_\+rotation}} (const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&axis, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} translation, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} rotation)
+\begin{DoxyCompactList}\small\item\em Utility function to return a translation + rotation transformation around the same axis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{direct__kinematics_8cpp_adb8b35a223be9133838b91b20ffb5e63}\label{direct__kinematics_8cpp_adb8b35a223be9133838b91b20ffb5e63} 
+\index{direct\_kinematics.cpp@{direct\_kinematics.cpp}!SPECIALIZE@{SPECIALIZE}}
+\index{SPECIALIZE@{SPECIALIZE}!direct\_kinematics.cpp@{direct\_kinematics.cpp}}
+\doxysubsubsection{\texorpdfstring{SPECIALIZE}{SPECIALIZE}}
+{\footnotesize\ttfamily \#define SPECIALIZE(\begin{DoxyParamCaption}\item[{}]{m,  }\item[{}]{a,  }\item[{}]{l }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ Pose<a,\ l>\ direct<m,\ a,\ l>(\textcolor{keyword}{const}\ m\&)\ \textcolor{keyword}{noexcept};\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ Pose<a,\ l>\ direct<m,\ a,\ l>(\textcolor{keyword}{const}\ m\&,\ \textcolor{keyword}{const}\ m::Configuration\&)\ \textcolor{keyword}{noexcept};}
+
+\end{DoxyCode}

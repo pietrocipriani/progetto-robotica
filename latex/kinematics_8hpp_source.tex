@@ -1,0 +1,70 @@
+\doxysection{kinematics.\+hpp}
+\hypertarget{kinematics_8hpp_source}{}\label{kinematics_8hpp_source}\index{src/planner/include/kinematics.hpp@{src/planner/include/kinematics.hpp}}
+\mbox{\hyperlink{kinematics_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ KINEMATICS\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ KINEMATICS\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{euler_8hpp}{euler.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{utils_8hpp}{utils.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8hpp}{constants.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{spaces_8hpp}{spaces.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{coordinates_8hpp}{utils/coordinates.hpp}}"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacekinematics}{kinematics}}\ \{}
+\DoxyCodeLine{00013\ \ \ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<}
+\DoxyCodeLine{00018\ \ \ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord::AngularSystem}}\ angular\_system\ =\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}},}
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord::LinearSystem}}\ linear\_system\ =\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord::Cartesian}}}
+\DoxyCodeLine{00020\ >\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace}{Pose}}\ =\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace<linear\_system,\ angular\_system,\ os\_size>}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{template}<}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord::AngularSystem}}\ angular\_system\ =\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}},}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord::LinearSystem}}\ linear\_system\ =\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord::Cartesian}}}
+\DoxyCodeLine{00025\ >\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}\ =\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{classOperationalSpace}{Pose<angular\_system,\ linear\_system>::Derivative}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{template}<}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord::AngularSystem}}\ angular\_system\ =\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}},}
+\DoxyCodeLine{00029\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord::LinearSystem}}\ linear\_system\ =\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord::Cartesian}}}
+\DoxyCodeLine{00030\ >\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{Acceleration}}\ =\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity<angular\_system,\ linear\_system>::Derivative}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{template}<}
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{class\ }Robot,\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord::AngularSystem}}\ angular\_system\ =\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}},}
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord::LinearSystem}}\ linear\_system\ =\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord::Cartesian}}}
+\DoxyCodeLine{00039\ >\ \mbox{\hyperlink{classOperationalSpace}{Pose<angular\_system,\ linear\_system>}}\ \mbox{\hyperlink{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}{direct}}(\textcolor{keyword}{const}\ Robot\&\ robot)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{template}<}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{class\ }Robot,\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord::AngularSystem}}\ angular\_system\ =\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}},}
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord::LinearSystem}}\ linear\_system\ =\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord::Cartesian}}}
+\DoxyCodeLine{00049\ >\ \mbox{\hyperlink{classOperationalSpace}{Pose<angular\_system,\ linear\_system>}}\ \mbox{\hyperlink{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}{direct}}(\textcolor{keyword}{const}\ Robot\&\ robot,\ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ Robot::Configuration\&\ config)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\ \mbox{\hyperlink{namespacekinematics_a616e0da97c95a521b88a51dfe3c04d79}{inverse}}(}
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{Pose<coord::Lie,\ coord::Cartesian>}}\&\ pose}
+\DoxyCodeLine{00061\ );}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Robot>}
+\DoxyCodeLine{00070\ \textcolor{keyword}{typename}\ Robot::Velocity\ \mbox{\hyperlink{namespacekinematics_a0c61ae8b734960da89121f0a97480647}{inverse\_diff}}(}
+\DoxyCodeLine{00071\ \ \ \textcolor{keyword}{const}\ Robot\&\ robot,}
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity<coord::Lie,\ coord::Cartesian>}}\&\ velocity}
+\DoxyCodeLine{00073\ );}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Robot>}
+\DoxyCodeLine{00086\ \textcolor{keyword}{typename}\ Robot::Velocity\ \mbox{\hyperlink{namespacekinematics_a8b27df3cb3bb50dc22c090b81fffb5aa}{dpa\_inverse\_diff}}(}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{const}\ Robot\&\ robot,}
+\DoxyCodeLine{00088\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity<coord::Lie,\ coord::Cartesian>}}\&\ velocity,}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{Pose<coord::Lie,\ coord::Cartesian>}}\&\ desired\_pose,}
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt}
+\DoxyCodeLine{00091\ );}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ KINEMATICS\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

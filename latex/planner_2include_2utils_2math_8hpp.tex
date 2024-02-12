@@ -1,0 +1,88 @@
+\doxysection{src/planner/include/utils/math.hpp File Reference}
+\hypertarget{planner_2include_2utils_2math_8hpp}{}\label{planner_2include_2utils_2math_8hpp}\index{src/planner/include/utils/math.hpp@{src/planner/include/utils/math.hpp}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include "{}../types.\+hpp"{}}\newline
+Include dependency graph for math.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{planner_2include_2utils_2math_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{planner_2include_2utils_2math_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr double \mbox{\hyperlink{planner_2include_2utils_2math_8hpp_af077d113c1c491ef2834dbacd606672a}{\+\_\+constexpr\+\_\+sqrt\+\_\+newton\+\_\+raphson}} (double x, double curr, double prev)
+\item 
+constexpr double \mbox{\hyperlink{planner_2include_2utils_2math_8hpp_a20576fd279b6f9ac6797763266048509}{constexpr\+\_\+sqrt}} (double x)
+\begin{DoxyCompactList}\small\item\em Constexpr version of the square root. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \mbox{\hyperlink{planner_2include_2utils_2math_8hpp_a1e03cae5679185d91544465a8fbac0b7}{pow}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&base, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&exp)
+\begin{DoxyCompactList}\small\item\em Exponentiates the given quaternion {\ttfamily base}. \end{DoxyCompactList}\item 
+constexpr double \mbox{\hyperlink{planner_2include_2utils_2math_8hpp_a682842ababc8d4fbf5d4b55f1b030827}{rectangle\+\_\+radius}} (double w, double h)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{planner_2include_2utils_2math_8hpp_af077d113c1c491ef2834dbacd606672a}\label{planner_2include_2utils_2math_8hpp_af077d113c1c491ef2834dbacd606672a} 
+\index{math.hpp@{math.hpp}!\_constexpr\_sqrt\_newton\_raphson@{\_constexpr\_sqrt\_newton\_raphson}}
+\index{\_constexpr\_sqrt\_newton\_raphson@{\_constexpr\_sqrt\_newton\_raphson}!math.hpp@{math.hpp}}
+\doxysubsubsection{\texorpdfstring{\_constexpr\_sqrt\_newton\_raphson()}{\_constexpr\_sqrt\_newton\_raphson()}}
+{\footnotesize\ttfamily constexpr double \+\_\+constexpr\+\_\+sqrt\+\_\+newton\+\_\+raphson (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{curr,  }\item[{double}]{prev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{planner_2include_2utils_2math_8hpp_a20576fd279b6f9ac6797763266048509}\label{planner_2include_2utils_2math_8hpp_a20576fd279b6f9ac6797763266048509} 
+\index{math.hpp@{math.hpp}!constexpr\_sqrt@{constexpr\_sqrt}}
+\index{constexpr\_sqrt@{constexpr\_sqrt}!math.hpp@{math.hpp}}
+\doxysubsubsection{\texorpdfstring{constexpr\_sqrt()}{constexpr\_sqrt()}}
+{\footnotesize\ttfamily constexpr double constexpr\+\_\+sqrt (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Constexpr version of the square root. 
+
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item For a finite and non-\/negative value of "{}x"{}, returns an approximation for the square root of "{}x"{}
+\item Otherwise, returns NaN Taken from \href{https://stackoverflow.com/a/34134071}{\texttt{ https\+://stackoverflow.\+com/a/34134071}} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{planner_2include_2utils_2math_8hpp_a1e03cae5679185d91544465a8fbac0b7}\label{planner_2include_2utils_2math_8hpp_a1e03cae5679185d91544465a8fbac0b7} 
+\index{math.hpp@{math.hpp}!pow@{pow}}
+\index{pow@{pow}!math.hpp@{math.hpp}}
+\doxysubsubsection{\texorpdfstring{pow()}{pow()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} pow (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{base,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{exp }\end{DoxyParamCaption})}
+
+
+
+Exponentiates the given quaternion {\ttfamily base}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base} & The base of the exponentiation. \\
+\hline
+{\em exp} & The exponent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The exponentiated quaternion. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The current implementation by eigen is able to generalize the exponential to {\ttfamily exp} \texorpdfstring{$>$}{>} 1. 
+
+The {\ttfamily base} should be an unit quaternion. 
+\end{DoxyNote}
+\Hypertarget{planner_2include_2utils_2math_8hpp_a682842ababc8d4fbf5d4b55f1b030827}\label{planner_2include_2utils_2math_8hpp_a682842ababc8d4fbf5d4b55f1b030827} 
+\index{math.hpp@{math.hpp}!rectangle\_radius@{rectangle\_radius}}
+\index{rectangle\_radius@{rectangle\_radius}!math.hpp@{math.hpp}}
+\doxysubsubsection{\texorpdfstring{rectangle\_radius()}{rectangle\_radius()}}
+{\footnotesize\ttfamily constexpr double rectangle\+\_\+radius (\begin{DoxyParamCaption}\item[{double}]{w,  }\item[{double}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+

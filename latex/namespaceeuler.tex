@@ -1,0 +1,122 @@
+\doxysection{euler Namespace Reference}
+\hypertarget{namespaceeuler}{}\label{namespaceeuler}\index{euler@{euler}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \mbox{\hyperlink{namespaceeuler_af50b64e2958fc8c69811111d683f6905}{from}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&q)
+\begin{DoxyCompactList}\small\item\em Constructs the euler angle vector from a quaternion. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \mbox{\hyperlink{namespaceeuler_a666b175b1ebafa6242613f5536c6c36e}{from}} (const \mbox{\hyperlink{types_8hpp_ac05d2f2746fc98930cf560b47f258b4a}{Rotation}} \&aa)
+\begin{DoxyCompactList}\small\item\em Constructs the euler angle vector from a angle axis. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \mbox{\hyperlink{namespaceeuler_a58774f36927fc45a137dbc20b546712e}{from}} (const \mbox{\hyperlink{types_8hpp_a255f7b24f655ade0a3853344694d324d}{Rotation\+Matrix}} \&rot\+\_\+matrix)
+\begin{DoxyCompactList}\small\item\em Constructs the euler angle vector from a rotation matrix. \end{DoxyCompactList}\item 
+template$<$$>$ \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ 3 $>$ $>$ \mbox{\hyperlink{namespaceeuler_af2512b2754f63a79868d9caafafb3bad}{from$<$ 3 $>$}} (const \mbox{\hyperlink{types_8hpp_a255f7b24f655ade0a3853344694d324d}{Rotation\+Matrix}} \&rot\+\_\+matrix)
+\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \mbox{\hyperlink{namespaceeuler_a61d3ae6e43eb9d62f4dc91e9158cce56}{jacobian}} (const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&rotation)
+\begin{DoxyCompactList}\small\item\em Constructs the jacobian for conversions from euler angles derivatives to angular velocities. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ size $>$ \mbox{\hyperlink{namespaceeuler_a5faa917103be7176e437b9fc844df7f1}{rotate\+\_\+axis}} (const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&rotation, const \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ size $>$ \&axis)
+\begin{DoxyCompactList}\small\item\em Rotate a given {\ttfamily axis} according to the given {\ttfamily rotation}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\\mbox{\hyperlink{types_8hpp_ac05d2f2746fc98930cf560b47f258b4a}{Rotation}} \mbox{\hyperlink{namespaceeuler_ac8e70043928e77966aee7e1afade12af}{to\+\_\+rotation}} (const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&euler)
+\begin{DoxyCompactList}\small\item\em Converts euler angles to the corresponding rotation matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$size\+\_\+t size$>$ }\\constexpr std\+::array$<$ size\+\_\+t, \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \mbox{\hyperlink{namespaceeuler_add3927473d6a0a00c4afbfede55da5b8}{axis\+\_\+order}}
+\item 
+template$<$$>$ constexpr std\+::array$<$ size\+\_\+t, \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ 3 $>$ $>$ \mbox{\hyperlink{namespaceeuler_a165a7a7e5fa87faaf2cf520c644544a0}{axis\+\_\+order$<$ 3 $>$}} \{2, 1, 0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceeuler_af50b64e2958fc8c69811111d683f6905}\label{namespaceeuler_af50b64e2958fc8c69811111d683f6905} 
+\index{euler@{euler}!from@{from}}
+\index{from@{from}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{from()}{from()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ from (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{q }\end{DoxyParamCaption})}
+
+
+
+Constructs the euler angle vector from a quaternion. 
+
+\Hypertarget{namespaceeuler_a666b175b1ebafa6242613f5536c6c36e}\label{namespaceeuler_a666b175b1ebafa6242613f5536c6c36e} 
+\index{euler@{euler}!from@{from}}
+\index{from@{from}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{from()}{from()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ from (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_ac05d2f2746fc98930cf560b47f258b4a}{Rotation}} \&}]{aa }\end{DoxyParamCaption})}
+
+
+
+Constructs the euler angle vector from a angle axis. 
+
+\Hypertarget{namespaceeuler_a58774f36927fc45a137dbc20b546712e}\label{namespaceeuler_a58774f36927fc45a137dbc20b546712e} 
+\index{euler@{euler}!from@{from}}
+\index{from@{from}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{from()}{from()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ from (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a255f7b24f655ade0a3853344694d324d}{Rotation\+Matrix}} \&}]{rot\+\_\+matrix }\end{DoxyParamCaption})}
+
+
+
+Constructs the euler angle vector from a rotation matrix. 
+
+\begin{DoxyNote}{Note}
+Only implemented for 3D spaces. 
+\end{DoxyNote}
+\Hypertarget{namespaceeuler_af2512b2754f63a79868d9caafafb3bad}\label{namespaceeuler_af2512b2754f63a79868d9caafafb3bad} 
+\index{euler@{euler}!from$<$ 3 $>$@{from$<$ 3 $>$}}
+\index{from$<$ 3 $>$@{from$<$ 3 $>$}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{from$<$ 3 $>$()}{from< 3 >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+\mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ 3 $>$ $>$ \mbox{\hyperlink{namespaceeuler_a58774f36927fc45a137dbc20b546712e}{from}}$<$ 3 $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a255f7b24f655ade0a3853344694d324d}{Rotation\+Matrix}} \&}]{rot\+\_\+matrix }\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceeuler_a61d3ae6e43eb9d62f4dc91e9158cce56}\label{namespaceeuler_a61d3ae6e43eb9d62f4dc91e9158cce56} 
+\index{euler@{euler}!jacobian@{jacobian}}
+\index{jacobian@{jacobian}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{jacobian()}{jacobian()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ jacobian (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Constructs the jacobian for conversions from euler angles derivatives to angular velocities. 
+
+\Hypertarget{namespaceeuler_a5faa917103be7176e437b9fc844df7f1}\label{namespaceeuler_a5faa917103be7176e437b9fc844df7f1} 
+\index{euler@{euler}!rotate\_axis@{rotate\_axis}}
+\index{rotate\_axis@{rotate\_axis}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{rotate\_axis()}{rotate\_axis()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ size $>$ rotate\+\_\+axis (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&}]{rotation,  }\item[{const \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ size $>$ \&}]{axis }\end{DoxyParamCaption})}
+
+
+
+Rotate a given {\ttfamily axis} according to the given {\ttfamily rotation}. 
+
+\Hypertarget{namespaceeuler_ac8e70043928e77966aee7e1afade12af}\label{namespaceeuler_ac8e70043928e77966aee7e1afade12af} 
+\index{euler@{euler}!to\_rotation@{to\_rotation}}
+\index{to\_rotation@{to\_rotation}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{to\_rotation()}{to\_rotation()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+\mbox{\hyperlink{types_8hpp_ac05d2f2746fc98930cf560b47f258b4a}{Rotation}} to\+\_\+rotation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{Euler\+Angles}}$<$ \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ size $>$ $>$ \&}]{euler }\end{DoxyParamCaption})}
+
+
+
+Converts euler angles to the corresponding rotation matrix. 
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceeuler_add3927473d6a0a00c4afbfede55da5b8}\label{namespaceeuler_add3927473d6a0a00c4afbfede55da5b8} 
+\index{euler@{euler}!axis\_order@{axis\_order}}
+\index{axis\_order@{axis\_order}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{axis\_order}{axis\_order}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size$>$ \\
+constexpr std\+::array$<$size\+\_\+t, \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$size$>$ $>$ axis\+\_\+order\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceeuler_a165a7a7e5fa87faaf2cf520c644544a0}\label{namespaceeuler_a165a7a7e5fa87faaf2cf520c644544a0} 
+\index{euler@{euler}!axis\_order$<$ 3 $>$@{axis\_order$<$ 3 $>$}}
+\index{axis\_order$<$ 3 $>$@{axis\_order$<$ 3 $>$}!euler@{euler}}
+\doxysubsubsection{\texorpdfstring{axis\_order$<$ 3 $>$}{axis\_order< 3 >}}
+{\footnotesize\ttfamily template$<$$>$ \\
+constexpr std\+::array$<$size\+\_\+t, \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$3$>$ $>$ \mbox{\hyperlink{namespaceeuler_add3927473d6a0a00c4afbfede55da5b8}{axis\+\_\+order}}$<$ 3 $>$ \{2, 1, 0\}\hspace{0.3cm}{\ttfamily [constexpr]}}
+

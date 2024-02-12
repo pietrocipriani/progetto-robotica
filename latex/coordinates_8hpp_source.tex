@@ -1,0 +1,167 @@
+\doxysection{coordinates.\+hpp}
+\hypertarget{coordinates_8hpp_source}{}\label{coordinates_8hpp_source}\index{src/planner/include/utils/coordinates.hpp@{src/planner/include/utils/coordinates.hpp}}
+\mbox{\hyperlink{coordinates_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ UTILS\_COORDINATES\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ UTILS\_COORDINATES\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../types.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../constants.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../euler.hpp"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{unlazy_8hpp}{unlazy.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{helpers_8hpp}{helpers.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{unlazy_8hpp}{unlazy.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecoord}{coord}}\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{LinearSystem}}\ \{}
+\DoxyCodeLine{00020\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{Cartesian}},}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6ada77fde9bade0864e168f8cd705aee36}{Cylindrical}}}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{AngularSystem}}\ \{}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}},}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}<LinearSystem\ linear\_system,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00042\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcoord_1_1linear__type}{linear\_type}}\ \{}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{type}}\ =\ \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector<size>}};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{template}<AngularSystem\ angular\_system,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00050\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcoord_1_1angular__type}{angular\_type}}\ \{}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{type}}\ =\ \mbox{\hyperlink{types_8hpp_a72d232935297b80a66d1dfe7f32b2be1}{EulerAngles<so<size>}}>;}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{static\_assert}(angular\_system\ ==\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{Euler}});}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00056\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structcoord_1_1angular__type}{angular\_type}}<\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{Lie}},\ 3>\ \{}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structcoord_1_1angular__type_3_01Lie_00_013_01_4_ad3f69c2e0c01436dd9d9670f8a36d961}{type}}\ =\ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{template}<LinearSystem\ from,\ LinearSystem\ to,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00064\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<to,\ size>::type}}\ \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}(\textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<from,\ size>::type}}\&\ p)\ \{}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{static\_assert}(from\ ==\ to,\ \textcolor{stringliteral}{"{}Default\ implementation\ is\ the\ identity\ function.\ Use\ a\ specialization."{}});}
+\DoxyCodeLine{00066\ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{00067\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{template}<AngularSystem\ from,\ AngularSystem\ to,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00072\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<to,\ size>::type}}\ \mbox{\hyperlink{namespacecoord_aefb1cfe24945665d92bcb0ba1e6dc29e}{convert}}(\textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<from,\ size>::type}}\&\ p)\ \{}
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{static\_assert}(from\ ==\ to,\ \textcolor{stringliteral}{"{}Default\ implementation\ is\ the\ identity\ function.\ Use\ a\ specialization."{}});}
+\DoxyCodeLine{00074\ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00082\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cylindrical,\ 3>::type}}\ \mbox{\hyperlink{namespacecoord_a533c9576bdf09c4e2a2445fc50df024b}{convert<Cartesian,\ Cylindrical,\ 3>}}(}
+\DoxyCodeLine{00083\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cartesian,\ 3>::type}}\&\ cartesian}
+\DoxyCodeLine{00084\ )\ \{}
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ rho\ =\ cartesian.head<2>().norm();}
+\DoxyCodeLine{00086\ \ \ \textcolor{comment}{//\ TODO:\ dummy\ implementation\ to\ avoid\ control\ panel.}}
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{auto}\ theta\ =\ std::atan2(cartesian.y(),\ cartesian.x());}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordflow}{if}\ (theta\ >=\ M\_PI\_2)\ theta\ -\/=\ 2\ *\ M\_PI;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ h\ =\ cartesian.z();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{return}\ \{rho,\ theta,\ h\};}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00100\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cartesian,\ 3>::type}}\ \mbox{\hyperlink{namespacecoord_a331aa108ffe163fe8c3bb583c7c73e19}{convert<Cylindrical,\ Cartesian,\ 3>}}(}
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cylindrical,\ 3>::type}}\&\ cylindrical}
+\DoxyCodeLine{00102\ )\ \{}
+\DoxyCodeLine{00103\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ rho\ =\ cylindrical.x();}
+\DoxyCodeLine{00104\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ theta\ =\ cylindrical.y();}
+\DoxyCodeLine{00105\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ h\ =\ cylindrical.z();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ x\ =\ std::cos(theta)\ *\ rho;}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ y\ =\ std::sin(theta)\ *\ rho;}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ z\ =\ h;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{return}\ \{x,\ y,\ z\};}
+\DoxyCodeLine{00112\ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00120\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Euler,\ 3>::type}}\ \mbox{\hyperlink{namespacecoord_a48d424bed51109389f4cfcf373c97116}{convert<Lie,\ Euler,\ 3>}}(}
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Lie,\ 3>::type}}\&\ lie}
+\DoxyCodeLine{00122\ )\ \{}
+\DoxyCodeLine{00123\ \ \ \textcolor{comment}{//\ TODO:\ deprecate\ euler.}}
+\DoxyCodeLine{00124\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceeuler_af2512b2754f63a79868d9caafafb3bad}{euler::from<3>}}(lie);}
+\DoxyCodeLine{00125\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00131\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00132\ \textcolor{keyword}{inline}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Lie,\ 3>::type}}\ \mbox{\hyperlink{namespacecoord_a5957272d0f63195400458956038769a1}{convert<Euler,\ Lie,\ 3>}}(}
+\DoxyCodeLine{00133\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Euler,\ 3>::type}}\&\ \mbox{\hyperlink{namespaceeuler}{euler}}}
+\DoxyCodeLine{00134\ )\ \{}
+\DoxyCodeLine{00135\ \ \ \textcolor{keyword}{using\ }Ret\ =\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Lie,\ 3>::type}};}
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordflow}{return}\ Ret(euler::to\_rotation<3>(\mbox{\hyperlink{namespaceeuler}{euler}}));}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{template}<LinearSystem\ from,\ LinearSystem\ to\ =\ Cartesian,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00142\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}}(}
+\DoxyCodeLine{00143\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<from,\ size>::type}}\&\ start,}
+\DoxyCodeLine{00144\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<from,\ size>::type}}\&\ end}
+\DoxyCodeLine{00145\ )\ \{}
+\DoxyCodeLine{00146\ \ \ \textcolor{keyword}{static\_assert}(from\ ==\ to,\ \textcolor{stringliteral}{"{}Default\ implementation\ do\ not\ allow\ conversion."{}});}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{return}\ (end\ -\/\ start).norm();}
+\DoxyCodeLine{00148\ \}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{template}<AngularSystem\ from,\ AngularSystem\ to\ =\ Lie,\ \textcolor{keywordtype}{size\_t}\ size>}
+\DoxyCodeLine{00153\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecoord_ac184343b0ae9d63e9fe473e22a1cd54a}{measure}}(}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<from,\ size>::type}}\&\ start,}
+\DoxyCodeLine{00155\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<from,\ size>::type}}\&\ end}
+\DoxyCodeLine{00156\ )\ \{}
+\DoxyCodeLine{00157\ \ \ \textcolor{keyword}{static\_assert}(from\ ==\ to,\ \textcolor{stringliteral}{"{}Default\ implementation\ do\ not\ allow\ conversion."{}});}
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordflow}{return}\ (end\ -\/\ start).norm();}
+\DoxyCodeLine{00159\ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00163\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00164\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecoord_ab10c87867e4292619db3b217ff87124d}{measure<Lie,\ Lie,\ 3>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}}\&\ start,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}}\&\ end)\ \{}
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordflow}{return}\ start.angularDistance(end);}
+\DoxyCodeLine{00166\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00170\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecoord_ac9654a0bd1855d46b4864188f795e365}{measure<Cylindrical,\ Cartesian,\ 3>}}(}
+\DoxyCodeLine{00171\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cylindrical,\ 3>::type}}\&\ start,}
+\DoxyCodeLine{00172\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{linear\_type<Cylindrical,\ 3>::type}}\&\ end}
+\DoxyCodeLine{00173\ )\ \{}
+\DoxyCodeLine{00174\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ delta\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}(end\ -\/\ start);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ delta\_rho\ =\ delta.x();}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{comment}{//\ A\ movement\ of\ theta\ produces\ a\ movement\ of\ rho·theta\ in\ cartesian\ coordinates.}}
+\DoxyCodeLine{00179\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ delta\_theta\ =\ delta.y()\ *\ end.x();}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ delta\_h\ =\ delta.z();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \textcolor{comment}{//\ Norm\ without\ considering\ the\ rotation.}}
+\DoxyCodeLine{00184\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ pseudo\_norm\_sq\ =\ std::pow(delta\_rho,\ 2)\ +\ std::pow(delta\_h,\ 2);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \textcolor{keywordflow}{if}\ (std::abs(delta\_theta)\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}})\ \textcolor{keywordflow}{return}\ delta.norm();}
+\DoxyCodeLine{00187\ \ \ \textcolor{keywordflow}{if}\ (pseudo\_norm\_sq\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}})\ \textcolor{keywordflow}{return}\ std::abs(delta\_theta);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \textcolor{comment}{//\ NOTE:\ the\ correctness\ of\ the\ integral\ should\ be\ checked.}}
+\DoxyCodeLine{00190\ \ \ \textcolor{keywordflow}{return}\ delta.norm()\ /\ 2\ +\ std::asinh(delta\_theta\ /\ std::sqrt(pseudo\_norm\_sq))\ *\ pseudo\_norm\_sq\ /\ delta\_theta;}
+\DoxyCodeLine{00191\ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{keyword}{template}<>}
+\DoxyCodeLine{00194\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecoord_a789a6c8ff29119c3131a35b5b784fa30}{measure<Euler,\ Lie,\ 3>}}(}
+\DoxyCodeLine{00195\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Euler,\ 3>::type}}\&\ start,}
+\DoxyCodeLine{00196\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{angular\_type<Euler,\ 3>::type}}\&\ end}
+\DoxyCodeLine{00197\ )\ \{}
+\DoxyCodeLine{00198\ \ \ \textcolor{comment}{//\ TODO:\ dummy\ implementation.}}
+\DoxyCodeLine{00199\ \ \ \textcolor{keywordflow}{return}\ (end\ -\/\ start).norm();}
+\DoxyCodeLine{00200\ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \}\ \textcolor{comment}{//\ namespace\ coord}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ UTILS\_COORDINATES\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

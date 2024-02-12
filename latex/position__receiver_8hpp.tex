@@ -1,0 +1,51 @@
+\doxysection{src/controller/include/controller/control/position\+\_\+receiver.hpp File Reference}
+\hypertarget{position__receiver_8hpp}{}\label{position__receiver_8hpp}\index{src/controller/include/controller/control/position\_receiver.hpp@{src/controller/include/controller/control/position\_receiver.hpp}}
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include "{}position\+\_\+detection/\+Block\+Positions.\+h"{}}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+Include dependency graph for position\+\_\+receiver.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{position__receiver_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{position__receiver_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller}{controller}}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller_1_1control}{controller\+::control}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{position__receiver_8hpp_ae2a7ea078ee84bbadd2499c266d73488}{\+\_\+\+CONTROL\+\_\+\+POSITION\+\_\+\+RECEIVER\+\_\+\+HPP\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} \mbox{\hyperlink{namespacecontroller_1_1control_a239eb11a4d80a60d7793cc47fe32bee6}{block\+\_\+pos\+\_\+to\+\_\+type}} (const position\+\_\+detection\+::\+Block\+Position \&block\+\_\+pos)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} $>$ \mbox{\hyperlink{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}{filter\+\_\+map\+\_\+movements\+\_\+to\+\_\+pads}} (const std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \&blocks, double min\+\_\+confidence, size\+\_\+t max\+\_\+count)
+\item 
+std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \mbox{\hyperlink{namespacecontroller_1_1control_af85952ee2c21b113eb830d29ea127f5e}{wait\+\_\+for\+\_\+new\+\_\+block\+\_\+positions}} (ros\+::\+Node\+Handle \&node\+\_\+handle)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{position__receiver_8hpp_ae2a7ea078ee84bbadd2499c266d73488}\label{position__receiver_8hpp_ae2a7ea078ee84bbadd2499c266d73488} 
+\index{position\_receiver.hpp@{position\_receiver.hpp}!\_CONTROL\_POSITION\_RECEIVER\_HPP\_@{\_CONTROL\_POSITION\_RECEIVER\_HPP\_}}
+\index{\_CONTROL\_POSITION\_RECEIVER\_HPP\_@{\_CONTROL\_POSITION\_RECEIVER\_HPP\_}!position\_receiver.hpp@{position\_receiver.hpp}}
+\doxysubsubsection{\texorpdfstring{\_CONTROL\_POSITION\_RECEIVER\_HPP\_}{\_CONTROL\_POSITION\_RECEIVER\_HPP\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+CONTROL\+\_\+\+POSITION\+\_\+\+RECEIVER\+\_\+\+HPP\+\_\+}
+

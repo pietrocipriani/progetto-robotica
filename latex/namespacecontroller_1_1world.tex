@@ -1,0 +1,154 @@
+\doxysection{controller\+::world Namespace Reference}
+\hypertarget{namespacecontroller_1_1world}{}\label{namespacecontroller_1_1world}\index{controller::world@{controller::world}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}}
+\item 
+class \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b}{clear\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&deleter)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}{setup\+\_\+workspace}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}{spawn\+\_\+blocks}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner, bool avoid\+\_\+pads)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}{spawn\+\_\+missing\+\_\+pads}} (\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&spawner)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacecontroller_1_1world_ac746d33419dafaadb8c8cf166ab62351}{BLOCK\+\_\+\+PREFIX}} = "{}brick\+\_\+"{}
+\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacecontroller_1_1world_ae9c771882682d3d680ac5f2f6804d1df}{BLOCK\+\_\+\+SDF}}
+\item 
+constexpr int \mbox{\hyperlink{namespacecontroller_1_1world_a6133ad85eabe3f3982cc17b08b3a3f18}{MAX\+\_\+\+TRIES\+\_\+\+TO\+\_\+\+PLACE\+\_\+\+BLOCK}} = 1000
+\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacecontroller_1_1world_a2955eea5f9122f92ee3a55bdaf1bb555}{PAD\+\_\+\+PREFIX}} = "{}pad\+\_\+"{}
+\item 
+constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacecontroller_1_1world_afb2645ba9303461f8cf50d193dbe64b6}{PAD\+\_\+\+SDF}}
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_a8c213e4bc8d1849b613088013399e424}{WORKSPACE\+\_\+\+MAX\+\_\+X}} = 0.\+92
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_aa38efa64bcd989e0e5c8be390ed1de05}{WORKSPACE\+\_\+\+MAX\+\_\+Y}} = 0.\+75
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_a4a742b8dd87ebf1917ccac4a6111b085}{WORKSPACE\+\_\+\+MIN\+\_\+X}} = 0.\+05
+\item 
+constexpr double \mbox{\hyperlink{namespacecontroller_1_1world_ab2896550d8f4b6c346382e5cb8b6835d}{WORKSPACE\+\_\+\+MIN\+\_\+Y}} = 0.\+30
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b}\label{namespacecontroller_1_1world_a47cfa2ecd7b95611716665ed4bb33d0b} 
+\index{controller::world@{controller::world}!clear\_workspace@{clear\_workspace}}
+\index{clear\_workspace@{clear\_workspace}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{clear\_workspace()}{clear\_workspace()}}
+{\footnotesize\ttfamily void clear\+\_\+workspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{Deleter}} \&}]{deleter }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b}\label{namespacecontroller_1_1world_a0c7a75875ac68595cdadb0bbcece446b} 
+\index{controller::world@{controller::world}!setup\_workspace@{setup\_workspace}}
+\index{setup\_workspace@{setup\_workspace}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{setup\_workspace()}{setup\_workspace()}}
+{\footnotesize\ttfamily void setup\+\_\+workspace (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner,  }\item[{bool}]{avoid\+\_\+pads }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167}\label{namespacecontroller_1_1world_ab7d7a5d798e83941ad6ca38c7b7a8167} 
+\index{controller::world@{controller::world}!spawn\_blocks@{spawn\_blocks}}
+\index{spawn\_blocks@{spawn\_blocks}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{spawn\_blocks()}{spawn\_blocks()}}
+{\footnotesize\ttfamily void spawn\+\_\+blocks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner,  }\item[{bool}]{avoid\+\_\+pads }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6}\label{namespacecontroller_1_1world_a9ed3584d4373f0d84c9738bd0ec72ff6} 
+\index{controller::world@{controller::world}!spawn\_missing\_pads@{spawn\_missing\_pads}}
+\index{spawn\_missing\_pads@{spawn\_missing\_pads}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{spawn\_missing\_pads()}{spawn\_missing\_pads()}}
+{\footnotesize\ttfamily void spawn\+\_\+missing\+\_\+pads (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{Spawner}} \&}]{spawner }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacecontroller_1_1world_ac746d33419dafaadb8c8cf166ab62351}\label{namespacecontroller_1_1world_ac746d33419dafaadb8c8cf166ab62351} 
+\index{controller::world@{controller::world}!BLOCK\_PREFIX@{BLOCK\_PREFIX}}
+\index{BLOCK\_PREFIX@{BLOCK\_PREFIX}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{BLOCK\_PREFIX}{BLOCK\_PREFIX}}
+{\footnotesize\ttfamily constexpr const char\texorpdfstring{$\ast$}{*} BLOCK\+\_\+\+PREFIX = "{}brick\+\_\+"{}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_ae9c771882682d3d680ac5f2f6804d1df}\label{namespacecontroller_1_1world_ae9c771882682d3d680ac5f2f6804d1df} 
+\index{controller::world@{controller::world}!BLOCK\_SDF@{BLOCK\_SDF}}
+\index{BLOCK\_SDF@{BLOCK\_SDF}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{BLOCK\_SDF}{BLOCK\_SDF}}
+{\footnotesize\ttfamily constexpr const char\texorpdfstring{$\ast$}{*} BLOCK\+\_\+\+SDF\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_a6133ad85eabe3f3982cc17b08b3a3f18}\label{namespacecontroller_1_1world_a6133ad85eabe3f3982cc17b08b3a3f18} 
+\index{controller::world@{controller::world}!MAX\_TRIES\_TO\_PLACE\_BLOCK@{MAX\_TRIES\_TO\_PLACE\_BLOCK}}
+\index{MAX\_TRIES\_TO\_PLACE\_BLOCK@{MAX\_TRIES\_TO\_PLACE\_BLOCK}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRIES\_TO\_PLACE\_BLOCK}{MAX\_TRIES\_TO\_PLACE\_BLOCK}}
+{\footnotesize\ttfamily constexpr int MAX\+\_\+\+TRIES\+\_\+\+TO\+\_\+\+PLACE\+\_\+\+BLOCK = 1000\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_a2955eea5f9122f92ee3a55bdaf1bb555}\label{namespacecontroller_1_1world_a2955eea5f9122f92ee3a55bdaf1bb555} 
+\index{controller::world@{controller::world}!PAD\_PREFIX@{PAD\_PREFIX}}
+\index{PAD\_PREFIX@{PAD\_PREFIX}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{PAD\_PREFIX}{PAD\_PREFIX}}
+{\footnotesize\ttfamily constexpr const char\texorpdfstring{$\ast$}{*} PAD\+\_\+\+PREFIX = "{}pad\+\_\+"{}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_afb2645ba9303461f8cf50d193dbe64b6}\label{namespacecontroller_1_1world_afb2645ba9303461f8cf50d193dbe64b6} 
+\index{controller::world@{controller::world}!PAD\_SDF@{PAD\_SDF}}
+\index{PAD\_SDF@{PAD\_SDF}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{PAD\_SDF}{PAD\_SDF}}
+{\footnotesize\ttfamily constexpr const char\texorpdfstring{$\ast$}{*} PAD\+\_\+\+SDF\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ R\textcolor{stringliteral}{"{}(}}
+\DoxyCodeLine{\textcolor{stringliteral}{<?xml\ version='1.0'?>}}
+\DoxyCodeLine{\textcolor{stringliteral}{<sdf\ version='1.7'>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ <model\ name='pad\_\%s'>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ <link\ name='link'>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ <visual\ name='visual'>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ <geometry>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ <mesh>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <uri>model://pad\_\%s/mesh.stl</uri>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ \ \ <scale>0.04\ 0.07\ 0.07</scale>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ </mesh>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ </geometry>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ <material>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ <ambient>0.0\ 0.0\ 0.0\ 1.0</ambient>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ <diffuse>0.0\ 0.0\ 0.0\ 1.0</diffuse>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ \ \ <specular>0.1\ 0.1\ 0.1\ 1.0\ 5.0</specular>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ </material>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ <transparency>0</transparency>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ \ \ <cast\_shadows>0</cast\_shadows>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ \ \ </visual>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ </link>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ \ \ <static>1</static>}}
+\DoxyCodeLine{\textcolor{stringliteral}{\ \ </model>}}
+\DoxyCodeLine{\textcolor{stringliteral}{</sdf>}}
+\DoxyCodeLine{\textcolor{stringliteral}{)"{}}}
+
+\end{DoxyCode}
+\Hypertarget{namespacecontroller_1_1world_a8c213e4bc8d1849b613088013399e424}\label{namespacecontroller_1_1world_a8c213e4bc8d1849b613088013399e424} 
+\index{controller::world@{controller::world}!WORKSPACE\_MAX\_X@{WORKSPACE\_MAX\_X}}
+\index{WORKSPACE\_MAX\_X@{WORKSPACE\_MAX\_X}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{WORKSPACE\_MAX\_X}{WORKSPACE\_MAX\_X}}
+{\footnotesize\ttfamily constexpr double WORKSPACE\+\_\+\+MAX\+\_\+X = 0.\+92\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_aa38efa64bcd989e0e5c8be390ed1de05}\label{namespacecontroller_1_1world_aa38efa64bcd989e0e5c8be390ed1de05} 
+\index{controller::world@{controller::world}!WORKSPACE\_MAX\_Y@{WORKSPACE\_MAX\_Y}}
+\index{WORKSPACE\_MAX\_Y@{WORKSPACE\_MAX\_Y}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{WORKSPACE\_MAX\_Y}{WORKSPACE\_MAX\_Y}}
+{\footnotesize\ttfamily constexpr double WORKSPACE\+\_\+\+MAX\+\_\+Y = 0.\+75\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_a4a742b8dd87ebf1917ccac4a6111b085}\label{namespacecontroller_1_1world_a4a742b8dd87ebf1917ccac4a6111b085} 
+\index{controller::world@{controller::world}!WORKSPACE\_MIN\_X@{WORKSPACE\_MIN\_X}}
+\index{WORKSPACE\_MIN\_X@{WORKSPACE\_MIN\_X}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{WORKSPACE\_MIN\_X}{WORKSPACE\_MIN\_X}}
+{\footnotesize\ttfamily constexpr double WORKSPACE\+\_\+\+MIN\+\_\+X = 0.\+05\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+\Hypertarget{namespacecontroller_1_1world_ab2896550d8f4b6c346382e5cb8b6835d}\label{namespacecontroller_1_1world_ab2896550d8f4b6c346382e5cb8b6835d} 
+\index{controller::world@{controller::world}!WORKSPACE\_MIN\_Y@{WORKSPACE\_MIN\_Y}}
+\index{WORKSPACE\_MIN\_Y@{WORKSPACE\_MIN\_Y}!controller::world@{controller::world}}
+\doxysubsubsection{\texorpdfstring{WORKSPACE\_MIN\_Y}{WORKSPACE\_MIN\_Y}}
+{\footnotesize\ttfamily constexpr double WORKSPACE\+\_\+\+MIN\+\_\+Y = 0.\+30\hspace{0.3cm}{\ttfamily [constexpr]}}
+

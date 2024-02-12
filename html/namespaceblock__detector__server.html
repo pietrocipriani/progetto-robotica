@@ -77,15 +77,20 @@ $(function() {
   <div class="headertitle"><div class="title">block_detector_server Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Starts a ROS service that takes an <code>sensor_msgs/Image</code> as input, detects boxes in the image, and returns <code>block_detector/DetectBlocks</code>, i.e.  
+<a href="namespaceblock__detector__server.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classblock__detector__server_1_1BlockDetector.html">BlockDetector</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A ROS service that detects blocks in the images passed as input using a YOLOv8 model, and returns the detected labeled bounding boxes as output.  <a href="classblock__detector__server_1_1BlockDetector.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a51af30a60f9f02777c6396b8247e356f" id="r_a51af30a60f9f02777c6396b8247e356f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceblock__detector__server.html#a51af30a60f9f02777c6396b8247e356f">main</a> ()</td></tr>
+<tr class="memdesc:a51af30a60f9f02777c6396b8247e356f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a ROS service that detects boxes in images, see file docs for more info.  <br /></td></tr>
 <tr class="separator:a51af30a60f9f02777c6396b8247e356f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -98,20 +103,15 @@ Variables</h2></td></tr>
 <tr class="separator:a0dd595c7d89699a9b60f4af29c1f3c06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><pre class="fragment">Starts a ROS service that takes an `sensor_msgs/Image` as input, detects boxes in the image, and
-returns `block_detector/DetectBlocks`, i.e. the boxes detected by YOLOv8, as output. A service was
-preferred, instead of a publisher reading directly from the camera and publishing boxes from time
-to time, for the following reasons:
-- to allow making this component more standalone
-- to allow the input image to be chosen by the caller, e.g. by cropping it or passing a custom image
-- to avoid wasting CPU on calculating boxes that would never be used because the subscriber (if any)
-    does not need them
-
-This file also contains the configuration to pass to the YOLOv8 model for detecting boxes, such as
-CONFIDENCE_THRESHOLD and INTERSECTION_OVER_UNION_THRESHOLD.
-
-You can visualize results from this service using `inspect_detected_blocks.py`.
-</pre> </div><h2 class="groupheader">Function Documentation</h2>
+<div class="textblock"><p>Starts a ROS service that takes an <code>sensor_msgs/Image</code> as input, detects boxes in the image, and returns <code>block_detector/DetectBlocks</code>, i.e. </p>
+<p>the boxes detected by YOLOv8, as output. A service was preferred, instead of a publisher reading directly from the camera and publishing boxes from time to time, for the following reasons:</p><ul>
+<li>to allow making this component more standalone</li>
+<li>to allow the input image to be chosen by the caller, e.g. by cropping it or passing a custom image</li>
+<li>to avoid wasting CPU on calculating boxes that would never be used because the subscriber (if any) does not need them</li>
+</ul>
+<p>This file also contains the configuration to pass to the YOLOv8 model for detecting boxes, such as CONFIDENCE_THRESHOLD and INTERSECTION_OVER_UNION_THRESHOLD.</p>
+<p>You can visualize results from this service using <code><a class="el" href="inspect__detected__blocks_8py.html">inspect_detected_blocks.py</a></code>. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="a51af30a60f9f02777c6396b8247e356f" name="a51af30a60f9f02777c6396b8247e356f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a51af30a60f9f02777c6396b8247e356f">&#9670;&#160;</a></span>main()</h2>
 
@@ -126,6 +126,8 @@ You can visualize results from this service using `inspect_detected_blocks.py`.
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Starts a ROS service that detects boxes in images, see file docs for more info. </p>
 
 </div>
 </div>

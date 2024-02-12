@@ -1,0 +1,93 @@
+\doxysection{src/planner/tests/test\+\_\+planner.cpp File Reference}
+\hypertarget{test__planner_8cpp}{}\label{test__planner_8cpp}\index{src/planner/tests/test\_planner.cpp@{src/planner/tests/test\_planner.cpp}}
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}tester.\+hpp"{}}\newline
+{\ttfamily \#include "{}../include/planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+{\ttfamily \#include "{}block\+\_\+type.\+hpp"{}}\newline
+{\ttfamily \#include "{}../lib/planning/interpolation.\+hpp"{}}\newline
+{\ttfamily \#include "{}../lib/planning/sequencer.\+hpp"{}}\newline
+{\ttfamily \#include "{}../lib/planning/internal.\+hpp"{}}\newline
+Include dependency graph for test\+\_\+planner.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{test__planner_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{test__planner_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+std\+::ostream \& \mbox{\hyperlink{test__planner_8cpp_a09dc9c7f48b6d3eeb578f68cc99446f1}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$$>$ \&pose)
+\item 
+bool \mbox{\hyperlink{test__planner_8cpp_a082ee1bd39917f27ca92b09d2938baa6}{test\+\_\+conflict\+\_\+management}} ()
+\item 
+bool \mbox{\hyperlink{test__planner_8cpp_a4871487f1c6ab68abfc2e10190015149}{test\+\_\+linear\+\_\+interpolator}} ()
+\item 
+bool \mbox{\hyperlink{test__planner_8cpp_adeff8f0452c2a5415703429c7cd3d93d}{test\+\_\+movement\+\_\+planning}} ()
+\item 
+bool \mbox{\hyperlink{test__planner_8cpp_a132747144e35e780daa13d17f07832aa}{test\+\_\+planner}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{test__planner_8cpp_accd66d2b8be27c31e12ce8ab03abdaed}{ur5\+\_\+default\+\_\+homing\+\_\+config\+\_\+init}} \mbox{[}$\,$\mbox{]} = \{-\/0.\+32, -\/0.\+78, -\/2.\+56, -\/1.\+63, -\/1.\+57, 3.\+49\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{test__planner_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__planner_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{test\_planner.cpp@{test\_planner.cpp}!main@{main}}
+\index{main@{main}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__planner_8cpp_a09dc9c7f48b6d3eeb578f68cc99446f1}\label{test__planner_8cpp_a09dc9c7f48b6d3eeb578f68cc99446f1} 
+\index{test\_planner.cpp@{test\_planner.cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$$>$ \&}]{pose }\end{DoxyParamCaption})}
+
+\Hypertarget{test__planner_8cpp_a082ee1bd39917f27ca92b09d2938baa6}\label{test__planner_8cpp_a082ee1bd39917f27ca92b09d2938baa6} 
+\index{test\_planner.cpp@{test\_planner.cpp}!test\_conflict\_management@{test\_conflict\_management}}
+\index{test\_conflict\_management@{test\_conflict\_management}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_conflict\_management()}{test\_conflict\_management()}}
+{\footnotesize\ttfamily bool test\+\_\+conflict\+\_\+management (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__planner_8cpp_a4871487f1c6ab68abfc2e10190015149}\label{test__planner_8cpp_a4871487f1c6ab68abfc2e10190015149} 
+\index{test\_planner.cpp@{test\_planner.cpp}!test\_linear\_interpolator@{test\_linear\_interpolator}}
+\index{test\_linear\_interpolator@{test\_linear\_interpolator}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_linear\_interpolator()}{test\_linear\_interpolator()}}
+{\footnotesize\ttfamily bool test\+\_\+linear\+\_\+interpolator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__planner_8cpp_adeff8f0452c2a5415703429c7cd3d93d}\label{test__planner_8cpp_adeff8f0452c2a5415703429c7cd3d93d} 
+\index{test\_planner.cpp@{test\_planner.cpp}!test\_movement\_planning@{test\_movement\_planning}}
+\index{test\_movement\_planning@{test\_movement\_planning}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_movement\_planning()}{test\_movement\_planning()}}
+{\footnotesize\ttfamily bool test\+\_\+movement\+\_\+planning (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{test__planner_8cpp_a132747144e35e780daa13d17f07832aa}\label{test__planner_8cpp_a132747144e35e780daa13d17f07832aa} 
+\index{test\_planner.cpp@{test\_planner.cpp}!test\_planner@{test\_planner}}
+\index{test\_planner@{test\_planner}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{test\_planner()}{test\_planner()}}
+{\footnotesize\ttfamily bool test\+\_\+planner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{test__planner_8cpp_accd66d2b8be27c31e12ce8ab03abdaed}\label{test__planner_8cpp_accd66d2b8be27c31e12ce8ab03abdaed} 
+\index{test\_planner.cpp@{test\_planner.cpp}!ur5\_default\_homing\_config\_init@{ur5\_default\_homing\_config\_init}}
+\index{ur5\_default\_homing\_config\_init@{ur5\_default\_homing\_config\_init}!test\_planner.cpp@{test\_planner.cpp}}
+\doxysubsubsection{\texorpdfstring{ur5\_default\_homing\_config\_init}{ur5\_default\_homing\_config\_init}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} ur5\+\_\+default\+\_\+homing\+\_\+config\+\_\+init\mbox{[}$\,$\mbox{]} = \{-\/0.\+32, -\/0.\+78, -\/2.\+56, -\/1.\+63, -\/1.\+57, 3.\+49\}\hspace{0.3cm}{\ttfamily [constexpr]}}
+

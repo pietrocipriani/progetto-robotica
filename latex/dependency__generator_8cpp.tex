@@ -1,0 +1,35 @@
+\doxysection{src/planner/lib/planning/dependency\+\_\+generator.cpp File Reference}
+\hypertarget{dependency__generator_8cpp}{}\label{dependency__generator_8cpp}\index{src/planner/lib/planning/dependency\_generator.cpp@{src/planner/lib/planning/dependency\_generator.cpp}}
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+Include dependency graph for dependency\+\_\+generator.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dependency__generator_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} = std\+::vector$<$ std\+::vector$<$ size\+\_\+t $>$ $>$
+\begin{DoxyCompactList}\small\item\em Graph as adjlist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespaceplanner_ab33f384f70ef1d97034fe3a782df3284}{dfs}} (const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&graph, std\+::vector$<$ bool $>$ \&visited, std\+::queue$<$ size\+\_\+t $>$ \&stack, size\+\_\+t current)
+\begin{DoxyCompactList}\small\item\em Post order DFS. \end{DoxyCompactList}\item 
+std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \mbox{\hyperlink{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c}{generate\+\_\+block\+\_\+positioning\+\_\+order}} (const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&blocks, const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}, \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&targets)
+\begin{DoxyCompactList}\small\item\em Generates dependencies between the positioning of the blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \mbox{\hyperlink{namespaceplanner_a4bbf78174f967fe66d9c642b5dc5eb8c}{generate\+\_\+dependency\+\_\+graph}} (const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \&blocks)
+\item 
+std\+::queue$<$ size\+\_\+t $>$ \mbox{\hyperlink{namespaceplanner_ab996d64a14f3911e0cd80939ed52ba93}{top\+\_\+sort}} (const \mbox{\hyperlink{namespaceplanner_a81e18ebd8906b7c3b2c9cf6e55786082}{Graph}} \&graph)
+\begin{DoxyCompactList}\small\item\em Topological (reversed) order of a graph. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,74 @@
+\doxysection{src/planner/lib/planning/sequencer.cpp File Reference}
+\hypertarget{sequencer_8cpp}{}\label{sequencer_8cpp}\index{src/planner/lib/planning/sequencer.cpp@{src/planner/lib/planning/sequencer.cpp}}
+{\ttfamily \#include "{}sequencer.\+hpp"{}}\newline
+{\ttfamily \#include "{}constants.\+hpp"{}}\newline
+{\ttfamily \#include "{}interpolation/parabolic.\+hpp"{}}\newline
+{\ttfamily \#include "{}interpolation/stop\+\_\+and\+\_\+play.\+hpp"{}}\newline
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+{\ttfamily \#include "{}interpolation.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/helpers.\+hpp"{}}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+Include dependency graph for sequencer.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sequencer_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{sequencer_8cpp_ac23f4ecfe7919f42036caffb5f0b11d9}{SPECIALIZATION}}(ls,  as)~template decltype(via\+\_\+point\+\_\+sequencer$<$ls, as$>$) via\+\_\+point\+\_\+sequencer$<$ls, as$>$;
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceplanner_ac549066c45a38ce3fb4b9e7186de87bf}{Angular\+Params}} = \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{os\+::\+Position\+::\+Angular}} $>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_a45b56029f52a9d0e648dc2a25ac55656}{Linear\+Params}} = \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{os\+::\+Position\+::\+Linear}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a1dcb4f1837b4e751236d3cb0dc74afa7}{generate\+\_\+parameters}} (const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \&point, const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&linear\+\_\+speed, const \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&angular\+\_\+speed, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&time)
+\begin{DoxyCompactList}\small\item\em Generate the timestamps for the last point in via point interpolation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} ls, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} as$>$ }\\auto \mbox{\hyperlink{namespaceplanner_a5bc7b483a8b8be14de19cb0cdd9acc83}{generate\+\_\+parameters}} (const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&point, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ as, ls $>$ \&next\+\_\+point, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&linear\+\_\+speed, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&angular\+\_\+speed, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&time)
+\begin{DoxyCompactList}\small\item\em Generate the timestamps for the via point interpolation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ }\\\mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$\+::\+Times \mbox{\hyperlink{namespaceplanner_a120a7a72636bd66eecdad19540b8eaaf}{get\+\_\+desired\+\_\+speed}} (\mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&limits, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&distance, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&acc\+\_\+1, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&acc\+\_\+2)
+\begin{DoxyCompactList}\small\item\em Updates the desired speed and returns the time parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespaceplanner_a6f0cbcfcad7d5c5eb38df91d5cf5e5c3}{get\+\_\+maximum\+\_\+speed}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} distance, \mbox{\hyperlink{structplanner_1_1SpeedLimits}{Speed\+Limits}} \&limits, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} acc\+\_\+1, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} acc\+\_\+2)
+\begin{DoxyCompactList}\small\item\em Generates the maximum speed reachable in the given space and the given accelerations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a4457a2d9ad873534b4fc0e9c89369c18}{max\+\_\+acceleration}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&pose)
+\begin{DoxyCompactList}\small\item\em Returns the maximum linear acceleration to avoid to stress the joints. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespaceplanner_a6cb99949bd650f3909740676364de143}{max\+\_\+angular\+\_\+acceleration}} ()
+\begin{DoxyCompactList}\small\item\em Returns the maximum angular acceleration to avoid to stress the joints. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , template$<$ class T $>$ class Container$>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_a4fdfb41abf3b44bce4d6bc5d142b47a6}{via\+\_\+point\+\_\+interpolation}} (const \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&start, Container$<$ \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ $>$ \&\&via\+\_\+points, \mbox{\hyperlink{structplanner_1_1Params}{Params}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \&\&end)
+\begin{DoxyCompactList}\small\item\em Utility function to manage the interpolation of different {\ttfamily Point} types. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ $>$ \mbox{\hyperlink{namespaceplanner_af113643d0711694c87c67168d0fe2f1d}{via\+\_\+point\+\_\+sequencer}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&current\+\_\+pose, const \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} \&viapoints, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&target\+\_\+pose, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&finish\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Creates the config sequence from a set of viapoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{sequencer_8cpp_ac23f4ecfe7919f42036caffb5f0b11d9}\label{sequencer_8cpp_ac23f4ecfe7919f42036caffb5f0b11d9} 
+\index{sequencer.cpp@{sequencer.cpp}!SPECIALIZATION@{SPECIALIZATION}}
+\index{SPECIALIZATION@{SPECIALIZATION}!sequencer.cpp@{sequencer.cpp}}
+\doxysubsubsection{\texorpdfstring{SPECIALIZATION}{SPECIALIZATION}}
+{\footnotesize\ttfamily \#define SPECIALIZATION(\begin{DoxyParamCaption}\item[{}]{ls,  }\item[{}]{as }\end{DoxyParamCaption})~template decltype(via\+\_\+point\+\_\+sequencer$<$ls, as$>$) via\+\_\+point\+\_\+sequencer$<$ls, as$>$;}
+

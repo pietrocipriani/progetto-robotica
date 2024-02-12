@@ -1,0 +1,50 @@
+\doxysection{src/planner/lib/planning/interpolation/quadratic.hpp File Reference}
+\hypertarget{quadratic_8hpp}{}\label{quadratic_8hpp}\index{src/planner/lib/planning/interpolation/quadratic.hpp@{src/planner/lib/planning/interpolation/quadratic.hpp}}
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}spaces/operational\+\_\+space.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils/coordinates.\+hpp"{}}\newline
+{\ttfamily \#include $<$eigen3/\+Eigen/\+Core$>$}\newline
+Include dependency graph for quadratic.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quadratic_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{quadratic_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1internal}{planner\+::internal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_1_1internal_a560b155b4cfdcb360333c5e327391c3f}{\+\_\+quadratic\+\_\+interpolation}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const Velocity \&initial\+\_\+velocity, const Velocity \&final\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_a8a808e2c91b85dc66e5ae1e712a9bb20}{quadratic\+\_\+acceleration}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const Velocity \&final\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Accelerates from a given {\ttfamily initial\+\_\+position} up to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_ae82fe1dba0d85fc6ad3ea48c220e03a3}{quadratic\+\_\+deceleration}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&final\+\_\+position, const Velocity \&initial\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&final\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Decelerates to a given {\ttfamily final\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} , class Velocity $>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} $>$ \mbox{\hyperlink{namespaceplanner_afd48a07dc2c92f73c34f88887788a1c8}{quadratic\+\_\+interpolation}} (const \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}} \&initial\+\_\+position, const Velocity \&initial\+\_\+velocity, const Velocity \&final\+\_\+velocity, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&start\+\_\+time, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&duration)
+\begin{DoxyCompactList}\small\item\em Accelerates from a given {\ttfamily initial\+\_\+position} from a given {\ttfamily initial\+\_\+velocity} to a given {\ttfamily final\+\_\+velocity} in the given {\ttfamily duration} time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr bool \mbox{\hyperlink{namespaceplanner_1_1internal_a834eaab4dc12b48bf4eafb6742236a81}{uses\+\_\+quaternions}} = false
+\item 
+template$<$$>$ constexpr bool \mbox{\hyperlink{namespaceplanner_1_1internal_a7d098feec7cc0a67b96eb54f53110f61}{uses\+\_\+quaternions$<$ Quaternion $>$}} = true
+\end{DoxyCompactItemize}

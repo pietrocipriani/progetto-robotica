@@ -1,0 +1,65 @@
+\doxysection{src/planner/include/utils/unlazy.hpp File Reference}
+\hypertarget{unlazy_8hpp}{}\label{unlazy_8hpp}\index{src/planner/include/utils/unlazy.hpp@{src/planner/include/utils/unlazy.hpp}}
+{\ttfamily \#include "{}../types.\+hpp"{}}\newline
+Include dependency graph for unlazy.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unlazy_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unlazy_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\constexpr auto \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}} (T \&\&lazy\+\_\+expression)
+\begin{DoxyCompactList}\small\item\em Takes a lazy expression and evaluates it. \end{DoxyCompactList}\item 
+template$<$$>$ auto \mbox{\hyperlink{unlazy_8hpp_a63cbee30942993508f310820fed442b6}{unlazy$<$ const Quaternion \& $>$}} (const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&lazy\+\_\+expression)
+\item 
+template$<$$>$ auto \mbox{\hyperlink{unlazy_8hpp_ad0c0c8b1cbeecf66af73e75b3d2a29fa}{unlazy$<$ Quaternion \& $>$}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&lazy\+\_\+expression)
+\item 
+template$<$$>$ auto \mbox{\hyperlink{unlazy_8hpp_a86f2393229fa3b83630f14b34f5bf23a}{unlazy$<$ Quaternion $>$}} (\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&\&lazy\+\_\+expression)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}\label{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd} 
+\index{unlazy.hpp@{unlazy.hpp}!unlazy@{unlazy}}
+\index{unlazy@{unlazy}!unlazy.hpp@{unlazy.hpp}}
+\doxysubsubsection{\texorpdfstring{unlazy()}{unlazy()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+constexpr auto unlazy (\begin{DoxyParamCaption}\item[{T \&\&}]{lazy\+\_\+expression }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Takes a lazy expression and evaluates it. 
+
+Allows usage of {\ttfamily auto} specifiers without "{}strange"{} behaviours in Eigen. \Hypertarget{unlazy_8hpp_a63cbee30942993508f310820fed442b6}\label{unlazy_8hpp_a63cbee30942993508f310820fed442b6} 
+\index{unlazy.hpp@{unlazy.hpp}!unlazy$<$ const Quaternion \& $>$@{unlazy$<$ const Quaternion \& $>$}}
+\index{unlazy$<$ const Quaternion \& $>$@{unlazy$<$ const Quaternion \& $>$}!unlazy.hpp@{unlazy.hpp}}
+\doxysubsubsection{\texorpdfstring{unlazy$<$ const Quaternion \& $>$()}{unlazy< const Quaternion \& >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+auto \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}$<$ const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{lazy\+\_\+expression }\end{DoxyParamCaption})}
+
+\Hypertarget{unlazy_8hpp_ad0c0c8b1cbeecf66af73e75b3d2a29fa}\label{unlazy_8hpp_ad0c0c8b1cbeecf66af73e75b3d2a29fa} 
+\index{unlazy.hpp@{unlazy.hpp}!unlazy$<$ Quaternion \& $>$@{unlazy$<$ Quaternion \& $>$}}
+\index{unlazy$<$ Quaternion \& $>$@{unlazy$<$ Quaternion \& $>$}!unlazy.hpp@{unlazy.hpp}}
+\doxysubsubsection{\texorpdfstring{unlazy$<$ Quaternion \& $>$()}{unlazy< Quaternion \& >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+auto \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}$<$ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \& $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&}]{lazy\+\_\+expression }\end{DoxyParamCaption})}
+
+\Hypertarget{unlazy_8hpp_a86f2393229fa3b83630f14b34f5bf23a}\label{unlazy_8hpp_a86f2393229fa3b83630f14b34f5bf23a} 
+\index{unlazy.hpp@{unlazy.hpp}!unlazy$<$ Quaternion $>$@{unlazy$<$ Quaternion $>$}}
+\index{unlazy$<$ Quaternion $>$@{unlazy$<$ Quaternion $>$}!unlazy.hpp@{unlazy.hpp}}
+\doxysubsubsection{\texorpdfstring{unlazy$<$ Quaternion $>$()}{unlazy< Quaternion >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+auto \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}$<$ \mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a79293b1c265440df7dd9a041332d5b1e}{Quaternion}} \&\&}]{lazy\+\_\+expression }\end{DoxyParamCaption})}
+

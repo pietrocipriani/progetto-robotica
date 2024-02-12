@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['meshes_0',['meshes',['../classprecise__placement_1_1PrecisePlacement.html#a5428deecfa188d28deb2a96fe29066e8',1,'precise_placement::PrecisePlacement']]],
-  ['model_1',['model',['../classblock__detector__server_1_1BlockDetector.html#a508cc3106d2c29fe07dc87cbe3ea6927',1,'block_detector_server::BlockDetector']]],
-  ['model_5fconfig_2',['MODEL_CONFIG',['../namespacemodel__handler.html#a04d73b6612c48f03fd831ca3c080e812',1,'model_handler']]],
-  ['msg_5fseq_3',['msg_seq',['../classprecise__placement_1_1PrecisePlacement.html#af3ede8c094a5c427fd1f7669132df68b',1,'precise_placement::PrecisePlacement']]]
+  ['image_5fcallback_0',['image_callback',['../classprecise__placement_1_1PrecisePlacement.html#ae490aca119b50747b0e88a500a2a0cd1',1,'precise_placement::PrecisePlacement']]],
+  ['image_5fsub_1',['image_sub',['../classinspect__detected__blocks_1_1BlockInspector.html#ad8b0a1964f6e8289c858108ae891718e',1,'inspect_detected_blocks::BlockInspector']]],
+  ['image_5ftopic_2',['IMAGE_TOPIC',['../namespaceinspect__detected__blocks.html#ae09cb5a6183e8be4e4f2086cb1702733',1,'inspect_detected_blocks']]],
+  ['intersection_5fover_5funion_5fthreshold_3',['INTERSECTION_OVER_UNION_THRESHOLD',['../namespaceblock__detector__server.html#aa692faeafdce6ffcde5ee89e2c4a9c2a',1,'block_detector_server']]],
+  ['inv_5fcamera_5ftransform_4',['inv_camera_transform',['../namespaceprecise__placement.html#a02b0663018d876e57b2fee71c6c8a6eb',1,'precise_placement']]],
+  ['is_5fquasi_5',['is_quasi',['../helpers_8hpp.html#ac79ecbbc554b224ac837bc1707e9e9fd',1,'helpers.hpp']]]
 ];

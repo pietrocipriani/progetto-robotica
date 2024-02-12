@@ -1,0 +1,43 @@
+\doxysection{linear.\+hpp}
+\hypertarget{linear_8hpp_source}{}\label{linear_8hpp_source}\index{src/planner/lib/planning/interpolation/linear.hpp@{src/planner/lib/planning/interpolation/linear.hpp}}
+\mbox{\hyperlink{linear_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LINEAR\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LINEAR\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{constants_8hpp}{constants.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int}>}
+\DoxyCodeLine{00018\ \mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{TimeFunction<Point>}}\ \mbox{\hyperlink{namespaceplanner_ad63228565ee5abe7bb79e6506de8752d}{linear\_interpolation}}(}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ initial\_position,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ final\_position,}
+\DoxyCodeLine{00020\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ start\_time,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ duration}
+\DoxyCodeLine{00021\ )\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \textcolor{comment}{//\ To\ avoid\ division\ by\ zero.}}
+\DoxyCodeLine{00025\ \ \ \textcolor{keywordflow}{if}\ (duration\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}})\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordflow}{return}\ [=]([[maybe\_unused]]\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time)\ \{\ \textcolor{keywordflow}{return}\ final\_position;\ \};}
+\DoxyCodeLine{00027\ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{//\ FIXME:\ with\ quaternions\ there\ is\ the\ possibility\ that\ wrong\ velocities\ are\ produced.}}
+\DoxyCodeLine{00030\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ The\ problem\ is\ that\ quaternions\ are\ not\ a\ good\ choice\ for\ velocities\ due\ to\ the}}
+\DoxyCodeLine{00031\ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ periodicity\ of\ the\ components.}}
+\DoxyCodeLine{00032\ \ \ \textcolor{keyword}{auto}\ velocity\ =\ \mbox{\hyperlink{unlazy_8hpp_afeaf4cf9c0d0e0d0980d4729413c38dd}{unlazy}}((final\_position\ -\/\ initial\_position)\ /\ duration);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keywordflow}{return}\ [=,\ velocity\ =\ std::move(velocity)](\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{return}\ initial\_position\ +\ velocity\ *\ (time\ -\/\ start\_time);}
+\DoxyCodeLine{00036\ \ \ \};}
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ LINEAR\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

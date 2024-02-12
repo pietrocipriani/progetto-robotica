@@ -1,0 +1,34 @@
+\doxysection{common.\+hpp}
+\hypertarget{common_8hpp_source}{}\label{common_8hpp_source}\index{src/planner/lib/planning/interpolation/common.hpp@{src/planner/lib/planning/interpolation/common.hpp}}
+\mbox{\hyperlink{common_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLANNING\_INTERPOLATION\_COMMON\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLANNING\_INTERPOLATION\_COMMON\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{types_8hpp}{types.hpp}}"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceplanner}{planner}}\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{template}<\textcolor{keyword}{class}\ Po\textcolor{keywordtype}{int}>}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1Params}{Params}}\ \{}
+\DoxyCodeLine{00012\ \ \ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\ \mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structplanner_1_1Params_1_1Times}{Times}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\ \mbox{\hyperlink{structplanner_1_1Params_1_1Times_ada213df0f23833509981179817b7beab}{time}};}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\ \mbox{\hyperlink{structplanner_1_1Params_1_1Times_a05ec4283e270826f28435bc4a83f7fd8}{accel\_delta}};}
+\DoxyCodeLine{00017\ \ \ \}\ \mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \mbox{\hyperlink{structplanner_1_1Params_a0f6cea85414f01267b5f5ec735c8f3a9}{Params}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\ \mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ accel\_delta)}
+\DoxyCodeLine{00020\ \ \ \ \ :\ \mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}(\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}),\ \mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}\{time,\ accel\_delta\}\ \{\}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \mbox{\hyperlink{structplanner_1_1Params_a8bc1cb6f51ddc7a98f967f75bf9eb68c}{Params}}(\mbox{\hyperlink{namespaceplanner_a46c8a310cf4c094f8c80e1cb8dc1f911a2a3cd5946cfd317eb99c3d32e35e2d4c}{Point}}\&\&\ \mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ accel\_delta)}
+\DoxyCodeLine{00023\ \ \ \ \ :\ \mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}}(std::move(\mbox{\hyperlink{structplanner_1_1Params_afa95e3c7f6220a97484f80f2726b5eb5}{point}})),\ \mbox{\hyperlink{structplanner_1_1Params_a600304b2d788c2da3302409944aab823}{times}}\{time,\ accel\_delta\}\ \{\}}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ PLANNING\_INTERPOLATION\_COMMON\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

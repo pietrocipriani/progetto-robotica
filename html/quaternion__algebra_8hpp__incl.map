@@ -1,0 +1,18 @@
+<map id="src/planner/include/utils/quaternion_algebra.hpp" name="src/planner/include/utils/quaternion_algebra.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="208,5,419,50"/>
+<area shape="rect" id="Node000002" href="$types_8hpp.html" title=" " alt="" coords="226,174,323,201"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="311,51,284,159,279,158,306,50"/>
+<area shape="rect" id="Node000007" href="$planner_2include_2utils_2math_8hpp.html" title=" " alt="" coords="312,98,395,126"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="326,49,343,83,338,85,321,52"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,249,83,277"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="234,204,98,247,97,242,233,199"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="106,249,257,277"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="260,204,211,242,208,238,256,200"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="281,249,455,277"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="293,200,341,238,338,242,290,204"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="480,249,571,277"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="320,199,467,242,465,247,319,204"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="341,128,302,165,298,161,337,124"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="348,174,410,201"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="360,125,372,158,367,160,355,127"/>
+</map>

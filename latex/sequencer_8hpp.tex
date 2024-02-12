@@ -1,0 +1,37 @@
+\doxysection{src/planner/lib/planning/sequencer.hpp File Reference}
+\hypertarget{sequencer_8hpp}{}\label{sequencer_8hpp}\index{src/planner/lib/planning/sequencer.hpp@{src/planner/lib/planning/sequencer.hpp}}
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}types.\+hpp"{}}\newline
+{\ttfamily \#include $<$list$>$}\newline
+Include dependency graph for sequencer.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sequencer_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sequencer_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} = std\+::list$<$ \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{Linear\+System}} linear\+\_\+system, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{Angular\+System}} angular\+\_\+system$>$ }\\\mbox{\hyperlink{types_8hpp_a13ea09f1af2aac545610d201c2d2327e}{Time\+Function}}$<$ \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ $>$ \mbox{\hyperlink{namespaceplanner_af113643d0711694c87c67168d0fe2f1d}{via\+\_\+point\+\_\+sequencer}} (const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&current\+\_\+pose, const \mbox{\hyperlink{namespaceplanner_ad92906838efd1b975ed958f9a46b5a00}{Via\+Points}} \&viapoints, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&target\+\_\+pose, \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&finish\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Creates the config sequence from a set of viapoints. \end{DoxyCompactList}\end{DoxyCompactItemize}

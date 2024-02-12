@@ -1,0 +1,56 @@
+\doxysection{Config\+Publisher Class Reference}
+\hypertarget{classcontroller_1_1control_1_1ConfigPublisher}{}\label{classcontroller_1_1control_1_1ConfigPublisher}\index{ConfigPublisher@{ConfigPublisher}}
+
+
+{\ttfamily \#include $<$config\+\_\+publisher.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4}{Config\+Publisher}} (ros\+::\+Publisher \&\&publisher, size\+\_\+t gripper\+\_\+joint\+\_\+count)
+\item 
+void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1}{publish\+\_\+config}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&config, double gripper\+\_\+pos)
+\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b}{publish\+\_\+config\+\_\+sequence}} (\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{planner\+::\+Movement\+Sequence\+::\+Config\+Generator}} \&configs, double gripper\+\_\+pos, double frequency\+\_\+hz)
+\item 
+void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852}{publish\+\_\+gripper\+\_\+sequence}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&last\+Config, double gripper\+\_\+pos\+\_\+beg, double gripper\+\_\+pos\+\_\+end, double gripper\+\_\+speed, double frequency\+\_\+hz)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4}\label{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4} 
+\index{ConfigPublisher@{ConfigPublisher}!ConfigPublisher@{ConfigPublisher}}
+\index{ConfigPublisher@{ConfigPublisher}!ConfigPublisher@{ConfigPublisher}}
+\doxysubsubsection{\texorpdfstring{ConfigPublisher()}{ConfigPublisher()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{Config\+Publisher}} (\begin{DoxyParamCaption}\item[{ros\+::\+Publisher \&\&}]{publisher,  }\item[{size\+\_\+t}]{gripper\+\_\+joint\+\_\+count }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1}\label{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1} 
+\index{ConfigPublisher@{ConfigPublisher}!publish\_config@{publish\_config}}
+\index{publish\_config@{publish\_config}!ConfigPublisher@{ConfigPublisher}}
+\doxysubsubsection{\texorpdfstring{publish\_config()}{publish\_config()}}
+{\footnotesize\ttfamily void publish\+\_\+config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{config,  }\item[{double}]{gripper\+\_\+pos }\end{DoxyParamCaption})}
+
+\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b}\label{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b} 
+\index{ConfigPublisher@{ConfigPublisher}!publish\_config\_sequence@{publish\_config\_sequence}}
+\index{publish\_config\_sequence@{publish\_config\_sequence}!ConfigPublisher@{ConfigPublisher}}
+\doxysubsubsection{\texorpdfstring{publish\_config\_sequence()}{publish\_config\_sequence()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} publish\+\_\+config\+\_\+sequence (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{planner\+::\+Movement\+Sequence\+::\+Config\+Generator}} \&}]{configs,  }\item[{double}]{gripper\+\_\+pos,  }\item[{double}]{frequency\+\_\+hz }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the last configuration obtained from the config sequence 
+\end{DoxyReturn}
+\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852}\label{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852} 
+\index{ConfigPublisher@{ConfigPublisher}!publish\_gripper\_sequence@{publish\_gripper\_sequence}}
+\index{publish\_gripper\_sequence@{publish\_gripper\_sequence}!ConfigPublisher@{ConfigPublisher}}
+\doxysubsubsection{\texorpdfstring{publish\_gripper\_sequence()}{publish\_gripper\_sequence()}}
+{\footnotesize\ttfamily void publish\+\_\+gripper\+\_\+sequence (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{last\+Config,  }\item[{double}]{gripper\+\_\+pos\+\_\+beg,  }\item[{double}]{gripper\+\_\+pos\+\_\+end,  }\item[{double}]{gripper\+\_\+speed,  }\item[{double}]{frequency\+\_\+hz }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/controller/include/controller/control/\mbox{\hyperlink{config__publisher_8hpp}{config\+\_\+publisher.\+hpp}}\item 
+src/controller/src/control/\mbox{\hyperlink{config__publisher_8cpp}{config\+\_\+publisher.\+cpp}}\end{DoxyCompactItemize}

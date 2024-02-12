@@ -1,0 +1,61 @@
+\doxysection{src/controller/include/controller/experiments.hpp File Reference}
+\hypertarget{experiments_8hpp}{}\label{experiments_8hpp}\index{src/controller/include/controller/experiments.hpp@{src/controller/include/controller/experiments.hpp}}
+{\ttfamily \#include "{}planner.\+hpp"{}}\newline
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}controller/control/config\+\_\+publisher.\+hpp"{}}\newline
+{\ttfamily \#include "{}controller/control/config\+\_\+reader.\+hpp"{}}\newline
+{\ttfamily \#include "{}controller/world/workspace.\+hpp"{}}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+Include dependency graph for experiments.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{experiments_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{experiments_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller}{controller}}
+\item 
+namespace \mbox{\hyperlink{namespacecontroller_1_1experiment}{controller\+::experiment}}
+\begin{DoxyCompactList}\small\item\em This file contains various experiments we have done along the way. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{experiments_8hpp_a6630231a193dcf4b00e953c18c3482c5}{\+\_\+\+EXPERIMENTS\+\_\+\+HPP\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacecontroller_1_1experiment_aa3917ab842f6a912f51598c89c6765f7}{Experiment\+Func}} = void(\texorpdfstring{$\ast$}{*})(ros\+::\+Node\+Handle \&, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&, double \&)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1experiment_a00f9ff30f795608a3c595cd840ca0549}{all\+\_\+blocks}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1experiment_a9850dd68fe664734f6d310d744368f0c}{full}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1experiment_ae3755edb5241a3149e027b7308261c4e}{selected\+\_\+fixed\+\_\+positions}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
+\item 
+void \mbox{\hyperlink{namespacecontroller_1_1experiment_a339295ae551fe3d7f939013529fd3f97}{workspace}} (ros\+::\+Node\+Handle \&node\+\_\+handle, \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world\+::\+Spawner}} \&spawner, \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world\+::\+Deleter}} \&deleter, \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{experiments_8hpp_a6630231a193dcf4b00e953c18c3482c5}\label{experiments_8hpp_a6630231a193dcf4b00e953c18c3482c5} 
+\index{experiments.hpp@{experiments.hpp}!\_EXPERIMENTS\_HPP\_@{\_EXPERIMENTS\_HPP\_}}
+\index{\_EXPERIMENTS\_HPP\_@{\_EXPERIMENTS\_HPP\_}!experiments.hpp@{experiments.hpp}}
+\doxysubsubsection{\texorpdfstring{\_EXPERIMENTS\_HPP\_}{\_EXPERIMENTS\_HPP\_}}
+{\footnotesize\ttfamily \#define \+\_\+\+EXPERIMENTS\+\_\+\+HPP\+\_\+}
+

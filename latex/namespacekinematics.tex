@@ -1,0 +1,796 @@
+\doxysection{kinematics Namespace Reference}
+\hypertarget{namespacekinematics}{}\label{namespacekinematics}\index{kinematics@{kinematics}}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{Acceleration}} = typename \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ angular\+\_\+system, linear\+\_\+system $>$\+::\+Derivative
+\item 
+using \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} = std\+::vector$<$ \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} $>$
+\begin{DoxyCompactList}\small\item\em List of possible configurations. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} = \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$
+\item 
+{\footnotesize template$<$class Robot $>$ }\\using \mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}} = \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$\+::\+Cols\+At\+Compile\+Time, \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$\+::\+Rows\+At\+Compile\+Time $>$
+\begin{DoxyCompactList}\small\item\em Type representing the inverse of the geometric or analytical jacobian. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot $>$ }\\using \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}} = \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ os\+\_\+size+\mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$ os\+\_\+size $>$, Robot\+::dof $>$
+\begin{DoxyCompactList}\small\item\em Type representing the geometric or analytical jacobian. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} = Eigen\+::\+Transform$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, os\+\_\+size, Eigen\+::\+Transform\+Traits\+::\+Isometry $>$
+\begin{DoxyCompactList}\small\item\em Type representing a transformation for direct kinematics. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}} = \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ linear\+\_\+system, angular\+\_\+system, os\+\_\+size $>$
+\begin{DoxyCompactList}\small\item\em The pose of the end effector (position + orientation). \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}} = \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}}$<$ os\+\_\+size $>$
+\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\using \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}} = typename \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$\+::\+Derivative
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} \+: size\+\_\+t \{ \newline
+\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a299d826d9ef8b8e142823890a04b74c2}{t1}} = 0
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a50ae3b7ce65099236da64656c33ec64f}{t2}} = 1
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a43eaba56197e4d0a744823dfed1a0fd1}{t3}} = 2
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a25e2696476f1ec1837844053e75bb5cb}{t4}} = 3
+, \newline
+\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7ab7d43dc6573f558ef6bcd49b0b6f783a}{t5}} = 4
+, \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7a1f7b8b641470adf04b599da16c737596}{t6}} = 5
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ \mbox{\hyperlink{namespacekinematics_a07c35907efb364d03897d0392a74b8a6}{acos}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} cos)
+\begin{DoxyCompactList}\small\item\em Computes the two solutions of cos(theta) = {\ttfamily cos}. \end{DoxyCompactList}\item 
+std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ \mbox{\hyperlink{namespacekinematics_a19caecbeba2689906461a53132ef63a4}{asin}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} sin)
+\begin{DoxyCompactList}\small\item\em Computes the two solutions of sin(theta) = {\ttfamily sin}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_ab2ae35428549909f073edba91b0f0f8b}{configs\+\_\+given\+\_\+theta\+\_\+1}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a1733d09f966c8d6824f48e459e880e8f}{configs\+\_\+given\+\_\+theta\+\_\+3}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin, const \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Default\+Pose\+::\+Linear}} \&origin\+\_\+3)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+3. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_aaf257a65b5cf6347efaa9e70997e469e}{configs\+\_\+given\+\_\+theta\+\_\+5}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} direct\+\_\+kin)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+5. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_a415d8b736804f369524f60f2c197c3fa}{configurations}} (const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&pose)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}{direct}} (const Robot \&robot) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ }\\\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ \mbox{\hyperlink{namespacekinematics_a9dcf0a64752d287bac18846d31af4de0}{direct}} (const Robot \&robot, const typename Robot\+::\+Configuration \&config) noexcept
+\begin{DoxyCompactList}\small\item\em Evaluates the direct kinematics of {\ttfamily robot}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a57c2b9b2110633ee8ef2c38659f6681c}{dpa\+\_\+inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&desired\+\_\+pose, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a8b27df3cb3bb50dc22c090b81fffb5aa}{dpa\+\_\+inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&velocity, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&desired\+\_\+pose, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Desired-\/pose-\/aware inverse differential kinematics implementation. \end{DoxyCompactList}\item 
+{\footnotesize template$<$\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} theta, bool fail\+\_\+silently, typename Function , typename Arg\+List , class... Args$>$ }\\\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} \mbox{\hyperlink{namespacekinematics_adf1759b3a7f6678a8c62080ff7a5266e}{expand}} (const Arg\+List \&variable\+\_\+argument, Function \&\&function, \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&config, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Calls {\ttfamily function} {\ttfamily n} times with the various parameters in {\ttfamily variable\+\_\+argument} and condensate the configs into a single Configurations. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a616e0da97c95a521b88a51dfe3c04d79}{inverse}} (const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&pose)
+\begin{DoxyCompactList}\small\item\em Performs the inverse kinematics for {\ttfamily robot}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \mbox{\hyperlink{namespacekinematics_a22f2ab07c9bc2f374f161bd9e44cd091}{inverse}} (const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&robot, const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&pose)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a95643c0b5ce0f9939ab67215ba67e467}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a605802381b668b4a51034b1a6d62c360}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&movement, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&current\+\_\+pose)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\Robot\+::\+Velocity \mbox{\hyperlink{namespacekinematics_a0c61ae8b734960da89121f0a97480647}{inverse\+\_\+diff}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&velocity)
+\begin{DoxyCompactList}\small\item\em Finds the configuration variation in order to obtain the desired velocity in the operational space. \end{DoxyCompactList}\item 
+template \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{model\+::\+UR5\+::\+Velocity}} \mbox{\hyperlink{namespacekinematics_ab0a59ca747e6d7d05af3a66bfd9e2c49}{inverse\+\_\+diff$<$ model\+::\+UR5 $>$}} (const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&, const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&)
+\item 
+{\footnotesize template$<$class Robot $>$ }\\\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ \mbox{\hyperlink{namespacekinematics_ade154ebef3e06ab81c8d6a16aac554c4}{inverse\+\_\+geometrical\+\_\+jacobian}} (const Robot \&robot, const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&current\+\_\+pose)
+\begin{DoxyCompactList}\small\item\em Generate the inverse analytical jacobian for the current configuration of {\ttfamily robot}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a0520d4b1317042b00eb166c9da99548b}{inverse\+\_\+trans}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \&joint, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} theta)
+\begin{DoxyCompactList}\small\item\em Calculates the inverse transformation matrix for {\ttfamily joint} with the given {\ttfamily theta}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Robot , bool damped = false$>$ }\\\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ \mbox{\hyperlink{namespacekinematics_ae96d6b2a84ecf4b4a5f2bff823c5001d}{invert}} (const \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Function performing the right pseudo-\/inverse of the jacobian. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a8c9fef8db0b23496f1849c395d68bf54}{joint\+\_\+transformation\+\_\+matrix}} (const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&joint, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} theta)
+\begin{DoxyCompactList}\small\item\em Compute the direct kinematics transformation matrix for a signle joint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \mbox{\hyperlink{namespacekinematics_a919a091a08c8cf349dea27bcf7391a43}{rotate}} (const \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \&trans, const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&axis)
+\begin{DoxyCompactList}\small\item\em Calculates the rotated {\ttfamily axis} after the transformation @trans. \end{DoxyCompactList}\item 
+{\footnotesize template$<$size\+\_\+t n, bool safe = false$>$ }\\\mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ \mbox{\hyperlink{namespacekinematics_adb2fd55fafff53f6c73da162e748ceb0}{sq\+\_\+invert}} (const \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Function performing the inverse of a square matrix with (optional\+: default) determinant check. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \mbox{\hyperlink{namespacekinematics_a925a56f148162734113080ddc4ec622d}{translation\+\_\+rotation}} (const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&axis, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} translation, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} rotation)
+\begin{DoxyCompactList}\small\item\em Utility function to return a translation + rotation transformation around the same axis. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacekinematics_a1ff4be03e6f7cdcff6754e7acfefd34b}{vector\+\_\+angle\+\_\+xy}} (const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&vector)
+\begin{DoxyCompactList}\small\item\em Calculates the angle in the xy plane of the vector {\ttfamily vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacekinematics_a44c1b946c8b4886e1856c8004c6abbf7}{min\+\_\+safe\+\_\+determinant}} = 1e-\/11
+\begin{DoxyCompactList}\small\item\em Determinant of J·\+J\texorpdfstring{$^\wedge$}{\string^}T to be considered near to a singularity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespacekinematics_a7e83f6716e81748f715b925a624000db}\label{namespacekinematics_a7e83f6716e81748f715b925a624000db} 
+\index{kinematics@{kinematics}!Acceleration@{Acceleration}}
+\index{Acceleration@{Acceleration}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Acceleration}{Acceleration}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ \\
+using \mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{Acceleration}} =  typename \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$angular\+\_\+system, linear\+\_\+system$>$\+::\+Derivative}
+
+\Hypertarget{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}\label{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3} 
+\index{kinematics@{kinematics}!Configurations@{Configurations}}
+\index{Configurations@{Configurations}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Configurations}{Configurations}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} =  std\+::vector$<$\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}}$>$}
+
+
+
+List of possible configurations. 
+
+\Hypertarget{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}\label{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378} 
+\index{kinematics@{kinematics}!DefaultPose@{DefaultPose}}
+\index{DefaultPose@{DefaultPose}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{DefaultPose}{DefaultPose}}
+{\footnotesize\ttfamily typedef \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}}}
+
+\Hypertarget{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}\label{namespacekinematics_ac83b77bec392d18f8782e9484ab83477} 
+\index{kinematics@{kinematics}!InvJacobian@{InvJacobian}}
+\index{InvJacobian@{InvJacobian}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{InvJacobian}{InvJacobian}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+using \mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}} =  \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$\mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$Robot$>$\+::\+Cols\+At\+Compile\+Time, \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$Robot$>$\+::\+Rows\+At\+Compile\+Time$>$}
+
+
+
+Type representing the inverse of the geometric or analytical jacobian. 
+
+\Hypertarget{namespacekinematics_afed377526d819b62afa30c719ec46877}\label{namespacekinematics_afed377526d819b62afa30c719ec46877} 
+\index{kinematics@{kinematics}!Jacobian@{Jacobian}}
+\index{Jacobian@{Jacobian}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Jacobian}{Jacobian}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+using \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}} =  \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$os\+\_\+size + \mbox{\hyperlink{helpers_8hpp_aa173a7b2fccb574b8b22c3aa5a576d97}{so}}$<$os\+\_\+size$>$, Robot\+::dof$>$}
+
+
+
+Type representing the geometric or analytical jacobian. 
+
+\begin{DoxyNote}{Note}
+Specific for UR5. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a627a55457b7105c7250991703a4fd349}\label{namespacekinematics_a627a55457b7105c7250991703a4fd349} 
+\index{kinematics@{kinematics}!JointTransformation@{JointTransformation}}
+\index{JointTransformation@{JointTransformation}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{JointTransformation}{JointTransformation}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} =  Eigen\+::\+Transform$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, os\+\_\+size, Eigen\+::\+Transform\+Traits\+::\+Isometry$>$}
+
+
+
+Type representing a transformation for direct kinematics. 
+
+\begin{DoxyNote}{Note}
+Eigen\+::\+Transform\+Traits\+::\+Isometry as Mode in order to speed up some operations (no scaling permitted). 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}\label{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc} 
+\index{kinematics@{kinematics}!Pose@{Pose}}
+\index{Pose@{Pose}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Pose}{Pose}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ \\
+using \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}} =  \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$linear\+\_\+system, angular\+\_\+system, os\+\_\+size$>$}
+
+
+
+The pose of the end effector (position + orientation). 
+
+\Hypertarget{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}\label{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9} 
+\index{kinematics@{kinematics}!Translation@{Translation}}
+\index{Translation@{Translation}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Translation}{Translation}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}} =  \mbox{\hyperlink{namespacekinematics_a64969a6f409ee9223225a1f0866dc4c9}{Translation}}$<$os\+\_\+size$>$}
+
+\Hypertarget{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}\label{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b} 
+\index{kinematics@{kinematics}!Velocity@{Velocity}}
+\index{Velocity@{Velocity}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Velocity}{Velocity}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ \\
+using \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}} =  typename \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$angular\+\_\+system, linear\+\_\+system$>$\+::\+Derivative}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7} 
+\index{kinematics@{kinematics}!Theta@{Theta}}
+\index{Theta@{Theta}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{Theta}{Theta}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} \+: size\+\_\+t}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t1@{t1}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t1@{t1}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7a299d826d9ef8b8e142823890a04b74c2}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7a299d826d9ef8b8e142823890a04b74c2} 
+t1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t2@{t2}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t2@{t2}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7a50ae3b7ce65099236da64656c33ec64f}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7a50ae3b7ce65099236da64656c33ec64f} 
+t2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t3@{t3}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t3@{t3}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7a43eaba56197e4d0a744823dfed1a0fd1}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7a43eaba56197e4d0a744823dfed1a0fd1} 
+t3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t4@{t4}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t4@{t4}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7a25e2696476f1ec1837844053e75bb5cb}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7a25e2696476f1ec1837844053e75bb5cb} 
+t4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t5@{t5}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t5@{t5}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7ab7d43dc6573f558ef6bcd49b0b6f783a}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7ab7d43dc6573f558ef6bcd49b0b6f783a} 
+t5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{t6@{t6}!kinematics@{kinematics}}\index{kinematics@{kinematics}!t6@{t6}}}\Hypertarget{namespacekinematics_a48ef68167132da2d029e852e035115b7a1f7b8b641470adf04b599da16c737596}\label{namespacekinematics_a48ef68167132da2d029e852e035115b7a1f7b8b641470adf04b599da16c737596} 
+t6&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacekinematics_a07c35907efb364d03897d0392a74b8a6}\label{namespacekinematics_a07c35907efb364d03897d0392a74b8a6} 
+\index{kinematics@{kinematics}!acos@{acos}}
+\index{acos@{acos}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{acos()}{acos()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ acos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{cos }\end{DoxyParamCaption})}
+
+
+
+Computes the two solutions of cos(theta) = {\ttfamily cos}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cos} & The cosine value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array containing the two solutions. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & In case of domain errors. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Can return two coincident solutions. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a19caecbeba2689906461a53132ef63a4}\label{namespacekinematics_a19caecbeba2689906461a53132ef63a4} 
+\index{kinematics@{kinematics}!asin@{asin}}
+\index{asin@{asin}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{asin()}{asin()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}, 2 $>$ asin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{sin }\end{DoxyParamCaption})}
+
+
+
+Computes the two solutions of sin(theta) = {\ttfamily sin}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sin} & The sine value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An array containing the two solutions. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & In case of domain errors. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Can return two coincident solutions. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_ab2ae35428549909f073edba91b0f0f8b}\label{namespacekinematics_ab2ae35428549909f073edba91b0f0f8b} 
+\index{kinematics@{kinematics}!configs\_given\_theta\_1@{configs\_given\_theta\_1}}
+\index{configs\_given\_theta\_1@{configs\_given\_theta\_1}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{configs\_given\_theta\_1()}{configs\_given\_theta\_1()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} configs\+\_\+given\+\_\+theta\+\_\+1 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&}]{config,  }\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&}]{robot,  }\item[{\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}}}]{direct\+\_\+kin }\end{DoxyParamCaption})}
+
+
+
+Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+1. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot parameters. \\
+\hline
+{\em direct\+\_\+kin} & The precalculated direct kinematics for efficiency. \\
+\hline
+{\em theta\+\_\+1} & The value of theta\+\_\+1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The possible configurations to obtain the given {\ttfamily pose}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error if the desired {\ttfamily pose} in not in the operational space. \begin{DoxyNote}{Note}
+UR5 is not redundant, however multiple (finite) solutions are allowed. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a1733d09f966c8d6824f48e459e880e8f}\label{namespacekinematics_a1733d09f966c8d6824f48e459e880e8f} 
+\index{kinematics@{kinematics}!configs\_given\_theta\_3@{configs\_given\_theta\_3}}
+\index{configs\_given\_theta\_3@{configs\_given\_theta\_3}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{configs\_given\_theta\_3()}{configs\_given\_theta\_3()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} configs\+\_\+given\+\_\+theta\+\_\+3 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&}]{config,  }\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&}]{robot,  }\item[{\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}}}]{direct\+\_\+kin,  }\item[{const \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Default\+Pose\+::\+Linear}} \&}]{origin\+\_\+3 }\end{DoxyParamCaption})}
+
+
+
+Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+3. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot parameters. \\
+\hline
+{\em direct\+\_\+kin} & The precalculated direct kinematics from frame 6 to frame 1. \\
+\hline
+{\em theta\+\_\+3} & The value of theta\+\_\+5. \\
+\hline
+{\em origin\+\_\+3} & The origin\+\_\+3 respect to origin\+\_\+1. For efficency only. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The configuration to obtain the given {\ttfamily pose} (theta\+\_\+2, theta\+\_\+3, theta\+\_\+4, theta\+\_\+5, theta\+\_\+6). 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_aaf257a65b5cf6347efaa9e70997e469e}\label{namespacekinematics_aaf257a65b5cf6347efaa9e70997e469e} 
+\index{kinematics@{kinematics}!configs\_given\_theta\_5@{configs\_given\_theta\_5}}
+\index{configs\_given\_theta\_5@{configs\_given\_theta\_5}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{configs\_given\_theta\_5()}{configs\_given\_theta\_5()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} configs\+\_\+given\+\_\+theta\+\_\+5 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&}]{config,  }\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&}]{robot,  }\item[{\mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}}}]{direct\+\_\+kin }\end{DoxyParamCaption})}
+
+
+
+Performs the inverse kinematics for {\ttfamily robot} given theta\+\_\+5. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot parameters. \\
+\hline
+{\em direct\+\_\+kin} & The precalculated direct kinematics from frame 6 to frame 1. \\
+\hline
+{\em theta\+\_\+5} & The value of theta\+\_\+5. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The possible configurations to obtain the given {\ttfamily pose} (theta\+\_\+2, theta\+\_\+3, theta\+\_\+4, theta\+\_\+5, theta\+\_\+6). 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error if the desired {\ttfamily pose} in not in the operational space. \begin{DoxyNote}{Note}
+UR5 is not redundant, however multiple (finite) solutions are allowed. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a415d8b736804f369524f60f2c197c3fa}\label{namespacekinematics_a415d8b736804f369524f60f2c197c3fa} 
+\index{kinematics@{kinematics}!configurations@{configurations}}
+\index{configurations@{configurations}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{configurations()}{configurations()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} configurations (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Performs the inverse kinematics for {\ttfamily robot}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot parameters. \\
+\hline
+{\em pose} & The desired pose. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The possible configurations to obtain the given {\ttfamily pose}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error if the desired {\ttfamily pose} in not in the operational space. \begin{DoxyNote}{Note}
+UR5 is not redundant, however multiple (finite) solutions are allowed. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91}\label{namespacekinematics_a1fb57f76a87fe2b2a593429b1befdf91} 
+\index{kinematics@{kinematics}!direct@{direct}}
+\index{direct@{direct}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{direct()}{direct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ \\
+\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ direct (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Evaluates the direct kinematics of {\ttfamily robot}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot configuration. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pose of the end effector. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a9dcf0a64752d287bac18846d31af4de0}\label{namespacekinematics_a9dcf0a64752d287bac18846d31af4de0} 
+\index{kinematics@{kinematics}!direct@{direct}}
+\index{direct@{direct}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{direct()}{direct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Robot , \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3}{coord\+::\+Angular\+System}} angular\+\_\+system = coord\+::\+Lie, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6}{coord\+::\+Linear\+System}} linear\+\_\+system = coord\+::\+Cartesian$>$ \\
+\mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ angular\+\_\+system, linear\+\_\+system $>$ direct (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const typename Robot\+::\+Configuration \&}]{config }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Evaluates the direct kinematics of {\ttfamily robot}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot configuration. \\
+\hline
+{\em config} & The target robot configuration. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pose of the end effector. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a57c2b9b2110633ee8ef2c38659f6681c}\label{namespacekinematics_a57c2b9b2110633ee8ef2c38659f6681c} 
+\index{kinematics@{kinematics}!dpa\_inverse\_diff@{dpa\_inverse\_diff}}
+\index{dpa\_inverse\_diff@{dpa\_inverse\_diff}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{dpa\_inverse\_diff()}{dpa\_inverse\_diff()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+Robot\+::\+Velocity dpa\+\_\+inverse\+\_\+diff (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&}]{movement,  }\item[{const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&}]{desired\+\_\+pose,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacekinematics_a8b27df3cb3bb50dc22c090b81fffb5aa}\label{namespacekinematics_a8b27df3cb3bb50dc22c090b81fffb5aa} 
+\index{kinematics@{kinematics}!dpa\_inverse\_diff@{dpa\_inverse\_diff}}
+\index{dpa\_inverse\_diff@{dpa\_inverse\_diff}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{dpa\_inverse\_diff()}{dpa\_inverse\_diff()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+Robot\+::\+Velocity dpa\+\_\+inverse\+\_\+diff (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&}]{velocity,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&}]{desired\+\_\+pose,  }\item[{const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption})}
+
+
+
+Desired-\/pose-\/aware inverse differential kinematics implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot configuration. \\
+\hline
+{\em velocity} & The desired velocity in the operational space. \\
+\hline
+{\em desired\+\_\+pose} & The desired current pose. \\
+\hline
+{\em dt} & The time granularity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The configuration variation. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error when in singularity. \begin{DoxySeeAlso}{See also}
+\doxylink{namespacekinematics_a0c61ae8b734960da89121f0a97480647}{kinematics\+::inverse\+\_\+diff} 
+\end{DoxySeeAlso}
+\begin{DoxyNote}{Note}
+Usage of cartesian coordinates and lie groups is forced to avoid wrap-\/around issues in the error-\/calculation phase. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_adf1759b3a7f6678a8c62080ff7a5266e}\label{namespacekinematics_adf1759b3a7f6678a8c62080ff7a5266e} 
+\index{kinematics@{kinematics}!expand@{expand}}
+\index{expand@{expand}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{expand()}{expand()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{namespacekinematics_a48ef68167132da2d029e852e035115b7}{Theta}} theta, bool fail\+\_\+silently, typename Function , typename Arg\+List , class... Args$>$ \\
+\mbox{\hyperlink{namespacekinematics_addb07f2c4efaf289f595bf4a5aec84f3}{Configurations}} expand (\begin{DoxyParamCaption}\item[{const Arg\+List \&}]{variable\+\_\+argument,  }\item[{Function \&\&}]{function,  }\item[{\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{UR5\+::\+Configuration\+::\+Base}} \&}]{config,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Calls {\ttfamily function} {\ttfamily n} times with the various parameters in {\ttfamily variable\+\_\+argument} and condensate the configs into a single Configurations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the theta parameter in order to update the configs. 1-\/based. \\
+\hline
+{\em Function} & The Function type. Must accept as last argument an Arg. Must be a function returning a Configurations or a \doxylink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}. \\
+\hline
+{\em Arg\+List} & The type of a list containing the values for the variable argument. \\
+\hline
+{\em Args} & the other parameters for {\ttfamily Function}. \\
+\hline
+{\em variable\+\_\+argument} & The list of variable arguments. \\
+\hline
+{\em function} & The function to generate configurations. \\
+\hline
+{\em args} & The arguments for function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The list of configurations. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Whatever} & is thrown by {\ttfamily function}. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespacekinematics_a616e0da97c95a521b88a51dfe3c04d79}\label{namespacekinematics_a616e0da97c95a521b88a51dfe3c04d79} 
+\index{kinematics@{kinematics}!inverse@{inverse}}
+\index{inverse@{inverse}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse()}{inverse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} inverse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&}]{pose }\end{DoxyParamCaption})}
+
+
+
+Performs the inverse kinematics for {\ttfamily robot}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot parameters. \\
+\hline
+{\em pose} & The desired pose. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The "{}nearest"{} configuration to the current configuration to obtain the given {\ttfamily pose}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error if the desired {\ttfamily pose} in not in the operational space. \begin{DoxyNote}{Note}
+UR5 is not redundant, however multiple (finite) solutions are allowed. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a22f2ab07c9bc2f374f161bd9e44cd091}\label{namespacekinematics_a22f2ab07c9bc2f374f161bd9e44cd091} 
+\index{kinematics@{kinematics}!inverse@{inverse}}
+\index{inverse@{inverse}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse()}{inverse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} inverse (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{UR5}} \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{Pose}}$<$$>$ \&}]{pose }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacekinematics_a95643c0b5ce0f9939ab67215ba67e467}\label{namespacekinematics_a95643c0b5ce0f9939ab67215ba67e467} 
+\index{kinematics@{kinematics}!inverse\_diff@{inverse\_diff}}
+\index{inverse\_diff@{inverse\_diff}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_diff()}{inverse\_diff()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+Robot\+::\+Velocity inverse\+\_\+diff (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&}]{movement }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacekinematics_a605802381b668b4a51034b1a6d62c360}\label{namespacekinematics_a605802381b668b4a51034b1a6d62c360} 
+\index{kinematics@{kinematics}!inverse\_diff@{inverse\_diff}}
+\index{inverse\_diff@{inverse\_diff}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_diff()}{inverse\_diff()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+Robot\+::\+Velocity inverse\+\_\+diff (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&}]{movement,  }\item[{const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&}]{current\+\_\+pose }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacekinematics_a0c61ae8b734960da89121f0a97480647}\label{namespacekinematics_a0c61ae8b734960da89121f0a97480647} 
+\index{kinematics@{kinematics}!inverse\_diff@{inverse\_diff}}
+\index{inverse\_diff@{inverse\_diff}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_diff()}{inverse\_diff()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+Robot\+::\+Velocity inverse\+\_\+diff (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{Velocity}}$<$ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord\+::\+Lie}}, \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}} $>$ \&}]{velocity }\end{DoxyParamCaption})}
+
+
+
+Finds the configuration variation in order to obtain the desired velocity in the operational space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot configuration. \\
+\hline
+{\em velocity} & The desired velocity in the operational space. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The configuration variation. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em } & \\
+\hline
+\end{DoxyExceptions}
+p std\+::domain\+\_\+error when in singularity. \begin{DoxyNote}{Note}
+Damped least-\/squares implementation. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_ab0a59ca747e6d7d05af3a66bfd9e2c49}\label{namespacekinematics_ab0a59ca747e6d7d05af3a66bfd9e2c49} 
+\index{kinematics@{kinematics}!inverse\_diff$<$ model::UR5 $>$@{inverse\_diff$<$ model::UR5 $>$}}
+\index{inverse\_diff$<$ model::UR5 $>$@{inverse\_diff$<$ model::UR5 $>$}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_diff$<$ model::UR5 $>$()}{inverse\_diff< model::UR5 >()}}
+{\footnotesize\ttfamily template \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{model\+::\+UR5\+::\+Velocity}} \mbox{\hyperlink{namespacekinematics_a0c61ae8b734960da89121f0a97480647}{inverse\+\_\+diff}}$<$ \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} $>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&}]{,  }\item[{const \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Default\+Pose\+::\+Derivative}} \&}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacekinematics_ade154ebef3e06ab81c8d6a16aac554c4}\label{namespacekinematics_ade154ebef3e06ab81c8d6a16aac554c4} 
+\index{kinematics@{kinematics}!inverse\_geometrical\_jacobian@{inverse\_geometrical\_jacobian}}
+\index{inverse\_geometrical\_jacobian@{inverse\_geometrical\_jacobian}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_geometrical\_jacobian()}{inverse\_geometrical\_jacobian()}}
+{\footnotesize\ttfamily template$<$class Robot $>$ \\
+\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ inverse\+\_\+geometrical\+\_\+jacobian (\begin{DoxyParamCaption}\item[{const Robot \&}]{robot,  }\item[{const \mbox{\hyperlink{namespacekinematics_a3ac1ed6e443facca001cc79ab7326378}{Default\+Pose}} \&}]{current\+\_\+pose }\end{DoxyParamCaption})}
+
+
+
+Generate the inverse analytical jacobian for the current configuration of {\ttfamily robot}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & The robot instance. \\
+\hline
+{\em current\+\_\+pose} & The precalculated current\+\_\+pose \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The analytical jacobian. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a0520d4b1317042b00eb166c9da99548b}\label{namespacekinematics_a0520d4b1317042b00eb166c9da99548b} 
+\index{kinematics@{kinematics}!inverse\_trans@{inverse\_trans}}
+\index{inverse\_trans@{inverse\_trans}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{inverse\_trans()}{inverse\_trans()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} inverse\+\_\+trans (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} \&}]{joint,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{theta }\end{DoxyParamCaption})}
+
+
+
+Calculates the inverse transformation matrix for {\ttfamily joint} with the given {\ttfamily theta}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint} & The transforming joint. \\
+\hline
+{\em theta} & The configuration theta. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transformation matrix for the inverse transformation. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_ae96d6b2a84ecf4b4a5f2bff823c5001d}\label{namespacekinematics_ae96d6b2a84ecf4b4a5f2bff823c5001d} 
+\index{kinematics@{kinematics}!invert@{invert}}
+\index{invert@{invert}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{invert()}{invert()}}
+{\footnotesize\ttfamily template$<$class Robot , bool damped = false$>$ \\
+\mbox{\hyperlink{namespacekinematics_ac83b77bec392d18f8782e9484ab83477}{Inv\+Jacobian}}$<$ Robot $>$ invert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacekinematics_afed377526d819b62afa30c719ec46877}{Jacobian}}$<$ Robot $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Function performing the right pseudo-\/inverse of the jacobian. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & The jacobian to "{}invert"{}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The right pseudo-\/inverse. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & If the system is overdetermined or if in singular configuration. \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+This function performs the traditional inverse in case of square jacobian. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9}\label{namespacekinematics_a27b8790b1dec42f275cf855f9bef76e9} 
+\index{kinematics@{kinematics}!joint\_transformation\_matrix@{joint\_transformation\_matrix}}
+\index{joint\_transformation\_matrix@{joint\_transformation\_matrix}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{joint\_transformation\_matrix()}{joint\_transformation\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} joint\+\_\+transformation\+\_\+matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&}]{joint }\end{DoxyParamCaption})}
+
+
+
+Compute the direct kinematics transformation matrix for a signle joint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint} & The joint. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding transformation matrix to the joint frame. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a8c9fef8db0b23496f1849c395d68bf54}\label{namespacekinematics_a8c9fef8db0b23496f1849c395d68bf54} 
+\index{kinematics@{kinematics}!joint\_transformation\_matrix@{joint\_transformation\_matrix}}
+\index{joint\_transformation\_matrix@{joint\_transformation\_matrix}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{joint\_transformation\_matrix()}{joint\_transformation\_matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} joint\+\_\+transformation\+\_\+matrix (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{model\+::\+Revolute\+Joint}} \&}]{joint,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{theta }\end{DoxyParamCaption})}
+
+
+
+Compute the direct kinematics transformation matrix for a signle joint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em joint} & The joint. \\
+\hline
+{\em theta} & A custom value theta to avoid config modification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding transformation matrix to the joint frame. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a919a091a08c8cf349dea27bcf7391a43}\label{namespacekinematics_a919a091a08c8cf349dea27bcf7391a43} 
+\index{kinematics@{kinematics}!rotate@{rotate}}
+\index{rotate@{rotate}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} rotate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} \&}]{trans,  }\item[{const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&}]{axis }\end{DoxyParamCaption})}
+
+
+
+Calculates the rotated {\ttfamily axis} after the transformation @trans. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & The transformation. \\
+\hline
+{\em axis} & The axis. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting axis. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Only the rotation is applied. 
+\end{DoxyNote}
+\Hypertarget{namespacekinematics_adb2fd55fafff53f6c73da162e748ceb0}\label{namespacekinematics_adb2fd55fafff53f6c73da162e748ceb0} 
+\index{kinematics@{kinematics}!sq\_invert@{sq\_invert}}
+\index{sq\_invert@{sq\_invert}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{sq\_invert()}{sq\_invert()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t n, bool safe = false$>$ \\
+\mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ sq\+\_\+invert (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_ab62f3f5f23bfc5a68c32e87b70f13be0}{Matrix}}$<$ n, n $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Function performing the inverse of a square matrix with (optional\+: default) determinant check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em safe} & If a check on the determinant has to be performed. \\
+\hline
+{\em matrix} & The matric to invert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The inverse. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & if the {\ttfamily matrix} is not invertible. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespacekinematics_a925a56f148162734113080ddc4ec622d}\label{namespacekinematics_a925a56f148162734113080ddc4ec622d} 
+\index{kinematics@{kinematics}!translation\_rotation@{translation\_rotation}}
+\index{translation\_rotation@{translation\_rotation}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{translation\_rotation()}{translation\_rotation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacekinematics_a627a55457b7105c7250991703a4fd349}{Joint\+Transformation}} translation\+\_\+rotation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&}]{axis,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{translation,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{rotation }\end{DoxyParamCaption})}
+
+
+
+Utility function to return a translation + rotation transformation around the same axis. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em axis} & The axis for the translation and the rotation. \\
+\hline
+{\em translation} & The magnitude of the translation. \\
+\hline
+{\em rotation} & The magnitude of the rotation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding transformation. 
+\end{DoxyReturn}
+\Hypertarget{namespacekinematics_a1ff4be03e6f7cdcff6754e7acfefd34b}\label{namespacekinematics_a1ff4be03e6f7cdcff6754e7acfefd34b} 
+\index{kinematics@{kinematics}!vector\_angle\_xy@{vector\_angle\_xy}}
+\index{vector\_angle\_xy@{vector\_angle\_xy}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{vector\_angle\_xy()}{vector\_angle\_xy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} vector\+\_\+angle\+\_\+xy (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{types_8hpp_a5de6923cec29bb1f90911240d5ce6b52}{Axis}} \&}]{vector }\end{DoxyParamCaption})}
+
+
+
+Calculates the angle in the xy plane of the vector {\ttfamily vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vector} & The vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The angle. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacekinematics_a44c1b946c8b4886e1856c8004c6abbf7}\label{namespacekinematics_a44c1b946c8b4886e1856c8004c6abbf7} 
+\index{kinematics@{kinematics}!min\_safe\_determinant@{min\_safe\_determinant}}
+\index{min\_safe\_determinant@{min\_safe\_determinant}!kinematics@{kinematics}}
+\doxysubsubsection{\texorpdfstring{min\_safe\_determinant}{min\_safe\_determinant}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} min\+\_\+safe\+\_\+determinant = 1e-\/11\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Determinant of J·\+J\texorpdfstring{$^\wedge$}{\string^}T to be considered near to a singularity. 
+

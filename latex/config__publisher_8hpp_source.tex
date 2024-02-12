@@ -1,0 +1,53 @@
+\doxysection{config\+\_\+publisher.\+hpp}
+\hypertarget{config__publisher_8hpp_source}{}\label{config__publisher_8hpp_source}\index{src/controller/include/controller/control/config\_publisher.hpp@{src/controller/include/controller/control/config\_publisher.hpp}}
+\mbox{\hyperlink{config__publisher_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_CONTROL\_CONGIG\_PUBLISHER\_HPP\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_CONTROL\_CONGIG\_PUBLISHER\_HPP\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <ros/ros.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <std\_msgs/Float64MultiArray.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1control}{controller::control}}\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{ConfigPublisher}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ ros::Publisher\ publisher;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ gripper\_joint\_count;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ std\_msgs::Float64MultiArray\ config\_to\_ros(}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\&\ config,}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_pos}
+\DoxyCodeLine{00020\ \ \ \ \ );}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{ConfigPublisher}}(ros::Publisher\&\&\ publisher,\ \textcolor{keywordtype}{size\_t}\ gripper\_joint\_count);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1}{publish\_config}}(}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\&\ config,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_pos}
+\DoxyCodeLine{00028\ \ \ \ \ );}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852}{publish\_gripper\_sequence}}(}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\&\ lastConfig,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_pos\_beg,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_pos\_end,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_speed,\ \textcolor{comment}{//\ [pos]/s}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ frequency\_hz}
+\DoxyCodeLine{00036\ \ \ \ \ );}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b}{publish\_config\_sequence}}(}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{planner::MovementSequence::ConfigGenerator}}\&\ configs,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ gripper\_pos,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ frequency\_hz}
+\DoxyCodeLine{00045\ \ \ \ \ );}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \}\ \textcolor{comment}{//\ namespace\ controller::control}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_CONTROL\_CONGIG\_PUBLISHER\_HPP\_}}
+
+\end{DoxyCode}

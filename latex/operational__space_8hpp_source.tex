@@ -1,0 +1,165 @@
+\doxysection{operational\+\_\+space.\+hpp}
+\hypertarget{operational__space_8hpp_source}{}\label{operational__space_8hpp_source}\index{src/planner/include/spaces/operational\_space.hpp@{src/planner/include/spaces/operational\_space.hpp}}
+\mbox{\hyperlink{operational__space_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ OPERATIONAL\_SPACE\_HPP\_INCLUDED}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ OPERATIONAL\_SPACE\_HPP\_INCLUDED}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../types.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}../constants.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}../utils.hpp"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}<coord::LinearSystem\ linear\_system,\ coord::AngularSystem\ angular\_system,\ \textcolor{keywordtype}{size\_t}\ size\ =\ 3,\ s\textcolor{keywordtype}{size\_t}\ order\ =\ 0>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}}\ =\ \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector<size\ +\ so<size>}}>;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace}{Derivative}}\ =\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace<linear\_system,\ angular\_system,\ size,\ order\ +\ 1>}};}
+\DoxyCodeLine{00022\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace}{Primitive}}\ =\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}<\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\_system}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\_system}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}}\ -\/\ 1>;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\ =\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1linear__type_abcb300a36c7b54de3906125abfbbaf0d}{coord::linear\_type<linear\_system,\ size>::type}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\ =\ \textcolor{keyword}{typename}\ \mbox{\hyperlink{structcoord_1_1angular__type_ab42912407f2214b6f7f082ebc6b9ec08}{coord::angular\_type<angular\_system,\ size>::type}};}
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{dimension<Angular>}}\ ==\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{so<size>}},\ \textcolor{stringliteral}{"{}The\ angular\ dimension\ cannot\ be\ represented\ fully."{}});}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classOperationalSpace_a9327a02ad65a726d97ed8fa403dcd66a}{space\_size}}\ =\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\ \_linear;}
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\ \_angular;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}{OperationalSpace}}()\ :\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}(\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}::\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{Zero}}(),\ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}::Identity())\ \{\}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{template}<coord::LinearSystem\ ls,\ coord::AngularSystem\ as>}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{classOperationalSpace_a259cf26d14857771763c2fd968e19298}{OperationalSpace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace<ls,\ as,\ size,\ order>}}\&\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}})}
+\DoxyCodeLine{00051\ \ \ \ \ :\ \_linear(\mbox{\hyperlink{namespacecoord}{coord}}::convert<\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{ls}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{linear\_system}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}>(\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}}.\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}()))}
+\DoxyCodeLine{00052\ \ \ \ \ ,\ \_angular(\mbox{\hyperlink{namespacecoord}{coord}}::convert<\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{as}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\_system}},\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{size}}>(\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}}.\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}}()))\ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ NOTE:\ velocity\ conversion\ can\ be\ added.}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static\_assert}(\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{order}}\ ==\ 0,\ \textcolor{stringliteral}{"{}Only\ positions\ can\ be\ converted."{}});}
+\DoxyCodeLine{00055\ \ \ \}}
+\DoxyCodeLine{00056\ \ \ }
+\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{classOperationalSpace_abdce980217ca1f98e7ec1f14c3ccf6f4}{OperationalSpace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\&\ \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\&\ \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})}
+\DoxyCodeLine{00058\ \ \ \ \ :\ \_linear(\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}),\ \_angular(\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})\ \{\}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \mbox{\hyperlink{classOperationalSpace_a404fe3e07d72687e86bd49cd0ec75057}{OperationalSpace}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\&\ \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}},\ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\&\&\ \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})}
+\DoxyCodeLine{00061\ \ \ \ \ :\ \_linear(\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}),\ \_angular(std::\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{move}}(\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}}))\ \{\}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \mbox{\hyperlink{classOperationalSpace_a682421cacd403d2eecc805ead4cb2d28}{OperationalSpace}}(\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\&\&\ \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\&\ \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})}
+\DoxyCodeLine{00064\ \ \ \ \ :\ \_linear(std::\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{move}}(\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}})),\ \_angular(\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})\ \{\}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{classOperationalSpace_ac61b7d01fd063d17e3bbe72d1c70dd9f}{OperationalSpace}}(\mbox{\hyperlink{classOperationalSpace_a2972763fedf48d069f0d420c87ad883b}{Linear}}\&\&\ \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}},\ \mbox{\hyperlink{classOperationalSpace_a2716017eea350657bf5c2853ec44ed7f}{Angular}}\&\&\ \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}})}
+\DoxyCodeLine{00067\ \ \ \ \ :\ \_linear(std::\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{move}}(\mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}})),\ \_angular(std::\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{move}}(\mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}}))\ \{\}}
+\DoxyCodeLine{00068\ \ \ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\ \mbox{\hyperlink{classOperationalSpace_ae938c44d6e41b7e11aee7b8434a93b3d}{operator-\/}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}{OperationalSpace}}(-\/\_linear,\ -\/\_angular);}
+\DoxyCodeLine{00073\ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{comment}{//\ NOTE:\ this\ function\ is\ not\ so\ user\ friendly.\ Use\ with\ care.}}
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\ \mbox{\hyperlink{classOperationalSpace_a4d45b382e4a797a3b74a7d524d587e2c}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}{OperationalSpace}}(*\textcolor{keyword}{this})\ -\/=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{other}};}
+\DoxyCodeLine{00078\ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{//\ NOTE:\ this\ function\ is\ not\ so\ user\ friendly.\ Use\ with\ care.}}
+\DoxyCodeLine{00081\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_a01f098189ede882b9352730af9c9621e}{operator-\/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}})\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \_linear\ -\/=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}}.\_linear;}
+\DoxyCodeLine{00085\ \ \ \ \ \_angular\ -\/=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}}.\_angular;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00087\ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\ \mbox{\hyperlink{classOperationalSpace_a61379da39aa165482cc99802b6db6ad1}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}})\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_a1455d9f4d786819ed6bb95bb312f368a}{OperationalSpace}}(*\textcolor{keyword}{this})\ +=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}};}
+\DoxyCodeLine{00091\ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_a7fa37cda5880ab473fa6802775690841}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}})\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \_linear\ +=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}}.\_linear;}
+\DoxyCodeLine{00097\ \ \ \ \ \_angular\ +=\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{variation}}.\_angular;}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00099\ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \mbox{\hyperlink{classOperationalSpace}{Primitive}}\ \mbox{\hyperlink{classOperationalSpace_a93a97f5144ba5b11bb4960a6a3e537dc}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_ab6ca2eac23070e3e18dc4d79a3c341d1}{Primitive}}(\_linear\ *\ dt,\ \_angular\ *\ dt);}
+\DoxyCodeLine{00105\ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \mbox{\hyperlink{classOperationalSpace}{Derivative}}\ \mbox{\hyperlink{classOperationalSpace_ace15501aaded12e667ae4dc14dc33f8b}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ dt)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }\mbox{\hyperlink{namespaceuniformed__rotation__algebra}{uniformed\_rotation\_algebra}};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_a2de71fd77ccc0a95e7e7edd5800097e2}{Derivative}}(\_linear\ /\ dt,\ \_angular\ /\ dt);}
+\DoxyCodeLine{00111\ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{classOperationalSpace_ad840f5d7d824ab9d442511c61c8f6b77}{norm}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{vector}}().norm();}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classOperationalSpace_ac43ec0afa3222fdcd73835963d7bc156}{linear}}()\ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{return}\ \_linear;}
+\DoxyCodeLine{00119\ \ \ \}}
+\DoxyCodeLine{00120\ \ \ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classOperationalSpace_aacd347307e98533288e838271ad185b7}{linear}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordflow}{return}\ \_linear;}
+\DoxyCodeLine{00123\ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classOperationalSpace_a159bedc7291433437a3b9febe2a251fa}{angular}}()\ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{return}\ \_angular;}
+\DoxyCodeLine{00127\ \ \ \}}
+\DoxyCodeLine{00128\ \ \ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{classOperationalSpace_a235019049939e6117bdf835d803acb17}{angular}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordflow}{return}\ \_angular;}
+\DoxyCodeLine{00131\ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{vector}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classOperationalSpace_a8c1d17e3283b94e282a2ec6977247650}{Base}}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{result}};}
+\DoxyCodeLine{00137\ \ \ \ \ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ The\ linear\ part\ is\ just\ the\ linear\ part.}}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{builder}}\ =\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{result}}\ <<\ \_linear;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{angular\_system}}\ ==\ \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3adf237bf559c4e3b3937c5485a629a522}{coord::Lie}})\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \textcolor{comment}{//\ For\ the\ angular\ part\ in\ lie\ algebra\ we\ consider\ the\ angular\ pseudo-\/vector.}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \textcolor{comment}{//\ NOTE:\ this\ implementation\ is\ in\ reality\ only\ valid\ for\ quaternions.}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{sin\_theta\_2}}\ =\ \_angular.vec().norm();}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{sin\_theta\_2}}\ <\ \mbox{\hyperlink{constants_8hpp_a3f94be92fb4585716d5e50a9bf57d887}{dummy\_precision}})\ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ To\ avoid\ numeric\ approximation\ bad\ conditioning.}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{builder}}\ ,\ \_angular.vec()\ *\ 2;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extraction\ of\ the\ theta\ angle.}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{omega}}\ =\ 2\ *\ std::asin(\mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{sin\_theta\_2}});}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{builder}}\ ,\ \_angular.vec().normalized()\ *\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{omega}};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \textcolor{comment}{//\ In\ euler\ algebra\ the\ angular\ part\ is\ already\ represented\ as\ a\ vector.}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{builder}}\ ,\ \_linear;}
+\DoxyCodeLine{00157\ \ \ \ \ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{builder}}.finished();}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classOperationalSpace_aca4d0f881cd38e721b6bbf22a36e5dcb}{result}};}
+\DoxyCodeLine{00161\ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \textcolor{comment}{//\ For\ uniformity\ with\ Eigen\ only.}}
+\DoxyCodeLine{00164\ \ \ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_a88accfd556be16dd4c55ea0c0e6e68c0}{eval}}()\ \{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{//\ For\ uniformity\ with\ Eigen\ only.}}
+\DoxyCodeLine{00167\ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace}}\&\ \mbox{\hyperlink{classOperationalSpace_a96f1d85a181b6a37c72223bd3ab09461}{eval}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};\ \}}
+\DoxyCodeLine{00168\ \ \ }
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{keyword}{template}<coord::LinearSystem\ linear\_system,\ coord::AngularSystem\ angular\_system,\ \textcolor{keywordtype}{size\_t}\ size,\ s\textcolor{keywordtype}{size\_t}\ order>}
+\DoxyCodeLine{00173\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{operational__space_8hpp_acdb3f2ff5d0288ac73cc79eb99629a1b}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\&\ time,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classOperationalSpace}{OperationalSpace<linear\_system,\ angular\_system,\ size,\ order>}}\&\ mov)\ \{}
+\DoxyCodeLine{00174\ \ \ \textcolor{keywordflow}{return}\ mov\ *\ time;}
+\DoxyCodeLine{00175\ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ OPERATIONAL\_SPACE\_HPP\_INCLUDED\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

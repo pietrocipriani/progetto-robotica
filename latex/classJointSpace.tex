@@ -1,0 +1,232 @@
+\doxysection{Joint\+Space\texorpdfstring{$<$}{<} size, order \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classJointSpace}{}\label{classJointSpace}\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+
+
+The differentiable joint space.  
+
+
+
+
+{\ttfamily \#include $<$joint\+\_\+space.\+hpp$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} = \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}} $>$
+\begin{DoxyCompactList}\small\item\em The underlying type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Derivative}} = \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}}+1 $>$
+\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}{Primitive}} = \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} -\/ 1 $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_acafbe27386d43699566099b6bd520fc8}{eval}} ()
+\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_ade868dda24e0c1eea8b39f05997a642d}{eval}} () \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}{Joint\+Space}} () \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{noexcept}}
+\item 
+\mbox{\hyperlink{classJointSpace_a6660924bb83036796eda9d2fae8bac5f}{Joint\+Space}} (\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \&\&base)
+\item 
+\mbox{\hyperlink{classJointSpace_aac553b36e3418e8e173e070da5b96a0b}{Joint\+Space}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \&base)
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{classJointSpace_ad840f5d7d824ab9d442511c61c8f6b77}{norm}} () \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}{Primitive}} \mbox{\hyperlink{classJointSpace_a93a97f5144ba5b11bb4960a6a3e537dc}{operator\texorpdfstring{$\ast$}{*}}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt) \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_abf919a53f95129c45649613f94d2a29e}{operator+}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \&\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}}) \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_a0fc943e7263242c818c79caea8b55ad9}{operator+=}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \&\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}})
+\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_ab9968a634089dada177ddb22fcbf17ee}{operator-\/}} () \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_ae0964915543f0608feea0565bcfacac1}{operator-\/}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \&\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{other}}) \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\begin{DoxyCompactList}\small\item\em Returns the distance between {\ttfamily other} and {\ttfamily this}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_a869176ea8dd4cca52c69d111621e6f69}{operator-\/=}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \&\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{variation}})
+\item 
+\mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Derivative}} \mbox{\hyperlink{classJointSpace_ace15501aaded12e667ae4dc14dc33f8b}{operator/}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt) \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{auto}} \& \mbox{\hyperlink{classJointSpace_a5cc5ec351b310503a49d74dd3aff2e07}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} index)
+\item 
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{auto}} \& \mbox{\hyperlink{classJointSpace_a44e0813818e43ed8e95626c1704070f1}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} index) \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}}
+\item 
+const \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \& \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{vector}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$\newline
+class Joint\+Space$<$ size, order $>$}
+The differentiable joint space. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The dimension of the space. \\
+\hline
+{\em order} & The time derivative order. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}\label{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!Base@{Base}}
+\index{Base@{Base}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Base}{Base}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} =  \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}$>$}
+
+
+
+The underlying type. 
+
+\Hypertarget{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}\label{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!Derivative@{Derivative}}
+\index{Derivative@{Derivative}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Derivative}{Derivative}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Derivative}} =  \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} + 1$>$}
+
+\Hypertarget{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}\label{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!Primitive@{Primitive}}
+\index{Primitive@{Primitive}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{Primitive}{Primitive}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{using}} \mbox{\hyperlink{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}{Primitive}} =  \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} -\/ 1$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe}\label{classJointSpace_a1a22b62bce202ee813d0fe129f9137fe} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!JointSpace@{JointSpace}}
+\index{JointSpace@{JointSpace}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{JointSpace()}{JointSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+\Hypertarget{classJointSpace_aac553b36e3418e8e173e070da5b96a0b}\label{classJointSpace_aac553b36e3418e8e173e070da5b96a0b} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!JointSpace@{JointSpace}}
+\index{JointSpace@{JointSpace}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{JointSpace()}{JointSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \&}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\Hypertarget{classJointSpace_a6660924bb83036796eda9d2fae8bac5f}\label{classJointSpace_a6660924bb83036796eda9d2fae8bac5f} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!JointSpace@{JointSpace}}
+\index{JointSpace@{JointSpace}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{JointSpace()}{JointSpace()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \&\&}]{base }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classJointSpace_acafbe27386d43699566099b6bd520fc8}\label{classJointSpace_acafbe27386d43699566099b6bd520fc8} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!eval@{eval}}
+\index{eval@{eval}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{classJointSpace_ade868dda24e0c1eea8b39f05997a642d}\label{classJointSpace_ade868dda24e0c1eea8b39f05997a642d} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!eval@{eval}}
+\index{eval@{eval}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{eval()}{eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_ad840f5d7d824ab9d442511c61c8f6b77}\label{classJointSpace_ad840f5d7d824ab9d442511c61c8f6b77} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!norm@{norm}}
+\index{norm@{norm}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{norm()}{norm()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} norm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_a93a97f5144ba5b11bb4960a6a3e537dc}\label{classJointSpace_a93a97f5144ba5b11bb4960a6a3e537dc} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_afb7492925d8530ed0e6be73d8ed8002c}{Primitive}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_abf919a53f95129c45649613f94d2a29e}\label{classJointSpace_abf919a53f95129c45649613f94d2a29e} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} $>$ \&}]{variation }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_a0fc943e7263242c818c79caea8b55ad9}\label{classJointSpace_a0fc943e7263242c818c79caea8b55ad9} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} $>$ \&}]{variation }\end{DoxyParamCaption})}
+
+\Hypertarget{classJointSpace_ab9968a634089dada177ddb22fcbf17ee}\label{classJointSpace_ab9968a634089dada177ddb22fcbf17ee} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}-\/ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_ae0964915543f0608feea0565bcfacac1}\label{classJointSpace_ae0964915543f0608feea0565bcfacac1} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} $>$ \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Returns the distance between {\ttfamily other} and {\ttfamily this}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The starting pose. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The distance as movement. 
+\end{DoxyReturn}
+\Hypertarget{classJointSpace_a869176ea8dd4cca52c69d111621e6f69}\label{classJointSpace_a869176ea8dd4cca52c69d111621e6f69} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace}{Joint\+Space}} \& \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}-\/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace}{Joint\+Space}}$<$ \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size}}, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{order}} $>$ \&}]{variation }\end{DoxyParamCaption})}
+
+\Hypertarget{classJointSpace_ace15501aaded12e667ae4dc14dc33f8b}\label{classJointSpace_ace15501aaded12e667ae4dc14dc33f8b} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_aa41b115d13902e8934cb87f3fb8d8fa5}{Derivative}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&}]{dt }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_a5cc5ec351b310503a49d74dd3aff2e07}\label{classJointSpace_a5cc5ec351b310503a49d74dd3aff2e07} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{auto}} \& \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}}}]{index }\end{DoxyParamCaption})}
+
+\Hypertarget{classJointSpace_a44e0813818e43ed8e95626c1704070f1}\label{classJointSpace_a44e0813818e43ed8e95626c1704070f1} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}} size, \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{ssize\+\_\+t}} order = 0$>$ \\
+\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{const}} \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{auto}} \& \mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{operator}}\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}{size\+\_\+t}}}]{index }\end{DoxyParamCaption}) const}
+
+\Hypertarget{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b}\label{classJointSpace_ae7a2641e040e7a32b91afd5098472e6b} 
+\index{JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}!vector@{vector}}
+\index{vector@{vector}!JointSpace$<$ size, order $>$@{JointSpace$<$ size, order $>$}}
+\doxysubsubsection{\texorpdfstring{vector()}{vector()}}
+{\footnotesize\ttfamily template$<$size\+\_\+t size, ssize\+\_\+t order = 0$>$ \\
+const \mbox{\hyperlink{classJointSpace_aece9c4806091c6ef9c28a5107ca3db88}{Base}} \& vector (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/spaces/\mbox{\hyperlink{joint__space_8hpp}{joint\+\_\+space.\+hpp}}\end{DoxyCompactItemize}

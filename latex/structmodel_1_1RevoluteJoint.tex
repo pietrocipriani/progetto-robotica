@@ -1,0 +1,100 @@
+\doxysection{Revolute\+Joint Struct Reference}
+\hypertarget{structmodel_1_1RevoluteJoint}{}\label{structmodel_1_1RevoluteJoint}\index{RevoluteJoint@{RevoluteJoint}}
+
+
+Structure representing the DH parameters for a single revolute joint.  
+
+
+
+
+{\ttfamily \#include $<$model.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a906e8c1fb94ce730d841293daac27d73}{Revolute\+Joint}} (\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f}{d}}, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&\mbox{\hyperlink{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86}{theta}}, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a}{a}}, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2}{alpha}}, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8}{min\+\_\+config}}=-\/std\+::numeric\+\_\+limits$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} $>$\+::infinity(), \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f}{max\+\_\+config}}=std\+::numeric\+\_\+limits$<$ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} $>$\+::infinity()) noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a}{a}} = 0
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2}{alpha}} = 0
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f}{d}} = 0
+\begin{DoxyCompactList}\small\item\em The DH parameters as defined by the DH convention. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f}{max\+\_\+config}} = std\+::numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+::infinity()
+\item 
+\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8}{min\+\_\+config}} = -\/std\+::numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+::infinity()
+\begin{DoxyCompactList}\small\item\em The physical limits of the joint. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \& \mbox{\hyperlink{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86}{theta}}
+\begin{DoxyCompactList}\small\item\em {\ttfamily theta} is a reference to the correponding robot config entry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure representing the DH parameters for a single revolute joint. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structmodel_1_1RevoluteJoint_a906e8c1fb94ce730d841293daac27d73}\label{structmodel_1_1RevoluteJoint_a906e8c1fb94ce730d841293daac27d73} 
+\index{RevoluteJoint@{RevoluteJoint}!RevoluteJoint@{RevoluteJoint}}
+\index{RevoluteJoint@{RevoluteJoint}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{RevoluteJoint()}{RevoluteJoint()}}
+{\footnotesize\ttfamily constexpr \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{d,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{theta,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{a,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{alpha,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{min\+\_\+config = {\ttfamily -\/std\+:\+:numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+:\+:infinity()},  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{max\+\_\+config = {\ttfamily std\+:\+:numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+:\+:infinity()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a}\label{structmodel_1_1RevoluteJoint_a2e9f620debac80b40949f14818158d4a} 
+\index{RevoluteJoint@{RevoluteJoint}!a@{a}}
+\index{a@{a}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{a}{a}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} a = 0}
+
+\Hypertarget{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2}\label{structmodel_1_1RevoluteJoint_aab71aae952f5851155b312eeb00ec7c2} 
+\index{RevoluteJoint@{RevoluteJoint}!alpha@{alpha}}
+\index{alpha@{alpha}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} alpha = 0}
+
+\Hypertarget{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f}\label{structmodel_1_1RevoluteJoint_aeed1bed590bcd0de8c34b63e3bf3415f} 
+\index{RevoluteJoint@{RevoluteJoint}!d@{d}}
+\index{d@{d}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{d}{d}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} d = 0}
+
+
+
+The DH parameters as defined by the DH convention. 
+
+\Hypertarget{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f}\label{structmodel_1_1RevoluteJoint_a728cde376d337a79d167fd19c68f820f} 
+\index{RevoluteJoint@{RevoluteJoint}!max\_config@{max\_config}}
+\index{max\_config@{max\_config}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{max\_config}{max\_config}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} max\+\_\+config = std\+::numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+::infinity()}
+
+\Hypertarget{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8}\label{structmodel_1_1RevoluteJoint_aed200174211c7165119d5ed4de1efcd8} 
+\index{RevoluteJoint@{RevoluteJoint}!min\_config@{min\_config}}
+\index{min\_config@{min\_config}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{min\_config}{min\_config}}
+{\footnotesize\ttfamily \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} min\+\_\+config = -\/std\+::numeric\+\_\+limits$<$\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}$>$\+::infinity()}
+
+
+
+The physical limits of the joint. 
+
+\Hypertarget{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86}\label{structmodel_1_1RevoluteJoint_ac142b2200fce82bdee49bd381f6bcb86} 
+\index{RevoluteJoint@{RevoluteJoint}!theta@{theta}}
+\index{theta@{theta}!RevoluteJoint@{RevoluteJoint}}
+\doxysubsubsection{\texorpdfstring{theta}{theta}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\& theta}
+
+
+
+{\ttfamily theta} is a reference to the correponding robot config entry. 
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/\mbox{\hyperlink{model_8hpp}{model.\+hpp}}\item 
+src/planner/lib/model/\mbox{\hyperlink{model_8cpp}{model.\+cpp}}\end{DoxyCompactItemize}

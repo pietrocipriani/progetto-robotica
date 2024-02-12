@@ -1,0 +1,5 @@
+<map id="MovementSequence" name="MovementSequence">
+<area shape="rect" id="Node000001" title="Sequence of configurations to perform the movement of a certain block." alt="" coords="5,115,160,143"/>
+<area shape="rect" id="Node000002" href="$structplanner_1_1MovementSequence_1_1ConfigGenerator.html" title="A generator capable of constructing configs on&#45;the&#45;fly." alt="" coords="19,5,146,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="85,48,85,115,80,115,80,48"/>
+</map>

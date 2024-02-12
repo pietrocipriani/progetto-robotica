@@ -1,0 +1,68 @@
+\doxysection{experiments.\+hpp}
+\hypertarget{experiments_8hpp_source}{}\label{experiments_8hpp_source}\index{src/controller/include/controller/experiments.hpp@{src/controller/include/controller/experiments.hpp}}
+\mbox{\hyperlink{experiments_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_EXPERIMENTS\_HPP\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_EXPERIMENTS\_HPP\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{model_8hpp}{model.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config__publisher_8hpp}{controller/control/config\_publisher.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{config__reader_8hpp}{controller/control/config\_reader.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{workspace_8hpp}{controller/world/workspace.hpp}}"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1experiment}{controller::experiment}}\ \{}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespacecontroller_1_1experiment_aa3917ab842f6a912f51598c89c6765f7}{ExperimentFunc}}\ =\ void\ (*)\ (}
+\DoxyCodeLine{00020\ \ \ \ \ ros::NodeHandle\&,}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world::Spawner}}\&,}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world::Deleter}}\&,}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&,}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&,}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{double}\&}
+\DoxyCodeLine{00026\ );}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1experiment_a9850dd68fe664734f6d310d744368f0c}{full}}(}
+\DoxyCodeLine{00029\ \ \ \ \ ros::NodeHandle\&\ node\_handle,}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world::Spawner}}\&\ spawner,}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world::Deleter}}\&\ deleter,}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos}
+\DoxyCodeLine{00035\ );}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1experiment_a00f9ff30f795608a3c595cd840ca0549}{all\_blocks}}(}
+\DoxyCodeLine{00038\ \ \ \ \ ros::NodeHandle\&\ node\_handle,}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world::Spawner}}\&\ spawner,}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world::Deleter}}\&\ deleter,}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos}
+\DoxyCodeLine{00044\ );}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1experiment_ae3755edb5241a3149e027b7308261c4e}{selected\_fixed\_positions}}(}
+\DoxyCodeLine{00047\ \ \ \ \ ros::NodeHandle\&\ node\_handle,}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world::Spawner}}\&\ spawner,}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world::Deleter}}\&\ deleter,}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos}
+\DoxyCodeLine{00053\ );}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespacecontroller_1_1experiment_a339295ae551fe3d7f939013529fd3f97}{workspace}}(}
+\DoxyCodeLine{00056\ \ \ \ \ ros::NodeHandle\&\ node\_handle,}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner}{world::Spawner}}\&\ spawner,}
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1world_1_1Deleter}{world::Deleter}}\&\ deleter,}
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control::ConfigPublisher}}\&\ config\_publisher,}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{structmodel_1_1UR5}{model::UR5}}\&\ robot,}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{double}\&\ prev\_gripper\_pos}
+\DoxyCodeLine{00062\ );}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \}\ \textcolor{comment}{//\ namespace\ controller::experiment}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_EXPERIMENTS\_HPP\_}}
+
+\end{DoxyCode}

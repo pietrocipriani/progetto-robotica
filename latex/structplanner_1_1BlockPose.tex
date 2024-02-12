@@ -1,0 +1,126 @@
+\doxysection{Block\+Pose Struct Reference}
+\hypertarget{structplanner_1_1BlockPose}{}\label{structplanner_1_1BlockPose}\index{BlockPose@{BlockPose}}
+
+
+The class representing the pose of a block on the table.  
+
+
+
+
+{\ttfamily \#include $<$planner.\+hpp$>$}
+
+
+
+Collaboration diagram for Block\+Pose\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{structplanner_1_1BlockPose__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6}{Pose}} = \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$ \mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{coord\+::\+Euler}}, 2 $>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structplanner_1_1BlockPose_a9fb6dbd85cd7725bca2ff7c9d8b6d2bb}{Block\+Pose}} (\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}}, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} x, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} y, \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} angle) noexcept
+\item 
+bool \mbox{\hyperlink{structplanner_1_1BlockPose_a8480441d7a5c3b0a76837a3f4e7a0de2}{collides}} (const \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if {\ttfamily this} block collides with {\ttfamily other}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \mbox{\hyperlink{structplanner_1_1BlockPose_a61bf3d4d8e72df2ec4b2e595b4f87230}{to\+\_\+os\+\_\+position}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} \mbox{\hyperlink{structplanner_1_1BlockPose_a643a9201d30a39f1222358adedf2fb98}{pad\+\_\+pose}} (\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}}) noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} \mbox{\hyperlink{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}{block}}
+\begin{DoxyCompactList}\small\item\em The type of the block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6}{Pose}} \mbox{\hyperlink{structplanner_1_1BlockPose_a6cef9464eeb5ace63256ef8c05a2e373}{pose}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The class representing the pose of a block on the table. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6}\label{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6} 
+\index{BlockPose@{BlockPose}!Pose@{Pose}}
+\index{Pose@{Pose}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{Pose}{Pose}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6}{Pose}} =  \mbox{\hyperlink{classOperationalSpace}{Operational\+Space}}$<$\mbox{\hyperlink{namespacecoord_a93f87e8f0bffc25c7aa3c7c7a55f24c6aee69cb7798900c68e7ce6a21b3b022dc}{coord\+::\+Cartesian}}, \mbox{\hyperlink{namespacecoord_a3a5935fa811d7a9b0173efb1b944c5a3ac4c9650db0ca5b76d67dbcb9da438a3e}{coord\+::\+Euler}}, 2$>$}
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structplanner_1_1BlockPose_a9fb6dbd85cd7725bca2ff7c9d8b6d2bb}\label{structplanner_1_1BlockPose_a9fb6dbd85cd7725bca2ff7c9d8b6d2bb} 
+\index{BlockPose@{BlockPose}!BlockPose@{BlockPose}}
+\index{BlockPose@{BlockPose}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{BlockPose()}{BlockPose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}}]{block,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{x,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{y,  }\item[{\mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structplanner_1_1BlockPose_a8480441d7a5c3b0a76837a3f4e7a0de2}\label{structplanner_1_1BlockPose_a8480441d7a5c3b0a76837a3f4e7a0de2} 
+\index{BlockPose@{BlockPose}!collides@{collides}}
+\index{collides@{collides}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{collides()}{collides()}}
+{\footnotesize\ttfamily bool collides (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+Checks if {\ttfamily this} block collides with {\ttfamily other}. 
+
+Collision is computed according to position and {\ttfamily hit\+\_\+box\+\_\+radius}. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other {\ttfamily \doxylink{structplanner_1_1BlockPose}{Block\+Pose}} to check the collision with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the two hitbox collides, {\ttfamily false} otherwise. 
+\end{DoxyReturn}
+\Hypertarget{structplanner_1_1BlockPose_a643a9201d30a39f1222358adedf2fb98}\label{structplanner_1_1BlockPose_a643a9201d30a39f1222358adedf2fb98} 
+\index{BlockPose@{BlockPose}!pad\_pose@{pad\_pose}}
+\index{pad\_pose@{pad\_pose}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{pad\_pose()}{pad\_pose()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} pad\+\_\+pose (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}}]{block }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{structplanner_1_1BlockPose_a61bf3d4d8e72df2ec4b2e595b4f87230}\label{structplanner_1_1BlockPose_a61bf3d4d8e72df2ec4b2e595b4f87230} 
+\index{BlockPose@{BlockPose}!to\_os\_position@{to\_os\_position}}
+\index{to\_os\_position@{to\_os\_position}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{to\_os\_position()}{to\_os\_position()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} to\+\_\+os\+\_\+position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1}\label{structplanner_1_1BlockPose_a3f5295dc923773e692b1f112e65550d1} 
+\index{BlockPose@{BlockPose}!block@{block}}
+\index{block@{block}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{block}{block}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}} block}
+
+
+
+The type of the block. 
+
+\Hypertarget{structplanner_1_1BlockPose_a6cef9464eeb5ace63256ef8c05a2e373}\label{structplanner_1_1BlockPose_a6cef9464eeb5ace63256ef8c05a2e373} 
+\index{BlockPose@{BlockPose}!pose@{pose}}
+\index{pose@{pose}!BlockPose@{BlockPose}}
+\doxysubsubsection{\texorpdfstring{pose}{pose}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structplanner_1_1BlockPose_a2404076544445a7c46ce0485abe6d2f6}{Pose}} pose}
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/planner/include/\mbox{\hyperlink{planner_8hpp}{planner.\+hpp}}\item 
+src/planner/lib/planning/\mbox{\hyperlink{planner_8cpp}{planner.\+cpp}}\end{DoxyCompactItemize}

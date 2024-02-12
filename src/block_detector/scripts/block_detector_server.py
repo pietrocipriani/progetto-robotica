@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""
+"""!
 Starts a ROS service that takes an `sensor_msgs/Image` as input, detects boxes in the image, and
 returns `block_detector/DetectBlocks`, i.e. the boxes detected by YOLOv8, as output. A service was
 preferred, instead of a publisher reading directly from the camera and publishing boxes from time
@@ -32,8 +32,13 @@ INTERSECTION_OVER_UNION_THRESHOLD = 0.5
 
 
 class BlockDetector:
+    """!
+    A ROS service that detects blocks in the images passed as input using a YOLOv8 model,
+    and returns the detected labeled bounding boxes as output. See file docs for more info.
+    """
+
     def __init__(self):
-        """
+        """!
         Creates an instance of BlockDetector and loads the YOLO model from
         `block_detector_model/model.pt` by resolving the path with `RosPack`.
         """
@@ -51,7 +56,7 @@ class BlockDetector:
     # the service callback, i.e. a function that takes an Image message
     # and returns 
     def callback(self, request: Image):
-        """
+        """!
         The ROS service callback; scripts can call it upon request using `rospy.ServiceProxy`.
         @param request an `sensor_msgs/Image` with bgr8 encoding that will be decoded using the
                        cv2 bridge
@@ -91,6 +96,10 @@ class BlockDetector:
 
 
 def main():
+    """!
+    Starts a ROS service that detects boxes in images, see file docs for more info.
+    """
+
     rospy.init_node("block_detector")
     rospy.loginfo("block_detector init")
     proc = BlockDetector()

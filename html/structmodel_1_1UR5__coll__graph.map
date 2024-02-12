@@ -1,0 +1,7 @@
+<map id="UR5" name="UR5">
+<area shape="rect" id="Node000001" title="The UR5 manipolator model." alt="" coords="125,183,173,211"/>
+<area shape="rect" id="Node000002" href="$classJointSpace.html" title=" " alt="" coords="5,5,146,33"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,47,146,182,141,184,84,49"/>
+<area shape="rect" id="Node000003" href="$structmodel_1_1RevoluteJoint.html" title="Structure representing the DH parameters for a single revolute joint." alt="" coords="169,5,278,33"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,49,209,102,184,160,166,184,161,181,180,158,203,100,216,48"/>
+</map>

@@ -1,0 +1,40 @@
+\doxysection{model Namespace Reference}
+\hypertarget{namespacemodel}{}\label{namespacemodel}\index{model@{model}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}
+\begin{DoxyCompactList}\small\item\em Structure representing the DH parameters for a single revolute joint. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmodel_1_1UR5}{UR5}}
+\begin{DoxyCompactList}\small\item\em The \doxylink{structmodel_1_1UR5}{UR5} manipolator model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}, \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{UR5\+::dof}} $>$ \mbox{\hyperlink{namespacemodel_a1dcfb2c7fea02b605852b572c8e6947f}{generate\+\_\+ur5\+\_\+parameters}} (\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \&config, const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&scale\+\_\+factor=1.\+0)
+\begin{DoxyCompactList}\small\item\em Generates the \doxylink{structmodel_1_1UR5}{UR5} joint parameters for a robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacemodel_a1dcfb2c7fea02b605852b572c8e6947f}\label{namespacemodel_a1dcfb2c7fea02b605852b572c8e6947f} 
+\index{model@{model}!generate\_ur5\_parameters@{generate\_ur5\_parameters}}
+\index{generate\_ur5\_parameters@{generate\_ur5\_parameters}!model@{model}}
+\doxysubsubsection{\texorpdfstring{generate\_ur5\_parameters()}{generate\_ur5\_parameters()}}
+{\footnotesize\ttfamily std\+::array$<$ \mbox{\hyperlink{structmodel_1_1RevoluteJoint}{Revolute\+Joint}}, \mbox{\hyperlink{structmodel_1_1UR5_ad584ac47e7cdd50c1ac3da05edbd211b}{UR5\+::dof}} $>$ generate\+\_\+ur5\+\_\+parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{UR5\+::\+Configuration}} \&}]{config,  }\item[{const \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \&}]{scale\+\_\+factor = {\ttfamily 1.0} }\end{DoxyParamCaption})}
+
+
+
+Generates the \doxylink{structmodel_1_1UR5}{UR5} joint parameters for a robot. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & The config of the robot to which link the thetas. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The list of parameters. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Due to design choices, the joint variable parameter (theta) has to be linked with the robot configuration. 
+
+The choosen measurement units are \mbox{[}meter\mbox{]} and \mbox{[}radiant\mbox{]}. 
+\end{DoxyNote}

@@ -1,0 +1,28 @@
+\doxysection{const.\+hpp}
+\hypertarget{const_8hpp_source}{}\label{const_8hpp_source}\index{src/controller/include/controller/util/const.hpp@{src/controller/include/controller/util/const.hpp}}
+\mbox{\hyperlink{const_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ \_UTIL\_CONST\_HPP\_}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ \_UTIL\_CONST\_HPP\_}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{planner_8hpp}{planner.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1util}{controller::util}}\ \{}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{namespacecontroller_1_1util_a939074183fb3e1abd17bee8385884a07}{gripper\_joint\_count}}\ =\ 2;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Default\ homing\ configuration\ for\ the\ UR5\ manipulator.\ Exported\ by\ \`{}params.py`.}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}}\ \mbox{\hyperlink{namespacecontroller_1_1util_a410b6fb3b9b09e3e91fe28ec9916678f}{ur5\_default\_homing\_config}}[]\ =\ \{-\/0.32,\ -\/0.78,\ -\/2.56,\ -\/1.63,\ -\/1.57,\ 3.49\};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacecontroller_1_1util_ad4a00bb0c71b629f943b1e6a7549379a}{ur5\_default\_homing\_gripper\_pos}}\ =\ 0.0;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{const}\ \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector<6>}}\ \mbox{\hyperlink{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036}{ur5\_default\_homing\_config\_vec}}(\mbox{\hyperlink{namespacecontroller_1_1util_a410b6fb3b9b09e3e91fe28ec9916678f}{ur5\_default\_homing\_config}});}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{constexpr}\ \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}}\ \mbox{\hyperlink{namespacecontroller_1_1util_a8e01c9514cc6869c5d09c09a2c78823a}{dt}}\ =\ 0.01;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacecontroller_1_1util_a55fd32ad8227f410caf538f38f6f3991}{frequency\_hz}}\ =\ 1\ /\ \mbox{\hyperlink{namespacecontroller_1_1util_a8e01c9514cc6869c5d09c09a2c78823a}{dt}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{namespacecontroller_1_1util_a2b97d3bda283b0c2357b8315a106e115}{gripper\_speed}}\ =\ 0.8;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \}\ \textcolor{comment}{//\ namespace\ controller::util}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_UTIL\_CONST\_HPP\_}}
+
+\end{DoxyCode}

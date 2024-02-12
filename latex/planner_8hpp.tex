@@ -1,0 +1,79 @@
+\doxysection{src/planner/include/planner.hpp File Reference}
+\hypertarget{planner_8hpp}{}\label{planner_8hpp}\index{src/planner/include/planner.hpp@{src/planner/include/planner.hpp}}
+{\ttfamily \#include "{}model.\+hpp"{}}\newline
+{\ttfamily \#include "{}spaces.\+hpp"{}}\newline
+{\ttfamily \#include "{}utils.\+hpp"{}}\newline
+{\ttfamily \#include "{}kinematics.\+hpp"{}}\newline
+{\ttfamily \#include "{}block\+\_\+type.\+hpp"{}}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$variant$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for planner.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{planner_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{planner_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}}
+\begin{DoxyCompactList}\small\item\em Class representing a planned movement of a block from a starting pose to a target pose. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}}
+\begin{DoxyCompactList}\small\item\em The class representing the pose of a block on the table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{Movement\+Sequence\+::\+Config\+Generator}}
+\begin{DoxyCompactList}\small\item\em A generator capable of constructing configs on-\/the-\/fly. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1ConflictingPositionsException}{Conflicting\+Positions\+Exception}}
+\begin{DoxyCompactList}\small\item\em Custom exception. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1MovementSequence_1_1ConfigGenerator_1_1const__iterator}{Movement\+Sequence\+::\+Config\+Generator\+::const\+\_\+iterator}}
+\item 
+class \mbox{\hyperlink{classplanner_1_1DeadlockException}{Deadlock\+Exception}}
+\begin{DoxyCompactList}\small\item\em Custom exception. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classplanner_1_1MovementGenerationRecoveringException}{Movement\+Generation\+Recovering\+Exception}}
+\begin{DoxyCompactList}\small\item\em Base exception class for {\ttfamily generate\+\_\+block\+\_\+positioning\+\_\+order}. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structplanner_1_1MovementSequence}{Movement\+Sequence}}
+\begin{DoxyCompactList}\small\item\em Sequence of configurations to perform the movement of a certain block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner}{planner}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1js}{planner\+::js}}
+\item 
+namespace \mbox{\hyperlink{namespaceplanner_1_1os}{planner\+::os}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1os_a6c97c8eb39742a4104f7f27fa12e40ae}{Acceleration}} = \mbox{\hyperlink{namespacekinematics_a7e83f6716e81748f715b925a624000db}{kinematics\+::\+Acceleration}}$<$$>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1js_a025bfffd2f8930deed76478c06b0c915}{Acceleration}} = \mbox{\hyperlink{structmodel_1_1UR5_a33eb88ef816ce12ac58d048d00592ddb}{model\+::\+UR5\+::\+Acceleration}}
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{Position}} = \mbox{\hyperlink{namespacekinematics_a0b8d49444c090b92707a9e8b4ad45bcc}{kinematics\+::\+Pose}}$<$$>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1js_a93309f556a8e2ca4dd04e0e1bb6fa86c}{Position}} = \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}}
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1os_a72860f91a564503d0627e184311c7647}{Velocity}} = \mbox{\hyperlink{namespacekinematics_a53eae2bd7448cc1c78d4b56710dcb53b}{kinematics\+::\+Velocity}}$<$$>$
+\item 
+using \mbox{\hyperlink{namespaceplanner_1_1js_ae1a3bf91d224a3b12a9a9a230cbe1178}{Velocity}} = \mbox{\hyperlink{structmodel_1_1UR5_a0d8ba5aefea331147ef40e5be4b6265e}{model\+::\+UR5\+::\+Velocity}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} $>$ \mbox{\hyperlink{namespaceplanner_a2b2ed7d387269c1a1e19f7ca9a13bb6c}{generate\+\_\+block\+\_\+positioning\+\_\+order}} (const std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&blocks, const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{Block}}, \mbox{\hyperlink{structplanner_1_1BlockPose}{Block\+Pose}} $>$ \&targets)
+\begin{DoxyCompactList}\small\item\em Generates dependencies between the positioning of the blocks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1MovementSequence}{Movement\+Sequence}} \mbox{\hyperlink{namespaceplanner_a7404826e99f71b7b8d66e5ccd72fb141}{plan\+\_\+movement}} (\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{structplanner_1_1BlockMovement}{Block\+Movement}} \&movement, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Generates the sequence of movements from the initial {\ttfamily robot} configuration, throught the picking of one block from its starting position, to the relase of the block into its target position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{Movement\+Sequence\+::\+Config\+Generator}} \mbox{\hyperlink{namespaceplanner_a05156c18c16821a1b51376f716a188ed}{plan\+\_\+movement}} (\mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, const \mbox{\hyperlink{namespaceplanner_1_1os_aa78811237c590a8b8d7b87cfa2e18b72}{os\+::\+Position}} \&end, const \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} \&dt)
+\begin{DoxyCompactList}\small\item\em Generates the sequence of movements from the initial {\ttfamily robot} configuration to the given {\ttfamily end} position. \end{DoxyCompactList}\end{DoxyCompactItemize}
