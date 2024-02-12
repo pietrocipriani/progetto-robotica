@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
         	return 2;
 		}
     } else if (argc > 2) {
-        ROS_ERROR("Usage: controller [experiment_name]");
+        ROS_ERROR("Usage: controller [full|all_blocks|selected_fixed_positions|workspace]");
         return 1;
 	}
 	ROS_INFO("Initialized controller");
