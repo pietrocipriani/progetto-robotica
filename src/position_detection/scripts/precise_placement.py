@@ -19,6 +19,19 @@ from open3d.pipelines import registration as treg
 from position_detection.msg import BlockPosition, BlockPositions 
 import copy
 
+##
+# @mainpage Doxygen Example Project
+#
+# @section description_main Description
+# An example Python program demonstrating how to use Doxygen style comments for
+# generating source code documentation with Doxygen.
+#
+# @section notes_main Notes
+# - Add special project notes here that you want to communicate to the user.
+#
+# Copyright (c) 2020 Woolsey Workshop.  All rights reserved.
+
+
 def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     convert_rgbUint32_to_tuple = lambda rgb_uint32: (
         (rgb_uint32 & 0x00ff0000)>>16, (rgb_uint32 & 0x0000ff00)>>8, (rgb_uint32 & 0x000000ff)
@@ -117,7 +130,7 @@ class PrecisePlacement:
             #self.vis.update_renderer()
             #time.sleep(0.020)
 
-    def __init__(self, point_cloud_srv, use_visualizer=True):
+    def __init__(self, point_cloud_srv_name, use_visualizer=True):
         self.msg_seq=0
         self.point_cloud = None
         self.use_visualizer = use_visualizer
@@ -142,12 +155,14 @@ class PrecisePlacement:
             self.thread_visualizer = threading.Thread(target=self.update_visualizer, name="process_visualization")
             self.thread_visualizer.start()
         
+        #spawn on a different thread
         self.thread_point_cloud_processer = threading.Thread(target=self.point_cloud_processer, name="process_visualization")
         self.thread_point_cloud_processer.start()
 
+
         self.bridge = CvBridge()
         
-        rospy.Subscriber(point_cloud_srv, PointCloud2, self.callback_cloud)
+        rospy.Subscriber(point_cloud_srv_name, PointCloud2, self.callback_cloud)
         rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
         self.pub = rospy.Publisher("block_positions", BlockPositions, queue_size=1)
@@ -177,10 +192,10 @@ class PrecisePlacement:
         
     #called every time an image is ready
     def image_callback(self, data: Image):
-        # if I don't have a converted point cloud it's useless
-
+        # if we don't have a converted point cloud it's pointless to process it
         if self.point_cloud is None:
             return
+        
         header = Header(seq=self.msg_seq, frame_id = "base_link", stamp=self.last_point_cloud_time)
         point_cloud = self.point_cloud
         
