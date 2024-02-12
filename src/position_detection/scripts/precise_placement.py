@@ -228,6 +228,7 @@ class PrecisePlacement:
         resp = self.detect_blocks_srv(self.bridge.cv2_to_imgmsg(decoded_image, encoding="bgr8"))
         to_send=[]
         for box in resp.boxes:
+            print(box.label)
             mesh=generate_intersection_mesh(676+box.x1, 676+box.x2, 396+box.y1, 396+box.y2)
             mesh.rotate(camera_transform[0:3, 0:3], [0, 0, 0])
             mesh = mesh.translate(camera_transform[0:3, 3].transpose())
