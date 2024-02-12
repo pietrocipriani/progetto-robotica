@@ -1,1 +1,0 @@
-This folder should contain `model.pt`. Download it from [here](TODO_INSERT_LINK).
