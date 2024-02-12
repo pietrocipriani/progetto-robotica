@@ -81,18 +81,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Sends messages of <code>gazebo_msgs::SpawnModel</code> type to the "/gazebo/spawn_sdf_model" topic, including in-place generated SDF files pointing to the actual <code>mesh.stl</code>.  
+ <a href="classcontroller_1_1world_1_1Spawner.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="spawner_8hpp_source.html">spawner.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aaf8929442fbdd601737778288d02ec5c" id="r_aaf8929442fbdd601737778288d02ec5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1world_1_1Spawner.html#aaf8929442fbdd601737778288d02ec5c">spawn_block</a> (<a class="el" href="namespaceplanner.html#ae91cb3afd79e6de887cf19fcca7a8c4a">planner::Block</a> block_type, double x, double y, double angle, bool upside_down, const <a class="el" href="unioncontroller_1_1util_1_1Color.html">util::Color</a> &amp;color, bool random_name)</td></tr>
+<tr class="memdesc:aaf8929442fbdd601737778288d02ec5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns a block in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual <code>mesh.stl</code>.  <br /></td></tr>
 <tr class="separator:aaf8929442fbdd601737778288d02ec5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcd041f188b1ce4430ac237b9a3549aa" id="r_abcd041f188b1ce4430ac237b9a3549aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1world_1_1Spawner.html#abcd041f188b1ce4430ac237b9a3549aa">spawn_pad</a> (<a class="el" href="namespaceplanner.html#ae91cb3afd79e6de887cf19fcca7a8c4a">planner::Block</a> pad_for_block_type, double x, double y, double angle)</td></tr>
+<tr class="memdesc:abcd041f188b1ce4430ac237b9a3549aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns a target pad in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual <code>mesh.stl</code>.  <br /></td></tr>
 <tr class="separator:abcd041f188b1ce4430ac237b9a3549aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a532485b0e4efbc18f730ac9ade682c3e" id="r_a532485b0e4efbc18f730ac9ade682c3e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1world_1_1Spawner.html#a532485b0e4efbc18f730ac9ade682c3e">Spawner</a> (ros::ServiceClient &amp;&amp;client)</td></tr>
 <tr class="separator:a532485b0e4efbc18f730ac9ade682c3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Sends messages of <code>gazebo_msgs::SpawnModel</code> type to the "/gazebo/spawn_sdf_model" topic, including in-place generated SDF files pointing to the actual <code>mesh.stl</code>. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a532485b0e4efbc18f730ac9ade682c3e" name="a532485b0e4efbc18f730ac9ade682c3e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a532485b0e4efbc18f730ac9ade682c3e">&#9670;&#160;</a></span>Spawner()</h2>
 
@@ -168,6 +175,20 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Spawns a block in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual <code>mesh.stl</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block_type</td><td>the block to spawn </td></tr>
+    <tr><td class="paramname">x</td><td>x </td></tr>
+    <tr><td class="paramname">y</td><td>y </td></tr>
+    <tr><td class="paramname">angle</td><td>angle wrt z axis </td></tr>
+    <tr><td class="paramname">upside_down</td><td>whether to spawn the model upside down </td></tr>
+    <tr><td class="paramname">color</td><td>the color of the model </td></tr>
+    <tr><td class="paramname">random_name</td><td>if true, appends the color of the model to the model name, to have a pseudorandom name that allows spawning multiple instances of the same block. If false and a block with the default name already exists, no block will be spawned. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="abcd041f188b1ce4430ac237b9a3549aa" name="abcd041f188b1ce4430ac237b9a3549aa"></a>
@@ -207,6 +228,18 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Spawns a target pad in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual <code>mesh.stl</code>. </p>
+<p>Pads are the targets where blocks will be places, and are just a model with some text indications, placed lying on the workspace table.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pad_for_block_type</td><td>the block corresponding to the target pad. The actual pad position will be obtained from <a class="el" href="namespaceplanner.html#a7719df040f84e7ce8d8e28a481bcd8fe" title="(x, y, angle)">planner::get_pad_position()</a> </td></tr>
+    <tr><td class="paramname">x</td><td>x </td></tr>
+    <tr><td class="paramname">y</td><td>y </td></tr>
+    <tr><td class="paramname">angle</td><td>angle wrt z axis </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

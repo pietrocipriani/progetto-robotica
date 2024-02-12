@@ -84,21 +84,28 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html">ConfigPublisher</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes messages of type <code>std_msgs::Float64MultiArray</code> to the "/ur5/joint_group_pos_controller/command" topic, to make the robot perform movements.  <a href="classcontroller_1_1control_1_1ConfigPublisher.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a239eb11a4d80a60d7793cc47fe32bee6" id="r_a239eb11a4d80a60d7793cc47fe32bee6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplanner.html#ae91cb3afd79e6de887cf19fcca7a8c4a">planner::Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a239eb11a4d80a60d7793cc47fe32bee6">block_pos_to_type</a> (const position_detection::BlockPosition &amp;block_pos)</td></tr>
+<tr class="memdesc:a239eb11a4d80a60d7793cc47fe32bee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the block type stored in a <code>position_detection::BlockPosition</code> message.  <br /></td></tr>
 <tr class="separator:a239eb11a4d80a60d7793cc47fe32bee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83770ea9314eb6e342a39b97c9d2b257" id="r_a83770ea9314eb6e342a39b97c9d2b257"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structplanner_1_1BlockMovement.html">planner::BlockMovement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a83770ea9314eb6e342a39b97c9d2b257">filter_map_movements_to_pads</a> (const std::vector&lt; position_detection::BlockPosition &gt; &amp;blocks, double min_confidence, size_t max_count)</td></tr>
+<tr class="memdesc:a83770ea9314eb6e342a39b97c9d2b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads.  <br /></td></tr>
 <tr class="separator:a83770ea9314eb6e342a39b97c9d2b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cd4c5307d0c40db49fa2ad1a52ed555" id="r_a8cd4c5307d0c40db49fa2ad1a52ed555"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a8cd4c5307d0c40db49fa2ad1a52ed555">go_in_homing_config</a> (<a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html">control::ConfigPublisher</a> &amp;config_publisher, <a class="el" href="structmodel_1_1UR5.html">model::UR5</a> &amp;robot, double &amp;prev_gripper_pos)</td></tr>
+<tr class="memdesc:a8cd4c5307d0c40db49fa2ad1a52ed555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the robot in homing config, which is a safe area where the robot does not interfere with the camera, allowing for better image capturing for block detection.  <br /></td></tr>
 <tr class="separator:a8cd4c5307d0c40db49fa2ad1a52ed555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c3f72cac619a66dccb8080c877a233" id="r_a79c3f72cac619a66dccb8080c877a233"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a>, double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a79c3f72cac619a66dccb8080c877a233">joint_state_to_config</a> (sensor_msgs::JointState::ConstPtr joint_state)</td></tr>
+<tr class="memdesc:a79c3f72cac619a66dccb8080c877a233"><td class="mdescLeft">&#160;</td><td class="mdescRight">converts a joint state message obtained from sensors on the robot to the robot configuration format used internally.  <br /></td></tr>
 <tr class="separator:a79c3f72cac619a66dccb8080c877a233"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe847ffb9f73c6121344fa763c0e8123" id="r_afe847ffb9f73c6121344fa763c0e8123"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#afe847ffb9f73c6121344fa763c0e8123">move_block</a> (<a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html">control::ConfigPublisher</a> &amp;config_publisher, <a class="el" href="structmodel_1_1UR5.html">model::UR5</a> &amp;robot, double &amp;prev_gripper_pos, const <a class="el" href="structplanner_1_1BlockMovement.html">planner::BlockMovement</a> &amp;movement)</td></tr>
+<tr class="memdesc:afe847ffb9f73c6121344fa763c0e8123"><td class="mdescLeft">&#160;</td><td class="mdescRight">Performs the steps needed to move a block according to the provided movement, and therefore handles:  <br /></td></tr>
 <tr class="separator:afe847ffb9f73c6121344fa763c0e8123"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af85952ee2c21b113eb830d29ea127f5e" id="r_af85952ee2c21b113eb830d29ea127f5e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; position_detection::BlockPosition &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#af85952ee2c21b113eb830d29ea127f5e">wait_for_new_block_positions</a> (ros::NodeHandle &amp;node_handle)</td></tr>
+<tr class="memdesc:af85952ee2c21b113eb830d29ea127f5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for new <code>position_detection::BlockPositions</code> messages on topic "/block_positions", making sure they are not older than when this function started listening, otherwise they'd be outdated.  <br /></td></tr>
 <tr class="separator:af85952ee2c21b113eb830d29ea127f5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -117,6 +124,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Obtains the block type stored in a <code>position_detection::BlockPosition</code> message. </p>
 
 </div>
 </div>
@@ -152,6 +161,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads. </p>
+<p>The following filters are applied:</p><ul>
+<li>blocks with a confidence lower than <code>min_confidence</code> are removed</li>
+<li>at most <code>max_count</code> objects are returned</li>
+<li>blocks which are already on their corresponding target pad are removed (e.g. the <code>1x1_H</code> block would be removed if it were already on the <code>1x1_H</code> pad)</li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">blocks</td><td>a list of block position messages, sorted by confidence (higher confidence at the beginning) </td></tr>
+    <tr><td class="paramname">min_confidence</td><td>all returned blocks will have at least this confidence </td></tr>
+    <tr><td class="paramname">max_count</td><td>at most this amount of blocks will be returned, preferring higher confidence ones </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;planner::BlockMovement&gt; the block movements to move blocks on the workspace to their corresponding pad </dd></dl>
+
 </div>
 </div>
 <a id="a8cd4c5307d0c40db49fa2ad1a52ed555" name="a8cd4c5307d0c40db49fa2ad1a52ed555"></a>
@@ -186,6 +211,16 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Moves the robot in homing config, which is a safe area where the robot does not interfere with the camera, allowing for better image capturing for block detection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_publisher</td><td>where to publish robot joint configurations so that they are performed in the simulation </td></tr>
+    <tr><td class="paramname">robot</td><td>the robot with the current joints config stored inside </td></tr>
+    <tr><td class="paramname">prev_gripper_pos</td><td>the current gripper position </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a79c3f72cac619a66dccb8080c877a233" name="a79c3f72cac619a66dccb8080c877a233"></a>
@@ -203,6 +238,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>converts a joint state message obtained from sensors on the robot to the robot configuration format used internally. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">joint_state</td><td>the <code>sensor_msgs/JointState</code> message to convert </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::pair&lt;model::UR5::Configuration,double&gt; the converted robot configuration, and the position of the gripper </dd></dl>
 
 </div>
 </div>
@@ -244,6 +288,25 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Performs the steps needed to move a block according to the provided movement, and therefore handles: </p>
+<ul>
+<li>going above the block</li>
+<li>closing the gripper to get hold of the block</li>
+<li>picking up the block</li>
+<li>moving over to the target pad</li>
+<li>droping the block by reopening the gripper</li>
+</ul>
+<p>The movements are planned using the planner and sent to the simulation config publisher.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_publisher</td><td>where to publish robot joint configurations so that they are performed in the simulation </td></tr>
+    <tr><td class="paramname">robot</td><td>the robot with the current joints config stored inside </td></tr>
+    <tr><td class="paramname">prev_gripper_pos</td><td>the current gripper position </td></tr>
+    <tr><td class="paramname">movement</td><td>the movement to perform (assumes the <code>start</code> and <code>target</code> poses both refer to the same block) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="af85952ee2c21b113eb830d29ea127f5e" name="af85952ee2c21b113eb830d29ea127f5e"></a>
@@ -261,6 +324,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Waits for new <code>position_detection::BlockPositions</code> messages on topic "/block_positions", making sure they are not older than when this function started listening, otherwise they'd be outdated. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node_handle</td><td>the ROS node handle on which to call waitForMessage() </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>std::vector&lt;position_detection::BlockPosition&gt; a list of block position messages, sorted by confidence (higher confidence at the beginning) </dd></dl>
 
 </div>
 </div>

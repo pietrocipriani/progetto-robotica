@@ -81,20 +81,29 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Publishes messages of type <code>std_msgs::Float64MultiArray</code> to the "/ur5/joint_group_pos_controller/command" topic, to make the robot perform movements.  
+ <a href="classcontroller_1_1control_1_1ConfigPublisher.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="config__publisher_8hpp_source.html">config_publisher.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abc46423ac59eec3bb541dfa7146ba4a4" id="r_abc46423ac59eec3bb541dfa7146ba4a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html#abc46423ac59eec3bb541dfa7146ba4a4">ConfigPublisher</a> (ros::Publisher &amp;&amp;publisher, size_t gripper_joint_count)</td></tr>
+<tr class="memdesc:abc46423ac59eec3bb541dfa7146ba4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Config Publisher object.  <br /></td></tr>
 <tr class="separator:abc46423ac59eec3bb541dfa7146ba4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e65820a0885c7b0dd6615180664e8b1" id="r_a4e65820a0885c7b0dd6615180664e8b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html#a4e65820a0885c7b0dd6615180664e8b1">publish_config</a> (const <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;config, double gripper_pos)</td></tr>
+<tr class="memdesc:a4e65820a0885c7b0dd6615180664e8b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puslishes a config directly to the robot, to make it perform a movement.  <br /></td></tr>
 <tr class="separator:a4e65820a0885c7b0dd6615180664e8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab939bc39046632c27906ce14914e051b" id="r_ab939bc39046632c27906ce14914e051b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html#ab939bc39046632c27906ce14914e051b">publish_config_sequence</a> (<a class="el" href="structplanner_1_1MovementSequence_1_1ConfigGenerator.html">planner::MovementSequence::ConfigGenerator</a> &amp;configs, double gripper_pos, double frequency_hz)</td></tr>
+<tr class="memdesc:ab939bc39046632c27906ce14914e051b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Publishes the provided config sequence one step at a time, and returns the last provided config, which will be the new robot configuration after the movement.  <br /></td></tr>
 <tr class="separator:ab939bc39046632c27906ce14914e051b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab83e40f75a9b3658ea48c2b73bb40852" id="r_ab83e40f75a9b3658ea48c2b73bb40852"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html#ab83e40f75a9b3658ea48c2b73bb40852">publish_gripper_sequence</a> (const <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;lastConfig, double gripper_pos_beg, double gripper_pos_end, double gripper_speed, double frequency_hz)</td></tr>
-<tr class="separator:ab83e40f75a9b3658ea48c2b73bb40852"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50e05a9691ea080ba4260fd82d3e9773" id="r_a50e05a9691ea080ba4260fd82d3e9773"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html#a50e05a9691ea080ba4260fd82d3e9773">publish_gripper_sequence</a> (const <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;last_config, double gripper_pos_beg, double gripper_pos_end, double gripper_speed, double frequency_hz)</td></tr>
+<tr class="memdesc:a50e05a9691ea080ba4260fd82d3e9773"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opens or closes the gripper gradually, by keeping the robot joints fixed and only moving the gripper joints.  <br /></td></tr>
+<tr class="separator:a50e05a9691ea080ba4260fd82d3e9773"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Publishes messages of type <code>std_msgs::Float64MultiArray</code> to the "/ur5/joint_group_pos_controller/command" topic, to make the robot perform movements. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abc46423ac59eec3bb541dfa7146ba4a4" name="abc46423ac59eec3bb541dfa7146ba4a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc46423ac59eec3bb541dfa7146ba4a4">&#9670;&#160;</a></span>ConfigPublisher()</h2>
 
@@ -120,6 +129,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Construct a new Config Publisher object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">publisher</td><td>the ROS publisher to send data to </td></tr>
+    <tr><td class="paramname">gripper_joint_count</td><td>the number of gripper joints, whose position is to be put at the end of the published arrays with duplicated this amount of times </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -149,6 +167,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Puslishes a config directly to the robot, to make it perform a movement. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>the robot joint config to publish </td></tr>
+    <tr><td class="paramname">gripper_pos</td><td>the position of the gripper joints </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -183,12 +210,23 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>the last configuration obtained from the config sequence </dd></dl>
+
+<p>Publishes the provided config sequence one step at a time, and returns the last provided config, which will be the new robot configuration after the movement. </p>
+<p>The gripper joints position will remain fixed throughout the movement.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">configs</td><td>the lazy config generator providing a sequence of configs </td></tr>
+    <tr><td class="paramname">gripper_pos</td><td>the gripper joints position, that will remain fixed throughout the motion </td></tr>
+    <tr><td class="paramname">frequency_hz</td><td>every how often to publish a config </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6" title="The type representing a configuration for a dof manipulator.">model::UR5::Configuration</a> the last configuration obtained from the config sequence </dd></dl>
 
 </div>
 </div>
-<a id="ab83e40f75a9b3658ea48c2b73bb40852" name="ab83e40f75a9b3658ea48c2b73bb40852"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab83e40f75a9b3658ea48c2b73bb40852">&#9670;&#160;</a></span>publish_gripper_sequence()</h2>
+<a id="a50e05a9691ea080ba4260fd82d3e9773" name="a50e05a9691ea080ba4260fd82d3e9773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50e05a9691ea080ba4260fd82d3e9773">&#9670;&#160;</a></span>publish_gripper_sequence()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,7 +235,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void publish_gripper_sequence </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;&#160;</td>
-          <td class="paramname"><em>lastConfig</em>, </td>
+          <td class="paramname"><em>last_config</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -230,6 +268,19 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Opens or closes the gripper gradually, by keeping the robot joints fixed and only moving the gripper joints. </p>
+<p>The movement is linear, one step at a time, and takes some time.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">last_config</td><td>the robot joint config, that will remain fixed throughout the open/closing motion </td></tr>
+    <tr><td class="paramname">gripper_pos_beg</td><td>the current gripper joints position </td></tr>
+    <tr><td class="paramname">gripper_pos_end</td><td>the target gripper joints position </td></tr>
+    <tr><td class="paramname">gripper_speed</td><td>the speed of the gripper, in [pos]/s (probably rad/s) </td></tr>
+    <tr><td class="paramname">frequency_hz</td><td>every how often to publish a config </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

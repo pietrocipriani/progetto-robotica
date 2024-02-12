@@ -12,20 +12,20 @@
 \DoxyCodeLine{00008\ }
 \DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacecontroller_1_1util}{controller::util}}\ \{}
 \DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
-\DoxyCodeLine{00012\ std::string\ \mbox{\hyperlink{namespacecontroller_1_1util_af7e34ab894685df0a70ffeb1cc543cd2}{string\_format}}(\textcolor{keyword}{const}\ std::string\&\ format,\ Args...\ args)\ \{}
-\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{int}\ size\_s\ =\ std::snprintf(\textcolor{keyword}{nullptr},\ 0,\ format.c\_str(),\ args...)\ +\ 1;\ \textcolor{comment}{//\ Extra\ space\ for\ '\(\backslash\)0'}}
-\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordflow}{if}(size\_s\ <=\ 0)\ \{\ \textcolor{keywordflow}{throw}\ std::runtime\_error(\ \textcolor{stringliteral}{"{}Error\ during\ formatting."{}}\ );\ \}}
-\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(size\_s);}
-\DoxyCodeLine{00016\ \ \ \ \ std::unique\_ptr<char[]>\ buf(\textcolor{keyword}{new}\ \textcolor{keywordtype}{char}[size]);}
-\DoxyCodeLine{00017\ \ \ \ \ std::snprintf(buf.get(),\ size,\ format.c\_str(),\ args...);}
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{return}\ std::string(buf.get(),\ buf.get()\ +\ size\ -\/\ 1);\ \textcolor{comment}{//\ We\ don't\ want\ the\ '\(\backslash\)0'\ inside}}
-\DoxyCodeLine{00019\ \}}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ std::string\ \mbox{\hyperlink{namespacecontroller_1_1util_a7ce4e7a97bb1ddd28d6e31955d0d5ec1}{config\_to\_string}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\&\ config,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ gripper\_pos);}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \}\ \textcolor{comment}{//\ namespace\ util}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00016\ std::string\ \mbox{\hyperlink{namespacecontroller_1_1util_af7e34ab894685df0a70ffeb1cc543cd2}{string\_format}}(\textcolor{keyword}{const}\ std::string\&\ format,\ Args...\ args)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ size\_s\ =\ std::snprintf(\textcolor{keyword}{nullptr},\ 0,\ format.c\_str(),\ args...)\ +\ 1;\ \textcolor{comment}{//\ Extra\ space\ for\ '\(\backslash\)0'}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordflow}{if}(size\_s\ <=\ 0)\ \{\ \textcolor{keywordflow}{throw}\ std::runtime\_error(\ \textcolor{stringliteral}{"{}Error\ during\ formatting."{}}\ );\ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(size\_s);}
+\DoxyCodeLine{00020\ \ \ \ \ std::unique\_ptr<char[]>\ buf(\textcolor{keyword}{new}\ \textcolor{keywordtype}{char}[size]);}
+\DoxyCodeLine{00021\ \ \ \ \ std::snprintf(buf.get(),\ size,\ format.c\_str(),\ args...);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{return}\ std::string(buf.get(),\ buf.get()\ +\ size\ -\/\ 1);\ \textcolor{comment}{//\ We\ don't\ want\ the\ '\(\backslash\)0'\ inside}}
+\DoxyCodeLine{00023\ \}}
 \DoxyCodeLine{00024\ }
-\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_UTIL\_STRING\_HPP\_}}
+\DoxyCodeLine{00028\ std::string\ \mbox{\hyperlink{namespacecontroller_1_1util_a7ce4e7a97bb1ddd28d6e31955d0d5ec1}{config\_to\_string}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classJointSpace}{model::UR5::Configuration}}\&\ config,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\&\ gripper\_pos);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \}\ \textcolor{comment}{//\ namespace\ util}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ \_UTIL\_STRING\_HPP\_}}
 
 \end{DoxyCode}

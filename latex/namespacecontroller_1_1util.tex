@@ -4,26 +4,26 @@
 \begin{DoxyCompactItemize}
 \item 
 union \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{Color}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em An RGBA color, stored in a 32bit unsigned integer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_aeb1cfcafd4b8cdf3223ce04d1e8d1cd8}{\+\_\+sqrt\+Newton\+Raphson}} (double x, double curr, double prev)
-\item 
+\begin{DoxyCompactList}\small\item\em Taken from \href{https://stackoverflow.com/a/34134071}{\texttt{ https\+://stackoverflow.\+com/a/34134071}}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{Color}} \mbox{\hyperlink{namespacecontroller_1_1util_a5e4bd239aa49616bdd9a8500377612f3}{color\+\_\+from\+\_\+double\+\_\+components}} (double r, double g, double b, double a)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a 32bit unsigned integer color by converting the 4 floating point components. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{namespacecontroller_1_1util_a7ce4e7a97bb1ddd28d6e31955d0d5ec1}{config\+\_\+to\+\_\+string}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&config, const double \&gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Creates a simple string representation for the robot config, to be used in logs. \end{DoxyCompactList}\item 
 constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_a20576fd279b6f9ac6797763266048509}{constexpr\+\_\+sqrt}} (double x)
-\item 
+\begin{DoxyCompactList}\small\item\em Constexpr version of the square root. \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{namespacecontroller_1_1util_af30cacd8d2d6deccb6a560965ad9660c}{double\+\_\+to\+\_\+uint8}} (double v)
 \item 
 \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{Color}} \mbox{\hyperlink{namespacecontroller_1_1util_a14c8c7de83a72b87e9f43d07b732937c}{gen\+\_\+bright\+\_\+color}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a random color, with a higher probability to be bright rather than dark. \end{DoxyCompactList}\item 
 constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_a682842ababc8d4fbf5d4b55f1b030827}{rectangle\+\_\+radius}} (double w, double h)
-\item 
+\begin{DoxyCompactList}\small\item\em like std\+::hypot(), but constexpr, and divided by 2, to represent the "{}radius"{} of a rectangle to use in collision detection. \end{DoxyCompactList}\item 
 {\footnotesize template$<$typename... Args$>$ }\\std\+::string \mbox{\hyperlink{namespacecontroller_1_1util_af7e34ab894685df0a70ffeb1cc543cd2}{string\+\_\+format}} (const std\+::string \&format, Args... args)
-\item 
+\begin{DoxyCompactList}\small\item\em Formats a string like printf(), but without printing it. \end{DoxyCompactList}\item 
 const \mbox{\hyperlink{types_8hpp_a89f168c0578a428546d9a71026868e23}{Vector}}$<$ 6 $>$ \mbox{\hyperlink{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036}{ur5\+\_\+default\+\_\+homing\+\_\+config\+\_\+vec}} (\mbox{\hyperlink{namespacecontroller_1_1util_a410b6fb3b9b09e3e91fe28ec9916678f}{ur5\+\_\+default\+\_\+homing\+\_\+config}})
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
@@ -34,7 +34,7 @@ constexpr \mbox{\hyperlink{types_8hpp_a3b5ed892af78b76780e76e03356804d7}{Time}} 
 constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_a55fd32ad8227f410caf538f38f6f3991}{frequency\+\_\+hz}} = 1 / \mbox{\hyperlink{namespacecontroller_1_1util_a8e01c9514cc6869c5d09c09a2c78823a}{dt}}
 \item 
 constexpr int \mbox{\hyperlink{namespacecontroller_1_1util_a939074183fb3e1abd17bee8385884a07}{gripper\+\_\+joint\+\_\+count}} = 2
-\item 
+\begin{DoxyCompactList}\small\item\em The number of joints needed to open/close the gripper on the end effector. \end{DoxyCompactList}\item 
 constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_a2b97d3bda283b0c2357b8315a106e115}{gripper\+\_\+speed}} = 0.\+8
 \item 
 constexpr \mbox{\hyperlink{types_8hpp_a8c2981f3f834be9448a6ab06c28748eb}{Scalar}} \mbox{\hyperlink{namespacecontroller_1_1util_a410b6fb3b9b09e3e91fe28ec9916678f}{ur5\+\_\+default\+\_\+homing\+\_\+config}} \mbox{[}$\,$\mbox{]} = \{-\/0.\+32, -\/0.\+78, -\/2.\+56, -\/1.\+63, -\/1.\+57, 3.\+49\}
@@ -50,11 +50,19 @@ constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_ad4a00bb0c71b629f9
 \doxysubsubsection{\texorpdfstring{\_sqrtNewtonRaphson()}{\_sqrtNewtonRaphson()}}
 {\footnotesize\ttfamily constexpr double \+\_\+sqrt\+Newton\+Raphson (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{curr,  }\item[{double}]{prev }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
 
+
+
+Taken from \href{https://stackoverflow.com/a/34134071}{\texttt{ https\+://stackoverflow.\+com/a/34134071}}. 
+
 \Hypertarget{namespacecontroller_1_1util_a5e4bd239aa49616bdd9a8500377612f3}\label{namespacecontroller_1_1util_a5e4bd239aa49616bdd9a8500377612f3} 
 \index{controller::util@{controller::util}!color\_from\_double\_components@{color\_from\_double\_components}}
 \index{color\_from\_double\_components@{color\_from\_double\_components}!controller::util@{controller::util}}
 \doxysubsubsection{\texorpdfstring{color\_from\_double\_components()}{color\_from\_double\_components()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{Color}} color\+\_\+from\+\_\+double\+\_\+components (\begin{DoxyParamCaption}\item[{double}]{r,  }\item[{double}]{g,  }\item[{double}]{b,  }\item[{double}]{a }\end{DoxyParamCaption})}
+
+
+
+Creates a 32bit unsigned integer color by converting the 4 floating point components. 
 
 \Hypertarget{namespacecontroller_1_1util_a7ce4e7a97bb1ddd28d6e31955d0d5ec1}\label{namespacecontroller_1_1util_a7ce4e7a97bb1ddd28d6e31955d0d5ec1} 
 \index{controller::util@{controller::util}!config\_to\_string@{config\_to\_string}}
@@ -62,12 +70,23 @@ constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_ad4a00bb0c71b629f9
 \doxysubsubsection{\texorpdfstring{config\_to\_string()}{config\_to\_string()}}
 {\footnotesize\ttfamily std\+::string config\+\_\+to\+\_\+string (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{config,  }\item[{const double \&}]{gripper\+\_\+pos }\end{DoxyParamCaption})}
 
+
+
+Creates a simple string representation for the robot config, to be used in logs. 
+
 \Hypertarget{namespacecontroller_1_1util_a20576fd279b6f9ac6797763266048509}\label{namespacecontroller_1_1util_a20576fd279b6f9ac6797763266048509} 
 \index{controller::util@{controller::util}!constexpr\_sqrt@{constexpr\_sqrt}}
 \index{constexpr\_sqrt@{constexpr\_sqrt}!controller::util@{controller::util}}
 \doxysubsubsection{\texorpdfstring{constexpr\_sqrt()}{constexpr\_sqrt()}}
 {\footnotesize\ttfamily constexpr double constexpr\+\_\+sqrt (\begin{DoxyParamCaption}\item[{double}]{x }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
 
+
+
+Constexpr version of the square root. 
+
+Taken from \href{https://stackoverflow.com/a/34134071}{\texttt{ https\+://stackoverflow.\+com/a/34134071}} \begin{DoxyReturn}{Returns}
+For a finite and non-\/negative value of "{}x"{}, returns an approximation for the square root of "{}x"{}, otherwise, returns NaN 
+\end{DoxyReturn}
 \Hypertarget{namespacecontroller_1_1util_af30cacd8d2d6deccb6a560965ad9660c}\label{namespacecontroller_1_1util_af30cacd8d2d6deccb6a560965ad9660c} 
 \index{controller::util@{controller::util}!double\_to\_uint8@{double\_to\_uint8}}
 \index{double\_to\_uint8@{double\_to\_uint8}!controller::util@{controller::util}}
@@ -80,12 +99,23 @@ constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_ad4a00bb0c71b629f9
 \doxysubsubsection{\texorpdfstring{gen\_bright\_color()}{gen\_bright\_color()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{Color}} gen\+\_\+bright\+\_\+color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+
+
+Generates a random color, with a higher probability to be bright rather than dark. 
+
 \Hypertarget{namespacecontroller_1_1util_a682842ababc8d4fbf5d4b55f1b030827}\label{namespacecontroller_1_1util_a682842ababc8d4fbf5d4b55f1b030827} 
 \index{controller::util@{controller::util}!rectangle\_radius@{rectangle\_radius}}
 \index{rectangle\_radius@{rectangle\_radius}!controller::util@{controller::util}}
 \doxysubsubsection{\texorpdfstring{rectangle\_radius()}{rectangle\_radius()}}
 {\footnotesize\ttfamily constexpr double rectangle\+\_\+radius (\begin{DoxyParamCaption}\item[{double}]{w,  }\item[{double}]{h }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
 
+
+
+like std\+::hypot(), but constexpr, and divided by 2, to represent the "{}radius"{} of a rectangle to use in collision detection. 
+
+\begin{DoxyReturn}{Returns}
+sqrt(w\texorpdfstring{$^\wedge$}{\string^}2 + h\texorpdfstring{$^\wedge$}{\string^}2) / 2 
+\end{DoxyReturn}
 \Hypertarget{namespacecontroller_1_1util_af7e34ab894685df0a70ffeb1cc543cd2}\label{namespacecontroller_1_1util_af7e34ab894685df0a70ffeb1cc543cd2} 
 \index{controller::util@{controller::util}!string\_format@{string\_format}}
 \index{string\_format@{string\_format}!controller::util@{controller::util}}
@@ -93,7 +123,11 @@ constexpr double \mbox{\hyperlink{namespacecontroller_1_1util_ad4a00bb0c71b629f9
 {\footnotesize\ttfamily template$<$typename... Args$>$ \\
 std\+::string string\+\_\+format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format,  }\item[{Args...}]{args }\end{DoxyParamCaption})}
 
-\Hypertarget{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036}\label{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036} 
+
+
+Formats a string like printf(), but without printing it. 
+
+Taken from \href{https://stackoverflow.com/a/26221725}{\texttt{ https\+://stackoverflow.\+com/a/26221725}} \Hypertarget{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036}\label{namespacecontroller_1_1util_a1756bb4b8cf0f57046db5d1c66319036} 
 \index{controller::util@{controller::util}!ur5\_default\_homing\_config\_vec@{ur5\_default\_homing\_config\_vec}}
 \index{ur5\_default\_homing\_config\_vec@{ur5\_default\_homing\_config\_vec}!controller::util@{controller::util}}
 \doxysubsubsection{\texorpdfstring{ur5\_default\_homing\_config\_vec()}{ur5\_default\_homing\_config\_vec()}}
@@ -119,6 +153,10 @@ std\+::string string\+\_\+format (\begin{DoxyParamCaption}\item[{const std\+::st
 \index{gripper\_joint\_count@{gripper\_joint\_count}!controller::util@{controller::util}}
 \doxysubsubsection{\texorpdfstring{gripper\_joint\_count}{gripper\_joint\_count}}
 {\footnotesize\ttfamily constexpr int gripper\+\_\+joint\+\_\+count = 2\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+The number of joints needed to open/close the gripper on the end effector. 
 
 \Hypertarget{namespacecontroller_1_1util_a2b97d3bda283b0c2357b8315a106e115}\label{namespacecontroller_1_1util_a2b97d3bda283b0c2357b8315a106e115} 
 \index{controller::util@{controller::util}!gripper\_speed@{gripper\_speed}}

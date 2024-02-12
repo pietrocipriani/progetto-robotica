@@ -2,18 +2,26 @@
 \hypertarget{classcontroller_1_1world_1_1Spawner}{}\label{classcontroller_1_1world_1_1Spawner}\index{Spawner@{Spawner}}
 
 
+Sends messages of {\ttfamily gazebo\+\_\+msgs\+::\+Spawn\+Model} type to the "{}/gazebo/spawn\+\_\+sdf\+\_\+model"{} topic, including in-\/place generated SDF files pointing to the actual {\ttfamily mesh.\+stl}.  
+
+
+
+
 {\ttfamily \#include $<$spawner.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_aaf8929442fbdd601737778288d02ec5c}{spawn\+\_\+block}} (\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} block\+\_\+type, double x, double y, double angle, bool upside\+\_\+down, const \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{util\+::\+Color}} \&color, bool random\+\_\+name)
-\item 
+\begin{DoxyCompactList}\small\item\em Spawns a block in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual {\ttfamily mesh.\+stl}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_abcd041f188b1ce4430ac237b9a3549aa}{spawn\+\_\+pad}} (\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} pad\+\_\+for\+\_\+block\+\_\+type, double x, double y, double angle)
-\item 
+\begin{DoxyCompactList}\small\item\em Spawns a target pad in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual {\ttfamily mesh.\+stl}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_a532485b0e4efbc18f730ac9ade682c3e}{Spawner}} (ros\+::\+Service\+Client \&\&client)
 \end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Sends messages of {\ttfamily gazebo\+\_\+msgs\+::\+Spawn\+Model} type to the "{}/gazebo/spawn\+\_\+sdf\+\_\+model"{} topic, including in-\/place generated SDF files pointing to the actual {\ttfamily mesh.\+stl}. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classcontroller_1_1world_1_1Spawner_a532485b0e4efbc18f730ac9ade682c3e}\label{classcontroller_1_1world_1_1Spawner_a532485b0e4efbc18f730ac9ade682c3e} 
@@ -31,12 +39,50 @@ void \mbox{\hyperlink{classcontroller_1_1world_1_1Spawner_abcd041f188b1ce4430ac2
 \doxysubsubsection{\texorpdfstring{spawn\_block()}{spawn\_block()}}
 {\footnotesize\ttfamily void spawn\+\_\+block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}}}]{block\+\_\+type,  }\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{angle,  }\item[{bool}]{upside\+\_\+down,  }\item[{const \mbox{\hyperlink{unioncontroller_1_1util_1_1Color}{util\+::\+Color}} \&}]{color,  }\item[{bool}]{random\+\_\+name }\end{DoxyParamCaption})}
 
+
+
+Spawns a block in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual {\ttfamily mesh.\+stl}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+\_\+type} & the block to spawn \\
+\hline
+{\em x} & x \\
+\hline
+{\em y} & y \\
+\hline
+{\em angle} & angle wrt z axis \\
+\hline
+{\em upside\+\_\+down} & whether to spawn the model upside down \\
+\hline
+{\em color} & the color of the model \\
+\hline
+{\em random\+\_\+name} & if true, appends the color of the model to the model name, to have a pseudorandom name that allows spawning multiple instances of the same block. If false and a block with the default name already exists, no block will be spawned. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classcontroller_1_1world_1_1Spawner_abcd041f188b1ce4430ac237b9a3549aa}\label{classcontroller_1_1world_1_1Spawner_abcd041f188b1ce4430ac237b9a3549aa} 
 \index{Spawner@{Spawner}!spawn\_pad@{spawn\_pad}}
 \index{spawn\_pad@{spawn\_pad}!Spawner@{Spawner}}
 \doxysubsubsection{\texorpdfstring{spawn\_pad()}{spawn\_pad()}}
 {\footnotesize\ttfamily void spawn\+\_\+pad (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}}}]{pad\+\_\+for\+\_\+block\+\_\+type,  }\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{angle }\end{DoxyParamCaption})}
 
+
+
+Spawns a target pad in the Gazebo simulation, if one with the same name does not already exist, with a SDF file embedded in C++ code pointing to the actual {\ttfamily mesh.\+stl}. 
+
+Pads are the targets where blocks will be places, and are just a model with some text indications, placed lying on the workspace table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pad\+\_\+for\+\_\+block\+\_\+type} & the block corresponding to the target pad. The actual pad position will be obtained from \doxylink{namespaceplanner_a7719df040f84e7ce8d8e28a481bcd8fe}{planner\+::get\+\_\+pad\+\_\+position()} \\
+\hline
+{\em x} & x \\
+\hline
+{\em y} & y \\
+\hline
+{\em angle} & angle wrt z axis \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

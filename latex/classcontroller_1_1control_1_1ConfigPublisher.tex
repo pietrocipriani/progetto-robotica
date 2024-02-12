@@ -2,20 +2,28 @@
 \hypertarget{classcontroller_1_1control_1_1ConfigPublisher}{}\label{classcontroller_1_1control_1_1ConfigPublisher}\index{ConfigPublisher@{ConfigPublisher}}
 
 
+Publishes messages of type {\ttfamily std\+\_\+msgs\+::\+Float64\+Multi\+Array} to the "{}/ur5/joint\+\_\+group\+\_\+pos\+\_\+controller/command"{} topic, to make the robot perform movements.  
+
+
+
+
 {\ttfamily \#include $<$config\+\_\+publisher.\+hpp$>$}
 
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4}{Config\+Publisher}} (ros\+::\+Publisher \&\&publisher, size\+\_\+t gripper\+\_\+joint\+\_\+count)
-\item 
+\begin{DoxyCompactList}\small\item\em Construct a new Config Publisher object. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1}{publish\+\_\+config}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&config, double gripper\+\_\+pos)
-\item 
+\begin{DoxyCompactList}\small\item\em Puslishes a config directly to the robot, to make it perform a movement. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b}{publish\+\_\+config\+\_\+sequence}} (\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{planner\+::\+Movement\+Sequence\+::\+Config\+Generator}} \&configs, double gripper\+\_\+pos, double frequency\+\_\+hz)
-\item 
-void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852}{publish\+\_\+gripper\+\_\+sequence}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&last\+Config, double gripper\+\_\+pos\+\_\+beg, double gripper\+\_\+pos\+\_\+end, double gripper\+\_\+speed, double frequency\+\_\+hz)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Publishes the provided config sequence one step at a time, and returns the last provided config, which will be the new robot configuration after the movement. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_a50e05a9691ea080ba4260fd82d3e9773}{publish\+\_\+gripper\+\_\+sequence}} (const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&last\+\_\+config, double gripper\+\_\+pos\+\_\+beg, double gripper\+\_\+pos\+\_\+end, double gripper\+\_\+speed, double frequency\+\_\+hz)
+\begin{DoxyCompactList}\small\item\em Opens or closes the gripper gradually, by keeping the robot joints fixed and only moving the gripper joints. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\doxysubsection{Detailed Description}
+Publishes messages of type {\ttfamily std\+\_\+msgs\+::\+Float64\+Multi\+Array} to the "{}/ur5/joint\+\_\+group\+\_\+pos\+\_\+controller/command"{} topic, to make the robot perform movements. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4}\label{classcontroller_1_1control_1_1ConfigPublisher_abc46423ac59eec3bb541dfa7146ba4a4} 
@@ -26,6 +34,17 @@ void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9
 
 
 
+Construct a new Config Publisher object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em publisher} & the ROS publisher to send data to \\
+\hline
+{\em gripper\+\_\+joint\+\_\+count} & the number of gripper joints, whose position is to be put at the end of the published arrays with duplicated this amount of times \\
+\hline
+\end{DoxyParams}
+
+
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1}\label{classcontroller_1_1control_1_1ConfigPublisher_a4e65820a0885c7b0dd6615180664e8b1} 
 \index{ConfigPublisher@{ConfigPublisher}!publish\_config@{publish\_config}}
@@ -33,21 +52,66 @@ void \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9
 \doxysubsubsection{\texorpdfstring{publish\_config()}{publish\_config()}}
 {\footnotesize\ttfamily void publish\+\_\+config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{config,  }\item[{double}]{gripper\+\_\+pos }\end{DoxyParamCaption})}
 
+
+
+Puslishes a config directly to the robot, to make it perform a movement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & the robot joint config to publish \\
+\hline
+{\em gripper\+\_\+pos} & the position of the gripper joints \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b}\label{classcontroller_1_1control_1_1ConfigPublisher_ab939bc39046632c27906ce14914e051b} 
 \index{ConfigPublisher@{ConfigPublisher}!publish\_config\_sequence@{publish\_config\_sequence}}
 \index{publish\_config\_sequence@{publish\_config\_sequence}!ConfigPublisher@{ConfigPublisher}}
 \doxysubsubsection{\texorpdfstring{publish\_config\_sequence()}{publish\_config\_sequence()}}
 {\footnotesize\ttfamily \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} publish\+\_\+config\+\_\+sequence (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structplanner_1_1MovementSequence_1_1ConfigGenerator}{planner\+::\+Movement\+Sequence\+::\+Config\+Generator}} \&}]{configs,  }\item[{double}]{gripper\+\_\+pos,  }\item[{double}]{frequency\+\_\+hz }\end{DoxyParamCaption})}
 
+
+
+Publishes the provided config sequence one step at a time, and returns the last provided config, which will be the new robot configuration after the movement. 
+
+The gripper joints position will remain fixed throughout the movement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em configs} & the lazy config generator providing a sequence of configs \\
+\hline
+{\em gripper\+\_\+pos} & the gripper joints position, that will remain fixed throughout the motion \\
+\hline
+{\em frequency\+\_\+hz} & every how often to publish a config \\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-the last configuration obtained from the config sequence 
+\doxylink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration} the last configuration obtained from the config sequence 
 \end{DoxyReturn}
-\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852}\label{classcontroller_1_1control_1_1ConfigPublisher_ab83e40f75a9b3658ea48c2b73bb40852} 
+\Hypertarget{classcontroller_1_1control_1_1ConfigPublisher_a50e05a9691ea080ba4260fd82d3e9773}\label{classcontroller_1_1control_1_1ConfigPublisher_a50e05a9691ea080ba4260fd82d3e9773} 
 \index{ConfigPublisher@{ConfigPublisher}!publish\_gripper\_sequence@{publish\_gripper\_sequence}}
 \index{publish\_gripper\_sequence@{publish\_gripper\_sequence}!ConfigPublisher@{ConfigPublisher}}
 \doxysubsubsection{\texorpdfstring{publish\_gripper\_sequence()}{publish\_gripper\_sequence()}}
-{\footnotesize\ttfamily void publish\+\_\+gripper\+\_\+sequence (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{last\+Config,  }\item[{double}]{gripper\+\_\+pos\+\_\+beg,  }\item[{double}]{gripper\+\_\+pos\+\_\+end,  }\item[{double}]{gripper\+\_\+speed,  }\item[{double}]{frequency\+\_\+hz }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void publish\+\_\+gripper\+\_\+sequence (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{last\+\_\+config,  }\item[{double}]{gripper\+\_\+pos\+\_\+beg,  }\item[{double}]{gripper\+\_\+pos\+\_\+end,  }\item[{double}]{gripper\+\_\+speed,  }\item[{double}]{frequency\+\_\+hz }\end{DoxyParamCaption})}
 
+
+
+Opens or closes the gripper gradually, by keeping the robot joints fixed and only moving the gripper joints. 
+
+The movement is linear, one step at a time, and takes some time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+\_\+config} & the robot joint config, that will remain fixed throughout the open/closing motion \\
+\hline
+{\em gripper\+\_\+pos\+\_\+beg} & the current gripper joints position \\
+\hline
+{\em gripper\+\_\+pos\+\_\+end} & the target gripper joints position \\
+\hline
+{\em gripper\+\_\+speed} & the speed of the gripper, in \mbox{[}pos\mbox{]}/s (probably rad/s) \\
+\hline
+{\em frequency\+\_\+hz} & every how often to publish a config \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

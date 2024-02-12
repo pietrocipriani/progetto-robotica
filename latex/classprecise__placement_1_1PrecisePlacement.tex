@@ -11,13 +11,13 @@ Precise\+Placement class, it manages all it\textquotesingle{}s needed to compute
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_addad9f958aae92887408ea8ff70f7470}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, image\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a402f00eb157498d5e69921db39f39d66}{callback\+\_\+cloud}} (self, Point\+Cloud2 data)
-\item 
+\begin{DoxyCompactList}\small\item\em called every time a Point Cloud callback is received, it parses it and compute \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da}{image\+\_\+callback}} (self, Image data)
 \begin{DoxyCompactList}\small\item\em called every time an image callback is received, it parses it and compute \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a9395bb61b6179ef183edd3cf454f74f4}{point\+\_\+cloud\+\_\+processer}} (self)
 \item 
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae44317d94b3415f512982e3eaf974e05}{process\+\_\+latest\+\_\+point\+\_\+cloud}} (self)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Method used to compute the latest Point Cloud from a ros message to a cropped point cloud in the work space. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -72,6 +72,15 @@ Precise\+Placement class, it manages all it\textquotesingle{}s needed to compute
 \doxysubsubsection{\texorpdfstring{callback\_cloud()}{callback\_cloud()}}
 {\footnotesize\ttfamily callback\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Point\+Cloud2}]{data }\end{DoxyParamCaption})}
 
+
+
+called every time a Point Cloud callback is received, it parses it and compute 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the incoming Point Cloud \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da}\label{classprecise__placement_1_1PrecisePlacement_aa9100289158df6712801f677996827da} 
 \index{PrecisePlacement@{PrecisePlacement}!image\_callback@{image\_callback}}
 \index{image\_callback@{image\_callback}!PrecisePlacement@{PrecisePlacement}}
@@ -98,6 +107,10 @@ called every time an image callback is received, it parses it and compute
 \index{process\_latest\_point\_cloud@{process\_latest\_point\_cloud}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{process\_latest\_point\_cloud()}{process\_latest\_point\_cloud()}}
 {\footnotesize\ttfamily process\+\_\+latest\+\_\+point\+\_\+cloud (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Method used to compute the latest Point Cloud from a ros message to a cropped point cloud in the work space. 
 
 
 
@@ -150,17 +163,7 @@ called every time an image callback is received, it parses it and compute
 \doxysubsubsection{\texorpdfstring{point\_cloud}{point\_cloud}}
 {\footnotesize\ttfamily point\+\_\+cloud}
 
-<<<<<<< HEAD
 \Hypertarget{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}\label{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f} 
-||||||| d37a779
-
-
-print(self.\+point\+\_\+cloud.\+get\+\_\+axis\+\_\+aligned\+\_\+bounding\+\_\+box()) is\+\_\+none = self.\+point\+\_\+cloud is None 
-
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}\label{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}} 
-=======
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}\label{classprecise__placement_1_1PrecisePlacement_aa4474258363d2d40129f9b7699c5ac7f}} 
->>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 \index{PrecisePlacement@{PrecisePlacement}!pub@{pub}}
 \index{pub@{pub}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{pub}{pub}}
@@ -172,17 +175,7 @@ print(self.\+point\+\_\+cloud.\+get\+\_\+axis\+\_\+aligned\+\_\+bounding\+\_\+bo
 \doxysubsubsection{\texorpdfstring{raw\_point\_cloud}{raw\_point\_cloud}}
 {\footnotesize\ttfamily raw\+\_\+point\+\_\+cloud}
 
-<<<<<<< HEAD
 \Hypertarget{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}\label{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f} 
-||||||| d37a779
-
-
-print(\char`\"{}point\+\_\+cloud\char`\"{}) 
-
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}\label{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}} 
-=======
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}\label{classprecise__placement_1_1PrecisePlacement_ab44f0806be15057af8ed8356ac97693f}} 
->>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 \index{PrecisePlacement@{PrecisePlacement}!thread\_point\_cloud\_processer@{thread\_point\_cloud\_processer}}
 \index{thread\_point\_cloud\_processer@{thread\_point\_cloud\_processer}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{thread\_point\_cloud\_processer}{thread\_point\_cloud\_processer}}

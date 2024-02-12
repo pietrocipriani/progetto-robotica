@@ -9,5 +9,5 @@ var searchData=
   ['process_5flatest_5fpoint_5fcloud_6',['process_latest_point_cloud',['../classprecise__placement_1_1PrecisePlacement.html#ae44317d94b3415f512982e3eaf974e05',1,'precise_placement::PrecisePlacement']]],
   ['publish_5fconfig_7',['publish_config',['../classcontroller_1_1control_1_1ConfigPublisher.html#a4e65820a0885c7b0dd6615180664e8b1',1,'controller::control::ConfigPublisher']]],
   ['publish_5fconfig_5fsequence_8',['publish_config_sequence',['../classcontroller_1_1control_1_1ConfigPublisher.html#ab939bc39046632c27906ce14914e051b',1,'controller::control::ConfigPublisher']]],
-  ['publish_5fgripper_5fsequence_9',['publish_gripper_sequence',['../classcontroller_1_1control_1_1ConfigPublisher.html#ab83e40f75a9b3658ea48c2b73bb40852',1,'controller::control::ConfigPublisher']]]
+  ['publish_5fgripper_5fsequence_9',['publish_gripper_sequence',['../classcontroller_1_1control_1_1ConfigPublisher.html#a50e05a9691ea080ba4260fd82d3e9773',1,'controller::control::ConfigPublisher']]]
 ];

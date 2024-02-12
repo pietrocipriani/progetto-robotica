@@ -1,6 +1,5 @@
 var searchData=
 [
-<<<<<<< HEAD
   ['callback_0',['callback',['../classinspect__detected__blocks_1_1BlockInspector.html#afd6593e992d5afbed7936c4ff0b12ed8',1,'inspect_detected_blocks.BlockInspector.callback()'],['../classblock__detector__server_1_1BlockDetector.html#a28c1182234e0766fd0112f684fbdfb8b',1,'block_detector_server.BlockDetector.callback()']]],
   ['callback_5fcloud_1',['callback_cloud',['../classprecise__placement_1_1PrecisePlacement.html#a402f00eb157498d5e69921db39f39d66',1,'precise_placement::PrecisePlacement']]],
   ['clear_2',['clear',['../classprecise__placement_1_1Visualizer.html#a8354e616a668be156c0d212186e64c43',1,'precise_placement::Visualizer']]],
@@ -23,11 +22,4 @@ var searchData=
   ['convert_3c_20euler_2c_20lie_2c_203_20_3e_19',['convert&lt; Euler, Lie, 3 &gt;',['../namespacecoord.html#a5957272d0f63195400458956038769a1',1,'coord']]],
   ['convert_3c_20lie_2c_20euler_2c_203_20_3e_20',['convert&lt; Lie, Euler, 3 &gt;',['../namespacecoord.html#a48d424bed51109389f4cfcf373c97116',1,'coord']]],
   ['convertcloudfromrostoopen3d_21',['convertCloudFromRosToOpen3d',['../namespaceprecise__placement.html#a57fe7bec8911fd0c427273e3b4504921',1,'precise_placement']]]
-||||||| d37a779
-  ['generate_5fintersection_5fmesh_43',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
-  ['generate_5fpoints_44',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
-=======
-  ['generate_5fintersection_5fmesh_42',['generate_intersection_mesh',['../namespaceprecise__placement.html#a78cb5aecc6c3ba87413c4d8e3feeb1b2',1,'precise_placement']]],
-  ['generate_5fpoints_43',['generate_points',['../namespaceprecise__placement.html#abc10cc9fb803f1dbb279af2b65a9835f',1,'precise_placement']]]
->>>>>>> df78f607dd21b08b1bf9ba843400bdee62b167e2
 ];
