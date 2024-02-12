@@ -1,6 +1,6 @@
 # Robotics project
 
-Done by Pietro Cipriani, Alessio Zeni, Fabio Giovanazzi.
+Done by Pietro Cipriani, Alessio Zeni, Fabio Giovanazzi for the fall semester of 2023 as an assignment for the Fundamentals of Robotics course.
 
 ### Documentation
 
@@ -40,7 +40,7 @@ catkin_make
 
 Add `source $HOME/progetto-robotica/devel/setup.bash` to `.bashrc` and reopen any terminal to update the sourcing configuration.
 
-Edit the file `~/ros_ws/src/locosim/robot_descriptions/gripper_description/gripper_description/urdf/soft_finger.xacro` on line 25 and increase the upper limit of the gripper to 0.9:
+Edit the file `~/ros_ws/src/locosim/robot_descriptions/gripper_description/gripper_description/urdf/soft_finger.xacro` on line 25 and increase the upper limit of the gripper to 0.9 (otherwise big blocks can't be picked up):
 ```diff
 - <limit effort="50" velocity="10.0" lower="-0.5" upper="0.3" />
 + <limit effort="50" velocity="10.0" lower="-0.5" upper="0.9" />
