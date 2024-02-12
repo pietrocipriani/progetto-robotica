@@ -6,7 +6,7 @@
 #include <gazebo_msgs/SpawnModel.h>
 #include <geometry_msgs/Pose.h>
 
-#include "controller/util/string_format.hpp"
+#include "controller/util/string.hpp"
 using controller::util::string_format;
 #include "controller/world/names.hpp"
 

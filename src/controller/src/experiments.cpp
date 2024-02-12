@@ -2,7 +2,7 @@
 
 #include "controller/util/const.hpp"
 #include "controller/control/position_receiver.hpp"
-#include "controller/control/move_block.hpp"
+#include "controller/control/composite_movements.hpp"
 
 namespace controller::experiment {
 
@@ -14,25 +14,21 @@ void full(
 	model::UR5& robot,
 	double& prev_gripper_pos
 ) {
-	auto configs = planner::plan_movement(
-		robot,
-		kinematics::direct(
-			robot,
-			model::UR5::Configuration(util::ur5_default_homing_config_vec)
-		),
-		util::dt
-	);
-	config_publisher.publish_config_sequence(configs, prev_gripper_pos, util::frequency_hz);
-	ROS_INFO("Homing config reached");
-
 	world::clear_workspace(deleter);
 	world::setup_workspace(spawner, true);
 	ROS_INFO("Workspace ready");
 
+	// do not "look only once", but try looking again after at most max_count blocks,
+	// and gradually lower the confidence threshold
 	for (auto [min_confidence, max_count] : std::initializer_list<std::pair<double, size_t>>{
-			{0.8, 5}, {0.7, 4}, {0.6, 2}, {0.2, 3}, {0.0, 11}}) {
+			{0.8, 5}, {0.7, 4}, {0.6, 2}, {0.2, 2}, {0.2, 2}, {0.2, 2}, {0.0, 11}}) {
+		
+		// move the robot arm away from the camera, so block positions can be recognized better
+		control::go_in_homing_config(config_publisher, robot, prev_gripper_pos);
 		auto blocks = control::wait_for_new_block_positions(node_handle);
 		auto movements = control::filter_map_movements_to_pads(blocks, min_confidence, max_count);
+
+		// the movements we have here passed our confidence threshold, so we can execute them
 		for (auto&& movement : movements) {
 			control::move_block(config_publisher, robot, prev_gripper_pos, movement);
 		}

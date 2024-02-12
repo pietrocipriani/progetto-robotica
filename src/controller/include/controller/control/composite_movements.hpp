@@ -1,6 +1,6 @@
 #pragma once
-#ifndef _CONTROL_MOVE_BLOCK_HPP_
-#define _CONTROL_MOVE_BLOCK_HPP_
+#ifndef _CONTROL_COMPOSITE_MOVEMENTS_HPP_
+#define _CONTROL_COMPOSITE_MOVEMENTS_HPP_
 
 #include "config_publisher.hpp"
 #include "planner.hpp"
@@ -15,6 +15,12 @@ void move_block(
 	const planner::BlockMovement& movement
 );
 
+void go_in_homing_config(
+	control::ConfigPublisher& config_publisher,
+	model::UR5& robot,
+	double& prev_gripper_pos
+);
+
 } // namespace controller::control
 
-#endif // _CONTROL_MOVE_BLOCK_HPP_
+#endif // _CONTROL_COMPOSITE_MOVEMENTS_HPP_

@@ -1,6 +1,7 @@
-#include "controller/control/move_block.hpp"
+#include "controller/control/composite_movements.hpp"
 
 #include "controller/util/const.hpp"
+#include "controller/util/string.hpp"
 
 namespace controller::control {
 
@@ -11,8 +12,11 @@ void move_block(
 	const planner::BlockMovement& movement
 ) {
 	const planner::Block block = movement.start.block;
+	const char * block_name = planner::get_name(block);
+	ROS_INFO("Starting to pick up block %s, config = %s", block_name,
+		util::config_to_string(robot.config, prev_gripper_pos).c_str());
+
 	auto configs = planner::plan_movement(robot, movement, util::dt);
-	ROS_INFO("Movement planned");
 
 	const double open_gripper = planner::get_open_gripper_pos(block);
 	const double closed_gripper = planner::get_closed_gripper_pos(block);
@@ -31,7 +35,31 @@ void move_block(
 	config_publisher.publish_gripper_sequence(robot.config, closed_gripper, open_gripper, util::gripper_speed, util::frequency_hz);
 	prev_gripper_pos = open_gripper;
 
-	ROS_INFO("Finished");
+	ROS_INFO("Finished picking up block %s, config = %s", block_name,
+		util::config_to_string(robot.config,prev_gripper_pos).c_str());
+}
+
+void go_in_homing_config(
+	control::ConfigPublisher& config_publisher,
+	model::UR5& robot,
+	double& prev_gripper_pos
+) {
+	ROS_INFO("Starting to go to homing config, config = %s",
+		util::config_to_string(robot.config, prev_gripper_pos).c_str());
+
+	auto configs = planner::plan_movement(
+		robot,
+		kinematics::direct(
+			robot,
+			model::UR5::Configuration(util::ur5_default_homing_config_vec)
+		),
+		util::dt
+	);
+
+	config_publisher.publish_config_sequence(configs, prev_gripper_pos, util::frequency_hz);
+
+	ROS_INFO("Finished going to homing config, config = %s",
+		util::config_to_string(robot.config, prev_gripper_pos).c_str());
 }
 
 } // namespace controller::control
