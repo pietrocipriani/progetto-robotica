@@ -1,0 +1,25 @@
+\hypertarget{md_README_autotoc_md1}{}\doxysubsection{Folder structure}\label{md_README_autotoc_md1}
+
+\begin{DoxyItemize}
+\item {\ttfamily planner/} contains a catkin package for kinematic calculations
+\item {\ttfamily vision\+\_\+ros/} contains a catkin package that extracts blocks positions from the camera
+\item {\ttfamily vision\+\_\+training/} contains the code that was used to train the Yo\+LoS model that recognizes blocks
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md2}{}\doxysubsection{Catkin workspace}\label{md_README_autotoc_md2}
+The root folder of this repository is a \href{http://wiki.ros.org/catkin/Tutorials/create_a_workspace}{\texttt{ catkin workspace}} created using {\ttfamily catkin\+\_\+make}. In order for the workspace to be active, you need to run {\ttfamily catkin\+\_\+make} in the root of this repository, and then {\ttfamily source devel/setup.\+bash}. The latter command can be put in {\ttfamily .bashrc} so that it\textquotesingle{}s executed before starting any terminal session.\hypertarget{md_README_autotoc_md3}{}\doxysection{Project n. 1}\label{md_README_autotoc_md3}
+A number of objects (e.\+g., mega-\/blocks) are stored without any specific order on a stand (initial stand) located within the workspace of a robotic manipulator. The manipulator is an anthropomorphic arm, with a spherical wrist and a two-\/fingered gripper as end-\/effector. The objects can belong to different classes but have a known geometry (coded in the STL files). The objective of the project is to use the manipulator to pick the objects in sequence and to position them on a different stand according to a specified order (final stand). A calibrated 3D sensor is used to locate the different objects and to detect their position in the initial stand. \hypertarget{md_README_autotoc_md4}{}\doxysubsection{Assignment}\label{md_README_autotoc_md4}
+There are multiple objects on the initial stand, one for each class. There is no specific order in the initial configuration, except that the base of the object is “naturally” in contact with the ground. Each object has to be picked up and stored in the position prescribed for its class and marked by the object’s silhouette. \hypertarget{md_README_autotoc_md5}{}\doxysubsection{Delivery rules}\label{md_README_autotoc_md5}
+The project is developed in groups. The typical group size consists of three-\/four members. We can also accept groups with a smaller number of members. The group is supposed to work in perfect cooperation and the workload is required to be fairly distributed. The specific contribution of each member will be exposed during the project discussion. The delivery phase is as follows\+:
+
+
+\begin{DoxyEnumerate}
+\item The project can be implemented both in simulation or on the real robot. In the second case it will have to be tested in the laboratory with the Teaching Assistant at most 5 least five days before the exam date. During the tests, small videos can be shot and used for the presentation.
+\item Each group will have to deliver the package containing the full code (with doxygen documentation and a readme for use) plus a 5-\/6 pages report describing
+\begin{DoxyItemize}
+\item the technique used for perception
+\item the technique used for robot motion
+\item the technique used for high-\/level planning
+\end{DoxyItemize}
+\item The delivery deadline is three days before the (oral) exam presentation
+\item On the day of the exam, the students will give a 10 minutes presentation highlighting the contribution of each member inside the oral session.
+\item If allowed by the time, the group could also be asked to perform a small demo session. Otherwise, we will rely on the clip shot before the exam. 
+\end{DoxyEnumerate}
