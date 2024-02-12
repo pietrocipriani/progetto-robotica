@@ -184,7 +184,7 @@ inline Scalar measure<Cylindrical, Cartesian, 3>(
   Scalar pseudo_norm_sq = std::pow(delta_rho, 2) + std::pow(delta_h, 2);
 
   if (std::abs(delta_theta) < dummy_precision) return delta.norm();
-  if (pseudo_norm_sq < dummy_precision) return delta_theta;
+  if (pseudo_norm_sq < dummy_precision) return std::abs(delta_theta);
 
   // NOTE: the correctness of the integral should be checked.
   return delta.norm() / 2 + std::asinh(delta_theta / std::sqrt(pseudo_norm_sq)) * pseudo_norm_sq / delta_theta;
