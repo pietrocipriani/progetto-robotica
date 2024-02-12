@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['precise_5fplacement_2epy_0',['precise_placement.py',['../precise__placement_8py.html',1,'']]]
+  ['model_5fhandler_2epy_0',['model_handler.py',['../model__handler_8py.html',1,'']]]
 ];

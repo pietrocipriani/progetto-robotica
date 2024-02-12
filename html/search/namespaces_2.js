@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['precise_5fplacement_0',['precise_placement',['../namespaceprecise__placement.html',1,'']]]
+  ['model_5fhandler_0',['model_handler',['../namespacemodel__handler.html',1,'']]]
 ];
