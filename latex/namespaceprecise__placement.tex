@@ -17,7 +17,9 @@ def \mbox{\hyperlink{namespaceprecise__placement_a78cb5aecc6c3ba87413c4d8e3feeb1
 def \mbox{\hyperlink{namespaceprecise__placement_abc10cc9fb803f1dbb279af2b65a9835f}{generate\+\_\+points}} (x, y, y\+\_\+min)
 \begin{DoxyCompactList}\small\item\em Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a \char`\"{}ray\char`\"{} from x, y of the camera (camera\+\_\+space) \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{namespaceprecise__placement_abd2f92caab6d65d366a1c0bc24dddc41}{main}} ()
-\end{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}{remove\+\_\+xy\+\_\+rotation}} (transform)
+\begin{DoxyCompactList}\small\item\em helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -68,6 +70,24 @@ Given x, y coordinates (in respect to optical center), it compute the intersecti
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily def precise\+\_\+placement.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
+\mbox{\Hypertarget{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}\label{namespaceprecise__placement_a3f458fd3c2b61eb3c47dffd1094a49cb}} 
+\index{precise\_placement@{precise\_placement}!remove\_xy\_rotation@{remove\_xy\_rotation}}
+\index{remove\_xy\_rotation@{remove\_xy\_rotation}!precise\_placement@{precise\_placement}}
+\doxysubsubsection{\texorpdfstring{remove\_xy\_rotation()}{remove\_xy\_rotation()}}
+{\footnotesize\ttfamily def precise\+\_\+placement.\+remove\+\_\+xy\+\_\+rotation (\begin{DoxyParamCaption}\item[{}]{transform }\end{DoxyParamCaption})}
+
+
+
+helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & input matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ruotated matrix 
+\end{DoxyReturn}
 
 
 \doxysubsection{Variable Documentation}

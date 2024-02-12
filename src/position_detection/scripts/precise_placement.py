@@ -78,17 +78,6 @@ def convertCloudFromRosToOpen3d(ros_cloud: PointCloud2):
     # return
     return open3d_cloud
 
-
-
-#Transform from camera to world_space
-camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
-                            [ -1,  0,  0,  0.59],
-                            [ 0, -0.866, -0.5, 1.4],
-                            [0, 0, 0, 1]])
-#Inverse of camera transform
-inv_camera_transform = np.linalg.inv(camera_transform)
-
-
 def generate_points(x, y, y_min):
     """! Given x, y coordinates (in respect to optical center), it compute the intersection with the table, and then generate a "ray" from x, y of the camera (camera_space)
     """
@@ -113,6 +102,23 @@ def generate_intersection_mesh(x_min, x_max, y_min, y_max):
     pcd.points = open3d.utility.Vector3dVector(points)
     mesh = pcd.get_oriented_bounding_box()
     return mesh
+
+def remove_xy_rotation(transform):
+    """! helper function that takes in input a valid homogeneus transform, and removes all rotation around the axis xy
+    @param transform input matrix
+    @result ruotated matrix
+    """
+    def zeroed(vec):
+        vec[2]=0
+        mod=1/(vec[1]*vec[1]+vec[0]*vec[0])
+        return vec*mod
+
+    transform[3][3]=1
+    transform[1, 0:3] = zeroed(transform[1, 0:3])
+    transform[0, 0:3] = zeroed(transform[0, 0:3])
+    transform[0:3, 1] = zeroed(transform[0:3, 1])
+    transform[0:3, 0] = zeroed(transform[0:3, 0])
+    return transform
 
 class Visualizer:
     """! Helper struct in charge of the point cloud visualization """
@@ -152,7 +158,6 @@ class Visualizer:
         """! Removes all Gemoetries from the visualization"""
         self.vis.clear_geometries()
 
-
 class PrecisePlacement:
     """! PrecisePlacement class, it manages all it's needed to compute the IC registration
     """
@@ -163,9 +168,12 @@ class PrecisePlacement:
             else:
                 self.process_latest_point_cloud()
 
-    def __init__(self, point_cloud_srv_name, use_visualizer=True):
+    def __init__(self, point_cloud_srv_name, image_srv_name,  use_visualizer=True):
         """ Contructor
-        @param"""
+        @param point_cloud_srv_name the name of the zed camera point cloud
+        @param use_visualizer should we use a visualizer?
+        """
+
         self.msg_seq=0
         self.point_cloud = None
         self.use_visualizer = use_visualizer
@@ -183,7 +191,8 @@ class PrecisePlacement:
         self.bridge = CvBridge()
         
         rospy.Subscriber(point_cloud_srv_name, PointCloud2, self.callback_cloud)
-        rospy.Subscriber("/ur5/zed_node/left/image_rect_color", Image, self.image_callback)
+        rospy.Subscriber(image_srv_name, Image, self.image_callback)
+        # register to detect_block service
         self.detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
         self.pub = rospy.Publisher("block_positions", BlockPositions, queue_size=1)
 
@@ -211,8 +220,10 @@ class PrecisePlacement:
             self.meshes[key].compute_vertex_normals()
         
         
-    #called every time an image callback is received
     def image_callback(self, data: Image):
+        """! called every time an image callback is received, it parses it and compute
+            @param data the incoming image
+        """
         # if we don't have a converted point cloud it's pointless to process it
         if self.point_cloud is None:
             return
@@ -236,34 +247,24 @@ class PrecisePlacement:
             #cropped.paint_uniform_color(np.random.rand(3))
             #if self.visualizer is not None:
             #    self.visualizer.add_geometry(cropped)
-            center = cropped.get_center()
+            
             transform = np.eye(4)
+            # set translation
+            center = cropped.get_center()
             transform[0:3, 3]=center
 
-
+            #load block mesh
             source= self.meshes[box.label].sample_points_uniformly(number_of_points=2000)
-            target=cropped
             threshold = 0.01
 
-            start = time.time()
-            target.estimate_normals()
             result = open3d.pipelines.registration.registration_icp(
-                source, target, threshold, transform,
+                source, cropped, threshold, transform,
                 open3d.pipelines.registration.TransformationEstimationPointToPoint(),
                 open3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=100))
             transform = copy.deepcopy(result.transformation)
 
+            transform = remove_xy_rotation(transform)
             
-            def zeroed(vec):
-                vec[2]=0
-                mod=1/(vec[1]*vec[1]+vec[0]*vec[0])
-                return vec*mod
-
-            transform[3][3]=1
-            transform[1, 0:3] = zeroed(transform[1, 0:3])
-            transform[0, 0:3] = zeroed(transform[0, 0:3])
-            transform[0:3, 1] = zeroed(transform[0:3, 1])
-            transform[0:3, 0] = zeroed(transform[0:3, 0])
             source.transform(transform)
 
             if self.visualizer is not None:
@@ -311,15 +312,21 @@ class PrecisePlacement:
             self.visualizer.add_geometry(self.point_cloud)
 
 
-
+#Transform from camera to world_space
+camera_transform = np.array([[ 0, -0.5,  0.866,  -0.4],
+                            [ -1,  0,  0,  0.59],
+                            [ 0, -0.866, -0.5, 1.4],
+                            [0, 0, 0, 1]])
+#Inverse of camera transform
+inv_camera_transform = np.linalg.inv(camera_transform)
 
 def main():
     #init ros
     rospy.init_node("position_detection")
     rospy.loginfo("position_detection init")
-
+    image_srv="/ur5/zed_node/left/image_rect_color" 
     cloud_srv="/ur5/zed_node/point_cloud/cloud_registered"
-    precise =PrecisePlacement(cloud_srv)
+    precise =PrecisePlacement(cloud_srv, image_srv, use_visualizer=False)
     rospy.loginfo("Ready")
     
     #proc = PrecisePlacement()

@@ -81,11 +81,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ce76a0392e8e413bff686bcedd9fb57"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html#a8ce76a0392e8e413bff686bcedd9fb57">__init__</a> (self, point_cloud_srv_name, <a class="el" href="classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718">use_visualizer</a>=True)</td></tr>
-<tr class="separator:a8ce76a0392e8e413bff686bcedd9fb57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7fa8222f1a8fbb05a53b9cdfb732f49"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html#aa7fa8222f1a8fbb05a53b9cdfb732f49">__init__</a> (self, point_cloud_srv_name, image_srv_name, <a class="el" href="classprecise__placement_1_1PrecisePlacement.html#ae3eef118abb0c206cfe3cc678ed46718">use_visualizer</a>=True)</td></tr>
+<tr class="separator:aa7fa8222f1a8fbb05a53b9cdfb732f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a719a68a31034fff56abeb106ee166b97"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html#a719a68a31034fff56abeb106ee166b97">callback_cloud</a> (self, PointCloud2 data)</td></tr>
 <tr class="separator:a719a68a31034fff56abeb106ee166b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e069f51e4f899c99ee9d8cc23d8532f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html#a7e069f51e4f899c99ee9d8cc23d8532f">image_callback</a> (self, Image data)</td></tr>
+<tr class="memdesc:a7e069f51e4f899c99ee9d8cc23d8532f"><td class="mdescLeft">&#160;</td><td class="mdescRight">called every time an image callback is received, it parses it and compute  <a href="classprecise__placement_1_1PrecisePlacement.html#a7e069f51e4f899c99ee9d8cc23d8532f">More...</a><br /></td></tr>
 <tr class="separator:a7e069f51e4f899c99ee9d8cc23d8532f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c5ddc04b8b9b18402b756d4b2f94f0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecise__placement_1_1PrecisePlacement.html#a79c5ddc04b8b9b18402b756d4b2f94f0">point_cloud_processer</a> (self)</td></tr>
 <tr class="separator:a79c5ddc04b8b9b18402b756d4b2f94f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,8 +123,8 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classprecise__placement_1_1PrecisePlacement.html" title="PrecisePlacement class, it manages all it&#39;s needed to compute the IC registration.">PrecisePlacement</a> class, it manages all it's needed to compute the IC registration. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a8ce76a0392e8e413bff686bcedd9fb57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ce76a0392e8e413bff686bcedd9fb57">&#9670;&nbsp;</a></span>__init__()</h2>
+<a id="aa7fa8222f1a8fbb05a53b9cdfb732f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7fa8222f1a8fbb05a53b9cdfb732f49">&#9670;&nbsp;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,6 +145,12 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>image_srv_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
           <td class="paramname"><em>use_visualizer</em> = <code>True</code>&#160;</td>
         </tr>
         <tr>
@@ -154,7 +161,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <pre class="fragment"> Contructor
-@param</pre> 
+@param point_cloud_srv_name the name of the zed camera point cloud
+@param use_visualizer should we use a visualizer?
+</pre> 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -211,6 +220,14 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>called every time an image callback is received, it parses it and compute </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>the incoming image </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

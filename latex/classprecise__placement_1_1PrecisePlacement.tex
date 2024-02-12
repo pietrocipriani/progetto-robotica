@@ -8,12 +8,12 @@
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
+def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, point\+\_\+cloud\+\_\+srv\+\_\+name, image\+\_\+srv\+\_\+name, \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_ae3eef118abb0c206cfe3cc678ed46718}{use\+\_\+visualizer}}=True)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a719a68a31034fff56abeb106ee166b97}{callback\+\_\+cloud}} (self, Point\+Cloud2 data)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a7e069f51e4f899c99ee9d8cc23d8532f}{image\+\_\+callback}} (self, Image data)
-\item 
+\begin{DoxyCompactList}\small\item\em called every time an image callback is received, it parses it and compute \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}{point\+\_\+cloud\+\_\+processer}} (self)
 \item 
 def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1db1b1ccc33a8baade6e}{process\+\_\+latest\+\_\+point\+\_\+cloud}} (self)
@@ -49,14 +49,16 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1d
 \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement}{Precise\+Placement}} class, it manages all it\textquotesingle{}s needed to compute the IC registration. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}\label{classprecise__placement_1_1PrecisePlacement_a8ce76a0392e8e413bff686bcedd9fb57}} 
+\mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}\label{classprecise__placement_1_1PrecisePlacement_aa7fa8222f1a8fbb05a53b9cdfb732f49}} 
 \index{PrecisePlacement@{PrecisePlacement}!\_\_init\_\_@{\_\_init\_\_}}
 \index{\_\_init\_\_@{\_\_init\_\_}!PrecisePlacement@{PrecisePlacement}}
 \doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
-{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{point\+\_\+cloud\+\_\+srv\+\_\+name,  }\item[{}]{image\+\_\+srv\+\_\+name,  }\item[{}]{use\+\_\+visualizer = {\ttfamily True} }\end{DoxyParamCaption})}
 
 \begin{DoxyVerb} Contructor
-@param\end{DoxyVerb}
+@param point_cloud_srv_name the name of the zed camera point cloud
+@param use_visualizer should we use a visualizer?
+\end{DoxyVerb}
  
 
 \doxysubsection{Member Function Documentation}
@@ -72,6 +74,15 @@ def \mbox{\hyperlink{classprecise__placement_1_1PrecisePlacement_a82585557ea7a1d
 \doxysubsubsection{\texorpdfstring{image\_callback()}{image\_callback()}}
 {\footnotesize\ttfamily def image\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Image}]{data }\end{DoxyParamCaption})}
 
+
+
+called every time an image callback is received, it parses it and compute 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & the incoming image \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}\label{classprecise__placement_1_1PrecisePlacement_a79c5ddc04b8b9b18402b756d4b2f94f0}} 
 \index{PrecisePlacement@{PrecisePlacement}!point\_cloud\_processer@{point\_cloud\_processer}}
 \index{point\_cloud\_processer@{point\_cloud\_processer}!PrecisePlacement@{PrecisePlacement}}

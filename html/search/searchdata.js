@@ -4,7 +4,7 @@ var indexSectionsWithContent =
   1: "pv",
   2: "p",
   3: "p",
-  4: "_acgimpu",
+  4: "_acgimpru",
   5: "bcdfilmprtuv",
   6: "d"
 };
