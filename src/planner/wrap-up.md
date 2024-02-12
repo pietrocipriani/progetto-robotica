@@ -2,15 +2,15 @@
 ## Direct Kinematics
 Standard implementation for the direct kinematics with the usage of the Denavitt-Hartberg conventions.
 
-Cartesian and cylindrical coordinates are supported for the position.\\
+Cartesian and cylindrical coordinates are supported for the position.//
 Euler angles and quaternions are supported for the orientation.
 
 ## Inverse Kinematics
 The inverse kinematics has been inspired by the course material.
 
-The inverse kinematics produces "consistent" configurations:\\
+The inverse kinematics produces "consistent" configurations://
 The idea is to prefer variations of $\theta_1$ for trasversal movements (parallel to the table).
-Large movements of $\theta_2$ and $\theta_3$ have much more imprevedible effects in the operational space.\\
+Large movements of $\theta_2$ and $\theta_3$ have much more imprevedible effects in the operational space.//
 For these purposes, $\theta_1$ is the first choosen angle.
 
 No effort has been made in trying to reduce the joint movements (See planning for observations).
@@ -34,8 +34,8 @@ due to lack of interest (out of the scope of this project).
 A damped least-squares approach is available (requires recompilation).
 
 The damping coefficient is dynamic and big just enough to grant a minimum threshold for the determinant.
-For implementation details see the code.\\
-The determinant must be limited to avoid numeric approximation and also to "limit" the joint space movements.\\
+For implementation details see the code.//
+The determinant must be limited to avoid numeric approximation and also to "limit" the joint space movements.//
 However, for the latter, the determinant threshold is just an approximation: an SVD approach should be preferred.
 Also see the planning phase for joint space speed limitation.
 
@@ -51,7 +51,7 @@ This variant has been deactivated to avoid positioning errors.
 
 ### Feedback Variant
 To avoid approximations due to the time quantization of the simulation, the linear approximation of the jacobian
-and the integral drift of the configuration changes, a linear feedback is available.\\
+and the integral drift of the configuration changes, a linear feedback is available.//
 This variant adds to the desired movement, the movement necessary to move from the effective position to the desired one.
 
 
@@ -68,25 +68,25 @@ The planner is capable of interpolating:
 
 On the choice of cylindrical coordinates and quaternions:
 
-Due to the presence of low-obstacles (other blocks), the planning requires a lifting phase, a trasversal movement and a dropping phase.\\
-To avoid the shoulder singularity it is advisable to perform radial movements.\\
-With this aim, cylindrical coordinates are preferred to cartesian coordinates.\\
-They also consent to decouple $\theta_1$ from $\theta_2,\theta_3,\theta_4$ and the **wrist** joints.\\
+Due to the presence of low-obstacles (other blocks), the planning requires a lifting phase, a trasversal movement and a dropping phase.//
+To avoid the shoulder singularity it is advisable to perform radial movements.//
+With this aim, cylindrical coordinates are preferred to cartesian coordinates.//
+They also consent to decouple $\theta_1$ from $\theta_2,\theta_3,\theta_4$ and the **wrist** joints.//
 Cylindrical coordinates consent to avoid the control panel in the back exploting the wrap-around of $\theta$.
-> However with "bad" initial configurations, $\theta_1$ could reach the end of run.\\
+> However with "bad" initial configurations, $\theta_1$ could reach the end of run.//
 > It is also possible to exploit the numeric approximations to make the end effector warp the wrap-around.
 
 Nb: only the interpolation is performed in cylindrical coordinates, the inverse kinematics uses cartesian coordinates
 to avoid warps during the movement.
 
 Quaternions are preferred to Euler angles as they do not present wrap-arounds and produce much more intuitive interpolations.
-Euler Angles have also representational singularities, however this is not a problem with euler angles interpolation.\\
+Euler Angles have also representational singularities, however this is not a problem with euler angles interpolation.//
 A drawback of quaternions is that they are not easily analitically integrable (however are numerically integrable).
 
 
 Drawbacks of joint space planning:
 
-Interpolating in the joint space can lead to "unexpected" behaviours in the operational space.\\
+Interpolating in the joint space can lead to "unexpected" behaviours in the operational space.//
 In the worst of the cases the arm can bump into the table.
 
 ## Movement Order Planner
@@ -114,10 +114,10 @@ The planner decides the via points for the parabolic interpolation:
 To avoid the problems of the differential inverse kinematics, angular velocities have \[rad/sim\] as unit of measurement.
 
 ## Via-Points Planner
-The via-points planner receives a list of via-points, produces a set of timestamps and returns a parabolic interpolation.\\
+The via-points planner receives a list of via-points, produces a set of timestamps and returns a parabolic interpolation.//
 Quaternions are implemented with a "stop&play" approach in order to avoid integration issues.
-> This means that in the angular space each via-point is reached with null velocity. Velocity continuity is granted.\\
-> Quaternions product is non-abelian due to the presence of the cross product, integration is easier when the cross product is null.\\
+> This means that in the angular space each via-point is reached with null velocity. Velocity continuity is granted.//
+> Quaternions product is non-abelian due to the presence of the cross product, integration is easier when the cross product is null.//
 > The cross product is null with allineated axis of rotation or null rotations:
 > - Allineated axis during the "linear" phase.
 > - Null velocity during the "linear" phase joining.
