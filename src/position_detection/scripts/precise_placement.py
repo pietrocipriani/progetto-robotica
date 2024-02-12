@@ -281,11 +281,8 @@ class PrecisePlacement:
         to_send = BlockPositions(header=header, blocks=to_send)
         print("SENDING!", to_send)
         self.pub.publish(to_send)
-        #cv2.imshow("test", decoded_image)
-        #cv2.waitKey(1)
 
     def callback_cloud(self, data: PointCloud2):
-        ##print("point_cloud")
         self.raw_point_cloud=data
         self.last_point_cloud_time=data.header.stamp
 
@@ -300,11 +297,8 @@ class PrecisePlacement:
         mesh = open3d.geometry.TriangleMesh.create_from_oriented_bounding_box(bbox)
         mesh.compute_vertex_normals()
         open3d.io.write_triangle_mesh("bbox.stl", mesh)
-        ###print(self.point_cloud.get_axis_aligned_bounding_box())
-        #is_none = self.point_cloud is None
         point_cloud=converted.crop(bbox)
         self.point_cloud = point_cloud.transform(camera_transform)
-        ##print(self.point_cloud)
 
         # visualizzation
         if self.visualizer is not None:
