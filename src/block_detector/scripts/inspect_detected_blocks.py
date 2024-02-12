@@ -9,6 +9,7 @@ import torchvision
 import torch
 import cv2
 import threading
+import sys
 
 WINDOW_TITLE = "Detected blocks"
 IMAGE_TOPIC = "/ur5/zed_node/left/image_rect_color"
@@ -23,12 +24,18 @@ def draw_bbox(image, bbox, txt_labels=None):
 
 
 class BlockInspector:
-    def __init__(self):
+    def __init__(self, skip_period: int):
         self.image_sub = rospy.Subscriber(IMAGE_TOPIC, Image, self.callback, queue_size=1)
         self.encoded_image = None
+        self.skip_period = skip_period
+        self.counter = skip_period - 1
 
     def callback(self, encoded_image: Image):
-        self.encoded_image = encoded_image
+        self.counter += 1
+        if self.counter == self.skip_period:
+            self.counter = 0
+            # skip 4 images out of 5 to save cpu
+            self.encoded_image = encoded_image
 
 
 def main():
@@ -36,7 +43,7 @@ def main():
     rospy.loginfo("inspect_detected_blocks init")
     detect_blocks_srv = rospy.ServiceProxy("detect_blocks", DetectBlocks)
     bridge = CvBridge()
-    proc = BlockInspector()
+    proc = BlockInspector(skip_period = 1 if len(sys.argv) < 2 else int(sys.argv[1]))
     annotated_image = None
     thread = None
 

@@ -47,7 +47,7 @@ void interpolation2(
   // Timestamp.
   Timestamps t(start, end);
   
-   // Velocity.
+  // Velocity.
   auto v = unlazy((end.point - start.point) / t.delta);
 
   auto q1 = quadratic_acceleration(start.point, v, t.start, start.times.accel_delta);
@@ -87,6 +87,7 @@ auto stop_and_play_interpolation(
 
   // The resulting function is a chain of interpolations.
   typename Sequence::Container chain;
+
 
   // points.size() - 1 segments.
   // For each segment 3 functions are needed (acc + lin + dec).

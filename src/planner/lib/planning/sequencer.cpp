@@ -86,12 +86,14 @@ typename Params<Point>::Times get_desired_speed(
   // Local optimization. No awareness of the global frame.
   get_maximum_speed(distance, limits, acc_1, acc_2);
 
-  Scalar delta_t_1 = (limits.prev + limits.current) / acc_1;
-  Scalar delta_t_2 = (limits.next + limits.current) / acc_2;
+  Scalar delta_t_1 = std::max(2.0, (limits.prev + limits.current) / acc_1);
+  Scalar delta_t_2 = std::max(2.0, (limits.next + limits.current) / acc_2);
 
   Time time = limits.current < dummy_precision
     ? delta_t_1 / 2 + delta_t_2 / 2
-    : distance / limits.current;
+    : std::max(delta_t_1 / 2 + delta_t_2 / 2, distance / limits.current);
+
+  limits.current = distance / time;
 
   assert(limits.current >= 0);
 

@@ -82,10 +82,12 @@ std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
 bool test_planner() {
   model::UR5 robot(model::UR5::Configuration(model::UR5::Configuration::Base{ur5_default_homing_config_init}));
 
-  const BlockMovement movement(
-    BlockPose(Block::B_1x1_H, 0.8, 0.2, 0),
-    BlockPose(Block::B_1x1_H, 0.4, 0.2, 0)
-  );
+  const BlockMovement movements[]{
+    {BlockPose(Block::B_2x1_H, 0.8, 0.2, 0)},
+    {BlockPose(Block::B_3x1_H, 0.68, 0.45, 0.0077)},
+    {BlockPose(Block::B_1x1_H, 0.84, 0.68, 0.60)},
+    {BlockPose(Block::B_2x2_U, 0.58, 0.73, 0.35)}
+  };
 
   constexpr Time dt = 0.001;
 
@@ -104,13 +106,15 @@ bool test_planner() {
     file = std::ofstream(temp);
   }
 
-  auto configs = planner::plan_movement(robot, movement, dt);
+  for (auto&& movement : movements) {
+    auto configs = planner::plan_movement(robot, movement, dt);
 
-  for (auto&& config : configs.lazy_picking) {
-    file << kinematics::direct(robot, config) << '\n';
-  }
-  for (auto&& config : configs.lazy_dropping) {
-    file << kinematics::direct(robot, config) << '\n';
+    for (auto&& config : configs.lazy_picking) {
+      file << kinematics::direct(robot, config) << '\n';
+    }
+    for (auto&& config : configs.lazy_dropping) {
+      file << kinematics::direct(robot, config) << '\n';
+    }
   }
 
   return true;

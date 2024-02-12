@@ -34,9 +34,11 @@ os::Position BlockPose::to_os_position() const {
 
 BlockMovement::BlockMovement(const BlockPose& start, const BlockPose& target) noexcept
   : start(start), target(target) {}
+BlockMovement::BlockMovement(const BlockPose& start) noexcept
+  : start(start), target(BlockPose::pad_pose(start.block)) {}
 
-BlockMovement::BlockMovement(BlockPose&& start, BlockPose&& target) noexcept
-  : start(std::move(start)), target(std::move(target)) {}
+BlockMovement::BlockMovement(BlockPose&& start) noexcept
+  : start(std::move(start)), target(BlockPose::pad_pose(this->start.block)) {}
 
 
 
