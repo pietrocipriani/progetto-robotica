@@ -80,6 +80,10 @@ struct UR5 {
   /// @param homing_config The initial configuration.
   explicit UR5(Configuration&& homing_config) noexcept;
 
+  /// Checks if the actual config of the robot is valid.
+  /// A config is valid when the joint limits are respected.
+  bool valid_config() const;
+
 };
 
 }

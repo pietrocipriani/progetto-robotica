@@ -258,8 +258,6 @@ via_point_sequencer(
 ) {
   using namespace uniformed_rotation_algebra;
 
-  // TODO: too many special cases.
-
   auto vp_it = viapoints.begin();
 
   auto get_next = [&, finished = false]() mutable -> const os::Position* {

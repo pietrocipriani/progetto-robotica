@@ -63,7 +63,7 @@ bool test_conflict_management() {
 #include "../lib/planning/internal.hpp"
 #include "planner.hpp"
 
-constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49};
+constexpr Scalar ur5_default_homing_config_init[] = {-0.32, -0.78, -2.56, -1.63, -1.57, 3.49 + M_PI};
 
 std::ostream& operator<<(std::ostream& out, const kinematics::Pose<>& pose) {
   Eigen::IOFormat format(Eigen::FullPrecision, Eigen::DontAlignCols, ", ");
