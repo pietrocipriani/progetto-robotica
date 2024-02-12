@@ -62,7 +62,9 @@ struct BlockMovement {
   BlockPose target;
 
   BlockMovement(const BlockPose& start, const BlockPose& target) noexcept;
+  BlockMovement(const BlockPose& start) noexcept;
   BlockMovement(BlockPose&& start, BlockPose&& target) noexcept;
+  BlockMovement(BlockPose&& start) noexcept;
 };
 
 /// Base exception class for @p generate_block_positioning_order.

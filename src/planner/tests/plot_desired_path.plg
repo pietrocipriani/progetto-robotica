@@ -4,5 +4,5 @@ set title 'end effector path'
 csv=system("echo \"$csv\"")
 
 #plot the graphic
-splot csv using 1:2:3:4:5:6 every 20 with vectors
+splot csv using 1:2:3:4:5:6 every 40 with vectors
 
