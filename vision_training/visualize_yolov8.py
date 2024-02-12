@@ -1,8 +1,20 @@
+"""!
+Simple script to run YOLOv8 detection on the image specified via command line (first argument),
+allowing to choose confidence threshold (second argument) and Intersection Over Union threshold
+(third argument, optional).
+Calls the ultralytics library with show=True to automatically show the detected boxes in a cv2
+window.
+"""
+
 from ultralytics import YOLO
 import sys
 import cv2
 
 def main():
+    """!
+    Usage: visualize_yolov8.py IMAGE_PATH CONFIDENCE_THRESHOLD [IOU_THRESHOLD]
+    """
+
     # model setup
     model = YOLO("runs/detect/multiclass_700/weights/best.pt")
 

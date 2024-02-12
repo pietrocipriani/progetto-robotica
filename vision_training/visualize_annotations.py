@@ -1,3 +1,8 @@
+"""!
+Helper to visualize annotations in the COCO Json format. Allows checking if labels and boxes are
+correct.
+"""
+
 import json
 import PIL
 import torch
@@ -29,6 +34,9 @@ class Image:
         self.boxes = []
 
 def load_data(path):
+    """!
+    @param path a `.coco.json` file to load data from
+    """
     with open(path) as f:
         data = json.load(f)
 
@@ -50,6 +58,11 @@ def load_data(path):
     return images
 
 def main(path):
+    """!
+    Loads data from the provided path and shows it multiple images at a time.
+
+    @param path a `.coco.json` file to load data from
+    """
     images = load_data(path)
 
     atonce = 1

@@ -1,3 +1,8 @@
+"""!
+This file is undocumented, as Yolos was not used for the project in the end, but YOLOv8 was used
+instead.
+"""
+
 import torch
 import torchvision
 import transformers

@@ -1,14 +1,19 @@
+"""!
+Collects images from the dataset in the `assigns/` folder and generates annotations in various
+formats to use for training object detection and recognition models.
+"""
+
 import json
 import glob
 import os
 import random
 import sys
 
-# the letter mapping is:
-# H: all top squares have a circle, the base is high
-# L: all top squares have a circle, the base is low
-# T: only half of the top squares have a circle, the other part a half-triangle
-# U: only half of the top squares have a circle, the other part is U-shaped
+## the letter mapping is:
+## - H: all top squares have a circle, the base is high
+## - L: all top squares have a circle, the base is low
+## - T: only half of the top squares have a circle, the other part a half-triangle
+## - U: only half of the top squares have a circle, the other part is U-shaped
 VERTICES_TO_CATEGORIES = {
     1971: (0,  "1x1_H"), # assign1/scene1/view=0
     2691: (1,  "2x1_T"), # assign1/scene2/view=0
@@ -23,13 +28,30 @@ VERTICES_TO_CATEGORIES = {
     4711: (10, "4x1_L"), # assign1/scene30/view=0
 }
 
+## whether to include categories for multiclass detection, or not include categories for
+## singleclass model detection
 MODES = ["with_categories", "without_categories"]
+
+## the format of annotations to generate
 FORMATS = ["coco", "ultralytics"]
+
+## The height of images in the dataset
 HEIGHT = 1024
+
+## The width of images in the dataset
 WIDTH = 1024
 
 
 def get_views(root):
+    """!
+    Collects image paths from the `assign/` folder.
+
+    @param root the root folder to search views in
+    @return a 3d list, where the first dimension identifies the `assigns/assign*/` folder,
+            the second dimension identifies the `scene*` folders in every `assigns/assign*/`
+            folder, and the third dimension contains the list of image paths (`view=*.jpeg`
+            but without the `.json`) in every `assign*/` folder
+    """
     assigns = []
     for i in range(1,4):
         assign = []
@@ -46,6 +68,9 @@ def get_views(root):
     return assigns
 
 def clamp(v, minv, maxv):
+    """!
+    Clamps v to be between minv and maxv.
+    """
     if v < minv:
         return minv
     if v > maxv:
@@ -53,6 +78,13 @@ def clamp(v, minv, maxv):
     return v
 
 def get_image_info(json_path, collapse_to_1_category):
+    """!
+    Reads image info from the provided json_path, calculates image category and collects all
+    bounding boxes maxing sure they are not out of the screen.
+
+    @param json_path the `view=*.json` path to read image info from
+    @param collapse_to_1_category whether to ignore the category and just return 0 as category id
+    """
     data = json.load(open(json_path))
     for obj in data.values():
         if collapse_to_1_category:
@@ -76,10 +108,13 @@ def get_image_info(json_path, collapse_to_1_category):
         yield (category_id, x1, y1, x2, y2)
 
 def flatten_2(arr):
+    """!
+    Flattens a 3d array so that it becomes 1d
+    """
     return [c for a in arr for b in a for c in b]
 
 def get_coco_json(root, paths, collapse_to_1_category):
-    """
+    """!
     Set `collapse_to_1_category` to True if you want a single
     category without distinction between blocks classes
     """
@@ -139,11 +174,18 @@ def get_coco_json(root, paths, collapse_to_1_category):
     }
 
 def save_coco_json(root, train, test, collapse_to_1_category):
+    """!
+    Saves the annotations in the COCO json format, used for training Yolos.
+    """
     for prefix, paths in [("train", train), ("test", test)]:
         res = get_coco_json(root, paths, collapse_to_1_category)
         json.dump(res, open(os.path.join(root, prefix + "_annotations.coco.json"), "w"), indent=4)
 
 def save_ultralytics(root, train, test, collapse_to_1_category):
+    """!
+    Saves the annotations in the ultralytics format, used for training YOLOv8
+    """
+
     with open(os.path.join(root, "ultralytics.yaml"), "w", encoding="utf-8") as f:
         f.write(f"path: {os.path.abspath(root)}\n")
         for prefix in ["train", "val"]:
@@ -185,14 +227,25 @@ def save_ultralytics(root, train, test, collapse_to_1_category):
         print()
 
 def split_train_test(paths, train_over_total_ratio, seed):
+    """!
+    Pseudorandomly splits the image paths in two sets according to the ratio.
+    """
     rng = random.Random(seed)
     paths = rng.sample(paths, len(paths))
     mid = int(train_over_total_ratio * len(paths))
     return paths[:mid], paths[mid:]
 
 def main():
+    """!
+    Usage: generate_annotations.py [with_categories|without_categories] [coco|ultralytics]
+
+    Collects images from the dataset in the `assigns/` folder and generates annotations in various
+    formats to use for training object detection and recognition models. See MODES and FORMATS for
+    more information.
+    """
+
     if len(sys.argv) != 3 or sys.argv[1] not in MODES or sys.argv[2] not in FORMATS:
-        print(f"Usage: {sys.argv[0]} [{'|'.join(MODES)}]")
+        print(f"Usage: {sys.argv[0]} [{'|'.join(MODES)}] [{'|'.join(FORMATS)}]")
         exit(1)
     collapse_to_1_category = sys.argv[1] == MODES[1]
     coco_json_format = sys.argv[2] == FORMATS[0]
