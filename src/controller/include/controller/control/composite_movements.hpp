@@ -8,6 +8,24 @@
 
 namespace controller::control {
 
+/**
+ * @brief Performs the steps needed to move a block according to the provided movement, and
+ * therefore handles:
+ * - going above the block
+ * - closing the gripper to get hold of the block
+ * - picking up the block
+ * - moving over to the target pad
+ * - droping the block by reopening the gripper
+ * 
+ * The movements are planned using the planner and sent to the simulation config publisher.
+ * 
+ * @param config_publisher where to publish robot joint configurations so that they are performed
+ *                         in the simulation
+ * @param robot the robot with the current joints config stored inside
+ * @param prev_gripper_pos the current gripper position
+ * @param movement the movement to perform (assumes the `start` and `target` poses both refer to
+ *                 the same block)
+ */
 void move_block(
 	control::ConfigPublisher& config_publisher,
 	model::UR5& robot,
@@ -15,6 +33,15 @@ void move_block(
 	const planner::BlockMovement& movement
 );
 
+/**
+ * @brief Moves the robot in homing config, which is a safe area where the robot does not interfere
+ * with the camera, allowing for better image capturing for block detection.
+ * 
+ * @param config_publisher where to publish robot joint configurations so that they are performed
+ *                         in the simulation
+ * @param robot the robot with the current joints config stored inside
+ * @param prev_gripper_pos the current gripper position
+ */
 void go_in_homing_config(
 	control::ConfigPublisher& config_publisher,
 	model::UR5& robot,

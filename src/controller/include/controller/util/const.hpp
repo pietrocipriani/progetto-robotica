@@ -6,6 +6,9 @@
 
 namespace controller::util {
 
+/**
+ * @brief The number of joints needed to open/close the gripper on the end effector.
+ */
 constexpr int gripper_joint_count = 2;
 
 // Default homing configuration for the UR5 manipulator. Exported by `params.py`.
