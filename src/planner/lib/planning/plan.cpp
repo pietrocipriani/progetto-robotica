@@ -46,7 +46,7 @@ std::function<std::tuple<typename Robot::Configuration, bool>()> to_js_trajector
 
     // Enforcing max joint speed with time dilation.
     const Scalar time_factor = std::min(1.0, Robot::max_joint_speed / jv.norm() * dt);
-    robot.config += jv * time_factor;
+    robot.config += jv * (time_factor);
 
     t += dt * time_factor;
 

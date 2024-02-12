@@ -70,7 +70,7 @@ TimeFunction<Point> quadratic_acceleration(
 
   return [=, acc = std::move(acc2)](const Time& time) {
     auto t = time - start_time;
-    return initial_position + acc * t * t;
+    return initial_position + final_velocity * (t * t / (2 * duration));
   };
 }
 
@@ -94,7 +94,7 @@ TimeFunction<Point> quadratic_deceleration(
 
   return [=, acc = std::move(acc2)](const Time& time) {
     auto t = final_time - time;
-    return final_position + acc * t * t;
+    return final_position + -initial_velocity * (t * t / (2 * duration));
   };
 }
 
