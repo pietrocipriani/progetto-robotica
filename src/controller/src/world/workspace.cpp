@@ -47,7 +47,7 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
         for (int i = 0; i < MAX_TRIES_TO_PLACE_BLOCK; ++i) {
             const double x = gen_x(rng), y = gen_y(rng), angle = gen_angle(rng);
             const planner::BlockPose pose(block, x, y, angle);
-            if (std::hypot(x - planner::gazebo_to_os_x, y - planner::gazebo_to_os_y) < 0.14) {
+            if (std::hypot(x - planner::gazebo_to_os_x, y - planner::gazebo_to_os_y) < 0.22) {
                 // avoid interal cylinder, where picking up blocks wouldn't be possible with
                 // the wrist perpendicular to the workspace plane, but would require picking
                 // up the blocks from the side
@@ -72,7 +72,9 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
         }
 
         if (!placed) {
-            ROS_ERROR("Could not find a spot to place block %d", static_cast<int>(block));
+            ROS_ERROR("Could not find a spot to place block %s, placing on its pad", planner::get_name(block));
+            auto [x, y, angle] = planner::get_pad_position(block);
+            spawner.spawn_block(block, x, y, angle, false, util::gen_bright_color(), false);
         }
     }
 }

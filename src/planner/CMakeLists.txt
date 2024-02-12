@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(planner)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++17)
+add_compile_options(-std=c++17 -DJOINT_SPACE_PLANNING)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)

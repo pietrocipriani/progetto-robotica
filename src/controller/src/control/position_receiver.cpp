@@ -62,7 +62,7 @@ std::vector<planner::BlockMovement> filter_map_movements_to_pads(
         planner::BlockPose start_pose(block, x, y, angle);
         planner::BlockPose end_pose = planner::BlockPose::pad_pose(block);
 
-        if (start_pose.collides(end_pose)) {
+        if (start_pose.collides(end_pose) || x > 0.88 || x < 0.07) {
             // the block is already where it should be, so no need to move it
             continue;
         }

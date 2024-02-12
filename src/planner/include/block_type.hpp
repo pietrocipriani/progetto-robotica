@@ -103,7 +103,7 @@ constexpr double get_closed_gripper_pos(const Block& block_type) {
 /// Circular in order to simplify the checking.
 ///
 constexpr double get_hit_box_radius(const Block& block_type) {
-    constexpr double UNIT_SIZE = 0.031; // all sides of the 1x1 block are this long
+    constexpr double UNIT_SIZE = 0.04;//0.031; // all sides of the 1x1 block are this long
     switch (block_type) {
         case Block::B_1x1_H:
             return UNIT_SIZE * rectangle_radius(1, 1);
