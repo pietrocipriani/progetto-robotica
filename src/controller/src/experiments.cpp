@@ -21,7 +21,7 @@ void full(
 	// do not "look only once", but try looking again after at most max_count blocks,
 	// and gradually lower the confidence threshold
 	for (auto [min_confidence, max_count] : std::initializer_list<std::pair<double, size_t>>{
-			{0.8, 5}, {0.7, 4}, {0.6, 2}, {0.2, 2}, {0.2, 2}, {0.2, 2}, {0.0, 11}}) {
+			{0.8, 5}, {0.7, 4}, {0.7, 2}, {0.6, 2}, {0.6, 2}, {0.2, 2}, {0.2, 2}, {0.2, 2}, {0.0, 11}}) {
 		
 		// move the robot arm away from the camera, so block positions can be recognized better
 		control::go_in_homing_config(config_publisher, robot, prev_gripper_pos);
