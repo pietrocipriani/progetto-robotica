@@ -2,6 +2,14 @@
 
 Done by Pietro Cipriani, Alessio Zeni, Fabio Giovanazzi for the fall semester of 2023 as an assignment for the Fundamentals of Robotics course.
 
+### Video
+
+[![](./image.png)](https://github.com/pietrocipriani/progetto-robotica/raw/videos/operational_space.mp4)
+
+Click on the image to download the video demo, or pick one from below here:
+- [operational_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/operational_space.mp4)
+- [joint_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/joint_space.mp4)
+
 ### Documentation
 
 You can find the project documentation for each part of the project here:
