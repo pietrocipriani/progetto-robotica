@@ -5,6 +5,31 @@
 
 namespace controller::control {
 
+void ensure_valid_initial_config(
+	control::ConfigPublisher& config_publisher,
+	model::UR5::Configuration& configuration,
+	double prev_gripper_pos
+) {
+	ROS_INFO("Starting to ensure valid initial config, config = %s",
+		util::config_to_string(configuration, prev_gripper_pos).c_str());
+
+	const Scalar initial = configuration[5];
+	const int steps = std::abs(initial) / util::theta6_speed * util::frequency_hz;
+
+	ros::Rate rate(util::frequency_hz);
+    for (int i = 0; i < steps; ++i) {
+		configuration[5] = initial * (steps - i) / steps;
+        config_publisher.publish_config(configuration, prev_gripper_pos);
+		rate.sleep();
+    }
+
+	configuration[5] = 0.0;
+    config_publisher.publish_config(configuration, prev_gripper_pos);
+
+	ROS_INFO("Finished ensuring valid initial config, config = %s",
+		util::config_to_string(configuration, prev_gripper_pos).c_str());
+}
+
 void move_block(
 	control::ConfigPublisher& config_publisher,
 	model::UR5& robot,

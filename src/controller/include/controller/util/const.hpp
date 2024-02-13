@@ -16,6 +16,7 @@ const Vector<6> ur5_default_homing_config_vec(ur5_default_homing_config);
 constexpr Time dt = 0.01;
 constexpr double frequency_hz = 1 / dt;
 constexpr double gripper_speed = 0.8;
+constexpr double theta6_speed = M_PI; // 0.25 turns/s, used only initially to reach a valid config
 
 } // namespace controller::util
 
