@@ -18,6 +18,7 @@
 #include "controller/control/config_publisher.hpp"
 #include "controller/control/config_reader.hpp"
 #include "controller/control/position_receiver.hpp"
+#include "controller/control/composite_movements.hpp"
 #include "controller/experiments.hpp"
 #include "controller/util/const.hpp"
 using namespace controller;
@@ -57,6 +58,7 @@ int main(int argc, char **argv) {
 
 	auto [initial_config, prev_gripper_pos] = control::joint_state_to_config(
 		ros::topic::waitForMessage<sensor_msgs::JointState>("/ur5/joint_states", n));
+	control::ensure_valid_initial_config(config_publisher, initial_config, prev_gripper_pos);
 	model::UR5 robot{initial_config};
 	ROS_INFO("Created robot with initial config");
 

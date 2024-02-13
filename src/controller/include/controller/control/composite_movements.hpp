@@ -9,6 +9,23 @@
 namespace controller::control {
 
 /**
+ * @brief Makes sure that the theta6 parameter is in range (-pi, pi), which is a requirement
+ * for planner we use. In particular, moves the sixth joint linearly to position 0.0, so that
+ * it's in the middle and the configuration will be surely valid.
+ * 
+ * @param config_publisher where to publish robot joint configurations so that they are performed
+ *                         in the simulation
+ * @param configuration the current joints config stored inside, before the robot has been initialized;
+ *                      will be changes to ensure valid initialization
+ * @param prev_gripper_pos the current gripper position, will not be changed
+ */
+void ensure_valid_initial_config(
+	control::ConfigPublisher& config_publisher,
+	model::UR5::Configuration& configuration,
+	double prev_gripper_pos
+);
+
+/**
  * @brief Performs the steps needed to move a block according to the provided movement, and
  * therefore handles:
  * - going above the block
