@@ -6,9 +6,7 @@ Done by Pietro Cipriani, Alessio Zeni, Fabio Giovanazzi for the fall semester of
 
 [![](./image.png)](https://github.com/pietrocipriani/progetto-robotica/raw/videos/operational_space.mp4)
 
-Click on the image to download the video demo, or pick one from below here:
-- [operational_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/operational_space.mp4)
-- [joint_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/joint_space.mp4)
+Click on the image to download the video demo, or pick one of [operational_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/operational_space.mp4) or [joint_space.mp4](https://github.com/pietrocipriani/progetto-robotica/raw/videos/joint_space.mp4). The videos contain the **terminals** with the various ROS programs being run on top left, the **block detection** on bottom left, the **block position recognition** with the point cloud at the center, and the **Gazebo simulation** on the right.
 
 ### Documentation
 
