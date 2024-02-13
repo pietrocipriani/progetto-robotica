@@ -1,3 +1,5 @@
+This part was done by Pietro Cipriani.
+
 # KINEMATICS
 ## Direct Kinematics
 Standard implementation for the direct kinematics with the usage of the Denavitt-Hartberg conventions.

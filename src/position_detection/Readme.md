@@ -1,3 +1,5 @@
+This part was done by Alessio Zeni.
+
 # Precise placement
 ### Why
 We need a precise placement in the system because the Computer vision Part could only get a rough 2D placement of the block in pixel coordinates.
