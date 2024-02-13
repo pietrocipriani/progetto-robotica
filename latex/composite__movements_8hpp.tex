@@ -10,7 +10,8 @@ Include dependency graph for composite\+\_\+movements.\+hpp\+:\nopagebreak
 \includegraphics[width=350pt]{composite__movements_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:\nopagebreak
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -32,6 +33,8 @@ namespace \mbox{\hyperlink{namespacecontroller_1_1control}{controller\+::control
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{namespacecontroller_1_1control_a9840c6a68653591839cd36b873b5c3c5}{ensure\+\_\+valid\+\_\+initial\+\_\+config}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&configuration, double prev\+\_\+gripper\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em Makes sure that the theta6 parameter is in range (-\/pi, pi), which is a requirement for planner we use. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555}{go\+\_\+in\+\_\+homing\+\_\+config}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
 \begin{DoxyCompactList}\small\item\em Moves the robot in homing config, which is a safe area where the robot does not interfere with the camera, allowing for better image capturing for block detection. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1control_afe847ffb9f73c6121344fa763c0e8123}{move\+\_\+block}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos, const \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} \&movement)

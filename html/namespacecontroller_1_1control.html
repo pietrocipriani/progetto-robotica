@@ -92,6 +92,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a239eb11a4d80a60d7793cc47fe32bee6" id="r_a239eb11a4d80a60d7793cc47fe32bee6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceplanner.html#ae91cb3afd79e6de887cf19fcca7a8c4a">planner::Block</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a239eb11a4d80a60d7793cc47fe32bee6">block_pos_to_type</a> (const position_detection::BlockPosition &amp;block_pos)</td></tr>
 <tr class="memdesc:a239eb11a4d80a60d7793cc47fe32bee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtains the block type stored in a <code>position_detection::BlockPosition</code> message.  <br /></td></tr>
 <tr class="separator:a239eb11a4d80a60d7793cc47fe32bee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9840c6a68653591839cd36b873b5c3c5" id="r_a9840c6a68653591839cd36b873b5c3c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a9840c6a68653591839cd36b873b5c3c5">ensure_valid_initial_config</a> (<a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html">control::ConfigPublisher</a> &amp;config_publisher, <a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;configuration, double prev_gripper_pos)</td></tr>
+<tr class="memdesc:a9840c6a68653591839cd36b873b5c3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes sure that the theta6 parameter is in range (-pi, pi), which is a requirement for planner we use.  <br /></td></tr>
+<tr class="separator:a9840c6a68653591839cd36b873b5c3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83770ea9314eb6e342a39b97c9d2b257" id="r_a83770ea9314eb6e342a39b97c9d2b257"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structplanner_1_1BlockMovement.html">planner::BlockMovement</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacecontroller_1_1control.html#a83770ea9314eb6e342a39b97c9d2b257">filter_map_movements_to_pads</a> (const std::vector&lt; position_detection::BlockPosition &gt; &amp;blocks, double min_confidence, size_t max_count)</td></tr>
 <tr class="memdesc:a83770ea9314eb6e342a39b97c9d2b257"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads.  <br /></td></tr>
 <tr class="separator:a83770ea9314eb6e342a39b97c9d2b257"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,6 +129,51 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Obtains the block type stored in a <code>position_detection::BlockPosition</code> message. </p>
+
+</div>
+</div>
+<a id="a9840c6a68653591839cd36b873b5c3c5" name="a9840c6a68653591839cd36b873b5c3c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9840c6a68653591839cd36b873b5c3c5">&#9670;&#160;</a></span>ensure_valid_initial_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ensure_valid_initial_config </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classcontroller_1_1control_1_1ConfigPublisher.html">control::ConfigPublisher</a> &amp;&#160;</td>
+          <td class="paramname"><em>config_publisher</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6">model::UR5::Configuration</a> &amp;&#160;</td>
+          <td class="paramname"><em>configuration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>prev_gripper_pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Makes sure that the theta6 parameter is in range (-pi, pi), which is a requirement for planner we use. </p>
+<p>In particular, moves the sixth joint linearly to position 0.0, so that it's in the middle and the configuration will be surely valid.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_publisher</td><td>where to publish robot joint configurations so that they are performed in the simulation </td></tr>
+    <tr><td class="paramname">configuration</td><td>the current joints config stored inside, before the robot has been initialized; will be changes to ensure valid initialization </td></tr>
+    <tr><td class="paramname">prev_gripper_pos</td><td>the current gripper position, will not be changed </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

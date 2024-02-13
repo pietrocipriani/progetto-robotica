@@ -10,6 +10,8 @@ class \mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{Config\+Pu
 \item 
 \mbox{\hyperlink{namespaceplanner_ae91cb3afd79e6de887cf19fcca7a8c4a}{planner\+::\+Block}} \mbox{\hyperlink{namespacecontroller_1_1control_a239eb11a4d80a60d7793cc47fe32bee6}{block\+\_\+pos\+\_\+to\+\_\+type}} (const position\+\_\+detection\+::\+Block\+Position \&block\+\_\+pos)
 \begin{DoxyCompactList}\small\item\em Obtains the block type stored in a {\ttfamily position\+\_\+detection\+::\+Block\+Position} message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacecontroller_1_1control_a9840c6a68653591839cd36b873b5c3c5}{ensure\+\_\+valid\+\_\+initial\+\_\+config}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&configuration, double prev\+\_\+gripper\+\_\+pos)
+\begin{DoxyCompactList}\small\item\em Makes sure that the theta6 parameter is in range (-\/pi, pi), which is a requirement for planner we use. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structplanner_1_1BlockMovement}{planner\+::\+Block\+Movement}} $>$ \mbox{\hyperlink{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}{filter\+\_\+map\+\_\+movements\+\_\+to\+\_\+pads}} (const std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \&blocks, double min\+\_\+confidence, size\+\_\+t max\+\_\+count)
 \begin{DoxyCompactList}\small\item\em Filters the provided block positions and maps them to block movements that can be planned by the robot to move blocks to their corresponding target pads. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacecontroller_1_1control_a8cd4c5307d0c40db49fa2ad1a52ed555}{go\+\_\+in\+\_\+homing\+\_\+config}} (\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&config\+\_\+publisher, \mbox{\hyperlink{structmodel_1_1UR5}{model\+::\+UR5}} \&robot, double \&prev\+\_\+gripper\+\_\+pos)
@@ -33,6 +35,27 @@ std\+::vector$<$ position\+\_\+detection\+::\+Block\+Position $>$ \mbox{\hyperli
 
 Obtains the block type stored in a {\ttfamily position\+\_\+detection\+::\+Block\+Position} message. 
 
+\Hypertarget{namespacecontroller_1_1control_a9840c6a68653591839cd36b873b5c3c5}\label{namespacecontroller_1_1control_a9840c6a68653591839cd36b873b5c3c5} 
+\index{controller::control@{controller::control}!ensure\_valid\_initial\_config@{ensure\_valid\_initial\_config}}
+\index{ensure\_valid\_initial\_config@{ensure\_valid\_initial\_config}!controller::control@{controller::control}}
+\doxysubsubsection{\texorpdfstring{ensure\_valid\_initial\_config()}{ensure\_valid\_initial\_config()}}
+{\footnotesize\ttfamily void ensure\+\_\+valid\+\_\+initial\+\_\+config (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcontroller_1_1control_1_1ConfigPublisher}{control\+::\+Config\+Publisher}} \&}]{config\+\_\+publisher,  }\item[{\mbox{\hyperlink{structmodel_1_1UR5_a1c5bc96710101e0c2c8259b7fa4a2ec6}{model\+::\+UR5\+::\+Configuration}} \&}]{configuration,  }\item[{double}]{prev\+\_\+gripper\+\_\+pos }\end{DoxyParamCaption})}
+
+
+
+Makes sure that the theta6 parameter is in range (-\/pi, pi), which is a requirement for planner we use. 
+
+In particular, moves the sixth joint linearly to position 0.\+0, so that it\textquotesingle{}s in the middle and the configuration will be surely valid.
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+\_\+publisher} & where to publish robot joint configurations so that they are performed in the simulation \\
+\hline
+{\em configuration} & the current joints config stored inside, before the robot has been initialized; will be changes to ensure valid initialization \\
+\hline
+{\em prev\+\_\+gripper\+\_\+pos} & the current gripper position, will not be changed \\
+\hline
+\end{DoxyParams}
 \Hypertarget{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257}\label{namespacecontroller_1_1control_a83770ea9314eb6e342a39b97c9d2b257} 
 \index{controller::control@{controller::control}!filter\_map\_movements\_to\_pads@{filter\_map\_movements\_to\_pads}}
 \index{filter\_map\_movements\_to\_pads@{filter\_map\_movements\_to\_pads}!controller::control@{controller::control}}

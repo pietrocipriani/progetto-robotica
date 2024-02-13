@@ -35,7 +35,7 @@ var searchData=
   ['configs_5fgiven_5ftheta_5f3_32',['configs_given_theta_3',['../namespacekinematics.html#a1733d09f966c8d6824f48e459e880e8f',1,'kinematics']]],
   ['configs_5fgiven_5ftheta_5f5_33',['configs_given_theta_5',['../namespacekinematics.html#aaf257a65b5cf6347efaa9e70997e469e',1,'kinematics']]],
   ['configuration_34',['Configuration',['../structmodel_1_1UR5.html#a1c5bc96710101e0c2c8259b7fa4a2ec6',1,'model::UR5']]],
-  ['configurations_35',['configurations',['../namespacekinematics.html#a415d8b736804f369524f60f2c197c3fa',1,'kinematics::configurations(const UR5 &amp;robot, const DefaultPose &amp;pose)'],['../namespacekinematics.html#addb07f2c4efaf289f595bf4a5aec84f3',1,'kinematics::Configurations']]],
+  ['configurations_35',['configurations',['../namespacekinematics.html#addb07f2c4efaf289f595bf4a5aec84f3',1,'kinematics::Configurations'],['../namespacekinematics.html#a415d8b736804f369524f60f2c197c3fa',1,'kinematics::configurations(const UR5 &amp;robot, const DefaultPose &amp;pose)']]],
   ['configure_5foptimizers_36',['configure_optimizers',['../classtrain__yolos_1_1YoloS.html#a43f98c5b4f21ac0c5e969c18c2af3100',1,'train_yolos::YoloS']]],
   ['conflictingpositionsexception_37',['conflictingpositionsexception',['../classplanner_1_1ConflictingPositionsException.html#a096feb663ee1700cc2429a2602c9b9de',1,'planner::ConflictingPositionsException::ConflictingPositionsException()'],['../classplanner_1_1ConflictingPositionsException.html',1,'ConflictingPositionsException'],['../classplanner_1_1ConflictingPositionsException.html#a37c629d5f51c4b6e64e83cfcd0f1b86e',1,'planner::ConflictingPositionsException::ConflictingPositionsException()']]],
   ['const_2ehpp_38',['const.hpp',['../const_8hpp.html',1,'']]],
