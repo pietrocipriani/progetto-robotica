@@ -72,7 +72,9 @@ void spawn_blocks(Spawner& spawner, bool avoid_pads) {
         }
 
         if (!placed) {
-            ROS_ERROR("Could not find a spot to place block %d", static_cast<int>(block));
+            ROS_ERROR("Could not find a spot to place block %s, placing on its pad", planner::get_name(block));
+            auto [x, y, angle] = planner::get_pad_position(block);
+            spawner.spawn_block(block, x, y, angle, false, util::gen_bright_color(), false);
         }
     }
 }
