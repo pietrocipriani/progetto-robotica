@@ -317,7 +317,7 @@ def main():
     rospy.loginfo("position_detection init")
     image_srv="/ur5/zed_node/left/image_rect_color" 
     cloud_srv="/ur5/zed_node/point_cloud/cloud_registered"
-    precise =PrecisePlacement(cloud_srv, image_srv, use_visualizer=False)
+    precise =PrecisePlacement(cloud_srv, image_srv, use_visualizer=True)
     rospy.loginfo("Ready")
     
     #proc = PrecisePlacement()
